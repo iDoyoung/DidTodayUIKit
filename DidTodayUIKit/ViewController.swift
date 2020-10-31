@@ -30,6 +30,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("Hello Republic of Korea")
         viewModel.loadToday()
         setBoxUI()
         textField.autocorrectionType = .no

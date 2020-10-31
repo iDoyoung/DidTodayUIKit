@@ -33,7 +33,7 @@ class ViewController: UIViewController {
         print("Hello Republic of Korea")
         print("Hello Republic of Korea1")
         print("Hello Republic of Korea2")
-        
+        print("Hello Republic of Korea3")
         
         viewModel.loadToday()
         setBoxUI()

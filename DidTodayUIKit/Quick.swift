@@ -17,6 +17,6 @@ class Quick {
         var bgClour: UIColor
     }
     
-    var dailys: [Daily] = [Daily(title: "Rest", bgClour: UIColor.systemPurple), Daily(title: "Meal", bgClour: UIColor.systemYellow), Daily(title: "Work", bgClour: UIColor.systemRed), Daily(title: "Study", bgClour: UIColor.systemGreen)]
+    var dailys: [Daily] = [Daily(title: "Rest", bgClour: UIColor.systemPurple), Daily(title: "Meal", bgClour: UIColor.systemYellow), Daily(title: "Work", bgClour: UIColor.systemRed), Daily(title: "Study", bgClour: UIColor.systemGreen), Daily(title: "Add", bgClour: UIColor.systemBackground)]
 }
 

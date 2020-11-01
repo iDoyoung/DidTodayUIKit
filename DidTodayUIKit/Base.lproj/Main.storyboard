@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UEZ-j8-3XY">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5tr-GM-IRY">
-                                <rect key="frame" x="0.0" y="44" width="375" height="448"/>
+                                <rect key="frame" x="0.0" y="88" width="375" height="448"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="5tr-GM-IRY" secondAttribute="height" multiplier="343:450" constant="33.524444444444441" id="kRJ-er-ePf"/>
@@ -156,7 +156,6 @@
                                     <constraint firstAttribute="trailing" secondItem="00T-6M-J45" secondAttribute="trailing" constant="87" id="I7v-SD-3Mu"/>
                                     <constraint firstItem="f5u-xU-eDM" firstAttribute="leading" secondItem="265-zO-Tpm" secondAttribute="leading" id="Ltp-qr-CpH"/>
                                     <constraint firstAttribute="width" secondItem="PgU-lw-FBu" secondAttribute="height" multiplier="375:278" id="Nfb-if-mQo"/>
-                                    <constraint firstAttribute="trailing" secondItem="10o-qO-yde" secondAttribute="trailing" id="T35-IE-iAk"/>
                                     <constraint firstAttribute="trailing" secondItem="S8M-Nr-wfg" secondAttribute="trailing" constant="20" id="TUE-Hm-f3m"/>
                                     <constraint firstItem="G0s-RN-eNy" firstAttribute="centerX" secondItem="PgU-lw-FBu" secondAttribute="centerX" id="Vjm-iJ-R4C"/>
                                     <constraint firstItem="10o-qO-yde" firstAttribute="top" secondItem="B9C-tg-FZP" secondAttribute="bottom" constant="8" symbolic="YES" id="XuF-SA-V4p"/>
@@ -166,6 +165,7 @@
                                     <constraint firstItem="265-zO-Tpm" firstAttribute="top" secondItem="f5u-xU-eDM" secondAttribute="bottom" id="cCK-fa-tji"/>
                                     <constraint firstAttribute="trailing" secondItem="nvz-vg-V33" secondAttribute="trailing" constant="16" id="d8E-hv-N9X"/>
                                     <constraint firstItem="nvz-vg-V33" firstAttribute="centerY" secondItem="UMw-DE-N69" secondAttribute="centerY" id="eY5-Gp-7SD"/>
+                                    <constraint firstAttribute="trailing" secondItem="10o-qO-yde" secondAttribute="trailing" id="ekZ-re-oqm"/>
                                     <constraint firstItem="00T-6M-J45" firstAttribute="leading" secondItem="UHU-PY-h0b" secondAttribute="leading" id="hdj-Mu-ny2"/>
                                     <constraint firstItem="f5u-xU-eDM" firstAttribute="top" secondItem="PgU-lw-FBu" secondAttribute="top" constant="20" symbolic="YES" id="kgq-hf-eCX"/>
                                     <constraint firstItem="S8M-Nr-wfg" firstAttribute="centerY" secondItem="B9C-tg-FZP" secondAttribute="centerY" id="mog-ek-Hf7"/>
@@ -190,6 +190,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PgU-lw-FBu" secondAttribute="trailing" id="xol-vQ-3Hh"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="XqT-tp-anF"/>
                     <connections>
                         <outlet property="buttonCollection" destination="10o-qO-yde" id="UUy-d7-WgG"/>
                         <outlet property="setBG" destination="PgU-lw-FBu" id="zG0-Q4-yKv"/>
@@ -202,6 +203,24 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="796" y="93.103448275862078"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="n1k-Wv-0UP">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="UEZ-j8-3XY" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7aj-hA-fSu">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="81r-pK-RA7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZP8-kk-i7f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-146.40000000000001" y="93.103448275862078"/>
         </scene>

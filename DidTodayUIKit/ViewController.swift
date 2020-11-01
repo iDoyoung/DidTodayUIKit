@@ -18,33 +18,26 @@ class ViewController: UIViewController {
     @IBOutlet weak var buttonCollection: UICollectionView!
     @IBOutlet weak var tableBG: UIView!
     @IBOutlet weak var setBG: UIView!
-
-    
     @IBOutlet weak var textField: UITextField!
-
-
     @IBOutlet weak var whenStarted: UILabel!
     @IBOutlet weak var whenFinished: UILabel!
-   
     @IBOutlet weak var setButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         viewModel.loadToday()
         setBoxUI()
         textField.autocorrectionType = .no
-        
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
         buttonCollection.delegate = self
         buttonCollection.dataSource = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(adjustInputView), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(adjustInputView), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
         updateTimeUI()
-        
         print(viewModel.dids)
-   //             testTableView.dataSource = self
-        
        drawPie()
     }
 
@@ -53,14 +46,12 @@ class ViewController: UIViewController {
         if viewModel.dids.count == 0 {
             whenStarted.text = "0:00"
         } else {
-            //dids.lastindex.finsh
             let lastDid = viewModel.dids[viewModel.dids.endIndex-1].finish
             whenStarted.text = lastDid
         }
     }
     
     func setBoxUI() {
-//        setBG.layer.shadowPath =
         setBG.layer.shadowColor = UIColor.black.cgColor
         setBG.layer.shadowRadius = 5.0
         setBG.layer.shadowOpacity = 0.1
@@ -81,12 +72,6 @@ class ViewController: UIViewController {
         updateTimeUI()
     }
    
-    
-//    @IBOutlet weak var tableView: UITableView!
-
-    
-    
-    
     @IBAction func set(_ sender: Any) {
         if textField.text != ""{
             if let thing = textField.text, let starting = whenStarted.text, let finishing = whenFinished.text, let color = colours.randomElement() {
@@ -99,9 +84,11 @@ class ViewController: UIViewController {
         }
     }
     
-    
-    
-  
+    @objc func showEdit(sender:UIBarButtonItem) {
+        let storyboard = UIStoryboard(name: "Edit", bundle: nil)
+        let editVC = storyboard.instantiateViewController(withIdentifier: "EditViewController")
+        present(editVC, animated: true, completion: nil)
+    }
 }
 
 
@@ -125,8 +112,12 @@ extension ViewController: UICollectionViewDelegate {
         
         let title = dailys[indexPath.item].title
         let color = dailys[indexPath.item].bgClour
-        print(title)
-        if let starting = self.whenStarted.text, let finishing = self.whenFinished.text {
+        
+        if indexPath.item == dailys.count - 1{
+            let storyboard = UIStoryboard(name: "Edit", bundle: nil)
+            let editVC = storyboard.instantiateViewController(withIdentifier: "EditViewController")
+            present(editVC, animated: true, completion: nil)
+        } else if let starting = self.whenStarted.text, let finishing = self.whenFinished.text {
             viewModel.save(did: title, at: starting, to: finishing, look: color)
             drawPie()
         }
@@ -156,10 +147,12 @@ class QuickCell: UICollectionViewCell {
     func updateCell(daily: Quick.Daily) {
         cellBG.backgroundColor = daily.bgClour
         buttonTitle.text = daily.title
-        
         cellBG.layer.cornerRadius = cellBG.bounds.height / 2
+        
+        if cellBG.backgroundColor == UIColor.systemBackground {
+            buttonTitle.textColor = UIColor.link
+        }
     }
-   
 }
 
 

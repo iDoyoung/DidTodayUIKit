@@ -30,11 +30,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Hello Republic of Korea")
-        print("Hello Republic of Korea1")
-        print("Hello Republic of Korea2")
-        print("Hello Republic of Korea3")
-        
         viewModel.loadToday()
         setBoxUI()
         textField.autocorrectionType = .no
@@ -83,7 +78,7 @@ class ViewController: UIViewController {
         pie.layer.shadowRadius = 5.0
         pie.layer.shadowOffset = .zero
         pie.layer.animationKeys()
-        
+        updateTimeUI()
     }
    
     

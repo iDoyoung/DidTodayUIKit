@@ -105,26 +105,16 @@ class Model {
         let minutes = Calendar.current.component(.minute, from: unwrap)
         return minutes
     }
-    
-    
-    
-    
     let defaults = UserDefaults.standard
-    
-//    func addDid(thing: String, start: String, finish: String) {
-//            let newDid = Did(did: thing, start: start, finish: finish)
-//            dids.append(newDid)
-//            print("succes add")
-//        }
-    
+
     func setData(thing: String, start: String, finish: String, colour: UIColor) {
         
         let encoder = JSONEncoder()
         
         let newDid = Did(did: thing, start: start, finish: finish, colour: colour)
         dids.append(newDid)
-        if let ecoded = try? encoder.encode(dids) {
-        defaults.set(ecoded, forKey: today)
+        if let encoded = try? encoder.encode(dids) {
+        defaults.set(encoded, forKey: today)
             print("Success save data")
             print(newDid)
         }

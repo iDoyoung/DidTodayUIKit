@@ -10,6 +10,7 @@ import Foundation
 class DidViewModel {
     
     var model = Model.shared
+    var quickModel = Quick.shared
     
     
     var dids: [Model.Did] {
@@ -34,11 +35,6 @@ class DidViewModel {
         
         return Double(hour + minute)
     }
-    
-//    func minutesData(saved about: String) -> Int {
-//        model.formatTimeMinutes(time: about)
-//    }
-    
     func loadToday() {
         model.loadToday()
     }
@@ -47,9 +43,23 @@ class DidViewModel {
         model.setData(thing: thing, start: start, finish: finish, colour: colour)
     }
     
-//    func add(did thing: String, at start: String, to finish: String, colour: String) {
-//        model.addDid(thing: thing, start: start, finish: finish)
-//    }
+    var dailys: [Quick.Daily] {
+        quickModel.dailys
+    }
     
+    func addDaily(daily: Quick.Daily) {
+        quickModel.addDaily(add: daily)
+    }
     
+    func saveMyButton() {
+        quickModel.setQuick()
+    }
+    
+    func resetButton(about: Int, new: Quick.Daily) {
+        quickModel.resetDaily(index: about, daily: new)
+    }
+    
+    func loadMyButton() {
+        quickModel.loadQuick()
+    }
 }

@@ -10,7 +10,6 @@ import UIKit
 class ViewController: UIViewController {
    
     var viewModel = DidViewModel()
-    var dailys = Quick.shared.dailys
     
     var colours = [UIColor.systemRed, UIColor.systemBlue, UIColor.systemTeal, UIColor.systemGreen, UIColor.systemYellow, UIColor.systemIndigo, UIColor.systemOrange]
     
@@ -27,10 +26,12 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         viewModel.loadToday()
+        viewModel.loadMyButton()
         setBoxUI()
         textField.autocorrectionType = .no
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
+        
+        
+    
         buttonCollection.delegate = self
         buttonCollection.dataSource = self
         
@@ -94,14 +95,14 @@ class ViewController: UIViewController {
 
 extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dailys.count
+        return viewModel.dailys.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "buttonCell", for: indexPath) as? QuickCell else {
             return UICollectionViewCell()
         }
-        cell.updateCell(daily: dailys[indexPath.item])
+        cell.updateCell(daily: viewModel.dailys[indexPath.item])
         return cell
     }
 }
@@ -110,13 +111,14 @@ extension ViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let title = dailys[indexPath.item].title
-        let color = dailys[indexPath.item].bgClour
+        let title = viewModel.dailys[indexPath.item].title
+        let color = viewModel.dailys[indexPath.item].bgColour
         
-        if indexPath.item == dailys.count - 1{
+        if indexPath.item == viewModel.dailys.count - 1{
             let storyboard = UIStoryboard(name: "Edit", bundle: nil)
             let editVC = storyboard.instantiateViewController(withIdentifier: "EditViewController")
-            present(editVC, animated: true, completion: nil)
+            let navEditVC = UINavigationController(rootViewController: editVC)
+            present(navEditVC, animated: true, completion: nil)
         } else if let starting = self.whenStarted.text, let finishing = self.whenFinished.text {
             viewModel.save(did: title, at: starting, to: finishing, look: color)
             drawPie()
@@ -145,9 +147,9 @@ class QuickCell: UICollectionViewCell {
     @IBOutlet weak var buttonTitle: UILabel!
     
     func updateCell(daily: Quick.Daily) {
-        cellBG.backgroundColor = daily.bgClour
+        cellBG.backgroundColor = daily.bgColour
         buttonTitle.text = daily.title
-        cellBG.layer.cornerRadius = cellBG.bounds.height / 2
+        cellBG.layer.cornerRadius = cellBG.bounds.height*0.5
         
         if cellBG.backgroundColor == UIColor.systemBackground {
             buttonTitle.textColor = UIColor.link

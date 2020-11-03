@@ -117,13 +117,13 @@
 				504CE047253FDFAA000CC6CF /* Main.storyboard */,
 				503CB763254E47230009D92E /* EditViewController.swift */,
 				503CB75E254E46D70009D92E /* Edit.storyboard */,
-				504CE04A253FDFAE000CC6CF /* Assets.xcassets */,
-				504CE04C253FDFAE000CC6CF /* LaunchScreen.storyboard */,
-				504CE04F253FDFAE000CC6CF /* Info.plist */,
-				504CE0B3253FDFDF000CC6CF /* Model.swift */,
 				504CE0B8253FDFE9000CC6CF /* ViewModel.swift */,
 				504CE0C0254143CC000CC6CF /* Pie.swift */,
 				50FCA4AC2547DC2D00262DF2 /* Quick.swift */,
+				504CE0B3253FDFDF000CC6CF /* Model.swift */,
+				504CE04C253FDFAE000CC6CF /* LaunchScreen.storyboard */,
+				504CE04A253FDFAE000CC6CF /* Assets.xcassets */,
+				504CE04F253FDFAE000CC6CF /* Info.plist */,
 			);
 			path = DidTodayUIKit;
 			sourceTree = "<group>";

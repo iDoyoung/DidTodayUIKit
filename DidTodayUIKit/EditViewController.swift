@@ -17,7 +17,9 @@ class EditViewController: UIViewController {
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var textField: UITextField!
+    
     // 글자수 제한, 버튼 enable
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         textField.becomeFirstResponder()

@@ -14,7 +14,6 @@ class Pie: UIView {
     
     override func draw(_ rect: CGRect) {
         
-   
         let dids = viewModel.dids
         print("today dids is \(dids)")
         //MARK: - fix
@@ -28,8 +27,6 @@ class Pie: UIView {
             let startAngle = CGFloat(viewModel.timeFormat(saved: startTime) * 0.25)
             let finishTime = did.finish
             let endAngle = CGFloat(viewModel.timeFormat(saved: finishTime)*0.25)
-            //print("Angle is \(startAngle) to \(endAngle)")
-
             let path = UIBezierPath()
             path.move(to: center)
             path.addArc(withCenter: center,

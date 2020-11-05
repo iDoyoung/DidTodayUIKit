@@ -7,8 +7,13 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-   
+class ViewController: UIViewController, ChangeStartAndEnd {
+    
+    func change(start: String, end: String) {
+        whenStarted.text = start
+        whenFinished.text = end
+    }
+
     var viewModel = DidViewModel()
     
     var colours = [UIColor.systemRed, UIColor.systemBlue, UIColor.systemTeal, UIColor.systemGreen, UIColor.systemYellow, UIColor.systemIndigo, UIColor.systemOrange]
@@ -21,7 +26,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var whenStarted: UILabel!
     @IBOutlet weak var whenFinished: UILabel!
     @IBOutlet weak var setButton: UIButton!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,9 +34,7 @@ class ViewController: UIViewController {
         viewModel.loadMyButton()
         setBoxUI()
         textField.autocorrectionType = .no
-        
-        
-    
+
         buttonCollection.delegate = self
         buttonCollection.dataSource = self
         
@@ -41,15 +44,29 @@ class ViewController: UIViewController {
         print(viewModel.dids)
        drawPie()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(false)
+        buttonCollection.reloadData()
+    }
 
     func updateTimeUI() {
         whenFinished.text = "\(viewModel.hours):\(viewModel.minutes)"
         if viewModel.dids.count == 0 {
-            whenStarted.text = "0:00"
+            whenStarted.text = "00:00"
         } else {
             let lastDid = viewModel.dids[viewModel.dids.endIndex-1].finish
             whenStarted.text = lastDid
         }
+    }
+    
+    @IBAction func showTimeSet(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let timeSetVC = storyboard.instantiateViewController(withIdentifier: "SetTimeViewController") as! SetTimeViewController
+        timeSetVC.delegate = self
+        timeSetVC.modalPresentationStyle = .formSheet
+        
+        present(timeSetVC, animated: true, completion: nil)
     }
     
     func setBoxUI() {
@@ -64,7 +81,6 @@ class ViewController: UIViewController {
         pie.center = tableBG.center
         pie.backgroundColor = .clear
         tableBG.addSubview(pie)
-        
         pie.layer.shadowColor = UIColor.black.cgColor
         pie.layer.shadowOpacity = 1
         pie.layer.shadowRadius = 5.0

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		50164DD22552EC5A000C36FA /* SetTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50164DD12552EC5A000C36FA /* SetTimeViewController.swift */; };
 		503CB75F254E46D70009D92E /* Edit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 503CB75E254E46D70009D92E /* Edit.storyboard */; };
 		503CB764254E47230009D92E /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503CB763254E47230009D92E /* EditViewController.swift */; };
 		504CE042253FDFAA000CC6CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504CE041253FDFAA000CC6CF /* AppDelegate.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		50164DD12552EC5A000C36FA /* SetTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTimeViewController.swift; sourceTree = "<group>"; };
 		503CB75E254E46D70009D92E /* Edit.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Edit.storyboard; sourceTree = "<group>"; };
 		503CB763254E47230009D92E /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		504CE03E253FDFAA000CC6CF /* DidTodayUIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DidTodayUIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,8 +115,9 @@
 			children = (
 				504CE041253FDFAA000CC6CF /* AppDelegate.swift */,
 				504CE043253FDFAA000CC6CF /* SceneDelegate.swift */,
-				504CE045253FDFAA000CC6CF /* ViewController.swift */,
 				504CE047253FDFAA000CC6CF /* Main.storyboard */,
+				504CE045253FDFAA000CC6CF /* ViewController.swift */,
+				50164DD12552EC5A000C36FA /* SetTimeViewController.swift */,
 				503CB763254E47230009D92E /* EditViewController.swift */,
 				503CB75E254E46D70009D92E /* Edit.storyboard */,
 				504CE0B8253FDFE9000CC6CF /* ViewModel.swift */,
@@ -279,6 +282,7 @@
 			files = (
 				503CB764254E47230009D92E /* EditViewController.swift in Sources */,
 				504CE0C1254143CC000CC6CF /* Pie.swift in Sources */,
+				50164DD22552EC5A000C36FA /* SetTimeViewController.swift in Sources */,
 				50FCA4AD2547DC2D00262DF2 /* Quick.swift in Sources */,
 				504CE0B9253FDFE9000CC6CF /* ViewModel.swift in Sources */,
 				504CE046253FDFAA000CC6CF /* ViewController.swift in Sources */,

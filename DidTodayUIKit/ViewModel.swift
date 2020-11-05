@@ -35,6 +35,12 @@ class DidViewModel {
         
         return Double(hour + minute)
     }
+    
+    func stringToDate(date: String) -> Date {
+        let time = model.formatTime(time: date)
+        return time
+    }
+    
     func loadToday() {
         model.loadToday()
     }

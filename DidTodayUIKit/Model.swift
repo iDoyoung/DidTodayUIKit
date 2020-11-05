@@ -73,14 +73,28 @@ class Model {
         dateFormatter.dateFormat = "yyyyMMdd"
         return dateFormatter.string(from: date)
     }
+    var hour: Int {
+        dateFormatter.dateFormat = "HH:mm"
+        return Calendar.current.component(.hour, from: Date())
+    }
     
-    let hour = Calendar.current.component(.hour, from: Date())
-    let minute = Calendar.current.component(.minute, from: Date())
+    var minute: Int {
+        dateFormatter.dateFormat = "HH.mm"
+        return Calendar.current.component(.minute, from: Date())
+    }
     
     var currentTime: Int {
         (hour * 60) + minute
     }
     
+    func formatTime(time: String) -> Date {
+        dateFormatter.dateFormat = "HH:mm"
+        let times = dateFormatter.date(from: time)!
+//        let compenet = Calendar.current.dateComponents([.hour, .minute], from: times!)
+//        let finalDate = Calendar.current.date(from:compenet)!
+//        return finalDate
+        return times
+    }
     
     func formatTimeHours(time: String) -> Int {
         dateFormatter.dateFormat = "HH:mm"
@@ -105,6 +119,7 @@ class Model {
         let minutes = Calendar.current.component(.minute, from: unwrap)
         return minutes
     }
+    
     let defaults = UserDefaults.standard
 
     func setData(thing: String, start: String, finish: String, colour: UIColor) {

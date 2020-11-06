@@ -45,6 +45,9 @@ class DidViewModel {
         model.loadToday()
     }
     
+    func loadLastDate(date: String) {
+        model.loadLastDate(date: date)
+    }
     func save(did thing: String, at start: String, to finish: String, look colour: UIColor) {
         model.setData(thing: thing, start: start, finish: finish, colour: colour)
     }

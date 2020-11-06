@@ -90,9 +90,6 @@ class Model {
     func formatTime(time: String) -> Date {
         dateFormatter.dateFormat = "HH:mm"
         let times = dateFormatter.date(from: time)!
-//        let compenet = Calendar.current.dateComponents([.hour, .minute], from: times!)
-//        let finalDate = Calendar.current.date(from:compenet)!
-//        return finalDate
         return times
     }
     
@@ -147,5 +144,15 @@ class Model {
         }
     }
     
+    func loadLastDate(date: String) {
+        if let savedDid = defaults.object(forKey: date) as? Data {
+            let decoder = JSONDecoder()
+            if let loadedDids = try? decoder.decode([Did].self, from: savedDid) {
+                dids = loadedDids
+                print("success load data")
+                print(dids)
+            }
+        }
+    }
    
 }

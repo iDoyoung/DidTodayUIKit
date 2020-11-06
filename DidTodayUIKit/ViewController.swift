@@ -26,7 +26,9 @@ class ViewController: UIViewController, ChangeStartAndEnd {
     @IBOutlet weak var whenStarted: UILabel!
     @IBOutlet weak var whenFinished: UILabel!
     @IBOutlet weak var setButton: UIButton!
-
+    @IBOutlet weak var datePicker: UIDatePicker!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -37,6 +39,8 @@ class ViewController: UIViewController, ChangeStartAndEnd {
 
         buttonCollection.delegate = self
         buttonCollection.dataSource = self
+        self.navigationItem.titleView = datePicker
+        datePicker.addTarget(self, action: #selector(chooseDate), for: .valueChanged)
         
         NotificationCenter.default.addObserver(self, selector: #selector(adjustInputView), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(adjustInputView), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -48,6 +52,8 @@ class ViewController: UIViewController, ChangeStartAndEnd {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
         buttonCollection.reloadData()
+        viewModel.loadToday()
+        datePicker.date = Date()
     }
 
     func updateTimeUI() {
@@ -77,10 +83,10 @@ class ViewController: UIViewController, ChangeStartAndEnd {
     }
     
     func drawPie() {
-        let pie = Pie(frame: tableBG.frame)
-        pie.center = tableBG.center
+        let pie = Pie(frame: CGRect(x: 0, y: 0, width: self.view.frame.width - 40, height: self.view.frame.width - 40))
+        pie.center = CGPoint(x: self.view.frame.width / 2, y: (self.view.frame.width + 40) / 2)
         pie.backgroundColor = .clear
-        tableBG.addSubview(pie)
+        self.view.addSubview(pie)
         pie.layer.shadowColor = UIColor.black.cgColor
         pie.layer.shadowOpacity = 1
         pie.layer.shadowRadius = 5.0
@@ -105,6 +111,30 @@ class ViewController: UIViewController, ChangeStartAndEnd {
         let storyboard = UIStoryboard(name: "Edit", bundle: nil)
         let editVC = storyboard.instantiateViewController(withIdentifier: "EditViewController")
         present(editVC, animated: true, completion: nil)
+    }
+    
+    @objc func chooseDate() {
+        performSegue(withIdentifier: "showCalender", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showCalender" {
+            let dateformatter = DateFormatter()
+            dateformatter.dateStyle = .long
+            dateformatter.timeStyle = .none
+            let chosed = datePicker.date
+//            let chosed = dateformatter.string(from: datePicker.date)
+            print(chosed)
+            dateformatter.dateFormat = "yyyyMMdd"
+            let dateKey = dateformatter.string(from: datePicker.date)
+            print(dateKey)
+            
+            let calenderVC = segue.destination as? CalenderViewController
+//            calenderVC?.datePicker.preferredDatePickerStyle = .compact
+//            calenderVC?.datePicker.datePickerMode = .date
+    
+            calenderVC?.update(day: dateKey, title: chosed)
+        }
     }
 }
 

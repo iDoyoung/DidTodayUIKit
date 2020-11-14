@@ -40,7 +40,7 @@ class Quick {
         }
     }
     
-    var dailys: [Daily] = [Daily(title: "Rest", bgColour: UIColor.systemPurple), Daily(title: "Meal", bgColour: UIColor.systemYellow), Daily(title: "Work", bgColour: UIColor.systemRed), Daily(title: "Study", bgColour: UIColor.systemGreen), Daily(title: "Add", bgColour: UIColor.systemBackground)]
+    var dailys: [Daily] = [Daily(title: "Rest", bgColour: UIColor.systemPurple), Daily(title: "Meal", bgColour: UIColor.systemYellow), Daily(title: "Work", bgColour: UIColor.systemRed), Daily(title: "Study", bgColour: UIColor.systemGreen), Daily(title: "Add", bgColour: UIColor.clear)]
     
     func addDaily(add: Daily) {
         dailys.insert(add, at: dailys.endIndex - 1)
@@ -50,8 +50,8 @@ class Quick {
         dailys.remove(at: index)
         dailys.insert(daily, at: index)
     }
-    func deleteDaily() {
-        //TODO: 삭제 만들기
+    func deleteDaily(index: Int) {
+        dailys.remove(at: index)
     }
     
     func setQuick() {

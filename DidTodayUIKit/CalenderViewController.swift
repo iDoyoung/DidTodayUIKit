@@ -10,7 +10,6 @@ import UIKit
 class CalenderViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var pieView: UIView!
     
     var viewModel = DidViewModel()
     var date = ""
@@ -19,29 +18,23 @@ class CalenderViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.loadLastDate(date: date)
         navigationItem.titleView = datePicker
+        let yesterdayDate = Calendar.current.date(byAdding: .day, value: -1, to: Date())
+        datePicker.maximumDate = yesterdayDate
         datePicker.preferredDatePickerStyle = .compact
         datePicker.datePickerMode = .date
         datePicker.addTarget(self, action: #selector(chooseDate), for: .valueChanged)
         tableView.dataSource = self
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         drawPie()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        viewModel.loadLastDate(date: date)
-    }
-    
     func drawPie() {
-        let pie = Pie(frame: pieView.frame)
-        pie.center = pieView.center
-        pie.backgroundColor = .clear
-        pieView.addSubview(pie)
-        pie.layer.shadowColor = UIColor.black.cgColor
-        pie.layer.shadowOpacity = 1
-        pie.layer.shadowRadius = 5.0
-        pie.layer.shadowOffset = .zero
-        pie.layer.animationKeys()
+            self.viewModel.loadPies(navigationController: self.navigationController, mainView: self.view)
     }
     
     func update(day: String, title: Date) {
@@ -55,8 +48,9 @@ class CalenderViewController: UIViewController {
         dateformatter.timeStyle = .none
         dateformatter.dateFormat = "yyyyMMdd"
         let dateKey = dateformatter.string(from: datePicker.date)
-        print(dateKey)
         viewModel.loadLastDate(date: dateKey)
+        self.view.viewWithTag(314)?.removeFromSuperview()
+        self.viewWillAppear(true)
         tableView.reloadData()
         dismiss(animated: true, completion: nil)
     }

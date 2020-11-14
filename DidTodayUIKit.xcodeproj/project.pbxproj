@@ -10,7 +10,7 @@
 		50164DD22552EC5A000C36FA /* SetTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50164DD12552EC5A000C36FA /* SetTimeViewController.swift */; };
 		502725A02555083700A29FBB /* CalenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5027259F2555083700A29FBB /* CalenderViewController.swift */; };
 		503CB75F254E46D70009D92E /* Edit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 503CB75E254E46D70009D92E /* Edit.storyboard */; };
-		503CB764254E47230009D92E /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503CB763254E47230009D92E /* EditViewController.swift */; };
+		503CB764254E47230009D92E /* EditQuickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503CB763254E47230009D92E /* EditQuickViewController.swift */; };
 		504CE042253FDFAA000CC6CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504CE041253FDFAA000CC6CF /* AppDelegate.swift */; };
 		504CE044253FDFAA000CC6CF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504CE043253FDFAA000CC6CF /* SceneDelegate.swift */; };
 		504CE046253FDFAA000CC6CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504CE045253FDFAA000CC6CF /* ViewController.swift */; };
@@ -21,7 +21,9 @@
 		504CE064253FDFAE000CC6CF /* DidTodayUIKitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504CE063253FDFAE000CC6CF /* DidTodayUIKitUITests.swift */; };
 		504CE0B4253FDFDF000CC6CF /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504CE0B3253FDFDF000CC6CF /* Model.swift */; };
 		504CE0B9253FDFE9000CC6CF /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504CE0B8253FDFE9000CC6CF /* ViewModel.swift */; };
-		504CE0C1254143CC000CC6CF /* Pie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504CE0C0254143CC000CC6CF /* Pie.swift */; };
+		504CE0C1254143CC000CC6CF /* AllPie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504CE0C0254143CC000CC6CF /* AllPie.swift */; };
+		5052CD6A255B9C4200DC9C10 /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5052CD69255B9C4200DC9C10 /* Gradient.swift */; };
+		5054D6C3255A8ABE005E8850 /* Pie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5054D6C2255A8ABE005E8850 /* Pie.swift */; };
 		50FCA4AD2547DC2D00262DF2 /* Quick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FCA4AC2547DC2D00262DF2 /* Quick.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,7 +48,7 @@
 		50164DD12552EC5A000C36FA /* SetTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTimeViewController.swift; sourceTree = "<group>"; };
 		5027259F2555083700A29FBB /* CalenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderViewController.swift; sourceTree = "<group>"; };
 		503CB75E254E46D70009D92E /* Edit.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Edit.storyboard; sourceTree = "<group>"; };
-		503CB763254E47230009D92E /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
+		503CB763254E47230009D92E /* EditQuickViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditQuickViewController.swift; sourceTree = "<group>"; };
 		504CE03E253FDFAA000CC6CF /* DidTodayUIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DidTodayUIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		504CE041253FDFAA000CC6CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		504CE043253FDFAA000CC6CF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,7 +65,9 @@
 		504CE065253FDFAE000CC6CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		504CE0B3253FDFDF000CC6CF /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		504CE0B8253FDFE9000CC6CF /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
-		504CE0C0254143CC000CC6CF /* Pie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pie.swift; sourceTree = "<group>"; };
+		504CE0C0254143CC000CC6CF /* AllPie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPie.swift; sourceTree = "<group>"; };
+		5052CD69255B9C4200DC9C10 /* Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
+		5054D6C2255A8ABE005E8850 /* Pie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pie.swift; sourceTree = "<group>"; };
 		50FCA4AC2547DC2D00262DF2 /* Quick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quick.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -121,12 +125,14 @@
 				504CE045253FDFAA000CC6CF /* ViewController.swift */,
 				50164DD12552EC5A000C36FA /* SetTimeViewController.swift */,
 				5027259F2555083700A29FBB /* CalenderViewController.swift */,
-				503CB763254E47230009D92E /* EditViewController.swift */,
+				503CB763254E47230009D92E /* EditQuickViewController.swift */,
 				503CB75E254E46D70009D92E /* Edit.storyboard */,
 				504CE0B8253FDFE9000CC6CF /* ViewModel.swift */,
-				504CE0C0254143CC000CC6CF /* Pie.swift */,
-				50FCA4AC2547DC2D00262DF2 /* Quick.swift */,
 				504CE0B3253FDFDF000CC6CF /* Model.swift */,
+				504CE0C0254143CC000CC6CF /* AllPie.swift */,
+				5054D6C2255A8ABE005E8850 /* Pie.swift */,
+				50FCA4AC2547DC2D00262DF2 /* Quick.swift */,
+				5052CD69255B9C4200DC9C10 /* Gradient.swift */,
 				504CE04C253FDFAE000CC6CF /* LaunchScreen.storyboard */,
 				504CE04A253FDFAE000CC6CF /* Assets.xcassets */,
 				504CE04F253FDFAE000CC6CF /* Info.plist */,
@@ -284,15 +290,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				502725A02555083700A29FBB /* CalenderViewController.swift in Sources */,
-				503CB764254E47230009D92E /* EditViewController.swift in Sources */,
-				504CE0C1254143CC000CC6CF /* Pie.swift in Sources */,
+				503CB764254E47230009D92E /* EditQuickViewController.swift in Sources */,
+				504CE0C1254143CC000CC6CF /* AllPie.swift in Sources */,
 				50164DD22552EC5A000C36FA /* SetTimeViewController.swift in Sources */,
 				50FCA4AD2547DC2D00262DF2 /* Quick.swift in Sources */,
 				504CE0B9253FDFE9000CC6CF /* ViewModel.swift in Sources */,
 				504CE046253FDFAA000CC6CF /* ViewController.swift in Sources */,
 				504CE042253FDFAA000CC6CF /* AppDelegate.swift in Sources */,
+				5054D6C3255A8ABE005E8850 /* Pie.swift in Sources */,
 				504CE044253FDFAA000CC6CF /* SceneDelegate.swift in Sources */,
 				504CE0B4253FDFDF000CC6CF /* Model.swift in Sources */,
+				5052CD6A255B9C4200DC9C10 /* Gradient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,7 +485,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ido.DidTodayUIKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -495,7 +503,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ido.DidTodayUIKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

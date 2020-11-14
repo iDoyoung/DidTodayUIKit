@@ -7,9 +7,11 @@
 
 import UIKit
 
-class EditViewController: UIViewController {
+class EditQuickViewController: UIViewController, UITextFieldDelegate {
 
+    // delete 만들기
     var viewModel = DidViewModel()
+    var delegate: UpdateButtons?
     var id: Int = 0
     let colours: [UIColor] = [UIColor.systemRed, UIColor.systemBlue, UIColor.systemPink, UIColor.systemTeal, UIColor.systemGreen, UIColor.systemOrange, UIColor.systemYellow, UIColor.systemPurple, UIColor.systemIndigo, UIColor.label]
     
@@ -17,14 +19,29 @@ class EditViewController: UIViewController {
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var textField: UITextField!
+
+    @IBOutlet weak var deleteButton: UIButton!
     
-    // 글자수 제한, 버튼 enable
+    @IBAction func deleteButton(_ sender: Any) {
+        viewModel.removeDaily(id: id)
+        collectionView.reloadData()
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let textFieldText = textField.text, let rangeOfTextToReplace = Range(range, in: textFieldText) else {
+            return false
+        }
+        let subStringToReplace = textFieldText[rangeOfTextToReplace]
+        let count = textFieldText.count - subStringToReplace.count + string.count
+        return count < 20
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         textField.becomeFirstResponder()
-        
-        id = viewModel.dailys.endIndex
+        textField.delegate = self
+        deleteButton.isHidden = true
+        id = viewModel.dailys.endIndex - 1
         
         NotificationCenter.default.addObserver(self, selector: #selector(adjustInputView), name: UIResponder.keyboardWillShowNotification, object: nil)
 
@@ -38,6 +55,7 @@ class EditViewController: UIViewController {
         textField.backgroundColor = UIColor.systemPink
         
         doneButton.setTitle("Add", for: .normal)
+        doneButton.layer.cornerRadius = doneButton.frame.height / 5
         textField.attributedPlaceholder = NSAttributedString(string: "Daily did thing", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGray6])
         
         textField.autocorrectionType = .no
@@ -48,30 +66,28 @@ class EditViewController: UIViewController {
     }
     
     @objc func back() {
+        delegate?.update()
         dismiss(animated: true, completion: nil)
     }
     
     @IBAction func doneEdit(_ sender: Any) {
-        let toAdd = Quick.Daily(title: textField.text!, bgColour: textField.backgroundColor!)
-        
-        if textField.text == "" {
-            textField.attributedPlaceholder = NSAttributedString(string: "Please fill text!!", attributes: [NSAttributedString.Key.font: UIFont.Weight.bold])
-            
-        } else {
-            
-            if id == viewModel.dailys.endIndex {
+        if textField.text?.isEmpty == false {
+            let toAdd = Quick.Daily(title: textField.text!, bgColour: textField.backgroundColor!)
+            if id == viewModel.dailys.endIndex - 1 {
                 viewModel.addDaily(daily: toAdd)
             } else {
                 viewModel.resetButton(about: id, new: toAdd)
             }
             viewModel.saveMyButton()
+            delegate?.update()
+            dismiss(animated: true, completion: nil)
+        } else {
+            textField.attributedPlaceholder = NSAttributedString(string: "Type Plz", attributes: [NSAttributedString.Key.foregroundColor : UIColor.label])
         }
-        
-        dismiss(animated: true, completion: nil)
     }
 }
 
-extension EditViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension EditQuickViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
@@ -112,7 +128,9 @@ extension EditViewController: UICollectionViewDataSource, UICollectionViewDelega
             if textField.text == "Add" {
                 doneButton.setTitle("Add", for: .normal)
                 textField.text = ""
+                deleteButton.isHidden = true
             } else {
+                deleteButton.isHidden = false
                 doneButton.setTitle("Edit", for: .normal)
                 textField.backgroundColor = viewModel.dailys[indexPath.item].bgColour
             }
@@ -164,12 +182,12 @@ class EditCell: UICollectionViewCell {
         if cellTitle.text == "Add" {
             cellTitle.textColor = .link
         }
-        cellBG.layer.cornerRadius = cellBG.bounds.height / 2
+        cellBG.layer.cornerRadius = cellBG.bounds.height / 2.3
         
     }
 }
-//확장 만들기
-extension EditViewController {
+
+extension EditQuickViewController {
     
     @objc private func adjustInputView(noti: Notification) {
         guard let userInfo = noti.userInfo else { return }
@@ -177,7 +195,7 @@ extension EditViewController {
         
         if noti.name == UIResponder.keyboardWillShowNotification {
             let adjustmentHeight = keyboardFrame.height - view.safeAreaInsets.bottom
-            setViewBottom.constant = adjustmentHeight
+            setViewBottom.constant = adjustmentHeight + 20
         } else {
             setViewBottom.constant = 0
         }
@@ -197,3 +215,6 @@ class ColourCell: UICollectionViewCell {
     }
 }
 
+protocol UpdateButtons {
+    func update()
+}

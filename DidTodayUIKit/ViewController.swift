@@ -6,54 +6,91 @@
 //
 
 import UIKit
+import QuartzCore
 
-class ViewController: UIViewController, ChangeStartAndEnd {
+class ViewController: UIViewController, ChangeStartAndEnd, UpdateButtons, UITextFieldDelegate {
+    
+    func update() {
+        print("reload")
+        buttonCollection.reloadData()
+    }
     
     func change(start: String, end: String) {
+        print("change")
         whenStarted.text = start
         whenFinished.text = end
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+         self.view.endEditing(true)
+   }
+
+    @IBOutlet weak var inputBottomView: NSLayoutConstraint!
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let textFieldText = textField.text, let rangeOfTextToReplace = Range(range, in: textFieldText) else {
+            return false
+        }
+        let substringToReplace = textFieldText[rangeOfTextToReplace]
+        let count = textFieldText.count - substringToReplace.count + string.count
+        return count < 20
+    }
 
     var viewModel = DidViewModel()
-    
     var colours = [UIColor.systemRed, UIColor.systemBlue, UIColor.systemTeal, UIColor.systemGreen, UIColor.systemYellow, UIColor.systemIndigo, UIColor.systemOrange]
     
-    @IBOutlet weak var setViewBottom: NSLayoutConstraint!
+    @IBOutlet weak var timeView: UIVisualEffectView!
+    @IBOutlet weak var setDidView: UIVisualEffectView!
+    @IBOutlet weak var quickSetView: UIVisualEffectView!
+    
     @IBOutlet weak var buttonCollection: UICollectionView!
-    @IBOutlet weak var tableBG: UIView!
-    @IBOutlet weak var setBG: UIView!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var whenStarted: UILabel!
     @IBOutlet weak var whenFinished: UILabel!
     @IBOutlet weak var setButton: UIButton!
-    @IBOutlet weak var datePicker: UIDatePicker!
     
+    
+    
+    
+    let dataPicker = UIDatePicker(frame: CGRect(x: 0.0, y: 0.0, width: 280, height: 44))
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+    
+        viewModel.bgView(mainView: self.view)
+        viewModel.applyRadius(view: timeView)
+        viewModel.applyRadius(view: setDidView)
+        viewModel.applyRadius(view: quickSetView)
+        self.view.backgroundColor = UIColor.clear
         viewModel.loadToday()
         viewModel.loadMyButton()
-        setBoxUI()
         textField.autocorrectionType = .no
+        textField.delegate = self
+        
 
+        let undoButton = UIBarButtonItem(image: UIImage(systemName: "gobackward"), style: .plain, target: self, action: #selector(undoDrawPie))
+        navigationItem.rightBarButtonItem = undoButton
+        
         buttonCollection.delegate = self
         buttonCollection.dataSource = self
-        self.navigationItem.titleView = datePicker
-        datePicker.addTarget(self, action: #selector(chooseDate), for: .valueChanged)
         
+        dataPicker.preferredDatePickerStyle = .compact
+        dataPicker.datePickerMode = .date
+        navigationController?.hidesBarsOnTap = true
+        self.navigationItem.titleView = dataPicker
+        dataPicker.addTarget(self, action: #selector(chooseDate), for: .valueChanged)
+        dataPicker.maximumDate = Date()
         NotificationCenter.default.addObserver(self, selector: #selector(adjustInputView), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(adjustInputView), name: UIResponder.keyboardWillHideNotification, object: nil)
         updateTimeUI()
-        print(viewModel.dids)
-       drawPie()
+        viewModel.addCircle(navigationController: self.navigationController!, mainView: self.view)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(false)
-        buttonCollection.reloadData()
+        super.viewWillAppear(true)
+        dataPicker.date = Date()
         viewModel.loadToday()
-        datePicker.date = Date()
+        loadAllPies()
     }
 
     func updateTimeUI() {
@@ -66,44 +103,34 @@ class ViewController: UIViewController, ChangeStartAndEnd {
         }
     }
     
+    
     @IBAction func showTimeSet(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let timeSetVC = storyboard.instantiateViewController(withIdentifier: "SetTimeViewController") as! SetTimeViewController
         timeSetVC.delegate = self
         timeSetVC.modalPresentationStyle = .formSheet
-        
+        buttonCollection.reloadData()
         present(timeSetVC, animated: true, completion: nil)
     }
+        
     
-    func setBoxUI() {
-        setBG.layer.shadowColor = UIColor.black.cgColor
-        setBG.layer.shadowRadius = 5.0
-        setBG.layer.shadowOpacity = 0.1
-        setBG.layer.cornerRadius =  setBG.bounds.height / 10
+    func loadAllPies() {
+        viewModel.loadPies(navigationController: self.navigationController!, mainView: self.view)
+        updateTimeUI()
     }
     
     func drawPie() {
-        let pie = Pie(frame: CGRect(x: 0, y: 0, width: self.view.frame.width - 40, height: self.view.frame.width - 40))
-        pie.center = CGPoint(x: self.view.frame.width / 2, y: (self.view.frame.width + 40) / 2)
-        pie.backgroundColor = .clear
-        self.view.addSubview(pie)
-        pie.layer.shadowColor = UIColor.black.cgColor
-        pie.layer.shadowOpacity = 1
-        pie.layer.shadowRadius = 5.0
-        pie.layer.shadowOffset = .zero
-        pie.layer.animationKeys()
+        self.viewModel.addPie(navigationController: self.navigationController!, mainView: self.view)
         updateTimeUI()
     }
    
     @IBAction func set(_ sender: Any) {
-        if textField.text != ""{
-            if let thing = textField.text, let starting = whenStarted.text, let finishing = whenFinished.text, let color = colours.randomElement() {
-                viewModel.save(did: thing, at: starting, to: finishing, look: color)
-                textField.text = ""
-                drawPie()
-            }
-        } else {
-            print("Error! Text Field Empty!")
+        if textField.text!.isEmpty || textField.text!.count > 19 {
+            print("check text count")
+        } else if let thing = textField.text, let starting = whenStarted.text, let finishing = whenFinished.text, let color = colours.randomElement() {
+            viewModel.save(did: thing, at: starting, to: finishing, look: color)
+            drawPie()
+            textField.text = ""
         }
     }
     
@@ -114,25 +141,33 @@ class ViewController: UIViewController, ChangeStartAndEnd {
     }
     
     @objc func chooseDate() {
+        let dateformatter = DateFormatter()
+        dateformatter.dateStyle = .none
+        dateformatter.timeStyle = .short
         performSegue(withIdentifier: "showCalender", sender: self)
     }
+    
+    @objc func undoDrawPie() {
+        if !viewModel.dids.isEmpty {
+            self.view.viewWithTag(365)?.removeFromSuperview()
+            self.view.viewWithTag(314)?.removeFromSuperview()
+            viewModel.undo()
+            viewWillAppear(true)
+        }
+    }
+    
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showCalender" {
             let dateformatter = DateFormatter()
             dateformatter.dateStyle = .long
             dateformatter.timeStyle = .none
-            let chosed = datePicker.date
-//            let chosed = dateformatter.string(from: datePicker.date)
-            print(chosed)
+            let chosed = dataPicker.date
             dateformatter.dateFormat = "yyyyMMdd"
-            let dateKey = dateformatter.string(from: datePicker.date)
-            print(dateKey)
+            let dateKey = dateformatter.string(from: dataPicker.date)
             
             let calenderVC = segue.destination as? CalenderViewController
-//            calenderVC?.datePicker.preferredDatePickerStyle = .compact
-//            calenderVC?.datePicker.datePickerMode = .date
-    
             calenderVC?.update(day: dateKey, title: chosed)
         }
     }
@@ -160,14 +195,34 @@ extension ViewController: UICollectionViewDelegate {
         let title = viewModel.dailys[indexPath.item].title
         let color = viewModel.dailys[indexPath.item].bgColour
         
-        if indexPath.item == viewModel.dailys.count - 1{
+        if indexPath.item == viewModel.dailys.count - 1 {
+            
             let storyboard = UIStoryboard(name: "Edit", bundle: nil)
-            let editVC = storyboard.instantiateViewController(withIdentifier: "EditViewController")
+            let editVC = storyboard.instantiateViewController(withIdentifier: "EditViewController") as! EditQuickViewController
+            editVC.delegate = self
             let navEditVC = UINavigationController(rootViewController: editVC)
             present(navEditVC, animated: true, completion: nil)
-        } else if let starting = self.whenStarted.text, let finishing = self.whenFinished.text {
+        } else if let starting = self.whenStarted.text, let finishing = self.whenFinished.text{
             viewModel.save(did: title, at: starting, to: finishing, look: color)
             drawPie()
+        }
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        let title = viewModel.dailys[indexPath.item].title
+        let color = viewModel.dailys[indexPath.item].bgColour
+        
+        if indexPath.item != viewModel.dailys.count - 1, let starting = self.whenStarted.text, let finishing = self.whenFinished.text {
+            viewModel.save(did: title, at: starting, to: finishing, look: color)
+            viewModel.drawPie(navigationController: self.navigationController!, mainView: self.view)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        if indexPath.item != viewModel.dailys.count - 1 {
+            self.view.viewWithTag(300)?.removeFromSuperview()
+            viewModel.undo()
         }
     }
 }
@@ -178,10 +233,10 @@ extension ViewController {
         guard let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
         
         if noti.name == UIResponder.keyboardWillShowNotification {
-            let adjustmentHeight = keyboardFrame.height - view.safeAreaInsets.bottom
-            setViewBottom.constant = adjustmentHeight
+            let adjustmentHeight = keyboardFrame.height
+            inputBottomView.constant = adjustmentHeight
         } else {
-            setViewBottom.constant = 0
+            inputBottomView.constant = 0
         }
     }
 }
@@ -192,14 +247,12 @@ class QuickCell: UICollectionViewCell {
     @IBOutlet weak var cellBG: UIView!
     @IBOutlet weak var buttonTitle: UILabel!
     
+    
     func updateCell(daily: Quick.Daily) {
         cellBG.backgroundColor = daily.bgColour
         buttonTitle.text = daily.title
-        cellBG.layer.cornerRadius = cellBG.bounds.height*0.5
+        cellBG.layer.cornerRadius = cellBG.bounds.height / 2.3
         
-        if cellBG.backgroundColor == UIColor.systemBackground {
-            buttonTitle.textColor = UIColor.link
-        }
     }
 }
 

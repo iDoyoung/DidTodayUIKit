@@ -14,8 +14,6 @@ class Model {
     
     var dids: [Did] = []
     
-    
-    
     struct Color : Codable {
         var red : CGFloat = 0.0, green: CGFloat = 0.0, blue: CGFloat = 0.0, alpha: CGFloat = 0.0
 
@@ -128,10 +126,18 @@ class Model {
         if let encoded = try? encoder.encode(dids) {
         defaults.set(encoded, forKey: today)
             print("Success save data")
-            print(newDid)
         }
     }
     
+    func undoPie() {
+        let end = dids.endIndex - 1
+        dids.remove(at: end)
+        let encoder = JSONEncoder()
+        
+        if let encoded = try? encoder.encode(dids) {
+        defaults.set(encoded, forKey: today)
+        }
+    }
     
     func loadToday() {
         if let savedDid = defaults.object(forKey: today) as? Data {
@@ -139,20 +145,20 @@ class Model {
             if let loadedDids = try? decoder.decode([Did].self, from: savedDid) {
                 dids = loadedDids
                 print("success load data")
-                print(dids)
             }
         }
     }
     
     func loadLastDate(date: String) {
+        dids = [Did]()
         if let savedDid = defaults.object(forKey: date) as? Data {
             let decoder = JSONDecoder()
             if let loadedDids = try? decoder.decode([Did].self, from: savedDid) {
                 dids = loadedDids
                 print("success load data")
-                print(dids)
             }
         }
     }
    
+    
 }

@@ -26,6 +26,8 @@ class SetTimeViewController: UIViewController {
         super.viewDidLoad()
         startTimePicker.date = stardardTime
         startTimePicker.addTarget(self, action: #selector(changed), for: .valueChanged)
+        endTimePickser.date = stardardTime
+        endTimePickser.addTarget(self, action: #selector(changed), for: .valueChanged)
     }
     
     @objc func changed(_ picker: UIDatePicker) {
@@ -40,8 +42,6 @@ class SetTimeViewController: UIViewController {
         } else {
             endTime = date
         }
-        print(startTime)
-        print(endTime)
     }
 
 
@@ -59,3 +59,4 @@ class SetTimeViewController: UIViewController {
 protocol ChangeStartAndEnd {
     func change(start: String, end: String)
 }
+

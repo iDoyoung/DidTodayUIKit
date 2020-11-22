@@ -1,0 +1,24 @@
+
+/* Class = "UILabel"; text = "00:00 ~ 00:00"; ObjectID = "0BF-My-TM7"; */
+"0BF-My-TM7.text" = "00:00 ~ 00:00";
+
+/* Class = "UILabel"; text = "Quick Set"; ObjectID = "B9C-tg-FZP"; */
+"B9C-tg-FZP.text" = "나의 일상";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "CBR-l0-0fd"; */
+"CBR-l0-0fd.text" = "Label";
+
+/* Class = "UITextField"; placeholder = "Type What you did."; ObjectID = "UMw-DE-N69"; */
+"UMw-DE-N69.placeholder" = "한 일 추가";
+
+/* Class = "UILabel"; text = "Start time"; ObjectID = "XaC-iW-Yzl"; */
+"XaC-iW-Yzl.text" = "시작 시간";
+
+/* Class = "UILabel"; text = "End time"; ObjectID = "YaZ-Jj-Bl2"; */
+"YaZ-Jj-Bl2.text" = "종료 시간";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "bKI-oX-3EJ"; */
+"bKI-oX-3EJ.text" = "Label";
+
+/* Class = "UILabel"; text = "I didn't do anything."; ObjectID = "hF4-hF-kKu"; */
+"hF4-hF-kKu.text" = "이날은 한 일이 없어요.";

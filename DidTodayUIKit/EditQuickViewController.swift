@@ -9,13 +9,11 @@ import UIKit
 
 class EditQuickViewController: UIViewController, UITextFieldDelegate {
 
-    // delete 만들기
     var viewModel = DidViewModel()
     var delegate: UpdateButtons?
     var id: Int = 0
-    let colours: [UIColor] = [UIColor.systemRed, UIColor.systemBlue, UIColor.systemPink, UIColor.systemTeal, UIColor.systemGreen, UIColor.systemOrange, UIColor.systemYellow, UIColor.systemPurple, UIColor.systemIndigo, UIColor.label]
+  
     
-    @IBOutlet weak var setViewBottom: NSLayoutConstraint!
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var textField: UITextField!
@@ -24,6 +22,11 @@ class EditQuickViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func deleteButton(_ sender: Any) {
         viewModel.removeDaily(id: id)
+        viewModel.saveMyButton()
+        textField.text = ""
+        textField.backgroundColor = viewModel.colours[0]
+        doneButton.setTitle("Add".localized, for: .normal)
+        deleteButton.isHidden = true
         collectionView.reloadData()
     }
     
@@ -33,7 +36,7 @@ class EditQuickViewController: UIViewController, UITextFieldDelegate {
         }
         let subStringToReplace = textFieldText[rangeOfTextToReplace]
         let count = textFieldText.count - subStringToReplace.count + string.count
-        return count < 20
+        return count < 11
     }
     
     override func viewDidLoad() {
@@ -43,28 +46,27 @@ class EditQuickViewController: UIViewController, UITextFieldDelegate {
         deleteButton.isHidden = true
         id = viewModel.dailys.endIndex - 1
         
-        NotificationCenter.default.addObserver(self, selector: #selector(adjustInputView), name: UIResponder.keyboardWillShowNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(adjustInputView), name: UIResponder.keyboardWillShowNotification, object: nil)
 
-        
         collectionView.dataSource = self
         collectionView.delegate = self
         
         textField.layer.cornerRadius = textField.frame.height/2
-        textField.textColor = UIColor.systemBackground
-        textField.tintColor = UIColor.systemBackground
-        textField.backgroundColor = UIColor.systemPink
+        textField.textColor = UIColor.darkGray
+        textField.tintColor = UIColor.systemPink
+        textField.backgroundColor = viewModel.colours[0]
         
-        doneButton.setTitle("Add", for: .normal)
-        doneButton.layer.cornerRadius = doneButton.frame.height / 5
-        textField.attributedPlaceholder = NSAttributedString(string: "Daily did thing", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGray6])
+        doneButton.setTitle("Add".localized, for: .normal)
+        textField.attributedPlaceholder = NSAttributedString(string: "Daily did thing".localized, attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGray])
         
         textField.autocorrectionType = .no
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(back))
+        let cancelButton = UIBarButtonItem(title: "Cancel".localized, style: .plain, target: self, action: #selector(back))
         self.navigationItem.leftBarButtonItem = cancelButton
-        self.title = "Edit Daily"
+        self.title = "Edit Daily".localized
         self.navigationController?.navigationBar.tintColor = .systemPink
     }
     
+
     @objc func back() {
         delegate?.update()
         dismiss(animated: true, completion: nil)
@@ -74,15 +76,25 @@ class EditQuickViewController: UIViewController, UITextFieldDelegate {
         if textField.text?.isEmpty == false {
             let toAdd = Quick.Daily(title: textField.text!, bgColour: textField.backgroundColor!)
             if id == viewModel.dailys.endIndex - 1 {
-                viewModel.addDaily(daily: toAdd)
+                if viewModel.dailys.count == 11 {
+                    let alert = UIAlertController(title: "Full your daily.".localized, message: "Sorry, you can add only 10 daily.".localized, preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                    alert.addAction(okAction)
+                    present(alert, animated: true, completion: nil)
+                } else {
+                    viewModel.addDaily(daily: toAdd)
+                    viewModel.saveMyButton()
+                    delegate?.update()
+                    dismiss(animated: true, completion: nil)
+                }
             } else {
                 viewModel.resetButton(about: id, new: toAdd)
+                viewModel.saveMyButton()
+                delegate?.update()
+                dismiss(animated: true, completion: nil)
             }
-            viewModel.saveMyButton()
-            delegate?.update()
-            dismiss(animated: true, completion: nil)
         } else {
-            textField.attributedPlaceholder = NSAttributedString(string: "Type Plz", attributes: [NSAttributedString.Key.foregroundColor : UIColor.label])
+            print("empty")
         }
     }
 }
@@ -104,13 +116,21 @@ extension EditQuickViewController: UICollectionViewDataSource, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if indexPath.section == 0 {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "editCell", for: indexPath) as! EditCell
-        
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "editCell", for: indexPath) as! EditCell
             cell.updateCell(daily: viewModel.dailys[indexPath.item])
-        return cell
+            
+            if indexPath.item == viewModel.dailys.count - 1 {
+                cell.cellTitle.textColor = .link
+                cell.contentView.alpha = 0.5
+                
+            } else {
+                cell.cellTitle.textColor = .darkGray
+                cell.contentView.alpha = 1.0
+            }
+            return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "colourCell", for: indexPath) as! ColourCell
-            cell.colourView.backgroundColor = colours[indexPath.item]
+            cell.colourView.backgroundColor = viewModel.colours[indexPath.item]
             cell.colourPickUI()
             if textField.backgroundColor == cell.colourView.backgroundColor {
                 cell.contentView.layer.borderWidth = 4
@@ -125,29 +145,33 @@ extension EditQuickViewController: UICollectionViewDataSource, UICollectionViewD
         if indexPath.section == 0 {
             textField.text = viewModel.dailys[indexPath.item].title
             
-            if textField.text == "Add" {
-                doneButton.setTitle("Add", for: .normal)
+            if indexPath.item == viewModel.dailys.count - 1 {
+                doneButton.setTitle("Add".localized, for: .normal)
                 textField.text = ""
                 deleteButton.isHidden = true
+                textField.backgroundColor = viewModel.colours[0]
             } else {
                 deleteButton.isHidden = false
-                doneButton.setTitle("Edit", for: .normal)
+                doneButton.setTitle("Edit".localized, for: .normal)
                 textField.backgroundColor = viewModel.dailys[indexPath.item].bgColour
+                print(textField.backgroundColor!)
+                print(viewModel.dailys[indexPath.item].bgColour)
             }
             
             let selected = collectionView.cellForItem(at: indexPath)
             let all = collectionView.visibleCells
             for cell in all {
                 cell.contentView.alpha = 1.0
-               
                 selected?.contentView.alpha = 0.5
             }
             let indexSet = IndexSet(integer: 1)
             self.collectionView.reloadSections(indexSet)
             
+            
+            
             id = indexPath.item
         } else {
-            textField.backgroundColor = colours[indexPath.item]
+            textField.backgroundColor = viewModel.colours[indexPath.item]
             let selected = collectionView.cellForItem(at: indexPath)
             let all = collectionView.visibleCells
             
@@ -156,7 +180,6 @@ extension EditQuickViewController: UICollectionViewDataSource, UICollectionViewD
                 selected?.contentView.layer.borderWidth = 4
             }
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -164,12 +187,10 @@ extension EditQuickViewController: UICollectionViewDataSource, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        
             return UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
     }
+    
 }
-
-
 
 class EditCell: UICollectionViewCell {
     
@@ -178,30 +199,11 @@ class EditCell: UICollectionViewCell {
     
     func updateCell(daily: Quick.Daily) {
         cellBG.backgroundColor = daily.bgColour
-        cellTitle.text = daily.title
-        if cellTitle.text == "Add" {
-            cellTitle.textColor = .link
-        }
+        cellTitle.text = daily.title.localized
         cellBG.layer.cornerRadius = cellBG.bounds.height / 2.3
-        
     }
 }
 
-extension EditQuickViewController {
-    
-    @objc private func adjustInputView(noti: Notification) {
-        guard let userInfo = noti.userInfo else { return }
-        guard let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
-        
-        if noti.name == UIResponder.keyboardWillShowNotification {
-            let adjustmentHeight = keyboardFrame.height - view.safeAreaInsets.bottom
-            setViewBottom.constant = adjustmentHeight + 20
-        } else {
-            setViewBottom.constant = 0
-        }
-    }
-    
-}
 class ColourCell: UICollectionViewCell {
     
     @IBOutlet weak var cellBG: UIView!

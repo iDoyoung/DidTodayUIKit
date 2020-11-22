@@ -18,6 +18,9 @@ class DidViewModel {
         model.dids
     }
     
+    var now: String {
+        model.now
+    }
     var hours: Int {
         model.hour
     }
@@ -26,8 +29,8 @@ class DidViewModel {
         model.minute
     }
     
-    var currentTime: Int {
-        model.currentTime
+    var currentMinutes: Int {
+        model.currentToMinutes
     }
     
     func undo() {
@@ -39,6 +42,16 @@ class DidViewModel {
         let minute: Int = model.formatTimeMinutes(time: about)
         
         return Double(hour + minute)
+    }
+    
+    func dateToString(time: Date) -> String {
+        let dateFormatter = DateFormatter()
+        
+        dateFormatter.dateStyle = .none
+        dateFormatter.timeStyle = .short
+        dateFormatter.dateFormat = "HH:mm"
+        let time = dateFormatter.string(from: time)
+        return time
     }
     
     func stringToDate(date: String) -> Date {
@@ -103,13 +116,8 @@ class DidViewModel {
         pie.center = CGPoint(x: mainView.frame.width / 2, y: ((mainView.frame.width / 2) + navigationBarHeight + statusBarHeight))
         
         pie.backgroundColor = .clear
-        mainView.insertSubview(pie, at: 3)
+        mainView.insertSubview(pie, at: 2)
         
-//        pie.layer.shadowColor = UIColor.black.cgColor
-//        pie.layer.shadowOpacity = 0.8
-//        pie.layer.shadowRadius = 5.0
-//        pie.layer.shadowOffset = .zero
-//        pie.layer.animationKeys()
         pie.tag = 300
         
     }
@@ -128,13 +136,8 @@ class DidViewModel {
         pie.center = CGPoint(x: mainView.frame.width / 2, y: ((mainView.frame.width / 2) + navigationBarHeight + statusBarHeight))
         
         pie.backgroundColor = .clear
-        mainView.insertSubview(pie, at: 3)
-        
-//        pie.layer.shadowColor = UIColor.black.cgColor
-//        pie.layer.shadowOpacity = 0.8
-//        pie.layer.shadowRadius = 5.0
-//        pie.layer.shadowOffset = .zero
-//        pie.layer.animationKeys()
+        mainView.insertSubview(pie, at: 2)
+
         pie.tag = 365
         print(pie.tag)
     }
@@ -152,13 +155,8 @@ class DidViewModel {
         pie.center = CGPoint(x: mainView.frame.width / 2, y: ((mainView.frame.width / 2) + navigationBarHeight + statusBarHeight))
         pie.backgroundColor = .clear
         
-        mainView.insertSubview(pie, at: 2)
+        mainView.insertSubview(pie, at: 1)
         
-//        pie.layer.shadowColor = UIColor.black.cgColor
-//        pie.layer.shadowOpacity = 0.8
-//        pie.layer.shadowRadius = 5.0
-//        pie.layer.shadowOffset = .zero
-//        pie.layer.animationKeys()
         pie.tag = 314
     }
 
@@ -175,13 +173,15 @@ class DidViewModel {
         circle.backgroundColor = .systemBackground
         
         circle.layer.shadowOpacity = 0.3
-        circle.layer.shadowColor = UIColor.black.cgColor
+        circle.layer.shadowColor = UIColor.label.cgColor
         circle.layer.shadowRadius = 7.0
         circle.layer.opacity = 0.3
         
         circle.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
         circle.layer.cornerRadius = circle.frame.size.width / 2
-        mainView.insertSubview(circle, at: 1)
+        mainView.insertSubview(circle, at: 0)
+        
+        circle.tag = 24
         
     }
     
@@ -190,18 +190,11 @@ class DidViewModel {
         view.clipsToBounds = true
     }
     
-    func bgView(mainView: UIView) {
-        let graident = Gradient()
-        if currentTime <= 300 {
-            graident.midnight(view: mainView)
-        } else if currentTime > 300, currentTime <= 420 {
-            graident.dawn(view: mainView)
-        } else if currentTime > 420, currentTime <= 1080 {
-            graident.afternoon(view: mainView)
-        } else if currentTime > 1080, currentTime <= 1140{
-            graident.evening(view: mainView)
-        } else {
-            graident.night(view: mainView)
-        }
+
+    let colours: [UIColor] = [#colorLiteral(red: 1, green: 0.4932718873, blue: 0.4739984274, alpha: 1), #colorLiteral(red: 1, green: 0.8323456645, blue: 0.4732058644, alpha: 1), #colorLiteral(red: 0.9995340705, green: 0.988355577, blue: 0.4726552367, alpha: 1), #colorLiteral(red: 0.8321695924, green: 0.985483706, blue: 0.4733308554, alpha: 1), #colorLiteral(red: 0.4500938654, green: 0.9813225865, blue: 0.4743030667, alpha: 1), #colorLiteral(red: 0.4513868093, green: 0.9930960536, blue: 1, alpha: 1), #colorLiteral(red: 0.4620226622, green: 0.8382837176, blue: 1, alpha: 1), #colorLiteral(red: 0.476841867, green: 0.5048075914, blue: 1, alpha: 1), #colorLiteral(red: 0.8446564078, green: 0.5145705342, blue: 1, alpha: 1), #colorLiteral(red: 1, green: 0.5409764051, blue: 0.8473142982, alpha: 1)]
+    var colour: UIColor {
+        let colors: [UIColor] = [#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1), #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1), #colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1), #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1), #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1), #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1), #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1), #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1), #colorLiteral(red: 0.5843137503, green: 0.8235294223, blue: 0.4196078479, alpha: 1)]
+        return colors.randomElement() ?? UIColor.clear
     }
+
 }

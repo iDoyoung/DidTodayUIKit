@@ -39,8 +39,8 @@ class Quick {
             try container.encode(Model.Color(uiColor: bgColour), forKey: .bgColour)
         }
     }
-    
-    var dailys: [Daily] = [Daily(title: "Rest", bgColour: UIColor.systemPurple), Daily(title: "Meal", bgColour: UIColor.systemYellow), Daily(title: "Work", bgColour: UIColor.systemRed), Daily(title: "Study", bgColour: UIColor.systemGreen), Daily(title: "Add", bgColour: UIColor.clear)]
+   
+    var dailys: [Daily] = [Daily(title: "Rest".localized, bgColour: #colorLiteral(red: 1, green: 0.4932718873, blue: 0.4739984274, alpha: 1)), Daily(title: "Have a Meal".localized, bgColour: #colorLiteral(red: 1, green: 0.8323456645, blue: 0.4732058644, alpha: 1)), Daily(title: "Work".localized, bgColour: #colorLiteral(red: 0.8321695924, green: 0.985483706, blue: 0.4733308554, alpha: 1)), Daily(title: "Study".localized, bgColour: #colorLiteral(red: 1, green: 0.5409764051, blue: 0.8473142982, alpha: 1)), Daily(title: "Eexrcise".localized, bgColour: #colorLiteral(red: 0.4513868093, green: 0.9930960536, blue: 1, alpha: 1)), Daily(title: "Add".localized, bgColour: UIColor.clear)]
     
     func addDaily(add: Daily) {
         dailys.insert(add, at: dailys.endIndex - 1)
@@ -50,6 +50,7 @@ class Quick {
         dailys.remove(at: index)
         dailys.insert(daily, at: index)
     }
+    
     func deleteDaily(index: Int) {
         dailys.remove(at: index)
     }

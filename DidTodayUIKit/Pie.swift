@@ -35,7 +35,7 @@ class Pie: UIView {
                     clockwise: true)
         
     
-        didNow.colour.set()
+        didNow.colour.withAlphaComponent(0.8).set()
         path.fill()
         
         let animation = CABasicAnimation(keyPath: "transform.scale")
@@ -62,6 +62,9 @@ class Pie: UIView {
         label.center = CGPoint(x: pieX, y: pieY)
         label.textAlignment = .center
         label.text = didNow.did
+        label.textColor = .darkGray
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+
         self.addSubview(label)
     }
     
@@ -102,7 +105,7 @@ class DrawPie: UIView {
         layer.path = path.cgPath
         layer.add(animation, forKey: animation.keyPath)
         layer.fillColor = UIColor.clear.cgColor
-        layer.strokeColor = didNow.colour.withAlphaComponent(0.3).cgColor
+        layer.strokeColor = didNow.colour.withAlphaComponent(0.2).cgColor
         
         layer.lineWidth = radius
         layer.strokeEnd = 1

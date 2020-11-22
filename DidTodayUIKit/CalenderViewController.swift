@@ -11,13 +11,31 @@ class CalenderViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var emptyLabel: UILabel!
     var viewModel = DidViewModel()
     var date = ""
 
     let datePicker = UIDatePicker()
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if !viewModel.dids.isEmpty {
+            tableViewHide()
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if !viewModel.dids.isEmpty {
+            tableViewHide()
+        }
+    }
+    
+    func tableViewHide() {
+        tableView.isHidden = !tableView.isHidden
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor.init(named: "CustomBackColor")
         viewModel.loadLastDate(date: date)
         navigationItem.titleView = datePicker
         let yesterdayDate = Calendar.current.date(byAdding: .day, value: -1, to: Date())
@@ -25,16 +43,32 @@ class CalenderViewController: UIViewController {
         datePicker.preferredDatePickerStyle = .compact
         datePicker.datePickerMode = .date
         datePicker.addTarget(self, action: #selector(chooseDate), for: .valueChanged)
+        
         tableView.dataSource = self
+        
+        tableView.backgroundColor = UIColor.clear
     }
 
+    func loadUI() {
+        if !viewModel.dids.isEmpty {
+            emptyLabel.isHidden = true
+            tableView.isHidden = false
+            drawPie()
+        } else {
+            emptyLabel.isHidden = false
+            tableView.isHidden = true
+        }
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        drawPie()
+        loadUI()
     }
     
     func drawPie() {
-            self.viewModel.loadPies(navigationController: self.navigationController, mainView: self.view)
+        let navigation = self.navigationController
+        let bgView = self.view
+        self.viewModel.addCircle(navigationController: navigation, mainView: bgView!)
+        self.viewModel.loadPies(navigationController: navigation, mainView: bgView!)
     }
     
     func update(day: String, title: Date) {
@@ -50,8 +84,10 @@ class CalenderViewController: UIViewController {
         let dateKey = dateformatter.string(from: datePicker.date)
         viewModel.loadLastDate(date: dateKey)
         self.view.viewWithTag(314)?.removeFromSuperview()
+        self.view.viewWithTag(24)?.removeFromSuperview()
         self.viewWillAppear(true)
         tableView.reloadData()
+        tableView.backgroundView?.backgroundColor = UIColor.clear
         dismiss(animated: true, completion: nil)
     }
 }
@@ -65,13 +101,21 @@ extension CalenderViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "DidTableCell", for: indexPath) as? DidTableCell else {
             return UITableViewCell()
         }
+        cell.selectionStyle = .none
+        cell.backgroundColor = .clear
+        cell.contentView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        cell.startToEndTime.textColor = .white
         cell.didThing.text = viewModel.dids[indexPath.row].did
+        cell.didThing.textColor = viewModel.dids[indexPath.row].colour
+        cell.separatorInset = .zero
+        tableView.separatorColor = UIColor.init(named: "CustomBackColor")
         let startTime = viewModel.dids[indexPath.row].start
         let endTime = viewModel.dids[indexPath.row].finish
         cell.startToEndTime.text = "\(startTime) ~ \(endTime)"
         return cell
     }
 }
+
 
 class DidTableCell: UITableViewCell {
     @IBOutlet weak var startToEndTime: UILabel!

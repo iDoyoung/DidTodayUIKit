@@ -62,7 +62,7 @@ class Model {
     
     
 
-    
+    //MARK: - Date & Time
     let date = Date()
     
     let dateFormatter = DateFormatter()
@@ -71,6 +71,12 @@ class Model {
         dateFormatter.dateFormat = "yyyyMMdd"
         return dateFormatter.string(from: date)
     }
+    
+    var now: String {
+        dateFormatter.dateFormat = "HH:mm"
+        return dateFormatter.string(from: date)
+    }
+    
     var hour: Int {
         dateFormatter.dateFormat = "HH:mm"
         return Calendar.current.component(.hour, from: Date())
@@ -81,7 +87,7 @@ class Model {
         return Calendar.current.component(.minute, from: Date())
     }
     
-    var currentTime: Int {
+    var currentToMinutes: Int {
         (hour * 60) + minute
     }
     
@@ -115,6 +121,16 @@ class Model {
         return minutes
     }
     
+    func dateToString(time: Date) -> String {
+        dateFormatter.dateStyle = .none
+        dateFormatter.timeStyle = .short
+        dateFormatter.dateFormat = "HH:mm"
+        let time = dateFormatter.string(from: time)
+        return time
+    }
+    
+    
+    //MARK: - Users Defaults
     let defaults = UserDefaults.standard
 
     func setData(thing: String, start: String, finish: String, colour: UIColor) {
@@ -154,6 +170,7 @@ class Model {
         if let savedDid = defaults.object(forKey: date) as? Data {
             let decoder = JSONDecoder()
             if let loadedDids = try? decoder.decode([Did].self, from: savedDid) {
+                
                 dids = loadedDids
                 print("success load data")
             }

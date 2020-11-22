@@ -1,0 +1,26 @@
+/* 
+  Localizable.strings
+  DidTodayUIKit
+
+  Created by ido on 2020/11/18.
+  
+*/
+"Start time" = "Start time";
+"End time" = "End time";
+"What you did." = "What you did.";
+"Quick Set" = "Quick Set";
+"Add" = "Add";
+"Edit Daily" = "Edit Daily";
+"Daily did thing" = "Daily did thing";
+"Edit" = "Edit";
+"Cancel" = "Cancel";
+"Delete" = "Delete";
+"I didn't do anything." = "I didn't do anything.";
+"Rest" = "Rest";
+"Have a Meal" = "Have a Meal";
+"Work" = "Work";
+"Eexrcise" = "Eexrcise";
+
+"Full your daily." = "Full your daily.";
+"Sorry, you can add only 10 daily." = "Sorry, you can add only 10 daily.";
+"OK" = "OK";

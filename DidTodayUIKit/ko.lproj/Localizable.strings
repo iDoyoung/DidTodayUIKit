@@ -1,0 +1,26 @@
+/* 
+  Localizable.strings
+  DidTodayUIKit
+
+  Created by ido on 2020/11/18.
+  
+*/
+"Start time" = "시작";
+"End time" = "끝";
+"What you did." = "한 일";
+"Quick Set" = "빠른 등록";
+"Add" = "추가";
+"Edit Daily" = "일상 편집";
+"Daily did thing" = "일상";
+"Edit" = "편집";
+"Cancel" = "취소";
+"Delete" = "삭제";
+"I didn't do anything." = "이날 기록이 없어요.";
+"Rest" = "휴식";
+"Have a Meal" = "식사";
+"Work" = "일";
+"Eexrcise" = "운동";
+
+"Full your daily." = "일상이 가득 찼습니다.";
+"Sorry, you can add only 10 daily." = "오직 10개의 일상을 만들 수 있습니다.";
+"OK" = "확인";

@@ -34,7 +34,7 @@ class AllPie: UIView {
                         clockwise: true)
             
            
-            did.colour.set()
+            did.colour.withAlphaComponent(0.8).set()
 
             path.fill()
             
@@ -51,7 +51,11 @@ class AllPie: UIView {
             label.center = CGPoint(x: pieX, y: pieY)
             label.textAlignment = .center
             label.text = did.did
+            label.font = UIFont.preferredFont(forTextStyle: .title3)
             
+            
+            label.textColor = .darkGray
+    
             self.addSubview(label)
         }
     }

@@ -86,7 +86,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Add I did" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UMw-DE-N69">
-                                            <rect key="frame" x="20" y="15.333333333333368" width="247" height="35.666666666666657"/>
+                                            <rect key="frame" x="20" y="18.333333333333371" width="203" height="29.333333333333329"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="UMw-DE-N69" secondAttribute="height" multiplier="305:44" id="OYO-u2-dgM"/>
                                             </constraints>
@@ -94,13 +94,14 @@
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nvz-vg-V33">
-                                            <rect key="frame" x="279" y="11" width="44" height="44"/>
+                                            <rect key="frame" x="235" y="11" width="88" height="44"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" secondItem="nvz-vg-V33" secondAttribute="height" multiplier="1:1" id="Nse-3M-ieS"/>
+                                                <constraint firstAttribute="width" secondItem="nvz-vg-V33" secondAttribute="height" multiplier="2:1" id="Nse-3M-ieS"/>
                                                 <constraint firstAttribute="height" constant="44" id="zSr-Bt-miJ"/>
                                             </constraints>
                                             <color key="tintColor" systemColor="systemPinkColor"/>
-                                            <state key="normal" image="pencil.and.outline" catalog="system">
+                                            <state key="normal" title="Report">
+                                                <color key="titleColor" systemColor="systemPinkColor"/>
                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="27" weight="bold"/>
                                             </state>
                                             <connections>
@@ -329,7 +330,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="pencil.and.outline" catalog="system" width="128" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

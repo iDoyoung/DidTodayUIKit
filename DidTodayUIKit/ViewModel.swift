@@ -11,7 +11,7 @@ import QuartzCore
 class DidViewModel {
     
     var model = Model.shared
-    var quickModel = Quick.shared
+   // var quickModel = Quick.shared
     
     
     var dids: [Model.Did] {
@@ -70,28 +70,46 @@ class DidViewModel {
         model.setData(thing: thing, start: start, finish: finish, colour: colour)
     }
     
-    var dailys: [Quick.Daily] {
-        quickModel.dailys
+//    var dailys: [Quick.Daily] {
+//        quickModel.dailys
+//    }
+    
+//    func addDaily(daily: Quick.Daily) {
+//        quickModel.addDaily(add: daily)
+//    }
+    
+//    func removeDaily(id: Int) {
+//        quickModel.deleteDaily(index: id)
+//    }
+//    func saveMyButton() {
+//        quickModel.setQuick()
+//    }
+    
+//    func resetButton(about: Int, new: Quick.Daily) {
+//        quickModel.resetDaily(index: about, daily: new)
+//    }
+    
+//    func loadMyButton() {
+//        quickModel.loadQuick()
+//    }
+    
+    var startNow: [String] {
+        model.startNow
     }
     
-    func addDaily(daily: Quick.Daily) {
-        quickModel.addDaily(add: daily)
+    func counting(time: String, doing: String) {
+        model.save(when: time, what: doing)
     }
     
-    func removeDaily(id: Int) {
-        quickModel.deleteDaily(index: id)
-    }
-    func saveMyButton() {
-        quickModel.setQuick()
+    func doing() {
+        model.load()
     }
     
-    func resetButton(about: Int, new: Quick.Daily) {
-        quickModel.resetDaily(index: about, daily: new)
+    func done() {
+        model.delete()
     }
     
-    func loadMyButton() {
-        quickModel.loadQuick()
-    }
+    //MARK: - Pie Chart
     
     var statusBarHeight: CGFloat {
         if #available(iOS 13.0, *) {

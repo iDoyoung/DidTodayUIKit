@@ -176,6 +176,21 @@ class Model {
             }
         }
     }
-   
+    
+    var startNow: [String] = []
+    
+    func save(when: String, what: String) {
+        defaults.set([when, what], forKey: "Doing")
+    }
+    
+    func load() {
+        let loaded = defaults.array(forKey: "Doing") as? [String]
+        startNow = loaded ?? []
+    }
+    
+    func delete() {
+        defaults.removeObject(forKey: "Doing")
+    }
+    
     
 }

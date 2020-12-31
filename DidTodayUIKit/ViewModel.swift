@@ -11,13 +11,14 @@ import QuartzCore
 class DidViewModel {
     
     var model = Model.shared
-   // var quickModel = Quick.shared
-    
-    
+
     var dids: [Model.Did] {
         model.dids
     }
     
+    var today: String {
+        model.today
+    }
     var now: String {
         model.now
     }
@@ -66,47 +67,22 @@ class DidViewModel {
     func loadLastDate(date: String) {
         model.loadLastDate(date: date)
     }
-    func save(did thing: String, at start: String, to finish: String, look colour: UIColor) {
-        model.setData(thing: thing, start: start, finish: finish, colour: colour)
-    }
     
-//    var dailys: [Quick.Daily] {
-//        quickModel.dailys
-//    }
-    
-//    func addDaily(daily: Quick.Daily) {
-//        quickModel.addDaily(add: daily)
-//    }
-    
-//    func removeDaily(id: Int) {
-//        quickModel.deleteDaily(index: id)
-//    }
-//    func saveMyButton() {
-//        quickModel.setQuick()
-//    }
-    
-//    func resetButton(about: Int, new: Quick.Daily) {
-//        quickModel.resetDaily(index: about, daily: new)
-//    }
-    
-//    func loadMyButton() {
-//        quickModel.loadQuick()
-//    }
-    
-    var startNow: [String] {
+    var startNow: [Model.Doing] {
         model.startNow
     }
     
-    func counting(time: String, doing: String) {
-        model.save(when: time, what: doing)
+    func save(did thing: String, at start: String, to finish: String, look colour: UIColor, date: String) {
+        model.setData(thing: thing, start: start, finish: finish, colour: colour, day: date)
+    }
+        
+    func counting(time: String, doing: String, paint: UIColor) {
+        model.saveDoing(when: time, what: doing, color: paint)
     }
     
-    func doing() {
-        model.load()
-    }
     
     func done() {
-        model.delete()
+        model.deleteDoing()
     }
     
     //MARK: - Pie Chart

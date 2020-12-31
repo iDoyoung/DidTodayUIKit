@@ -9,7 +9,9 @@ import UIKit
 import QuartzCore
 
 class ViewController: UIViewController, UITextFieldDelegate {
-    //TODO: if endtime > startTime , when change date still run timer
+    
+    //TODO: Secondescroll when change date still run timer
+    
     var viewModel = DidViewModel()
     
     @IBOutlet weak var scrollTopLine: NSLayoutConstraint!
@@ -18,13 +20,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     //MARK: - First Scroll View
     var start = "00:00"
     var end = "00:00"
-    var colour: UIColor = UIColor.systemGray
-    
-    func update() {
-        firstCollectionView.reloadData()
-    }
-    
-  
+    var colourSetOfFirst: UIColor = .clear
+   
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
    }
@@ -32,6 +29,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBAction func showEdit(_ sender: Any) {
         self.firstTextField.becomeFirstResponder()
         editShow()
+        navCancelButton()
         editButtonView.isHidden = true
     }
     
@@ -81,11 +79,17 @@ class ViewController: UIViewController, UITextFieldDelegate {
         quickSetView.isHidden = false
     }
     
+    func navCancelButton() {
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(editCancel))
+        navigationItem.rightBarButtonItem = cancelButton
+    }
     //MARK: - Second Scroll View
+    
     var started = "0"
     var doing = ""
-    var timer: Timer?
+    var colourSetOfSecond: UIColor = .clear
     
+    var timer: Timer?
     @IBOutlet weak var countingBG: UIVisualEffectView!
     @IBOutlet weak var secondCollectionBG: UIVisualEffectView!
     @IBOutlet weak var timeCountBG: UIView!
@@ -93,14 +97,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var secondTextField: UITextField!
     @IBOutlet weak var secondCollectionView: UICollectionView!
-    @IBOutlet weak var startingTime: UILabel!
-    @IBOutlet weak var doneTime: UILabel!
     @IBOutlet weak var startButton: UIButton!
     
     @IBOutlet weak var proceedingView1: UIView!
     @IBOutlet weak var proceedingView2: UIView!
     @IBOutlet weak var proceedingView3: UIView!
     
+    @IBOutlet weak var secondViewBottomLine: NSLayoutConstraint!
     
     @IBAction func starting(_ sender: UIButton) {
             if sender.currentTitle == "Start", !secondTextField.text!.isEmpty {
@@ -114,15 +117,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 print("Error")
             }
         loadingAnimation()
+        self.view.endEditing(true)
     }
     
     func startCountingUI() {
         started = viewModel.dateToString(time: Date())
-        viewModel.counting(time: started, doing: doing)
+        viewModel.counting(time: started, doing: doing, paint: colourSetOfSecond)
         secondTextField.text = ""
         secondTextField.isHidden = true
         timeCountBG.isHidden = false
-        doneTime.text = viewModel.dateToString(time: Date())
     }
     
     func prceedingViewUI() {
@@ -147,13 +150,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
         } else {
             self.timer?.invalidate()
+            print("Testing error")
         }
     }
     
     func animateLoadingDots() {
         UIView.animate(withDuration: 1.2, delay: 0) {
             self.proceedingView1.frame.origin.y = self.proceedingView1.frame.origin.y - 8
-            
         } completion: { (complete) in
             if complete {
                 UIView.animate(withDuration: 1.2) {
@@ -192,9 +195,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
             self.timeCountBG.isHidden = true
             let end = self.viewModel.dateToString(time: Date())
             self.secondTextField.isHidden = false
-            self.viewModel.save(did: self.doing, at: self.started, to: end, look: self.viewModel.colour)
+            self.viewModel.save(did: self.doing, at: self.started, to: end, look: self.colourSetOfSecond, date: self.viewModel.today)
             self.viewWillAppear(true)
-            
         }
         
         let stopAction = UIAlertAction(title: "Delete", style: .destructive) { (action) in
@@ -204,6 +206,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             self.viewWillAppear(true)
             self.secondTextField.isHidden = false
         }
+        
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
 
         alert.addAction(doneAction)
@@ -212,7 +215,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         present(alert, animated: true, completion: nil)
     }
-    
+  
     
     func secondViewLoad() {
         proceedingView1.layer.cornerRadius = proceedingView1.frame.height / 2
@@ -223,17 +226,22 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func secondViewAppear() {
-        viewModel.doing()
+//        colourSetOfSecond = viewModel.colour
         if viewModel.startNow.isEmpty {
-            startingTime.text = viewModel.dateToString(time: Date())
             timeCountBG.isHidden = true
             startButton.setTitle("Start", for: .normal)
+        } else if viewModel.startNow[0].date != viewModel.today {
+            
+            started = viewModel.startNow[0].startTime
+            doing = viewModel.startNow[0].doing
+            self.viewModel.save(did: self.doing, at: self.started, to: "23:59", look: self.viewModel.colour, date: viewModel.startNow[0].date)
+            timeCountBG.isHidden = true
+            startButton.setTitle("Start", for: .normal)
+            self.viewModel.done()
         } else {
-            started = viewModel.startNow[0]
-            doing = viewModel.startNow[1]
-            startingTime.text = started
+            started = viewModel.startNow[0].startTime
+            doing = viewModel.startNow[0].doing
             timeCountBG.isHidden = false
-            doneTime.text = viewModel.dateToString(time: Date())
             startButton.setTitle("Done", for: .normal)
             secondTextField.isHidden = true
         }
@@ -247,6 +255,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         editHidden()
         scrollTopLine.constant = self.view.frame.height/2
+        colourSetOfFirst = viewModel.colour
         
         secondViewLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(adjustInputView), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -269,8 +278,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         viewModel.loadToday()
 //        viewModel.loadMyButton()
         firstTextField.autocorrectionType = .no
-        firstTextField.delegate = self
         
+        firstTextField.delegate = self
+        secondTextField.delegate = self
 
         let undoButton = UIBarButtonItem(image: UIImage(systemName: "gobackward"), style: .plain, target: self, action: #selector(undoDrawPie))
         navigationItem.leftBarButtonItem = undoButton
@@ -279,6 +289,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         firstCollectionView.dataSource = self
         
         secondCollectionView.dataSource = self
+        secondCollectionView.delegate = self
         
         dataPicker.preferredDatePickerStyle = .compact
         dataPicker.datePickerMode = .date
@@ -321,32 +332,52 @@ class ViewController: UIViewController, UITextFieldDelegate {
         updateTimeUI()
     }
    
-
-    @IBAction func upSetButton(_ sender: Any) {
-        if firstTextField.text!.isEmpty || firstTextField.text!.count > 19 {
-            print("check text count")
-        } else if let thing = firstTextField.text {
-            self.view.viewWithTag(300)?.removeFromSuperview()
-            viewModel.undo()
-            viewModel.save(did: thing, at: start, to: end, look: colour)
-            completePie()
-            firstTextField.text = ""
+    func alertSetError() {
+        let alert = UIAlertController(title: "Check setting time", message: "You can't set end time faster than start time.", preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default) { (action) in
+            self.viewModel.undo()
         }
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
     }
-    
     
     @IBAction func downSetButton(_ sender: Any) {
         if firstTextField.text!.isEmpty || firstTextField.text!.count > 19 {
             print("check text count")
-        } else if let thing = firstTextField.text{
-            viewModel.save(did: thing, at: start, to: end, look: colour)
-            viewModel.drawPie(navigationController: self.navigationController, mainView: self.view)
+        } else if let thing = firstTextField.text {
+            let startTimes = viewModel.timeFormat(saved: start)
+            let endTimes = viewModel.timeFormat(saved: end)
+            
+            if startTimes > endTimes {
+                viewModel.save(did: thing, at: start, to: end, look: colourSetOfFirst, date: viewModel.today)
+            } else {
+                viewModel.save(did: thing, at: start, to: end, look: colourSetOfFirst, date: viewModel.today)
+                viewModel.drawPie(navigationController: self.navigationController, mainView: self.view)
+            }
         }
     }
     
-    @IBAction func cancelSetButton(_ sender: Any) {
-        self.view.viewWithTag(300)?.removeFromSuperview()
-        viewModel.undo()
+    @IBAction func upSetButton(_ sender: Any) {
+        if firstTextField.text!.isEmpty || firstTextField.text!.count > 19 {
+            print("check text count")
+        } else if let thing = firstTextField.text {
+            
+            let startTimes = viewModel.timeFormat(saved: start)
+            let endTimes = viewModel.timeFormat(saved: end)
+            if startTimes > endTimes {
+                alertSetError()
+            } else {
+                self.view.viewWithTag(300)?.removeFromSuperview()
+                viewModel.undo()
+                viewModel.save(did: thing, at: start, to: end, look: colourSetOfFirst, date: viewModel.today)
+                completePie()
+                firstTextField.text = ""
+                colourSetOfFirst = viewModel.colour
+                firstCollectionView.reloadData()
+                
+            }
+        }
+        self.view.endEditing(true)
     }
     
     @IBAction func exitSetButton(_ sender: Any) {
@@ -356,6 +387,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     
+    //MARK: - @objc
     
     @objc func showEdit(sender:UIBarButtonItem) {
         let storyboard = UIStoryboard(name: "Edit", bundle: nil)
@@ -383,7 +415,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         if picker == startTimePicker {
         start = viewModel.dateToString(time: picker.date)
             print(start)
-            
         } else {
             end = viewModel.dateToString(time: picker.date)
             print(end)
@@ -393,10 +424,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @objc func cancel() {
         editHidden()
         editButtonView.isHidden = false
-        colour = viewModel.colour
+        colourSetOfFirst = viewModel.colour
         
     }
-    
+    @objc func editCancel() {
+        editHidden()
+        editButtonView.isHidden = false
+        self.view.endEditing(true)
+        navigationItem.rightBarButtonItem = .none
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showCalender" {
@@ -415,10 +451,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == self.firstTextField {
-            self.view.endEditing(true)
-        }
-        return true
+        self.view.endEditing(true)
+        return false
     }
 }
 
@@ -434,6 +468,7 @@ extension ViewController: UICollectionViewDataSource {
         }
         cell.updateUI()
         cell.colours.backgroundColor = viewModel.colours[indexPath.item]
+        
         return cell
     }
 }
@@ -441,16 +476,22 @@ extension ViewController: UICollectionViewDataSource {
 extension ViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+       
         let selected = collectionView.cellForItem(at: indexPath)
-//        let all = collectionView.visibleCells
-//        
-//        for cell in all {
-//            cell.contentView.layer.borderWidth = 0
-//        }
+        let all = collectionView.visibleCells
+
+        for cell in all {
+            cell.contentView.layer.borderWidth = 0
+        }
         selected?.contentView.layer.borderWidth = 4
         
-        self.colour = viewModel.colours[indexPath.item]
+        if collectionView == self.firstCollectionView {
+            self.colourSetOfFirst = viewModel.colours[indexPath.item]
+        } else if collectionView == self.secondCollectionView {
+            self.colourSetOfSecond = viewModel.colours[indexPath.item]
+        }
     }
+        
 }
 
 
@@ -468,12 +509,14 @@ extension ViewController {
             setDidViewBottom.constant = quickSetViewBottom.constant + quickSetView.frame.height + 8
             endTimeViewBottom.constant = setDidViewBottom.constant + setDidView.frame.height + 8
             startTimeViewBottom.constant = endTimeViewBottom.constant + endTimeView.frame.height + 8
+            secondViewBottomLine.constant = adjustmentHeight
         } else {
             //scrollTopLine.constant = self.view.frame.height/2
             quickSetViewBottom.constant = 0
             setDidViewBottom.constant = quickSetViewBottom.constant + quickSetView.frame.height + 8
             endTimeViewBottom.constant = setDidViewBottom.constant + setDidView.frame.height + 8
             startTimeViewBottom.constant = endTimeViewBottom.constant + endTimeView.frame.height + 8
+            secondViewBottomLine.constant = 0
         }
     }
 }
@@ -484,6 +527,7 @@ class ColorCell: UICollectionViewCell {
     
 
     func updateUI() {
+        contentView.layer.borderWidth = 0
         contentView.layer.borderColor = UIColor.systemGray5.cgColor
         contentView.layer.cornerRadius = contentView.frame.width / 5
     }

@@ -12,6 +12,8 @@ class DidViewModel {
     
     var model = Model.shared
 
+    var navRightButton: Bool = false
+    
     var dids: [Model.Did] {
         model.dids
     }
@@ -19,6 +21,11 @@ class DidViewModel {
     var today: String {
         model.today
     }
+    
+    var todayMonthDay: String {
+        model.todayDate
+    }
+    
     var now: String {
         model.now
     }
@@ -60,12 +67,24 @@ class DidViewModel {
         return time
     }
     
+    func loadSavedDate() {
+        model.printKey()
+    }
+    
+    var savedDays: [Date] {
+        model.savedDays
+    }
+    
     func loadToday() {
         model.loadToday()
     }
     
     func loadLastDate(date: String) {
         model.loadLastDate(date: date)
+    }
+    
+    func loadDoing() {
+        model.loadDoing()
     }
     
     var startNow: [Model.Doing] {
@@ -110,7 +129,7 @@ class DidViewModel {
         pie.center = CGPoint(x: mainView.frame.width / 2, y: ((mainView.frame.width / 2) + navigationBarHeight + statusBarHeight))
         
         pie.backgroundColor = .clear
-        mainView.insertSubview(pie, at: 2)
+        mainView.insertSubview(pie, at: 1)
         
         pie.tag = 300
         
@@ -130,7 +149,7 @@ class DidViewModel {
         pie.center = CGPoint(x: mainView.frame.width / 2, y: ((mainView.frame.width / 2) + navigationBarHeight + statusBarHeight))
         
         pie.backgroundColor = .clear
-        mainView.insertSubview(pie, at: 2)
+        mainView.insertSubview(pie, at: 1)
 
         pie.tag = 365
         print(pie.tag)
@@ -149,7 +168,7 @@ class DidViewModel {
         pie.center = CGPoint(x: mainView.frame.width / 2, y: ((mainView.frame.width / 2) + navigationBarHeight + statusBarHeight))
         pie.backgroundColor = .clear
         
-        mainView.insertSubview(pie, at: 1)
+        mainView.insertSubview(pie, at: 0)
         
         pie.tag = 314
     }

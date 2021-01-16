@@ -62,10 +62,20 @@ class Model {
     
     let defaults = UserDefaults.standard
 
+    var savedDays: [Date] = []
+    
+    func printKey() {
+        let savedDate = defaults.dictionaryRepresentation().keys.filter({ $0.prefix(2) == "20" })
+        print(savedDate)
+        for day in savedDate {
+            dateFormatter.dateFormat = "yyyyMMdd"
+            let savedDate = dateFormatter.date(from: day)!
+                savedDays.append(savedDate)
+        }
+    }
+    
     func setData(thing: String, start: String, finish: String, colour: UIColor, day: String) {
-        
         let encoder = JSONEncoder()
-        
         let newDid = Did(did: thing, start: start, finish: finish, colour: colour)
         dids.append(newDid)
         if let encoded = try? encoder.encode(dids) {
@@ -77,14 +87,18 @@ class Model {
     func undoPie() {
         let end = dids.endIndex - 1
         dids.remove(at: end)
-        let encoder = JSONEncoder()
-        
-        if let encoded = try? encoder.encode(dids) {
-        defaults.set(encoded, forKey: today)
+        if dids.isEmpty {
+            defaults.removeObject(forKey: today)
+        } else {
+            let encoder = JSONEncoder()
+            if let encoded = try? encoder.encode(dids) {
+                defaults.set(encoded, forKey: today)
+            }
         }
     }
     
     func loadToday() {
+        dids = [Did]()
         if let savedDid = defaults.object(forKey: today) as? Data {
             let decoder = JSONDecoder()
             if let loadedDids = try? decoder.decode([Did].self, from: savedDid) {
@@ -142,21 +156,26 @@ class Model {
     func saveDoing(when: String, what: String, color: UIColor) {
         let encoder = JSONEncoder()
         let doingNow = Doing(doing: what, startTime: when, colour: color, date: today)
-        if let encoded = try? encoder.encode(doingNow) {
+        startNow.append(doingNow)
+        if let encoded = try? encoder.encode(startNow) {
             defaults.set(encoded, forKey: "Doing")
         }
     }
     
     func loadDoing() {
+        startNow = [Doing]()
         if let loaded = defaults.object(forKey: "Doing") as? Data {
             let decorder = JSONDecoder()
             if let loadDoing = try? decorder.decode([Doing].self, from: loaded) {
+                print(loadDoing)
                 startNow = loadDoing
             }
         }
     }
+    
     func deleteDoing() {
         defaults.removeObject(forKey: "Doing")
+        startNow = []
     }
     
     
@@ -169,6 +188,15 @@ class Model {
     var today: String {
         dateFormatter.dateFormat = "yyyyMMdd"
         return dateFormatter.string(from: date)
+    }
+    var todayDate: String {
+        dateFormatter.dateFormat = "MMMM d"
+        let todayMMDD = dateFormatter.string(from: date)
+        if Locale.current.languageCode == "ko"{
+            return todayMMDD + "일"
+        } else {
+            return todayMMDD
+        }
     }
     
     var now: String {
@@ -227,8 +255,4 @@ class Model {
         let time = dateFormatter.string(from: time)
         return time
     }
-    
-    
-
-    
 }

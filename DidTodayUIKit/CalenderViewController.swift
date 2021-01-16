@@ -6,95 +6,38 @@
 //
 
 import UIKit
+import FSCalendar
 
 class CalenderViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet weak var emptyLabel: UILabel!
+    @IBOutlet weak var calendar: FSCalendar!
+    
     var viewModel = DidViewModel()
-    var date = ""
-
-    let datePicker = UIDatePicker()
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if !viewModel.dids.isEmpty {
-            tableViewHide()
-        }
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if !viewModel.dids.isEmpty {
-            tableViewHide()
-        }
-    }
-    
-    func tableViewHide() {
-        tableView.isHidden = !tableView.isHidden
-    }
+    var selectYear = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        calendar.delegate = self
+        calendar.dataSource = self
+        calendar.select(Date())
         self.view.backgroundColor = UIColor.init(named: "CustomBackColor")
-        viewModel.loadLastDate(date: date)
-        navigationItem.titleView = datePicker
-        let yesterdayDate = Calendar.current.date(byAdding: .day, value: -1, to: Date())
-        datePicker.maximumDate = yesterdayDate
-        datePicker.preferredDatePickerStyle = .compact
-        datePicker.datePickerMode = .date
-        datePicker.addTarget(self, action: #selector(chooseDate), for: .valueChanged)
-        
         tableView.dataSource = self
-        
         tableView.backgroundColor = UIColor.clear
-    }
-
-    func loadUI() {
-        if !viewModel.dids.isEmpty {
-            emptyLabel.isHidden = true
-            tableView.isHidden = false
-            drawPie()
-        } else {
-            emptyLabel.isHidden = false
-            tableView.isHidden = true
-        }
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        loadUI()
-    }
-    
-    func drawPie() {
-        let navigation = self.navigationController
-        let bgView = self.view
-        self.viewModel.addCircle(navigationController: navigation, mainView: bgView!)
-        self.viewModel.loadPies(navigationController: navigation, mainView: bgView!)
-    }
-    
-    func update(day: String, title: Date) {
-        date = day
-        datePicker.date = title
-    }
-    
-    @objc func chooseDate() {
-        let dateformatter = DateFormatter()
-        dateformatter.dateStyle = .long
-        dateformatter.timeStyle = .none
-        dateformatter.dateFormat = "yyyyMMdd"
-        let dateKey = dateformatter.string(from: datePicker.date)
-        viewModel.loadLastDate(date: dateKey)
-        self.view.viewWithTag(314)?.removeFromSuperview()
-        self.view.viewWithTag(24)?.removeFromSuperview()
-        self.viewWillAppear(true)
-        tableView.reloadData()
-        tableView.backgroundView?.backgroundColor = UIColor.clear
-        dismiss(animated: true, completion: nil)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy"
+        selectYear = dateFormatter.string(from: calendar.currentPage)
+        self.navigationItem.title = selectYear
+        calendar.appearance.headerDateFormat = "MMMM"
     }
 }
 
 extension CalenderViewController: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.dids.count
+        return viewModel.dids.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -102,11 +45,10 @@ extension CalenderViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         cell.selectionStyle = .none
-        cell.backgroundColor = .clear
-        cell.contentView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-        cell.startToEndTime.textColor = .white
+        cell.backgroundColor = UIColor.systemBackground.withAlphaComponent(0.3)
+        cell.startToEndTime.textColor = .label
         cell.didThing.text = viewModel.dids[indexPath.row].did
-        cell.didThing.textColor = viewModel.dids[indexPath.row].colour
+        cell.colourView.backgroundColor = viewModel.dids[indexPath.row].colour
         cell.separatorInset = .zero
         tableView.separatorColor = UIColor.init(named: "CustomBackColor")
         let startTime = viewModel.dids[indexPath.row].start
@@ -120,5 +62,36 @@ extension CalenderViewController: UITableViewDataSource {
 class DidTableCell: UITableViewCell {
     @IBOutlet weak var startToEndTime: UILabel!
     @IBOutlet weak var didThing: UILabel!
-    
+    @IBOutlet weak var colourView: UIView!
 }
+
+extension CalenderViewController: FSCalendarDataSource {
+    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+        
+        if self.viewModel.savedDays.contains(date){
+            return 1
+        }
+        return 0
+    }
+}
+
+extension CalenderViewController: FSCalendarDelegate {
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyyMMdd"
+        let dateString = dateFormatter.string(from: date)
+        viewModel.loadLastDate(date: dateString)
+        tableView.reloadData()
+    }
+    
+    func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy"
+        let dateString = dateFormatter.string(from: calendar.currentPage)
+        if dateString != self.selectYear {
+            self.selectYear = dateString
+            self.navigationItem.title = dateString
+        }
+    }
+}
+

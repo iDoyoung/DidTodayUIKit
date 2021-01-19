@@ -15,7 +15,7 @@ class DidViewModel {
     var navRightButton: Bool = false
     
     var dids: [Model.Did] {
-        model.dids
+        model.dids 
     }
     
     var today: String {

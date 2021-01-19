@@ -64,6 +64,20 @@ class Pie: UIView {
         label.text = didNow.did
         label.textColor = .darkGray
         label.font = UIFont.preferredFont(forTextStyle: .title3)
+        let angle = endAngle - (duringAngle/2)
+        
+        switch angle {
+        case 0..<90:
+            label.transform = CGAffineTransform(rotationAngle: (-(.pi * (90 - angle)) / 180))
+        case 90..<180:
+            label.transform = CGAffineTransform(rotationAngle: (.pi * (angle - 90) / 180))
+        case 180..<270:
+            label.transform = CGAffineTransform(rotationAngle: -(.pi * ((90 - angle) - 180) / 180))
+        case 270..<360:
+            label.transform = CGAffineTransform(rotationAngle: (.pi * (angle - 270) / 180))
+        default:
+            label.transform = CGAffineTransform(rotationAngle: 0)
+        }
 
         self.addSubview(label)
     }

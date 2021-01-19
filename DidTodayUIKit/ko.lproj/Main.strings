@@ -24,7 +24,7 @@
 "XaC-iW-Yzl.text" = "시작 시간";
 
 /* Class = "UILabel"; text = "End time"; ObjectID = "YaZ-Jj-Bl2"; */
-"YaZ-Jj-Bl2.text" = "끝 낸 시간";
+"YaZ-Jj-Bl2.text" = "종료 시간";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "btL-Y4-iv8"; */
 "btL-Y4-iv8.text" = "Label";

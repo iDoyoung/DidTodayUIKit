@@ -17,7 +17,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         viewModel.loadToday()
         viewModel.loadSavedDate()
         scrollTopLine.constant = self.view.frame.height/2
-        colourSetOfFirst = viewModel.colour
         NotificationCenter.default.addObserver(self, selector: #selector(adjustInputView), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(adjustInputView), name: UIResponder.keyboardWillHideNotification, object: nil)
         self.view.backgroundColor = UIColor.init(named: "CustomBackColor")
@@ -42,13 +41,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         stateNavRightItem()
         todayLabel.text = viewModel.todayMonthDay
+        
+        viewModel.loadToday()
+        loadAllPies()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         dataPicker.date = Date()
         viewModel.loadToday()
-        loadAllPies()
         secondViewAppear()
     }
     
@@ -87,7 +88,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func upSetButton(_ sender: Any) {
         if firstTextField.text!.isEmpty {
-            // ui update textfield
             print("check text count")
         } else if let thing = firstTextField.text {
             let startTimes = viewModel.timeFormat(saved: start)
@@ -108,20 +108,21 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func downSetButton(_ sender: Any) {
-                if firstTextField.text!.isEmpty {
-                    print("check text count")
-                } else if let thing = firstTextField.text {
-                    let startTimes = viewModel.timeFormat(saved: start)
-                    let endTimes = viewModel.timeFormat(saved: end)
-                    
-                    if startTimes > endTimes {
-                        viewModel.save(did: thing, at: start, to: end, look: colourSetOfFirst, date: viewModel.today)
-                    } else {
-                        viewModel.save(did: thing, at: start, to: end, look: colourSetOfFirst, date: viewModel.today)
-                        viewModel.drawPie(navigationController: self.navigationController, mainView: self.view)
-                    }
-                }
+        colourSetOfFirst = viewModel.colour
+        if firstTextField.text!.isEmpty {
+            print("check text count")
+        } else if let thing = firstTextField.text {
+            let startTimes = viewModel.timeFormat(saved: start)
+            let endTimes = viewModel.timeFormat(saved: end)
+            
+            if startTimes > endTimes {
+                viewModel.save(did: thing, at: start, to: end, look: colourSetOfFirst, date: viewModel.today)
+            } else {
+                viewModel.save(did: thing, at: start, to: end, look: colourSetOfFirst, date: viewModel.today)
+                viewModel.drawPie(navigationController: self.navigationController, mainView: self.view)
             }
+        }
+    }
     
     @IBAction func exitSetButton(_ sender: Any) {
         self.view.viewWithTag(300)?.removeFromSuperview()
@@ -159,8 +160,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
 
     func alertSetError() {
-        let alert = UIAlertController(title: "Check setting time", message: "You can't set end time faster than start time.", preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .default) { (action) in
+        let alert = UIAlertController(title: "Check setting time".localized, message: "You can't set end time faster than start time.".localized, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK".localized, style: .default) { (action) in
             self.viewModel.undo()
         }
         alert.addAction(action)
@@ -213,12 +214,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
     func setDoingView() {
         blurView.frame = self.view.bounds
         label.textAlignment = .center
-        label.text = "\(doing) from \(started)...".uppercased()
+        if Locale.current.languageCode == "ko" {
+            label.text = "\(started)부터 \(doing)..."
+        } else {
+            label.text = "\(doing) from \(started)...".uppercased()
+        }
         label.sizeToFit()
         label.center = blurView.contentView.center
         
         infoLabel.textAlignment = .center
-        infoLabel.text = "If you finish, touch screen."
+        infoLabel.text = "If you finish, touch screen.".localized
         infoLabel.textColor = UIColor.secondaryLabel
         infoLabel.sizeToFit()
         infoLabel.center = CGPoint(x: label.center.x, y: label.center.y + label.frame.height)
@@ -236,26 +241,25 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
 
     func actionSheet() {
-        let alert = UIAlertController(title: "Are you done?", message: "", preferredStyle: .actionSheet)
-        let doneAction = UIAlertAction(title: "Yes", style: .default) { (action) in
-            self.startButton.setTitle("Start", for: .normal)
+        let alert = UIAlertController(title: "Are you done?".localized, message: "", preferredStyle: .actionSheet)
+        let doneAction = UIAlertAction(title: "Yes".localized, style: .default) { (action) in
+            self.startButton.setTitle("Start".localized, for: .normal)
             self.viewModel.done()
             let end = self.viewModel.dateToString(time: Date())
             self.viewModel.save(did: self.doing, at: self.started, to: end, look: self.colourSetOfSecond, date: self.viewModel.today)
-            self.viewWillAppear(true)
+            self.completePie()
             self.blurView.isHidden = true
             self.navigationItem.leftBarButtonItem?.isEnabled = true
         }
         
-        let stopAction = UIAlertAction(title: "Delete", style: .destructive) { (action) in
-            self.startButton.setTitle("Start", for: .normal)
+        let stopAction = UIAlertAction(title: "Delete".localized, style: .destructive) { (action) in
+            self.startButton.setTitle("Start".localized, for: .normal)
             self.viewModel.done()
-            self.viewWillAppear(true)
             self.blurView.isHidden = true
             self.navigationItem.leftBarButtonItem?.isEnabled = true
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let cancelAction = UIAlertAction(title: "Cancel".localized, style: .cancel)
 
         alert.addAction(doneAction)
         alert.addAction(stopAction)
@@ -265,14 +269,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
 
     func alertDayOver() {
-        let alert = UIAlertController(title: "You did't fisnish last day.", message: "Do you report finishing 23:59?", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
+        let alert = UIAlertController(title: "You did't fisnish last day.".localized, message: "Do you report finishing at 23:59 on last day".localized, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK".localized, style: .default) { (action) in
             self.started = self.viewModel.startNow[0].startTime
             self.doing = self.viewModel.startNow[0].doing
             self.viewModel.save(did: self.doing, at: self.started, to: "23:59", look: self.viewModel.colour, date: self.viewModel.startNow[0].date)
             self.viewModel.done()
         }
-        let cancelAction = UIAlertAction(title: "Delete", style: .destructive) { (action) in
+        let cancelAction = UIAlertAction(title: "Delete".localized, style: .destructive) { (action) in
             self.viewModel.done()
         }
         alert.addAction(okAction)
@@ -362,7 +366,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             self.view.viewWithTag(365)?.removeFromSuperview()
             self.view.viewWithTag(314)?.removeFromSuperview()
             viewModel.undo()
-            viewWillAppear(true)
+            loadAllPies()
         }
     }
     

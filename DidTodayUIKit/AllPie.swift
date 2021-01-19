@@ -15,9 +15,7 @@ class AllPie: UIView {
     override func draw(_ rect: CGRect) {
         
         let dids = viewModel.dids
-        
         let center = CGPoint(x: rect.midX, y: rect.midY)
-        
         let radius = max(rect.width, rect.width) / 2
         
         dids.forEach { (did) in
@@ -52,10 +50,24 @@ class AllPie: UIView {
             label.textAlignment = .center
             label.text = did.did
             label.font = UIFont.preferredFont(forTextStyle: .title3)
-            
-            
             label.textColor = .darkGray
-    
+            // endangle (0..90), (90 180), (180 270), (270 360)
+            let angle = endAngle - (duringAngle/2)
+            
+            switch angle {
+            case 0..<90:
+                label.transform = CGAffineTransform(rotationAngle: (-(.pi * (90 - angle)) / 180))
+            case 90..<180:
+                label.transform = CGAffineTransform(rotationAngle: (.pi * (angle - 90) / 180))
+            case 180..<270:
+                label.transform = CGAffineTransform(rotationAngle: -(.pi * ((90 - angle) - 180) / 180))
+            case 270..<360:
+                label.transform = CGAffineTransform(rotationAngle: (.pi * (angle - 270) / 180))
+            default:
+                label.transform = CGAffineTransform(rotationAngle: 0)
+            }
+            //label.transform = CGAffineTransform(rotationAngle: -.pi / (360/endAngle))
+            
             self.addSubview(label)
         }
     }

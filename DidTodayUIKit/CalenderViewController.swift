@@ -26,7 +26,7 @@ class CalenderViewController: UIViewController {
         self.view.backgroundColor = UIColor.init(named: "CustomBackColor")
         tableView.dataSource = self
         tableView.backgroundColor = UIColor.clear
-        
+        tableView.separatorColor = UIColor.init(named: "CustomBackColor")
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy"
         selectYear = dateFormatter.string(from: calendar.currentPage)
@@ -45,15 +45,16 @@ extension CalenderViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "DidTableCell", for: indexPath) as? DidTableCell else {
             return UITableViewCell()
         }
+        
+        let didCell = viewModel.dids.sorted(by: {viewModel.timeFormat(saved: $0.start) < viewModel.timeFormat(saved: $1.start)})
         cell.selectionStyle = .none
         cell.backgroundColor = UIColor.systemBackground.withAlphaComponent(0.3)
         cell.startToEndTime.textColor = .label
-        cell.didThing.text = viewModel.dids[indexPath.row].did
-        cell.colourView.backgroundColor = viewModel.dids[indexPath.row].colour
+        cell.didThing.text = didCell[indexPath.row].did
+        cell.colourView.backgroundColor = didCell[indexPath.row].colour
         cell.separatorInset = .zero
-        tableView.separatorColor = UIColor.init(named: "CustomBackColor")
-        let startTime = viewModel.dids[indexPath.row].start
-        let endTime = viewModel.dids[indexPath.row].finish
+        let startTime = didCell[indexPath.row].start
+        let endTime = didCell[indexPath.row].finish
         cell.startToEndTime.text = "\(startTime) ~ \(endTime)"
         return cell
     }

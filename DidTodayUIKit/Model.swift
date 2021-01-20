@@ -28,14 +28,15 @@ class Model {
     
     struct Did: Codable {
         
-        private enum CodingKeys: String, CodingKey { case did, start, finish, colour }
-        
+        private enum CodingKeys: String, CodingKey { case id, did, start, finish, colour }
+        var id : Int
         var did: String
         var start: String
         var finish: String
         var colour: UIColor
         
-        init(did: String, start: String, finish: String, colour: UIColor) {
+        init(id: Int, did: String, start: String, finish: String, colour: UIColor) {
+            self.id = id
             self.did = did
             self.start = start
             self.finish = finish
@@ -44,6 +45,7 @@ class Model {
         
         init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
+            id = try container.decode(Int.self, forKey: .id)
             did = try container.decode(String.self, forKey: .did)
             start = try container.decode(String.self, forKey: .start)
             finish = try container.decode(String.self, forKey: .finish)
@@ -52,6 +54,7 @@ class Model {
 
         public func encode(to encoder: Encoder) throws {
             var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(id, forKey: .id)
             try container.encode(did, forKey: .did)
             try container.encode(start, forKey: .start)
             try container.encode(finish, forKey: .finish)
@@ -76,7 +79,8 @@ class Model {
     
     func setData(thing: String, start: String, finish: String, colour: UIColor, day: String) {
         let encoder = JSONEncoder()
-        let newDid = Did(did: thing, start: start, finish: finish, colour: colour)
+        print(dids.count)
+        let newDid = Did(id: dids.count, did: thing, start: start, finish: finish, colour: colour)
         dids.append(newDid)
         if let encoded = try? encoder.encode(dids) {
         defaults.set(encoded, forKey: day)

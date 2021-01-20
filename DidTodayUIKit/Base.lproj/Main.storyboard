@@ -41,7 +41,7 @@
                                                             <subviews>
                                                                 <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Ge3-e7-Vcv">
                                                                     <rect key="frame" x="23" y="4" width="320" height="56"/>
-                                                                    <color key="tintColor" systemColor="systemIndigoColor"/>
+                                                                    <color key="tintColor" systemColor="systemTealColor"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="56" id="IQB-dE-C8M"/>
                                                                     </constraints>
@@ -89,7 +89,7 @@
                                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                                     <color key="tintColor" systemColor="systemPinkColor"/>
                                                                     <state key="normal" title="REPORT">
-                                                                        <color key="titleColor" systemColor="systemIndigoColor"/>
+                                                                        <color key="titleColor" systemColor="systemTealColor"/>
                                                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="27" weight="bold"/>
                                                                     </state>
                                                                     <connections>
@@ -116,7 +116,7 @@
                                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nt4-ox-sHq">
                                                         <rect key="frame" x="16" y="566.33333333333337" width="343" height="96.333333333333371"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="dY8-t7-kGu" userLabel="First Collection View BG">
-                                                            <rect key="frame" x="0.0" y="0.0" width="343" height="97"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="343" height="96.333333333333371"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Color" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B9C-tg-FZP">
@@ -126,7 +126,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="10o-qO-yde">
-                                                                    <rect key="frame" x="6" y="32.33333333333335" width="337" height="64.666666666666686"/>
+                                                                    <rect key="frame" x="6" y="32.333333333333343" width="337" height="64"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="iAe-ZO-uCe">
                                                                         <size key="itemSize" width="94" height="49"/>
@@ -136,7 +136,7 @@
                                                                     </collectionViewFlowLayout>
                                                                     <cells>
                                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="colorCell" id="HkA-lg-20R" customClass="ColorCell" customModule="DidTodayUIKit" customModuleProvider="target">
-                                                                            <rect key="frame" x="0.0" y="5.333333333333333" width="54" height="54"/>
+                                                                            <rect key="frame" x="0.0" y="5" width="54" height="54"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="WKi-3P-gTz">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="54" height="54"/>
@@ -197,7 +197,7 @@
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="pNA-Ec-eKc">
                                                                     <rect key="frame" x="12" y="14.33333333333333" width="36" height="31.666666666666664"/>
-                                                                    <color key="tintColor" systemColor="systemIndigoColor"/>
+                                                                    <color key="tintColor" systemColor="systemTealColor"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="pNA-Ec-eKc" secondAttribute="height" multiplier="1:1" id="gd9-Bn-ctp"/>
                                                                     </constraints>
@@ -241,7 +241,7 @@
                                                             <subviews>
                                                                 <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="T9s-e2-vXr">
                                                                     <rect key="frame" x="23" y="4" width="320" height="56"/>
-                                                                    <color key="tintColor" systemColor="systemIndigoColor"/>
+                                                                    <color key="tintColor" systemColor="systemTealColor"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="56" id="pYH-pC-AT9"/>
                                                                     </constraints>
@@ -298,7 +298,7 @@
                                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                                     <color key="tintColor" systemColor="systemPinkColor"/>
                                                                     <state key="normal" title="START">
-                                                                        <color key="titleColor" systemColor="systemIndigoColor"/>
+                                                                        <color key="titleColor" systemColor="systemTealColor"/>
                                                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="27" weight="bold"/>
                                                                     </state>
                                                                     <connections>
@@ -331,7 +331,7 @@
                                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wHM-IH-Aus">
                                                         <rect key="frame" x="16.666666666666686" y="566.66666666666663" width="341.66666666666669" height="96"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="8uP-BA-sUd" userLabel="Second Collection ViewBG">
-                                                            <rect key="frame" x="0.0" y="0.0" width="341" height="96"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="341.66666666666669" height="96"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Color" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mz3-wE-nGG">
@@ -341,7 +341,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Kyk-Vq-s0q">
-                                                                    <rect key="frame" x="6" y="32.333333333333314" width="335" height="63.666666666666657"/>
+                                                                    <rect key="frame" x="6" y="32.333333333333314" width="335.66666666666669" height="63.666666666666657"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="5mk-Bk-EJg">
                                                                         <size key="itemSize" width="60" height="56.999999999999993"/>
@@ -436,7 +436,7 @@
                             </scrollView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="dJd-GS-Vt7">
                                 <rect key="frame" x="127" y="750.66666666666663" width="121.33333333333331" height="27.333333333333371"/>
-                                <color key="currentPageIndicatorTintColor" systemColor="systemIndigoColor"/>
+                                <color key="currentPageIndicatorTintColor" systemColor="systemTealColor"/>
                                 <connections>
                                     <action selector="tapPage:" destination="BYZ-38-t0r" eventType="valueChanged" id="MAR-qO-1We"/>
                                 </connections>
@@ -559,7 +559,7 @@
                                         <color key="value" systemColor="systemPinkColor"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="weekdayTextColor">
-                                        <color key="value" systemColor="systemIndigoColor"/>
+                                        <color key="value" systemColor="systemTealColor"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="titleWeekendColor">
                                         <color key="value" systemColor="systemPinkColor"/>
@@ -568,11 +568,11 @@
                                         <color key="value" systemColor="systemPinkColor"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="eventSelectionColor">
-                                        <color key="value" systemColor="systemPurpleColor"/>
+                                        <color key="value" systemColor="systemTealColor"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="useVeryShortWeekdaySymbols" value="NO"/>
                                     <userDefinedRuntimeAttribute type="color" keyPath="eventDefaultColor">
-                                        <color key="value" systemColor="systemPurpleColor"/>
+                                        <color key="value" systemColor="secondaryLabelColor"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="titleTodayColor">
                                         <color key="value" systemColor="systemBackgroundColor"/>
@@ -584,7 +584,10 @@
                                         <color key="value" systemColor="systemBackgroundColor"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="selectionColor">
-                                        <color key="value" systemColor="systemIndigoColor"/>
+                                        <color key="value" systemColor="systemTealColor"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="titleDefaultColor">
+                                        <color key="value" systemColor="labelColor"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
@@ -619,7 +622,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7aj-hA-fSu">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" systemColor="systemIndigoColor"/>
+                        <color key="tintColor" systemColor="systemTealColor"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                         </textAttributes>
@@ -639,6 +642,9 @@
         <namedColor name="CustomBackColor">
             <color red="0.91764705882352937" green="0.92156862745098034" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
@@ -648,14 +654,11 @@
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
-        <systemColor name="systemIndigoColor">
-            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
-        <systemColor name="systemPurpleColor">
-            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="systemTealColor">
+            <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

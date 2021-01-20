@@ -96,7 +96,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 alertSetError()
             } else {
                 self.view.viewWithTag(300)?.removeFromSuperview()
-                viewModel.undo()
                 viewModel.save(did: thing, at: start, to: end, look: colourSetOfFirst, date: viewModel.today)
                 completePie()
                 firstTextField.text = ""
@@ -108,7 +107,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func downSetButton(_ sender: Any) {
-        colourSetOfFirst = viewModel.colour
         if firstTextField.text!.isEmpty {
             print("check text count")
         } else if let thing = firstTextField.text {
@@ -118,8 +116,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
             if startTimes > endTimes {
                 viewModel.save(did: thing, at: start, to: end, look: colourSetOfFirst, date: viewModel.today)
             } else {
-                viewModel.save(did: thing, at: start, to: end, look: colourSetOfFirst, date: viewModel.today)
-                viewModel.drawPie(navigationController: self.navigationController, mainView: self.view)
+
+                viewModel.drawPie(navigationController: self.navigationController, mainView: self.view, start: start, end: end, colour: colourSetOfFirst)
             }
         }
     }
@@ -178,6 +176,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         startTimePicker.preferredDatePickerStyle = .inline
         endTimePicker.addTarget(self, action: #selector(setTime), for: .valueChanged)
         endTimePicker.preferredDatePickerStyle = .inline
+        colourSetOfFirst = viewModel.colour
     }
 
     //MARK: - Second Scroll View
@@ -433,11 +432,15 @@ extension ViewController: UICollectionViewDelegate {
 extension ViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        pageControl.currentPage = Int(floorf(Float((scrollView.contentOffset.x) / (scrollView.frame.width))))
+        if scrollView == self.scrollView {
+            pageControl.currentPage = Int(floorf(Float((scrollView.contentOffset.x) / (scrollView.frame.width))))
+        }
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        self.view.endEditing(true)
+        if scrollView == self.scrollView {
+            self.view.endEditing(true)
+        }
     }
     
 }
@@ -455,7 +458,7 @@ extension ViewController {
             secondViewBottomLine.constant = adjustmentHeight
            
         } else {
-            scrollTopLine.constant = 0
+            scrollTopLine.constant =  self.view.frame.height/2 - startTimeView.frame.minY
             quickSetViewBottom.constant = 0
             secondViewBottomLine.constant = 0
           
@@ -470,7 +473,7 @@ class ColorCell: UICollectionViewCell {
         colours.layer.borderWidth = 1
         colours.layer.borderColor = UIColor.lightGray.cgColor
         contentView.layer.borderWidth = 0
-        contentView.layer.borderColor = UIColor.systemIndigo.withAlphaComponent(0.3).cgColor
+        contentView.layer.borderColor = UIColor.systemTeal.withAlphaComponent(0.3).cgColor
         contentView.layer.cornerRadius = contentView.frame.width / 5
     }
 }

@@ -34,8 +34,7 @@ class Pie: UIView {
                     endAngle: ((endAngle * .pi) / 180) - ((90 * .pi) / 180),
                     clockwise: true)
         
-    
-        didNow.colour.withAlphaComponent(0.8).set()
+        didNow.colour.set()
         path.fill()
         
         let animation = CABasicAnimation(keyPath: "transform.scale")
@@ -58,12 +57,30 @@ class Pie: UIView {
         let pieY = rect.midY - ((radius/2) * cos((halfDegree/2) + startDegree))
 
         
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
         label.center = CGPoint(x: pieX, y: pieY)
         label.textAlignment = .center
         label.text = didNow.did
-        label.textColor = .darkGray
-        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.font = UIFont.boldSystemFont(ofSize: 12)
+        
+        switch duringAngle {
+        case 0..<15 :
+            label.font = label.font.withSize(10)
+        case 30..<45 :
+            label.font = label.font.withSize(16)
+        case 45..<360 :
+            label.font = label.font.withSize(20)
+        
+        default:
+            label.font = label.font.withSize(12)
+        }
+        
+        if viewModel.colors.contains(didNow.colour) {
+            label.textColor = .white
+        } else {
+            label.textColor = .darkGray
+        }
+        
         let angle = endAngle - (duringAngle/2)
         
         switch angle {
@@ -88,19 +105,29 @@ class DrawPie: UIView {
     
     var viewModel = DidViewModel()
     
+    var start: String
+    var end: String
+    var colour: UIColor
+    
+    init(startTime: String, endTime: String, extraY: CGFloat, mainWidth: CGFloat, color: UIColor) {
+        start = startTime
+        end = endTime
+        colour = color
+        super.init(frame: CGRect(x: 20, y: 20 + extraY, width: mainWidth - 40, height: mainWidth - 40))
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func draw(_ rect: CGRect) {
         
-        let dids = viewModel.dids
-        let didNow = dids[dids.endIndex - 1]
         let center = CGPoint(x: rect.midX, y: rect.midY)
         
         let radius = max(rect.width, rect.width) / 2
-        
-        let startTime = didNow.start
+        let startTime = start
         let startAngle = CGFloat(viewModel.timeFormat(saved: startTime) * 0.25)
-        
-        let finishTime = didNow.finish
+        let finishTime = end
         let endAngle = CGFloat(viewModel.timeFormat(saved: finishTime)*0.25)
         
         let path = UIBezierPath()
@@ -119,10 +146,11 @@ class DrawPie: UIView {
         layer.path = path.cgPath
         layer.add(animation, forKey: animation.keyPath)
         layer.fillColor = UIColor.clear.cgColor
-        layer.strokeColor = didNow.colour.withAlphaComponent(0.2).cgColor
+        layer.strokeColor = colour.withAlphaComponent(0.2).cgColor
         
         layer.lineWidth = radius
         layer.strokeEnd = 1
         self.layer.addSublayer(layer)
     }
+    
 }

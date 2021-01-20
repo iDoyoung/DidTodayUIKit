@@ -32,8 +32,8 @@ class AllPie: UIView {
                         clockwise: true)
             
            
-            did.colour.withAlphaComponent(0.8).set()
-
+            did.colour.set()
+            
             path.fill()
             
             let duringAngle = (endAngle) - (startAngle)
@@ -45,18 +45,37 @@ class AllPie: UIView {
             let pieY = rect.midY - ((radius/2) * cos((halfDegree/2) + startDegree))
 
             
-            let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+            let label = UILabel(frame: CGRect(x: 0, y: 0, width: 140, height: 20))
             label.center = CGPoint(x: pieX, y: pieY)
             label.textAlignment = .center
             label.text = did.did
-            label.font = UIFont.preferredFont(forTextStyle: .title3)
-            label.textColor = .darkGray
-            // endangle (0..90), (90 180), (180 270), (270 360)
+
+            label.font = UIFont.boldSystemFont(ofSize: 12)
+            
+            switch duringAngle {
+            case 0..<15 :
+                label.font = label.font.withSize(10)
+            case 30..<45 :
+                label.font = label.font.withSize(16)
+            case 45..<360 :
+                label.font = label.font.withSize(20)
+            
+            default:
+                label.font = label.font.withSize(12)
+            }
+            
+            if viewModel.colours.contains(did.colour) {
+                label.textColor = .darkGray
+            } else {
+                label.textColor = .white
+            }
+            
             let angle = endAngle - (duringAngle/2)
             
             switch angle {
             case 0..<90:
                 label.transform = CGAffineTransform(rotationAngle: (-(.pi * (90 - angle)) / 180))
+                
             case 90..<180:
                 label.transform = CGAffineTransform(rotationAngle: (.pi * (angle - 90) / 180))
             case 180..<270:
@@ -66,9 +85,23 @@ class AllPie: UIView {
             default:
                 label.transform = CGAffineTransform(rotationAngle: 0)
             }
-            //label.transform = CGAffineTransform(rotationAngle: -.pi / (360/endAngle))
+            var buttonHeight: CGFloat {
+                if duringAngle < 180 {
+                    return duringAngle
+                } else {
+                    return 250
+                }
+            }
+            let button = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: buttonHeight))
+            button.transform = label.transform
             
+            button.addAction(UIAction(handler: { (_) in
+                // ???
+                print(did.id)
+            }), for: .touchUpInside)
+            button.center = label.center
             self.addSubview(label)
+            self.addSubview(button)
         }
     }
     

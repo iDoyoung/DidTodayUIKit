@@ -99,7 +99,10 @@ class DidViewModel {
         model.saveDoing(when: time, what: doing, color: paint)
     }
     
-    
+    func update(date: String) {
+        model.updateData(date: date)
+        print("succes update.")
+    }
     func done() {
         model.deleteDoing()
     }
@@ -123,8 +126,6 @@ class DidViewModel {
         } else {
             navigationBarHeight = navigationController!.navigationBar.frame.height
         }
-        
-//        let pie = DrawPie(frame: CGRect(x: 20, y: 20 + navigationBarHeight + statusBarHeight, width: mainView.frame.width - 40, height: mainView.frame.width - 40))
         let pie = DrawPie(startTime: start, endTime: end, extraY: navigationBarHeight + statusBarHeight, mainWidth: mainView.frame.width, color: colour)
         pie.center = CGPoint(x: mainView.frame.width / 2, y: ((mainView.frame.width / 2) + navigationBarHeight + statusBarHeight))
         
@@ -132,30 +133,8 @@ class DidViewModel {
         mainView.insertSubview(pie, at: 1)
         
         pie.tag = 300
-        
-        
     }
-    
-    func addPie(navigationController: UINavigationController?, mainView: UIView) {
         
-        let navigationBarHeight: CGFloat
-        if navigationController == nil {
-            navigationBarHeight = 0
-        } else {
-            navigationBarHeight = navigationController!.navigationBar.frame.height
-        }
-        
-        let pie = Pie(frame: CGRect(x: 20, y: 20 + navigationBarHeight + statusBarHeight, width: mainView.frame.width - 40, height: mainView.frame.width - 40))
-        
-        pie.center = CGPoint(x: mainView.frame.width / 2, y: ((mainView.frame.width / 2) + navigationBarHeight + statusBarHeight))
-        
-        pie.backgroundColor = .clear
-        mainView.insertSubview(pie, at: 1)
-
-        pie.tag = 365
-        print(pie.tag)
-    }
-    
     func loadPies(navigationController: UINavigationController?, mainView: UIView) {
         
         let navigationBarHeight: CGFloat
@@ -168,36 +147,10 @@ class DidViewModel {
         let pie = AllPie(frame: CGRect(x: 20, y: 20 + navigationBarHeight + statusBarHeight, width: mainView.frame.width - 40, height: mainView.frame.width - 40))
         pie.center = CGPoint(x: mainView.frame.width / 2, y: ((mainView.frame.width / 2) + navigationBarHeight + statusBarHeight))
         pie.backgroundColor = .clear
-        
         mainView.insertSubview(pie, at: 0)
-        
         pie.tag = 314
     }
 
-    func addCircle(navigationController: UINavigationController?, mainView: UIView) {
-        
-        let navigationBarHeight: CGFloat
-        if navigationController == nil {
-            navigationBarHeight = 0
-        } else {
-            navigationBarHeight =  navigationController!.navigationBar.frame.height
-        }
-        
-        let circle = UIView(frame: CGRect(x: 20, y: 20 + navigationBarHeight + statusBarHeight, width: mainView.frame.width - 40, height: mainView.frame.width - 40))
-        circle.backgroundColor = .systemBackground
-        
-        circle.layer.shadowOpacity = 0.3
-        circle.layer.shadowColor = UIColor.label.cgColor
-        circle.layer.shadowRadius = 7.0
-        circle.layer.opacity = 0.3
-        
-        circle.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
-        circle.layer.cornerRadius = circle.frame.size.width / 2
-        mainView.insertSubview(circle, at: 0)
-        
-        circle.tag = 24
-        
-    }
     
     func applyRadius(view: UIView) {
         view.layer.cornerRadius = view.frame.height * 0.25

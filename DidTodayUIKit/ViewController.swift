@@ -8,7 +8,7 @@
 import UIKit
 import QuartzCore
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class ViewController: UIViewController {
     
     var viewModel = DidViewModel()
     
@@ -17,6 +17,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         viewModel.loadToday()
         viewModel.loadSavedDate()
         scrollTopLine.constant = self.view.frame.height/2
+        
         NotificationCenter.default.addObserver(self, selector: #selector(adjustInputView), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(adjustInputView), name: UIResponder.keyboardWillHideNotification, object: nil)
         self.view.backgroundColor = UIColor.init(named: "CustomBackColor")
@@ -27,7 +28,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         firstTextField.delegate = self
         secondTextField.autocorrectionType = .no
         secondTextField.delegate = self
-
         firstCollectionView.dataSource = self
         firstCollectionView.delegate = self
         secondCollectionView.dataSource = self
@@ -97,7 +97,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             } else {
                 self.view.viewWithTag(300)?.removeFromSuperview()
                 viewModel.save(did: thing, at: start, to: end, look: colourSetOfFirst, date: viewModel.today)
-                completePie()
+                loadAllPies()
                 firstTextField.text = ""
                 colourSetOfFirst = viewModel.colour
                 firstCollectionView.reloadData()
@@ -171,6 +171,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         viewModel.applyRadius(view: endTimeView)
         viewModel.applyRadius(view: setDidView)
         viewModel.applyRadius(view: quickSetView)
+        
         editHidden()
         startTimePicker.addTarget(self, action: #selector(setTime), for: .valueChanged)
         startTimePicker.preferredDatePickerStyle = .inline
@@ -187,7 +188,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var secondCollectionView: UICollectionView!
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var secondViewBottomLine: NSLayoutConstraint!
-    
     var started = "0"
     var doing = ""
     var colourSetOfSecond: UIColor = .clear
@@ -246,7 +246,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             self.viewModel.done()
             let end = self.viewModel.dateToString(time: Date())
             self.viewModel.save(did: self.doing, at: self.started, to: end, look: self.colourSetOfSecond, date: self.viewModel.today)
-            self.completePie()
+            self.loadAllPies()
             self.blurView.isHidden = true
             self.navigationItem.leftBarButtonItem?.isEnabled = true
         }
@@ -318,21 +318,17 @@ class ViewController: UIViewController, UITextFieldDelegate {
             let calerdarButton = UIBarButtonItem(image: UIImage(systemName: "calendar"), style: .plain, target: self, action: #selector(chooseDate))
             navigationItem.rightBarButtonItem = calerdarButton
         } else if viewModel.navRightButton == true {
-            let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(editCancel))
+            let cancelButton = UIBarButtonItem(title: "Cancel".localized, style: .plain, target: self, action: #selector(editCancel))
             navigationItem.rightBarButtonItem = cancelButton
         }
     }
     
     func loadAllPies() {
+        self.view.viewWithTag(314)?.removeFromSuperview()
         viewModel.loadPies(navigationController: self.navigationController!, mainView: self.view)
         updateTimeUI()
     }
-    
-    func completePie() {
-        self.viewModel.addPie(navigationController: self.navigationController!, mainView: self.view)
-        updateTimeUI()
-    }
-    
+        
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let textFieldText = textField.text, let rangeOfTextToReplace = Range(range, in: textFieldText) else {
             return false
@@ -341,13 +337,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let count = textFieldText.count - substringToReplace.count + string.count
         return count < 20
     }
-
+    @IBOutlet weak var firstTextFieldBG: UIView!
+    @IBOutlet weak var secondTextFieldBG: UIView!
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return false
-    }
-    
+   
     //MARK: - @objc
     
     @objc func showEdit(sender:UIBarButtonItem) {
@@ -362,7 +355,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @objc func undoDrawPie() {
         if !viewModel.dids.isEmpty {
-            self.view.viewWithTag(365)?.removeFromSuperview()
             self.view.viewWithTag(314)?.removeFromSuperview()
             viewModel.undo()
             loadAllPies()
@@ -392,7 +384,36 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
 }
 
-
+extension ViewController: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.textColor = .white
+        let bgColor = UIColor.systemTeal.withAlphaComponent(0.8)
+        if textField == firstTextField {
+            firstTextFieldBG.backgroundColor = bgColor
+            setButton.setTitleColor(.systemPink, for: .normal)
+        } else {
+            secondTextFieldBG.backgroundColor = bgColor
+            startButton.setTitleColor(.systemPink, for: .normal)
+        }
+        textField.attributedPlaceholder = NSAttributedString(string: textField.placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textField.textColor = .label
+        firstTextFieldBG.backgroundColor = .clear
+        secondTextFieldBG.backgroundColor = .clear
+        setButton.setTitleColor(.systemTeal, for: .normal)
+        startButton.setTitleColor(.systemTeal, for: .normal)
+        textField.attributedPlaceholder = NSAttributedString(string: textField.placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor : UIColor.systemGray3])
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    
+}
 extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.colours.count
@@ -433,7 +454,7 @@ extension ViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == self.scrollView {
-            pageControl.currentPage = Int(floorf(Float((scrollView.contentOffset.x) / (scrollView.frame.width))))
+            pageControl.currentPage = Int(floorf(Float((scrollView.contentOffset.x + scrollView.frame.width/2) / (scrollView.frame.width))))
         }
     }
     
@@ -473,7 +494,7 @@ class ColorCell: UICollectionViewCell {
         colours.layer.borderWidth = 1
         colours.layer.borderColor = UIColor.lightGray.cgColor
         contentView.layer.borderWidth = 0
-        contentView.layer.borderColor = UIColor.systemTeal.withAlphaComponent(0.3).cgColor
+        contentView.layer.borderColor = UIColor.systemTeal.withAlphaComponent(0.9).cgColor
         contentView.layer.cornerRadius = contentView.frame.width / 5
     }
 }

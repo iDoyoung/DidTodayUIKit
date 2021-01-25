@@ -62,6 +62,38 @@ class Model {
         }
     }
     
+    struct OldDid: Codable {
+        
+        private enum CodingKeys: String, CodingKey { case did, start, finish, colour }
+        var did: String
+        var start: String
+        var finish: String
+        var colour: UIColor
+        
+        init(did: String, start: String, finish: String, colour: UIColor) {
+            self.did = did
+            self.start = start
+            self.finish = finish
+            self.colour = colour
+        }
+        
+        init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            did = try container.decode(String.self, forKey: .did)
+            start = try container.decode(String.self, forKey: .start)
+            finish = try container.decode(String.self, forKey: .finish)
+            colour = try container.decode(Color.self, forKey: .colour).uiColor
+        }
+
+        public func encode(to encoder: Encoder) throws {
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(did, forKey: .did)
+            try container.encode(start, forKey: .start)
+            try container.encode(finish, forKey: .finish)
+            try container.encode(Color(uiColor: colour), forKey: .colour)
+        }
+    }
+    
     
     let defaults = UserDefaults.standard
 
@@ -79,12 +111,10 @@ class Model {
     
     func setData(thing: String, start: String, finish: String, colour: UIColor, day: String) {
         let encoder = JSONEncoder()
-        print(dids.count)
         let newDid = Did(id: dids.count, did: thing, start: start, finish: finish, colour: colour)
         dids.append(newDid)
         if let encoded = try? encoder.encode(dids) {
         defaults.set(encoded, forKey: day)
-            print("Success save data")
         }
     }
     
@@ -112,6 +142,7 @@ class Model {
         }
     }
     
+    
     func loadLastDate(date: String) {
         dids = [Did]()
         if let savedDid = defaults.object(forKey: date) as? Data {
@@ -120,6 +151,25 @@ class Model {
                 dids = loadedDids
                 print("success load data")
             }
+        }
+    }
+    
+    func updateData(date: String) {
+        if let savedDid = defaults.object(forKey: date) as? Data {
+            let decoder = JSONDecoder()
+            if let loadedDids = try? decoder.decode([OldDid].self, from: savedDid) {
+                var id = 0
+                dids = [Did]()
+                for index in loadedDids {
+                    let newDid = Did(id: id, did: index.did, start: index.start, finish: index.finish, colour: index.colour)
+                    dids.append(newDid)
+                    id += 1
+                }
+            }
+        }
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(dids) {
+            defaults.set(encoded, forKey: date)
         }
     }
     

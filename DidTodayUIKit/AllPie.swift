@@ -36,6 +36,17 @@ class AllPie: UIView {
             
             path.fill()
             
+            let animation = CABasicAnimation(keyPath: "transform.scale")
+                    animation.fromValue = 1.04
+                    animation.toValue = 1
+                    animation.duration = 0.25
+                    
+                    let layer = CAShapeLayer()
+                    layer.path = path.cgPath
+                    layer.fillColor = did.colour.withAlphaComponent(0.5).cgColor
+                    layer.add(animation, forKey: animation.keyPath)
+                    self.layer.addSublayer(layer)
+            
             let duringAngle = (endAngle) - (startAngle)
             
             let startDegree = (startAngle * .pi) / 180
@@ -75,7 +86,6 @@ class AllPie: UIView {
             switch angle {
             case 0..<90:
                 label.transform = CGAffineTransform(rotationAngle: (-(.pi * (90 - angle)) / 180))
-                
             case 90..<180:
                 label.transform = CGAffineTransform(rotationAngle: (.pi * (angle - 90) / 180))
             case 180..<270:

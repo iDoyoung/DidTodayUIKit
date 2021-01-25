@@ -10,10 +10,23 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
+    let viewModel = DidViewModel()
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
+        let defaults = UserDefaults.standard
+        let launchedBefore = defaults.bool(forKey: "launchedBefore")
+        if launchedBefore  {
+            print("Not first launch.")
+        } else {
+            print("First launch, setting UserDefault.")
+            let dateKeys = defaults.dictionaryRepresentation().keys.filter({
+                $0.prefix(2) == "20"
+            })
+            for key in dateKeys {
+                viewModel.update(date: key)
+            }
+            UserDefaults.standard.set(true, forKey: "launchedBefore")
+        }
         // Override point for customization after application launch.
         return true
     }

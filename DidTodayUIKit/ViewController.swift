@@ -289,7 +289,6 @@ class ViewController: UIViewController {
         blurView.contentView.addSubview(label)
         blurView.contentView.addSubview(infoLabel)
         blurView.contentView.addSubview(doingButton)
-        setDoingView()
         blurView.isHidden = true
         viewModel.loadDoing()
     }
@@ -304,6 +303,7 @@ class ViewController: UIViewController {
             doing = viewModel.startNow[0].doing
             blurView.isHidden = false
             navigationItem.leftBarButtonItem?.isEnabled = false
+            setDoingView()
         }
     }
 

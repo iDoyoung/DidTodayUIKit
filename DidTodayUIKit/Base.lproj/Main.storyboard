@@ -135,7 +135,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="10o-qO-yde">
-                                                                    <rect key="frame" x="6" y="32.333333333333314" width="337" height="64"/>
+                                                                    <rect key="frame" x="6" y="32.33333333333335" width="337" height="64.666666666666686"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="iAe-ZO-uCe">
                                                                         <size key="itemSize" width="94" height="49"/>
@@ -145,7 +145,7 @@
                                                                     </collectionViewFlowLayout>
                                                                     <cells>
                                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="colorCell" id="HkA-lg-20R" customClass="ColorCell" customModule="DidTodayUIKit" customModuleProvider="target">
-                                                                            <rect key="frame" x="0.0" y="5" width="54" height="54"/>
+                                                                            <rect key="frame" x="0.0" y="5.333333333333333" width="54" height="54"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="WKi-3P-gTz">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="54" height="54"/>
@@ -303,7 +303,7 @@
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </view>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kMk-mO-a1e">
-                                                                    <rect key="frame" x="247" y="11" width="88" height="44"/>
+                                                                    <rect key="frame" x="247" y="11.000000000000014" width="88" height="44"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="kMk-mO-a1e" secondAttribute="height" multiplier="2:1" id="EAZ-SN-eud"/>
                                                                         <constraint firstAttribute="height" constant="44" id="XxA-Qd-id9"/>
@@ -319,7 +319,7 @@
                                                                     </connections>
                                                                 </button>
                                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Add I starting" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7hr-wP-k90">
-                                                                    <rect key="frame" x="8" y="16.666666666666654" width="227" height="32.666666666666657"/>
+                                                                    <rect key="frame" x="8" y="16.666666666666668" width="227" height="32.666666666666657"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="7hr-wP-k90" secondAttribute="height" multiplier="305:44" id="MqR-QD-bzd"/>
                                                                     </constraints>
@@ -358,7 +358,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Kyk-Vq-s0q">
-                                                                    <rect key="frame" x="6" y="32.333333333333371" width="335.66666666666669" height="63.666666666666657"/>
+                                                                    <rect key="frame" x="6" y="32.333333333333314" width="335" height="63.666666666666657"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="5mk-Bk-EJg">
                                                                         <size key="itemSize" width="60" height="56.999999999999993"/>
@@ -521,27 +521,27 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DidTableCell" id="pf5-f8-86l" customClass="DidTableCell" customModule="DidTodayUIKit" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="343" height="41.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="28" width="343" height="41"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pf5-f8-86l" id="B04-2q-IKn">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="41.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="41"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WL6-Rr-mEg">
-                                                    <rect key="frame" x="0.0" y="0.0" width="8" height="41.666666666666664"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="8" height="41"/>
                                                     <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="8" id="66w-po-bqB"/>
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00 ~ 00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BIZ-wi-JRj">
-                                                    <rect key="frame" x="216" y="10.333333333333336" width="111" height="21"/>
+                                                    <rect key="frame" x="216" y="10" width="111" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X0S-al-LZf">
-                                                    <rect key="frame" x="16" y="10.000000000000002" width="42" height="21.666666666666671"/>
+                                                    <rect key="frame" x="16" y="10" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>

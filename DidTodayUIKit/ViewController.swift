@@ -249,6 +249,7 @@ class ViewController: UIViewController {
             self.loadAllPies()
             self.blurView.isHidden = true
             self.navigationItem.leftBarButtonItem?.isEnabled = true
+            self.colourSetOfSecond = self.viewModel.colour
         }
         
         let stopAction = UIAlertAction(title: "Delete".localized, style: .destructive) { (action) in
@@ -256,6 +257,7 @@ class ViewController: UIViewController {
             self.viewModel.done()
             self.blurView.isHidden = true
             self.navigationItem.leftBarButtonItem?.isEnabled = true
+            self.colourSetOfSecond = self.viewModel.colour
         }
         
         let cancelAction = UIAlertAction(title: "Cancel".localized, style: .cancel)
@@ -290,6 +292,7 @@ class ViewController: UIViewController {
         blurView.contentView.addSubview(infoLabel)
         blurView.contentView.addSubview(doingButton)
         blurView.isHidden = true
+        colourSetOfSecond = viewModel.colour
         viewModel.loadDoing()
     }
     

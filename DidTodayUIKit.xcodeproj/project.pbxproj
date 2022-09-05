@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		502725A02555083700A29FBB /* CalenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5027259F2555083700A29FBB /* CalenderViewController.swift */; };
 		504CE042253FDFAA000CC6CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504CE041253FDFAA000CC6CF /* AppDelegate.swift */; };
 		504CE044253FDFAA000CC6CF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504CE043253FDFAA000CC6CF /* SceneDelegate.swift */; };
 		504CE046253FDFAA000CC6CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504CE045253FDFAA000CC6CF /* ViewController.swift */; };
@@ -47,7 +46,6 @@
 /* Begin PBXFileReference section */
 		3B4C0B84EE632100CEDD4B7E /* Pods-DidTodayUIKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DidTodayUIKitTests.debug.xcconfig"; path = "Target Support Files/Pods-DidTodayUIKitTests/Pods-DidTodayUIKitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		49F50979A383AA3F51E8E15F /* Pods_DidTodayUIKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DidTodayUIKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5027259F2555083700A29FBB /* CalenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderViewController.swift; sourceTree = "<group>"; };
 		504CE03E253FDFAA000CC6CF /* DidTodayUIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DidTodayUIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		504CE041253FDFAA000CC6CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		504CE043253FDFAA000CC6CF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -137,7 +135,6 @@
 				504CE043253FDFAA000CC6CF /* SceneDelegate.swift */,
 				504CE047253FDFAA000CC6CF /* Main.storyboard */,
 				504CE045253FDFAA000CC6CF /* ViewController.swift */,
-				5027259F2555083700A29FBB /* CalenderViewController.swift */,
 				504CE0B8253FDFE9000CC6CF /* ViewModel.swift */,
 				504CE0B3253FDFDF000CC6CF /* Model.swift */,
 				504CE0C0254143CC000CC6CF /* AllPie.swift */,
@@ -433,7 +430,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				50A4505A2564CFD500812F14 /* Localize.swift in Sources */,
-				502725A02555083700A29FBB /* CalenderViewController.swift in Sources */,
 				504CE0C1254143CC000CC6CF /* AllPie.swift in Sources */,
 				504CE0B9253FDFE9000CC6CF /* ViewModel.swift in Sources */,
 				504CE046253FDFAA000CC6CF /* ViewController.swift in Sources */,

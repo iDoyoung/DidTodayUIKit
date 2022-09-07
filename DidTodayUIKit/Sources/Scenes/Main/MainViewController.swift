@@ -6,9 +6,8 @@
 //
 
 import UIKit
-import QuartzCore
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
     
     var viewModel = DidViewModel()
     
@@ -387,7 +386,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UITextFieldDelegate {
+extension MainViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.textColor = .white
@@ -417,7 +416,7 @@ extension ViewController: UITextFieldDelegate {
     }
     
 }
-extension ViewController: UICollectionViewDataSource {
+extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.colours.count
     }
@@ -433,7 +432,7 @@ extension ViewController: UICollectionViewDataSource {
     }
 }
 
-extension ViewController: UICollectionViewDelegate {
+extension MainViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
        
@@ -453,7 +452,7 @@ extension ViewController: UICollectionViewDelegate {
     }
 }
 
-extension ViewController: UIScrollViewDelegate {
+extension MainViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == self.scrollView {
@@ -469,7 +468,7 @@ extension ViewController: UIScrollViewDelegate {
     
 }
 
-extension ViewController {
+extension MainViewController {
     @objc private func adjustInputView(noti: Notification) {
 
         guard let userInfo = noti.userInfo else { return }

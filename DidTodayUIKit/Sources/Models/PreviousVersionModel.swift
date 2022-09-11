@@ -5,11 +5,10 @@
 //  Created by ido on 2020/10/21.
 //
 
-import Foundation
 import UIKit
 
-class Model {
-    static let shared = Model()
+class PreviousVersionModel {
+    static let shared = PreviousVersionModel()
 
     //MARK: - Users Defaults Data
     var dids: [Did] = []

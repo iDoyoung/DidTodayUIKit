@@ -7,12 +7,16 @@
 
 import Foundation
 
-struct DidItem {
+struct DidItem: Equatable {
     let id: UUID
     let started: Date
     let finished: Date
     var content: String
     var pieColor: PieColor
+    
+    static func == (lhs: DidItem, rhs: DidItem) -> Bool {
+        lhs.id == rhs.id
+    }
     
     init(started: Date, finished: Date, content: String, color: PieColor) {
         self.id = UUID()

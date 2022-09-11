@@ -10,11 +10,11 @@ import QuartzCore
 
 class DidViewModel {
     
-    var model = Model.shared
+    var model = PreviousVersionModel.shared
 
     var navRightButton: Bool = false
     
-    var dids: [Model.Did] {
+    var dids: [PreviousVersionModel.Did] {
         model.dids 
     }
     
@@ -87,7 +87,7 @@ class DidViewModel {
         model.loadDoing()
     }
     
-    var startNow: [Model.Doing] {
+    var startNow: [PreviousVersionModel.Doing] {
         model.startNow
     }
     

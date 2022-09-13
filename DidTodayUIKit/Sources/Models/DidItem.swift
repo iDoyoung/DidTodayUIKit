@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DidItem: Equatable {
+struct DidItem: Equatable, Hashable {
     let id: UUID
     let started: Date
     let finished: Date
@@ -33,7 +33,7 @@ struct DidItem: Equatable {
         self.pieColor = PieColor(red: red, green: green, blue: blue, alpha: alpha)
     }
     
-    struct PieColor {
+    struct PieColor: Hashable {
         let red: Float
         let green: Float
         let blue: Float

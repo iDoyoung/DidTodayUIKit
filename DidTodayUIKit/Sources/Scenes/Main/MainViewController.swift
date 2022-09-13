@@ -9,7 +9,7 @@ import UIKit
 
 class MainViewController: UIViewController {
     
-    var viewModel = DidViewModel()
+    var viewModel = MainViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()

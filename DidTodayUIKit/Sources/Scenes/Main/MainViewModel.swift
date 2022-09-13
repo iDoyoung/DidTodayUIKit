@@ -8,7 +8,7 @@ import UIKit
 import Foundation
 import QuartzCore
 
-class DidViewModel {
+class MainViewModel {
     
     var model = PreviousVersionModel.shared
 

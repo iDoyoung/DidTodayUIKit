@@ -28,6 +28,7 @@
 		7FC22B7F28CB232600F83122 /* Seeds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22B7E28CB232600F83122 /* Seeds.swift */; };
 		7FC22BB828CDE19300F83122 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22BB728CDE19300F83122 /* ViewController.swift */; };
 		7FC22BBA28D0547500F83122 /* DidCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22BB928D0547500F83122 /* DidCell.swift */; };
+		7FC580A328D1A201008086FD /* PieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC580A228D1A201008086FD /* PieView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		7FC22B7E28CB232600F83122 /* Seeds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seeds.swift; sourceTree = "<group>"; };
 		7FC22BB728CDE19300F83122 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		7FC22BB928D0547500F83122 /* DidCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidCell.swift; sourceTree = "<group>"; };
+		7FC580A228D1A201008086FD /* PieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieView.swift; sourceTree = "<group>"; };
 		ADA015A5697AC9D46CCADCEC /* Pods_DidTodayUIKit_DidTodayUIKitUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DidTodayUIKit_DidTodayUIKitUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D52ECED48532DF52D0291955 /* Pods_DidTodayUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DidTodayUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -135,6 +137,7 @@
 		7FC22B5928C71AEB00F83122 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				7FC580A228D1A201008086FD /* PieView.swift */,
 				504CE0C0254143CC000CC6CF /* AllPie.swift */,
 				5054D6C2255A8ABE005E8850 /* Pie.swift */,
 				504CE047253FDFAA000CC6CF /* Main.storyboard */,
@@ -339,6 +342,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				50A4505A2564CFD500812F14 /* Localize.swift in Sources */,
+				7FC580A328D1A201008086FD /* PieView.swift in Sources */,
 				504CE0C1254143CC000CC6CF /* AllPie.swift in Sources */,
 				504CE0B9253FDFE9000CC6CF /* MainViewModel.swift in Sources */,
 				504CE046253FDFAA000CC6CF /* MainViewController.swift in Sources */,

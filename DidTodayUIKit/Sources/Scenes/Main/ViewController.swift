@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     private enum Section {
         case main
     }
@@ -56,6 +56,7 @@ extension ViewController: UICollectionViewDelegate {
     }
     private func createCellRegistration() -> UICollectionView.CellRegistration<DidCell, DidItem> {
         return UICollectionView.CellRegistration<DidCell, DidItem> { cell, indexPath, item in
+            cell.pieView.end = 300
             cell.timeLabel.text = "00:00"
             cell.contentLabel.text = "테스트 중"
         }

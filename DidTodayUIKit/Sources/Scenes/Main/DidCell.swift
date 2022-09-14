@@ -10,8 +10,8 @@ import UIKit
 class DidCell: UICollectionViewCell {
     static let reuseIdentifier = "DidCellReuseIdentifier"
     
-    let pieView: UIView = {
-        let view = UIView()
+    let pieView: PieView = {
+        let view = PieView()
         return view
     }()
     let timeLabel: UILabel = {

@@ -27,6 +27,7 @@
 		7FC22B7D28CB145D00F83122 /* DidCoreDataStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22B6E28CB137E00F83122 /* DidCoreDataStorageTests.swift */; };
 		7FC22B7F28CB232600F83122 /* Seeds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22B7E28CB232600F83122 /* Seeds.swift */; };
 		7FC22BB828CDE19300F83122 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22BB728CDE19300F83122 /* ViewController.swift */; };
+		7FC22BBA28D0547500F83122 /* DidCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22BB928D0547500F83122 /* DidCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		7FC22B7428CB145300F83122 /* DidTodayUIKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DidTodayUIKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FC22B7E28CB232600F83122 /* Seeds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seeds.swift; sourceTree = "<group>"; };
 		7FC22BB728CDE19300F83122 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		7FC22BB928D0547500F83122 /* DidCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidCell.swift; sourceTree = "<group>"; };
 		ADA015A5697AC9D46CCADCEC /* Pods_DidTodayUIKit_DidTodayUIKitUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DidTodayUIKit_DidTodayUIKitUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D52ECED48532DF52D0291955 /* Pods_DidTodayUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DidTodayUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -147,6 +149,7 @@
 				504CE045253FDFAA000CC6CF /* MainViewController.swift */,
 				504CE0B8253FDFE9000CC6CF /* MainViewModel.swift */,
 				7FC22BB728CDE19300F83122 /* ViewController.swift */,
+				7FC22BB928D0547500F83122 /* DidCell.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -344,6 +347,7 @@
 				7FC22B6928C9C0E500F83122 /* DidItem.swift in Sources */,
 				7FC22B6628C9BFBB00F83122 /* ManagedDidItem+CoreDataClass.swift in Sources */,
 				7FC22B6C28C9C9E900F83122 /* DidCoreDataStorage.swift in Sources */,
+				7FC22BBA28D0547500F83122 /* DidCell.swift in Sources */,
 				504CE042253FDFAA000CC6CF /* AppDelegate.swift in Sources */,
 				5054D6C3255A8ABE005E8850 /* Pie.swift in Sources */,
 				7FC22B6328C88AA500F83122 /* DataModel.xcdatamodeld in Sources */,

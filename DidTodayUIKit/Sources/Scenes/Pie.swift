@@ -10,7 +10,7 @@ import UIKit
 
 class DrawPie: UIView {
     
-    var viewModel = MainViewModel()
+    var viewModel = ViewModel()
     
     var start: String
     var end: String

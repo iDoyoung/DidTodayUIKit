@@ -10,7 +10,7 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    let viewModel = MainViewModel()
+    let viewModel = ViewModel()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let defaults = UserDefaults.standard

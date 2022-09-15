@@ -10,7 +10,7 @@ import UIKit
 
 class AllPie: UIView {
     
-    var viewModel = MainViewModel()
+    var viewModel = ViewModel()
     
     override func draw(_ rect: CGRect) {
         

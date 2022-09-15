@@ -14,10 +14,10 @@ enum CoreDataStoreError: Error {
 }
 
 protocol DidCoreDataStorable {
-    func create(_ did: DidItem, completion: @escaping (DidItem, CoreDataStoreError?) -> Void)
-    func fetchDids(completion: @escaping ([DidItem], CoreDataStoreError?) -> Void)
-    func update(_ did: DidItem, completion: @escaping (DidItem, CoreDataStoreError?) -> Void)
-    func delete(_ did: DidItem, completion: @escaping (DidItem, CoreDataStoreError?) -> Void)
+    func create(_ did: Did, completion: @escaping (Did, CoreDataStoreError?) -> Void)
+    func fetchDids(completion: @escaping ([Did], CoreDataStoreError?) -> Void)
+    func update(_ did: Did, completion: @escaping (Did, CoreDataStoreError?) -> Void)
+    func delete(_ did: Did, completion: @escaping (Did, CoreDataStoreError?) -> Void)
 }
 
 final class DidCoreDataStorage: DidCoreDataStorable {
@@ -31,7 +31,7 @@ final class DidCoreDataStorage: DidCoreDataStorable {
         return container
     }()
     
-    func create(_ did: DidItem, completion: @escaping (DidItem, CoreDataStoreError?) -> Void) {
+    func create(_ did: Did, completion: @escaping (Did, CoreDataStoreError?) -> Void) {
         persistentContainer.performBackgroundTask { context in
             let managedDid = ManagedDidItem(context: context)
             managedDid.fromDidItem(did, context: context)
@@ -45,7 +45,7 @@ final class DidCoreDataStorage: DidCoreDataStorable {
             }
         }
     }
-    func fetchDids(completion: @escaping ([DidItem], CoreDataStoreError?) -> Void) {
+    func fetchDids(completion: @escaping ([Did], CoreDataStoreError?) -> Void) {
         persistentContainer.performBackgroundTask { context in
             do {
                 let request = ManagedDidItem.fetchRequest()
@@ -57,7 +57,7 @@ final class DidCoreDataStorage: DidCoreDataStorable {
             }
         }
     }
-    func update(_ did: DidItem, completion: @escaping (DidItem, CoreDataStoreError?) -> Void) {
+    func update(_ did: Did, completion: @escaping (Did, CoreDataStoreError?) -> Void) {
         persistentContainer.performBackgroundTask { context in
             do {
                 let request = ManagedDidItem.fetchRequest()
@@ -78,7 +78,7 @@ final class DidCoreDataStorage: DidCoreDataStorable {
             }
         }
     }
-    func delete(_ did: DidItem, completion: @escaping (DidItem, CoreDataStoreError?) -> Void) {
+    func delete(_ did: Did, completion: @escaping (Did, CoreDataStoreError?) -> Void) {
         persistentContainer.performBackgroundTask { context in
             do {
                 let request = ManagedDidItem.fetchRequest()

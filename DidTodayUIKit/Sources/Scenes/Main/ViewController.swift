@@ -12,7 +12,7 @@ final class ViewController: UIViewController {
         case main
     }
     private var didCollectionView: UICollectionView!
-    private var dataSource: UICollectionViewDiffableDataSource<Section, DidItem>!
+    private var dataSource: UICollectionViewDiffableDataSource<Section, Did>!
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
@@ -48,23 +48,23 @@ extension ViewController: UICollectionViewDelegate {
     }
     private func configureDataSource() {
         let cellRegistration = createCellRegistration()
-        dataSource = UICollectionViewDiffableDataSource<Section, DidItem>(collectionView: didCollectionView) { collectionView, indexPath, itemIdentifier in
+        dataSource = UICollectionViewDiffableDataSource<Section, Did>(collectionView: didCollectionView) { collectionView, indexPath, itemIdentifier in
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration,
                                                                 for: indexPath,
                                                                 item: itemIdentifier)
         }
     }
-    private func createCellRegistration() -> UICollectionView.CellRegistration<DidCell, DidItem> {
-        return UICollectionView.CellRegistration<DidCell, DidItem> { cell, indexPath, item in
+    private func createCellRegistration() -> UICollectionView.CellRegistration<DidCell, Did> {
+        return UICollectionView.CellRegistration<DidCell, Did> { cell, indexPath, item in
             cell.pieView.end = 300
             cell.timeLabel.text = "00:00"
             cell.contentLabel.text = "테스트 중"
         }
     }
     private func applySnapShot() {
-        var snapShot = NSDiffableDataSourceSnapshot<Section, DidItem>()
+        var snapShot = NSDiffableDataSourceSnapshot<Section, Did>()
         snapShot.appendSections([.main])
-        snapShot.appendItems([DidItem(id: UUID(),
+        snapShot.appendItems([Did(id: UUID(),
                                       started: Date(),
                                       finished: Date(),
                                       content: "",

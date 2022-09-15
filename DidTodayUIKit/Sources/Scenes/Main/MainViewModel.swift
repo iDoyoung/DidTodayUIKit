@@ -12,14 +12,14 @@ protocol MainViewModelInput {
 }
 
 protocol MainViewModelOutput {
-    var dids: [DidItem] { get }
+    var dids: [Did] { get }
 }
 
 final class MainViewModel: MainViewModelInput {
     var didcCoreDataStorage: DidCoreDataStorable?
     
     //MARK: - Input
-    var fetchedDids = [DidItem]()
+    var fetchedDids = [Did]()
     
     func fetchDids() {
         didcCoreDataStorage?.fetchDids { [weak self] dids, error in

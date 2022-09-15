@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct DidItem: Equatable, Hashable {
+struct Did: Equatable, Hashable {
     let id: UUID
     let started: Date
     let finished: Date
     var content: String
     var pieColor: PieColor
     
-    static func == (lhs: DidItem, rhs: DidItem) -> Bool {
+    static func == (lhs: Did, rhs: Did) -> Bool {
         lhs.id == rhs.id
     }
     

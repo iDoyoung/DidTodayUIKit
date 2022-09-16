@@ -26,6 +26,7 @@ final class MainViewModel: MainViewModelInput {
             if error == nil {
                 self?.fetchedDids = dids
             } else {
+                //TODO: Alert 사용해서 Core Data Fetch 실패를 알려야 하나
                 #if DEBUG
                 print("Error: \(String(describing: error))")
                 #endif
@@ -33,4 +34,7 @@ final class MainViewModel: MainViewModelInput {
         }
     }
     //MARK: - Output
+    var didItems: [MainDidItemsViewModel] {
+        return fetchedDids.map { MainDidItemsViewModel($0)}
+    }
 }

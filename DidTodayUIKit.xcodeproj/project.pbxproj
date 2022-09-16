@@ -21,10 +21,11 @@
 		50A4505A2564CFD500812F14 /* Localize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A450592564CFD500812F14 /* Localize.swift */; };
 		7F80EBC728D3245500781DB4 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F80EBC628D3245500781DB4 /* MainViewModel.swift */; };
 		7F80EBC928D334A000781DB4 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F80EBC828D334A000781DB4 /* MainViewModelTests.swift */; };
+		7F80EBCB28D4102500781DB4 /* MainDidItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F80EBCA28D4102500781DB4 /* MainDidItemsViewModel.swift */; };
 		7FC22B6328C88AA500F83122 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22B6128C88AA500F83122 /* DataModel.xcdatamodeld */; };
 		7FC22B6628C9BFBB00F83122 /* ManagedDidItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22B6428C9BFBB00F83122 /* ManagedDidItem+CoreDataClass.swift */; };
 		7FC22B6728C9BFBB00F83122 /* ManagedDidItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22B6528C9BFBB00F83122 /* ManagedDidItem+CoreDataProperties.swift */; };
-		7FC22B6928C9C0E500F83122 /* DidItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22B6828C9C0E500F83122 /* DidItem.swift */; };
+		7FC22B6928C9C0E500F83122 /* Did.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22B6828C9C0E500F83122 /* Did.swift */; };
 		7FC22B6C28C9C9E900F83122 /* DidCoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22B6B28C9C9E900F83122 /* DidCoreDataStorage.swift */; };
 		7FC22B7D28CB145D00F83122 /* DidCoreDataStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22B6E28CB137E00F83122 /* DidCoreDataStorageTests.swift */; };
 		7FC22B7F28CB232600F83122 /* Seeds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22B7E28CB232600F83122 /* Seeds.swift */; };
@@ -64,10 +65,11 @@
 		50C6A1A525B28E40001B435C /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
 		7F80EBC628D3245500781DB4 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		7F80EBC828D334A000781DB4 /* MainViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTests.swift; sourceTree = "<group>"; };
+		7F80EBCA28D4102500781DB4 /* MainDidItemsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDidItemsViewModel.swift; sourceTree = "<group>"; };
 		7FC22B6228C88AA500F83122 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		7FC22B6428C9BFBB00F83122 /* ManagedDidItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagedDidItem+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7FC22B6528C9BFBB00F83122 /* ManagedDidItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagedDidItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		7FC22B6828C9C0E500F83122 /* DidItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidItem.swift; sourceTree = "<group>"; };
+		7FC22B6828C9C0E500F83122 /* Did.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Did.swift; sourceTree = "<group>"; };
 		7FC22B6B28C9C9E900F83122 /* DidCoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidCoreDataStorage.swift; sourceTree = "<group>"; };
 		7FC22B6E28CB137E00F83122 /* DidCoreDataStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidCoreDataStorageTests.swift; sourceTree = "<group>"; };
 		7FC22B7428CB145300F83122 /* DidTodayUIKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DidTodayUIKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -158,6 +160,7 @@
 				7FC22BB728CDE19300F83122 /* ViewController.swift */,
 				7FC22BB928D0547500F83122 /* DidCell.swift */,
 				7F80EBC628D3245500781DB4 /* MainViewModel.swift */,
+				7F80EBCA28D4102500781DB4 /* MainDidItemsViewModel.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -185,7 +188,7 @@
 				7FC22B6428C9BFBB00F83122 /* ManagedDidItem+CoreDataClass.swift */,
 				7FC22B6528C9BFBB00F83122 /* ManagedDidItem+CoreDataProperties.swift */,
 				504CE0B3253FDFDF000CC6CF /* PreviousVersionModel.swift */,
-				7FC22B6828C9C0E500F83122 /* DidItem.swift */,
+				7FC22B6828C9C0E500F83122 /* Did.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -351,10 +354,11 @@
 				7FC580A328D1A201008086FD /* PieView.swift in Sources */,
 				504CE0C1254143CC000CC6CF /* AllPie.swift in Sources */,
 				504CE0B9253FDFE9000CC6CF /* ViewModel.swift in Sources */,
+				7F80EBCB28D4102500781DB4 /* MainDidItemsViewModel.swift in Sources */,
 				504CE046253FDFAA000CC6CF /* MainViewController.swift in Sources */,
 				7FC22BB828CDE19300F83122 /* ViewController.swift in Sources */,
 				7FC22B6728C9BFBB00F83122 /* ManagedDidItem+CoreDataProperties.swift in Sources */,
-				7FC22B6928C9C0E500F83122 /* DidItem.swift in Sources */,
+				7FC22B6928C9C0E500F83122 /* Did.swift in Sources */,
 				7F80EBC728D3245500781DB4 /* MainViewModel.swift in Sources */,
 				7FC22B6628C9BFBB00F83122 /* ManagedDidItem+CoreDataClass.swift in Sources */,
 				7FC22B6C28C9C9E900F83122 /* DidCoreDataStorage.swift in Sources */,

@@ -12,7 +12,7 @@ import CoreData
 class DidCoreDataStorageTests: XCTestCase {
     //MARK: - System Under Test
     var sut: DidCoreDataStorage!
-    var fetchedMockDids: [DidItem]?
+    var fetchedMockDids: [Did]?
     
     override func setUpWithError() throws {
         try super.setUpWithError()

@@ -5,26 +5,28 @@
 //  Created by Doyoung on 2022/09/15.
 //
 
-import Foundation
+import Combine
 
 protocol MainViewModelInput {
     func fetchDids()
 }
 
 protocol MainViewModelOutput {
-    var dids: [Did] { get }
+    var fetchedDidsPublisher: Published<[MainDidItemsViewModel]?>.Publisher { get }
 }
 
-final class MainViewModel: MainViewModelInput {
-    var didcCoreDataStorage: DidCoreDataStorable?
+final class MainViewModel: MainViewModelInput, MainViewModelOutput {
+    var didCoreDataStorage: DidCoreDataStorable?
+    
+    init(didCoreDataStorage: DidCoreDataStorable) {
+        self.didCoreDataStorage = didCoreDataStorage
+    }
     
     //MARK: - Input
-    var fetchedDids = [Did]()
-    
     func fetchDids() {
-        didcCoreDataStorage?.fetchDids { [weak self] dids, error in
+        didCoreDataStorage?.fetchDids { [weak self] dids, error in
             if error == nil {
-                self?.fetchedDids = dids
+                self?.fetchedDids = dids.map { MainDidItemsViewModel($0)}
             } else {
                 //TODO: Alert 사용해서 Core Data Fetch 실패를 알려야 하나
                 #if DEBUG
@@ -34,7 +36,6 @@ final class MainViewModel: MainViewModelInput {
         }
     }
     //MARK: - Output
-    var didItems: [MainDidItemsViewModel] {
-        return fetchedDids.map { MainDidItemsViewModel($0)}
-    }
+    @Published  var fetchedDids: [MainDidItemsViewModel]?
+    var fetchedDidsPublisher: Published<[MainDidItemsViewModel]?>.Publisher { $fetchedDids }
 }

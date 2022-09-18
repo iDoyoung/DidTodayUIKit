@@ -10,7 +10,7 @@ import XCTest
 
 struct Seeds {
     struct Dids {
-        static let mock = DidItem(id: UUID(),
+        static let mock = Did(id: UUID(),
                                  started: Date(),
                                  finished: Date(),
                                  content: "It is mock",

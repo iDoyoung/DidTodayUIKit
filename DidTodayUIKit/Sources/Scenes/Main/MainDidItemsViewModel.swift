@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct MainDidItemsViewModel: Equatable {
+struct MainDidItemsViewModel: Hashable {
     let startedTimes: Double
     let finishedTimes: Double
     let content: String

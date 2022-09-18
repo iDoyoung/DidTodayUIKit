@@ -11,45 +11,54 @@ import XCTest
 class MainViewModelTests: XCTestCase {
     //MARK: - System Under Test
     var sut: MainViewModel!
-
+    var didsCoreDataStorageSpy: DidsCoreDataStorageSpy!
+    
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = MainViewModel()
+        didsCoreDataStorageSpy = DidsCoreDataStorageSpy()
+        sut = MainViewModel(didCoreDataStorage: didsCoreDataStorageSpy)
     }
     override func tearDownWithError() throws {
-        sut = MainViewModel()
+        sut = nil
         try super.tearDownWithError()
     }
     
     //MARK: - Test Doubles
     final class DidsCoreDataStorageSpy: DidCoreDataStorable {
+        var dids: [Did]?
         var createDidCalled = false
         var fetchDidsCalled = false
         var updateDidCalled = false
         var deleteDidCalled = false
         
-        func create(_ did: DidItem, completion: @escaping (DidItem, CoreDataStoreError?) -> Void) {
+        func create(_ did: Did, completion: @escaping (Did, CoreDataStoreError?) -> Void) {
             createDidCalled = true
         }
-        func fetchDids(completion: @escaping ([DidItem], CoreDataStoreError?) -> Void) {
+        func fetchDids(completion: @escaping ([Did], CoreDataStoreError?) -> Void) {
             fetchDidsCalled = true
+            guard let dids = dids else {
+                return
+            }
+            completion(dids, nil)
         }
-        func update(_ did: DidItem, completion: @escaping (DidItem, CoreDataStoreError?) -> Void) {
+        func update(_ did: Did, completion: @escaping (Did, CoreDataStoreError?) -> Void) {
             updateDidCalled = true
         }
-        func delete(_ did: DidItem, completion: @escaping (DidItem, CoreDataStoreError?) -> Void) {
+        func delete(_ did: Did, completion: @escaping (Did, CoreDataStoreError?) -> Void) {
             deleteDidCalled = true
         }
     }
     
     //MARK: - Tests
-    func test_fetchDids_shouldCallDidsCoreDataStorage() {
+    func test_fetchDids_shouldCallDidsCoreDataStorageAndGetOutputFetchedDids() {
         //given
-        let didsCoreDataStorageSpy = DidsCoreDataStorageSpy()
-        sut.didcCoreDataStorage = didsCoreDataStorageSpy
+        let mockDids = [Seeds.Dids.mock]
+        let expectation = mockDids.map { MainDidItemsViewModel($0) }
+        didsCoreDataStorageSpy.dids = mockDids
         //when
         sut.fetchDids()
         //then
         XCTAssert(didsCoreDataStorageSpy.fetchDidsCalled)
+        XCTAssertEqual(expectation, sut.fetchedDids)
     }
 }

@@ -21,8 +21,10 @@ final class CreateDidViewController: UIViewController {
         present(colorPickerViewController, animated: true)
     }
     @IBAction func setStartedTime(_ sender: UIDatePicker) {
+        viewModel?.startedTime = sender.date
     }
     @IBAction func setEndedTime(_ sender: UIDatePicker) {
+        viewModel?.endedTime = sender.date
     }
     @IBAction func addDid(_ sender: UIBarButtonItem) {
     }

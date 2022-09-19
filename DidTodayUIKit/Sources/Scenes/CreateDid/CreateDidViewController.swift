@@ -62,11 +62,12 @@ final class CreateDidViewController: UIViewController {
     private func bindViewModel() {
         cancellable = viewModel?.titlePublisher
             .sink { [weak self] title in
-            if title == nil || title == "" {
-                self?.addButtonItem.isEnabled = false
-            } else {
-                self?.addButtonItem.isEnabled = true
+                if let title = title,
+                   title.trimmingCharacters(in: .whitespaces).isEmpty == false {
+                    self?.addButtonItem.isEnabled = true
+                } else {
+                    self?.addButtonItem.isEnabled = false
+                }
             }
-        }
     }
 }

@@ -15,6 +15,7 @@ protocol CreateDidViewModelInput {
 }
 
 protocol CreateDidViewModelOutput {
+    var titlePublisher: Published<String?>.Publisher { get }
 }
 
 final class CreateDidViewModel: CreateDidViewModelInput, CreateDidViewModelOutput {
@@ -26,5 +27,7 @@ final class CreateDidViewModel: CreateDidViewModelInput, CreateDidViewModelOutpu
     
     func createDid() {
     }
+    
     //MARK: - Output
+    var titlePublisher: Published<String?>.Publisher { $title }
 }

@@ -48,7 +48,7 @@
                                                                     </constraints>
                                                                 </datePicker>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YaZ-Jj-Bl2">
-                                                                    <rect key="frame" x="12" y="21.666666666666664" width="59" height="17"/>
+                                                                    <rect key="frame" x="12" y="21.666666666666742" width="59" height="17"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
@@ -136,7 +136,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="10o-qO-yde">
-                                                                    <rect key="frame" x="6" y="32.333333333333343" width="338" height="63.666666666666657"/>
+                                                                    <rect key="frame" x="6" y="32.333333333333371" width="338" height="63.666666666666657"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="iAe-ZO-uCe">
                                                                         <size key="itemSize" width="94" height="49"/>
@@ -257,7 +257,7 @@
                                                                     </constraints>
                                                                 </datePicker>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XaC-iW-Yzl">
-                                                                    <rect key="frame" x="12" y="21.333333333333332" width="67" height="16.999999999999996"/>
+                                                                    <rect key="frame" x="12" y="21.666666666666686" width="67" height="17"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
@@ -320,7 +320,7 @@
                                                                     </connections>
                                                                 </button>
                                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Add I starting" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7hr-wP-k90">
-                                                                    <rect key="frame" x="8" y="16.666666666666668" width="227" height="32.666666666666657"/>
+                                                                    <rect key="frame" x="8" y="16.666666666666625" width="227" height="32.666666666666657"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="7hr-wP-k90" secondAttribute="height" multiplier="305:44" id="MqR-QD-bzd"/>
                                                                     </constraints>
@@ -359,7 +359,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Kyk-Vq-s0q">
-                                                                    <rect key="frame" x="6" y="32.333333333333314" width="336" height="63.666666666666657"/>
+                                                                    <rect key="frame" x="6" y="32.333333333333371" width="336" height="63.666666666666657"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="5mk-Bk-EJg">
                                                                         <size key="itemSize" width="60" height="56.999999999999993"/>

@@ -13,10 +13,11 @@ extension ManagedDidItem {
         return NSFetchRequest<ManagedDidItem>(entityName: "ManagedDidItem")
     }
 
+    @NSManaged public var enforced: Bool
     @NSManaged public var started: Date
     @NSManaged public var identifier: UUID
     @NSManaged public var finished: Date
-    @NSManaged public var content: String
+    @NSManaged public var title: String
     @NSManaged public var red: Float
     @NSManaged public var green: Float
     @NSManaged public var blue: Float

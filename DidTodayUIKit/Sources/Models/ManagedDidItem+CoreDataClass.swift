@@ -12,9 +12,10 @@ import CoreData
 public class ManagedDidItem: NSManagedObject {
     func toDidItem() -> Did {
         return Did(id: identifier,
+                   enforced: enforced,
                    started: started,
                    finished: finished,
-                   content: content,
+                   content: title,
                    red: red,
                    green: green,
                    blue: blue,
@@ -22,9 +23,10 @@ public class ManagedDidItem: NSManagedObject {
     }
     func fromDidItem(_ item: Did, context: NSManagedObjectContext) {
         identifier = item.id
+        enforced = item.enforced
         started = item.started
         finished = item.finished
-        content = item.content
+        title = item.content
         red = item.pieColor.red
         green = item.pieColor.green
         blue = item.pieColor.blue

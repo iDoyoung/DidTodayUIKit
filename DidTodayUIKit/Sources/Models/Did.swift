@@ -9,6 +9,7 @@ import Foundation
 
 struct Did: Equatable, Hashable {
     let id: UUID
+    let enforced: Bool
     let started: Date
     let finished: Date
     var content: String
@@ -18,15 +19,17 @@ struct Did: Equatable, Hashable {
         lhs.id == rhs.id
     }
     
-    init(started: Date, finished: Date, content: String, color: PieColor) {
+    init(enforced: Bool = false, started: Date, finished: Date, content: String, color: PieColor) {
         self.id = UUID()
+        self.enforced = enforced
         self.started = started
         self.finished = finished
         self.content = content
         self.pieColor = color
     }
-    init(id: UUID, started: Date, finished: Date, content: String, red: Float, green: Float, blue: Float, alpha: Float) {
+    init(id: UUID, enforced: Bool = false, started: Date, finished: Date, content: String, red: Float, green: Float, blue: Float, alpha: Float) {
         self.id = id
+        self.enforced = enforced
         self.started = started
         self.finished = finished
         self.content = content

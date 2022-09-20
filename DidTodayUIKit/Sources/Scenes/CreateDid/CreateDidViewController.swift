@@ -15,6 +15,8 @@ final class CreateDidViewController: UIViewController {
     @IBOutlet weak var pieView: PieView!
     @IBOutlet weak var addButtonItem: UIBarButtonItem!
     @IBOutlet weak var titleTextField: UITextField!
+    @IBOutlet weak var startedTimePicker: UIDatePicker!
+    @IBOutlet weak var endedTimePicker: UIDatePicker!
     
     @IBAction func showColorPicker(_ sender: UIButton) {
         let colorPickerViewController = UIColorPickerViewController()
@@ -22,16 +24,12 @@ final class CreateDidViewController: UIViewController {
         present(colorPickerViewController, animated: true)
     }
     @IBAction func setStartedTime(_ sender: UIDatePicker) {
+        endedTimePicker.minimumDate = sender.date
         viewModel?.startedTime = sender.date
-        #if DEBUG
-        print("START TIME IS CHANGED")
-        #endif
     }
     @IBAction func setEndedTime(_ sender: UIDatePicker) {
+        startedTimePicker.maximumDate = sender.date
         viewModel?.endedTime = sender.date
-        #if DEBUG
-        print("END TIME IS CHANGED")
-        #endif
     }
     @IBAction func addDid(_ sender: UIBarButtonItem) {
     }
@@ -49,13 +47,22 @@ final class CreateDidViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTextFieldAction()
+        setupUIObjects()
         bindViewModel()
     }
     
     //MARK: - Setup
+    private func setupUIObjects() {
+        setupTextFieldAction()
+        setupDatePicker()
+    }
     private func setupTextFieldAction() {
         titleTextField.addAction(textFieldAction(), for: .editingChanged)
+    }
+    private func setupDatePicker() {
+        endedTimePicker.minimumDate = startedTimePicker.date
+        endedTimePicker.maximumDate = Date()
+        startedTimePicker.maximumDate = endedTimePicker.date
     }
     private func textFieldAction() -> UIAction {
         return UIAction { [weak self] _ in

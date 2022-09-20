@@ -24,7 +24,7 @@ protocol CreateDidViewModelOutput {
 final class CreateDidViewModel: CreateDidViewModelInput, CreateDidViewModelOutput {
     //MARK: - Input
     @Published var startedTime: Date?
-    @Published var endedTime: Date?
+    @Published var endedTime: Date? = Date()
     @Published var color: UIColor?
     @Published var title: String?
     

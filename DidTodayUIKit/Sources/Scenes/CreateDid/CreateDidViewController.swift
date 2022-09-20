@@ -21,6 +21,7 @@ final class CreateDidViewController: UIViewController {
     @IBAction func showColorPicker(_ sender: UIButton) {
         let colorPickerViewController = UIColorPickerViewController()
         colorPickerViewController.supportsAlpha = false
+        colorPickerViewController.delegate = self
         present(colorPickerViewController, animated: true)
     }
     @IBAction func setStartedTime(_ sender: UIDatePicker) {
@@ -120,5 +121,11 @@ final class CreateDidViewController: UIViewController {
                 self?.pieView.color = color
             }
             .store(in: &cancellableBag)
+    }
+}
+
+extension CreateDidViewController: UIColorPickerViewControllerDelegate {
+    func colorPickerViewController(_ viewController: UIColorPickerViewController, didSelect color: UIColor, continuously: Bool) {
+        viewModel?.color = color
     }
 }

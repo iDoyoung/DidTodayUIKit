@@ -11,7 +11,12 @@ import UIKit
 ///
 ///  You must set start and end angles for draw pie
 final class PieView: UIView {
-    var color: UIColor = .systemGreen
+    var color: UIColor = .systemGreen {
+        didSet {
+            guard let pieLayer = layer.sublayers?.first as? CAShapeLayer else { return }
+            pieLayer.strokeColor = color.cgColor
+        }
+    }
     var start: Double = 0 { didSet { setNeedsDisplay() } }
     var end: Double = 0 { didSet { setNeedsDisplay() } }
     

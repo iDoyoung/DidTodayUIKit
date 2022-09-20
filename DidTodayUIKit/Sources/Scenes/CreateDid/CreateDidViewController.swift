@@ -10,8 +10,9 @@ import Combine
 
 final class CreateDidViewController: UIViewController {
     var viewModel: (CreateDidViewModelInput & CreateDidViewModelOutput)?
-    var cancellable: AnyCancellable?
+    var cancellableBag = Set<AnyCancellable>()
     
+    @IBOutlet weak var pieView: PieView!
     @IBOutlet weak var addButtonItem: UIBarButtonItem!
     @IBOutlet weak var titleTextField: UITextField!
     
@@ -22,9 +23,15 @@ final class CreateDidViewController: UIViewController {
     }
     @IBAction func setStartedTime(_ sender: UIDatePicker) {
         viewModel?.startedTime = sender.date
+        #if DEBUG
+        print("START TIME IS CHANGED")
+        #endif
     }
     @IBAction func setEndedTime(_ sender: UIDatePicker) {
         viewModel?.endedTime = sender.date
+        #if DEBUG
+        print("END TIME IS CHANGED")
+        #endif
     }
     @IBAction func addDid(_ sender: UIBarButtonItem) {
     }
@@ -62,7 +69,7 @@ final class CreateDidViewController: UIViewController {
         }
     }
     private func bindViewModel() {
-        cancellable = viewModel?.titlePublisher
+        viewModel?.titlePublisher
             .sink { [weak self] title in
                 if let title = title,
                    title.trimmingCharacters(in: .whitespaces).isEmpty == false {
@@ -71,5 +78,40 @@ final class CreateDidViewController: UIViewController {
                     self?.addButtonItem.isEnabled = false
                 }
             }
+            .store(in: &cancellableBag)
+        viewModel?.startedTimePublished
+            .compactMap {
+                $0?.timesCalculateToMinutes()
+            }
+            .map {
+                Double($0) * 0.25
+            }
+            .sink { [weak self] time in
+                self?.pieView.start = time
+                #if DEBUG
+                print("SET STARTED TIME \(time)")
+                #endif
+            }
+            .store(in: &cancellableBag)
+        viewModel?.endedTimePublished
+            .compactMap {
+                $0?.timesCalculateToMinutes()
+            }
+            .map {
+                Double($0) * 0.25
+            }
+            .sink { [weak self] time in
+                self?.pieView.end = time
+                #if DEBUG
+                print("SET ENDED TIME: \(time)")
+                #endif
+            }
+            .store(in: &cancellableBag)
+        viewModel?.colorPublished
+            .compactMap { $0 }
+            .sink { [weak self] color in
+                self?.pieView.color = color
+            }
+            .store(in: &cancellableBag)
     }
 }

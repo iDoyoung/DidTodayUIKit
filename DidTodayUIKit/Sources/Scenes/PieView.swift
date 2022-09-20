@@ -12,10 +12,11 @@ import UIKit
 ///  You must set start and end angles for draw pie
 final class PieView: UIView {
     var color: UIColor = .systemGreen
-    var start: Double = 0
-    var end: Double = 0
+    var start: Double = 0 { didSet { setNeedsDisplay() } }
+    var end: Double = 0 { didSet { setNeedsDisplay() } }
     
     override func draw(_ rect: CGRect) {
+        layer.sublayers?.removeAll()
         /// - Path
         let center = CGPoint(x: rect.midX, y: rect.midY)
         let radius = max(rect.width, rect.width) / 2.4
@@ -40,6 +41,6 @@ final class PieView: UIView {
         pieLayer.strokeColor = color.cgColor
         pieLayer.lineWidth = radius
         pieLayer.strokeEnd = 1
-        self.layer.addSublayer(pieLayer)
+        layer.addSublayer(pieLayer)
     }
 }

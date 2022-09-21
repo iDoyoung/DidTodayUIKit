@@ -33,6 +33,22 @@ final class CreateDidViewController: UIViewController {
         viewModel?.endedTime = sender.date
     }
     @IBAction func addDid(_ sender: UIBarButtonItem) {
+        var alert: UIAlertController?
+        viewModel?.createDid { [weak self] result in
+            switch result {
+            case .success:
+                alert = self?.successAddingAlert()
+            case .failure(let error):
+                switch error {
+                case .coreDataError:
+                    alert = self?.errorAlert()
+                case .startedTimeError:
+                    alert = self?.failedAddingAlert()
+                }
+            }
+        }
+        guard let alert = alert else { return }
+        present(alert, animated: true)
     }
     @IBAction func cancelAddDid(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
@@ -40,11 +56,11 @@ final class CreateDidViewController: UIViewController {
     //MARK: - Life cycle
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        viewModel = CreateDidViewModel()
+        viewModel = CreateDidViewModel(didCoreDataStorage: DidCoreDataStorage())
     }
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        viewModel = CreateDidViewModel()
+        viewModel = CreateDidViewModel(didCoreDataStorage: DidCoreDataStorage())
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -121,6 +137,37 @@ final class CreateDidViewController: UIViewController {
                 self?.pieView.color = color
             }
             .store(in: &cancellableBag)
+    }
+}
+
+//MARK: - Alert Action
+extension CreateDidViewController {
+    //TODO: - Add Message When Compleate UI
+    func successAddingAlert() -> UIAlertController {
+        let alert = UIAlertController(title: "Succeeded adding",
+                                      message: "",
+                                      preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "OK", style: .cancel) { [weak self] _ in
+            self?.dismiss(animated: true)
+        }
+        alert.addAction(confirmAction)
+        return alert
+    }
+    func failedAddingAlert() -> UIAlertController {
+        let alert = UIAlertController(title: "Failed adding",
+                                      message: "",
+                                      preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "OK", style: .cancel)
+        alert.addAction(confirmAction)
+        return alert
+    }
+    func errorAlert() -> UIAlertController {
+        let alert = UIAlertController(title: "Error",
+                                      message: "",
+                                      preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "OK", style: .cancel)
+        alert.addAction(confirmAction)
+        return alert
     }
 }
 

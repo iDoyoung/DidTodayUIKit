@@ -46,7 +46,7 @@ final class CreateDidViewModel: CreateDidViewModelInput, CreateDidViewModelOutpu
               let endedTime = endedTime,
               let title = title,
               let color = color?.cgColor.components else {
-            
+            completion(.failure(CreateDidError.startedTimeError))
             return
         }
         let pieColor = Did.PieColor(red: Float(color[0]),

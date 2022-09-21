@@ -26,6 +26,7 @@
 		7F80EBC928D334A000781DB4 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F80EBC828D334A000781DB4 /* MainViewModelTests.swift */; };
 		7F80EBCB28D4102500781DB4 /* MainDidItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F80EBCA28D4102500781DB4 /* MainDidItemsViewModel.swift */; };
 		7FA60AE928D6FB7A0098F3D2 /* MainViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA60AE828D6FB7A0098F3D2 /* MainViewControllerTests.swift */; };
+		7FB6A8CB28DAF529009C61C5 /* CreateDidViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6A8CA28DAF529009C61C5 /* CreateDidViewModelTests.swift */; };
 		7FC22B6328C88AA500F83122 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22B6128C88AA500F83122 /* DataModel.xcdatamodeld */; };
 		7FC22B6628C9BFBB00F83122 /* ManagedDidItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22B6428C9BFBB00F83122 /* ManagedDidItem+CoreDataClass.swift */; };
 		7FC22B6728C9BFBB00F83122 /* ManagedDidItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22B6528C9BFBB00F83122 /* ManagedDidItem+CoreDataProperties.swift */; };
@@ -74,6 +75,7 @@
 		7F80EBC828D334A000781DB4 /* MainViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTests.swift; sourceTree = "<group>"; };
 		7F80EBCA28D4102500781DB4 /* MainDidItemsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDidItemsViewModel.swift; sourceTree = "<group>"; };
 		7FA60AE828D6FB7A0098F3D2 /* MainViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerTests.swift; sourceTree = "<group>"; };
+		7FB6A8CA28DAF529009C61C5 /* CreateDidViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDidViewModelTests.swift; sourceTree = "<group>"; };
 		7FC22B6228C88AA500F83122 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		7FC22B6428C9BFBB00F83122 /* ManagedDidItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagedDidItem+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7FC22B6528C9BFBB00F83122 /* ManagedDidItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagedDidItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -150,6 +152,14 @@
 			children = (
 				7F397A6728D71E74000F89E2 /* CreateDidViewController.swift */,
 				7F397A7128D83021000F89E2 /* CreateDidViewModel.swift */,
+			);
+			path = CreateDid;
+			sourceTree = "<group>";
+		};
+		7FB6A8C928DAF514009C61C5 /* CreateDid */ = {
+			isa = PBXGroup;
+			children = (
+				7FB6A8CA28DAF529009C61C5 /* CreateDidViewModelTests.swift */,
 			);
 			path = CreateDid;
 			sourceTree = "<group>";
@@ -259,6 +269,7 @@
 		7FC22B7528CB145300F83122 /* DidTodayUIKitTests */ = {
 			isa = PBXGroup;
 			children = (
+				7FB6A8C928DAF514009C61C5 /* CreateDid */,
 				7F397A6428D709D3000F89E2 /* Main */,
 				7FC22B6E28CB137E00F83122 /* DidCoreDataStorageTests.swift */,
 				7FC22B7E28CB232600F83122 /* Seeds.swift */,
@@ -409,6 +420,7 @@
 				7F80EBC928D334A000781DB4 /* MainViewModelTests.swift in Sources */,
 				7FC22B7D28CB145D00F83122 /* DidCoreDataStorageTests.swift in Sources */,
 				7FC22B7F28CB232600F83122 /* Seeds.swift in Sources */,
+				7FB6A8CB28DAF529009C61C5 /* CreateDidViewModelTests.swift in Sources */,
 				7FA60AE928D6FB7A0098F3D2 /* MainViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

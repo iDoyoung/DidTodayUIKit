@@ -12,6 +12,7 @@ final class CreateDidViewController: UIViewController {
     var viewModel: (CreateDidViewModelInput & CreateDidViewModelOutput)?
     var cancellableBag = Set<AnyCancellable>()
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var pieView: PieView!
     @IBOutlet weak var addButtonItem: UIBarButtonItem!
     @IBOutlet weak var titleTextField: UITextField!
@@ -70,6 +71,7 @@ final class CreateDidViewController: UIViewController {
     
     //MARK: - Setup
     private func setupUIObjects() {
+        titleTextField.delegate = self
         setupTextFieldAction()
         setupDatePicker()
     }
@@ -174,5 +176,20 @@ extension CreateDidViewController {
 extension CreateDidViewController: UIColorPickerViewControllerDelegate {
     func colorPickerViewController(_ viewController: UIColorPickerViewController, didSelect color: UIColor, continuously: Bool) {
         viewModel?.color = color
+    }
+}
+
+extension CreateDidViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        scrollView.scrollToBottom()
+    }
+}
+
+extension UIScrollView {
+    func scrollToBottom() {
+        let bottomOffset = CGPoint(x: 0, y: contentSize.height - bounds.size.height + contentInset.bottom)
+        if(bottomOffset.y > 0) {
+            setContentOffset(bottomOffset, animated: true)
+        }
     }
 }

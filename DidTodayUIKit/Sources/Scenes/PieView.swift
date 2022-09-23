@@ -20,6 +20,15 @@ final class PieView: UIView {
     var start: Double = 0 { didSet { setNeedsDisplay() } }
     var end: Double = 0 { didSet { setNeedsDisplay() } }
     
+    //MARK: - Life Cycle
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundColor = .clear
+    }
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        backgroundColor = .clear
+    }
     override func draw(_ rect: CGRect) {
         layer.sublayers?.removeAll()
         /// - Path

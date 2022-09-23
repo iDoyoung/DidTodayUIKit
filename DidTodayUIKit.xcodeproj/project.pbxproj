@@ -167,6 +167,15 @@
 			path = CreateDid;
 			sourceTree = "<group>";
 		};
+		7FB6A8D028DD526E009C61C5 /* Legacy */ = {
+			isa = PBXGroup;
+			children = (
+				504CE045253FDFAA000CC6CF /* PreviousMainViewController.swift */,
+				504CE0B8253FDFE9000CC6CF /* ViewModel.swift */,
+			);
+			path = Legacy;
+			sourceTree = "<group>";
+		};
 		7FC22B5828C71AE400F83122 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -182,6 +191,7 @@
 		7FC22B5928C71AEB00F83122 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				7FB6A8D028DD526E009C61C5 /* Legacy */,
 				7FC580A228D1A201008086FD /* PieView.swift */,
 				504CE0C0254143CC000CC6CF /* AllPie.swift */,
 				5054D6C2255A8ABE005E8850 /* Pie.swift */,
@@ -195,10 +205,8 @@
 		7FC22B5A28C71AF500F83122 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				504CE045253FDFAA000CC6CF /* PreviousMainViewController.swift */,
-				504CE0B8253FDFE9000CC6CF /* ViewModel.swift */,
-				7FC22BB728CDE19300F83122 /* MainViewController.swift */,
 				7FC22BB928D0547500F83122 /* DidCell.swift */,
+				7FC22BB728CDE19300F83122 /* MainViewController.swift */,
 				7F80EBC628D3245500781DB4 /* MainViewModel.swift */,
 				7F80EBCA28D4102500781DB4 /* MainDidItemsViewModel.swift */,
 			);

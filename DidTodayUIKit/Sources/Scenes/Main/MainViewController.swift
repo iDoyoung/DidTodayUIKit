@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 final class MainViewController: UIViewController {
     ///Section for Did collection view in Main view controller
@@ -14,7 +15,7 @@ final class MainViewController: UIViewController {
     }
     
     var viewModel: (MainViewModelInput & MainViewModelOutput)?
-    
+    private var cancellableBag: AnyCancellable?
     private var didCollectionView: UICollectionView!
     private var dataSource: UICollectionViewDiffableDataSource<Section, MainDidItemsViewModel>!
     
@@ -37,7 +38,9 @@ final class MainViewController: UIViewController {
     
     private func bindViewModel() {
         guard let viewModel = viewModel else { return }
-        _ = viewModel.fetchedDidsPublisher.sink { [weak self] items in
+        cancellableBag = viewModel.fetchedDidsPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] items in
             guard let items = items else { return }
             #if DEBUG
             print(items.count)

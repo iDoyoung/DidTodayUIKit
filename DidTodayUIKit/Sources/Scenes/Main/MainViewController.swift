@@ -48,7 +48,6 @@ final class MainViewController: UIViewController {
             self?.applySnapShot(items)
         }
     }
-    
 }
 
 //MARK: - CollectionView Extentions
@@ -62,15 +61,14 @@ extension MainViewController: UICollectionViewDelegate {
     }
     private func createCollectionViewLayout() -> UICollectionViewCompositionalLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                              heightDimension: .fractionalWidth(0.5))
+                                              heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                               heightDimension: .fractionalHeight(1.0))
+                                               heightDimension: .absolute(80))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
                                                        subitem: item,
-                                                       count: 2)
-        group.interItemSpacing = .fixed(20)
-        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 12)
+                                                       count: 1)
+        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 12, bottom: 4, trailing: 12)
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 12, bottom: 10, trailing: 12)
         let layout = UICollectionViewCompositionalLayout(section: section)
@@ -86,8 +84,11 @@ extension MainViewController: UICollectionViewDelegate {
     }
     private func createCellRegistration() -> UICollectionView.CellRegistration<DidCell, MainDidItemsViewModel> {
         return UICollectionView.CellRegistration<DidCell, MainDidItemsViewModel> { cell, indexPath, item in
-            cell.pieView.start = item.startedTimes
-            cell.pieView.end = item.finishedTimes
+            cell.pieView.start = item.startedTimes * 0.25
+            cell.pieView.end = item.finishedTimes * 0.25
+            cell.pieView.color = item.color
+            cell.timeLabel.text = item.times
+            cell.timeLabel.textColor = item.color
             cell.contentLabel.text = item.content
         }
     }

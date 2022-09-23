@@ -39,9 +39,9 @@ class DidCell: UICollectionViewCell {
     
     func configure() {
         contentView.backgroundColor = .systemBackground
-        contentView.layer.cornerRadius = 20
+        contentView.layer.cornerRadius = 10
         pieView.frame = CGRect(origin: CGPoint(x: 0, y: 0),
-                               size: CGSize(width: contentView.frame.width / 1.8, height: contentView.frame.height / 1.8))
+                               size: CGSize(width: contentView.frame.height, height: contentView.frame.height))
         pieView.autoresizingMask = [.flexibleTopMargin,
                                     .flexibleLeftMargin,
                                     .flexibleWidth,
@@ -50,13 +50,10 @@ class DidCell: UICollectionViewCell {
         addSubview(timeLabel)
         addSubview(contentLabel)
         NSLayoutConstraint.activate([
-            timeLabel.topAnchor.constraint(equalTo: pieView.topAnchor),
-            timeLabel.bottomAnchor.constraint(equalTo: pieView.bottomAnchor),
-            timeLabel.leftAnchor.constraint(equalTo: pieView.rightAnchor, constant: 8),
-            timeLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -8),
-            contentLabel.topAnchor.constraint(equalTo: pieView.bottomAnchor),
-            contentLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
-            contentLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            timeLabel.topAnchor.constraint(equalTo: pieView.centerYAnchor),
+            timeLabel.leadingAnchor.constraint(equalTo: pieView.trailingAnchor, constant: 8),
+            contentLabel.bottomAnchor.constraint(equalTo: pieView.centerYAnchor),
+            contentLabel.leadingAnchor.constraint(equalTo: pieView.trailingAnchor, constant: 8),
             contentLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
         ])
     }

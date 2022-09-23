@@ -30,6 +30,7 @@
 		7FB6A8CF28DB00E3009C61C5 /* CreateDidViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6A8CE28DB00E3009C61C5 /* CreateDidViewControllerTests.swift */; };
 		7FB6A8D328DD5C04009C61C5 /* ManagedDidItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6A8D128DD5C04009C61C5 /* ManagedDidItem+CoreDataClass.swift */; };
 		7FB6A8D428DD5C04009C61C5 /* ManagedDidItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6A8D228DD5C04009C61C5 /* ManagedDidItem+CoreDataProperties.swift */; };
+		7FB6A8D628DD89E5009C61C5 /* Date+DifferenceToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6A8D528DD89E5009C61C5 /* Date+DifferenceToString.swift */; };
 		7FC22B6328C88AA500F83122 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22B6128C88AA500F83122 /* DataModel.xcdatamodeld */; };
 		7FC22B6928C9C0E500F83122 /* Did.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22B6828C9C0E500F83122 /* Did.swift */; };
 		7FC22B6C28C9C9E900F83122 /* DidCoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22B6B28C9C9E900F83122 /* DidCoreDataStorage.swift */; };
@@ -80,6 +81,7 @@
 		7FB6A8CE28DB00E3009C61C5 /* CreateDidViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDidViewControllerTests.swift; sourceTree = "<group>"; };
 		7FB6A8D128DD5C04009C61C5 /* ManagedDidItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagedDidItem+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7FB6A8D228DD5C04009C61C5 /* ManagedDidItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagedDidItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7FB6A8D528DD89E5009C61C5 /* Date+DifferenceToString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+DifferenceToString.swift"; sourceTree = "<group>"; };
 		7FC22B6228C88AA500F83122 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		7FC22B6828C9C0E500F83122 /* Did.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Did.swift; sourceTree = "<group>"; };
 		7FC22B6B28C9C9E900F83122 /* DidCoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidCoreDataStorage.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 			children = (
 				50A450592564CFD500812F14 /* Localize.swift */,
 				7F397A7328D86EF1000F89E2 /* Date+ToDouble.swift */,
+				7FB6A8D528DD89E5009C61C5 /* Date+DifferenceToString.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -406,6 +409,7 @@
 				504CE0C1254143CC000CC6CF /* AllPie.swift in Sources */,
 				7F397A6828D71E74000F89E2 /* CreateDidViewController.swift in Sources */,
 				504CE0B9253FDFE9000CC6CF /* ViewModel.swift in Sources */,
+				7FB6A8D628DD89E5009C61C5 /* Date+DifferenceToString.swift in Sources */,
 				7F80EBCB28D4102500781DB4 /* MainDidItemsViewModel.swift in Sources */,
 				504CE046253FDFAA000CC6CF /* PreviousMainViewController.swift in Sources */,
 				7FC22BB828CDE19300F83122 /* MainViewController.swift in Sources */,

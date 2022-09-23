@@ -10,12 +10,14 @@ import UIKit
 struct MainDidItemsViewModel: Hashable {
     let startedTimes: Double
     let finishedTimes: Double
+    let times: String
     let content: String
     let color: UIColor
     
     init(_ did: Did) {
         startedTimes = Double(getHours(did.started) + getMinutes(did.started))
         finishedTimes = Double(getHours(did.finished) + getMinutes(did.finished))
+        times = Date.diffetcneceToString(from: did.started, to: did.finished)
         content = did.content
         color = UIColor(red: CGFloat(did.pieColor.red),
                         green: CGFloat(did.pieColor.green),

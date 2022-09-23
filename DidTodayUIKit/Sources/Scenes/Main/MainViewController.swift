@@ -25,7 +25,7 @@ final class MainViewController: UIViewController {
     }
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        viewModel = MainViewModel(didCoreDataStorage: DidCoreDataStorage())
+        viewModel = MainViewModel(didCoreDataStorage: DidCoreDataStorage.shared)
     }
     override func viewDidLoad() {
         super.viewDidLoad()

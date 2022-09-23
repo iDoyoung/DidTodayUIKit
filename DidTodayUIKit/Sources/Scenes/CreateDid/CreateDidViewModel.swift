@@ -38,7 +38,7 @@ final class CreateDidViewModel: CreateDidViewModelInput, CreateDidViewModelOutpu
     //MARK: - Input
     @Published var startedTime: Date? = Date()
     @Published var endedTime: Date? = Date()
-    @Published var color: UIColor?
+    @Published var color: UIColor? = .green
     @Published var title: String?
     
     func createDid(completion: @escaping (Result<Did, CreateDidError>) -> Void) {

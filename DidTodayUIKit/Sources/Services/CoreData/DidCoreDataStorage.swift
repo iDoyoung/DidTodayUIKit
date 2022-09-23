@@ -21,6 +21,8 @@ protocol DidCoreDataStorable {
 }
 
 final class DidCoreDataStorage: DidCoreDataStorable {
+    static var shared = DidCoreDataStorage()
+    
     private lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "DataModel")
         container.loadPersistentStores { _, error in
@@ -34,7 +36,7 @@ final class DidCoreDataStorage: DidCoreDataStorable {
     func create(_ did: Did, completion: @escaping (Did, CoreDataStoreError?) -> Void) {
         persistentContainer.performBackgroundTask { context in
             let managedDid = ManagedDidItem(context: context)
-            managedDid.fromDidItem(did, context: context)
+            managedDid.fromDidItem(did)
             if context.hasChanges {
                 do {
                     try context.save()
@@ -64,7 +66,7 @@ final class DidCoreDataStorage: DidCoreDataStorable {
                 request.predicate = NSPredicate(format: "identifier==%@", did.id as CVarArg)
                 let result = try context.fetch(request)
                 if let manangedDid = result.first {
-                    manangedDid.fromDidItem(did, context: context)
+                    manangedDid.fromDidItem(did)
                     if context.hasChanges {
                         do {
                             try context.save()

@@ -34,22 +34,22 @@ final class CreateDidViewController: UIViewController {
         viewModel?.endedTime = sender.date
     }
     @IBAction func addDid(_ sender: UIBarButtonItem) {
-        var alert: UIAlertController?
         viewModel?.createDid { [weak self] result in
-            switch result {
-            case .success:
-                alert = self?.successAddingAlert()
-            case .failure(let error):
-                switch error {
-                case .coreDataError:
-                    alert = self?.errorAlert()
-                case .startedTimeError:
-                    alert = self?.failedAddingAlert()
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                switch result {
+                case .success:
+                    self.present(self.successAddingAlert(), animated: true)
+                case .failure(let error):
+                    switch error {
+                    case .coreDataError:
+                        self.present(self.errorAlert(), animated: true)
+                    case .startedTimeError:
+                        self.present(self.failedAddingAlert(), animated: true)
+                    }
                 }
             }
         }
-        guard let alert = alert else { return }
-        present(alert, animated: true)
     }
     @IBAction func cancelAddDid(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
@@ -57,11 +57,11 @@ final class CreateDidViewController: UIViewController {
     //MARK: - Life cycle
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        viewModel = CreateDidViewModel(didCoreDataStorage: DidCoreDataStorage())
+        viewModel = CreateDidViewModel(didCoreDataStorage: DidCoreDataStorage.shared)
     }
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        viewModel = CreateDidViewModel(didCoreDataStorage: DidCoreDataStorage())
+        viewModel = CreateDidViewModel(didCoreDataStorage: DidCoreDataStorage.shared)
     }
     override func viewDidLoad() {
         super.viewDidLoad()

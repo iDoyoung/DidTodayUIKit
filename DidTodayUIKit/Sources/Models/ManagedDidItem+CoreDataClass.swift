@@ -21,7 +21,7 @@ public class ManagedDidItem: NSManagedObject {
                    blue: blue,
                    alpha: alpha)
     }
-    func fromDidItem(_ item: Did, context: NSManagedObjectContext) {
+    func fromDidItem(_ item: Did) {
         identifier = item.id
         enforced = item.enforced
         started = item.started

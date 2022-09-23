@@ -36,7 +36,7 @@ final class CreateDidViewModel: CreateDidViewModelInput, CreateDidViewModelOutpu
     }
     
     //MARK: - Input
-    @Published var startedTime: Date?
+    @Published var startedTime: Date? = Date()
     @Published var endedTime: Date? = Date()
     @Published var color: UIColor?
     @Published var title: String?

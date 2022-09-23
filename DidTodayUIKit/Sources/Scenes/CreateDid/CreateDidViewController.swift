@@ -72,6 +72,7 @@ final class CreateDidViewController: UIViewController {
     //MARK: - Setup
     private func setupUIObjects() {
         titleTextField.delegate = self
+        scrollView.keyboardDismissMode = .onDrag
         setupTextFieldAction()
         setupDatePicker()
     }

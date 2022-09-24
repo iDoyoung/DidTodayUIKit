@@ -31,6 +31,8 @@
 		7FB6A8D328DD5C04009C61C5 /* ManagedDidItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6A8D128DD5C04009C61C5 /* ManagedDidItem+CoreDataClass.swift */; };
 		7FB6A8D428DD5C04009C61C5 /* ManagedDidItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6A8D228DD5C04009C61C5 /* ManagedDidItem+CoreDataProperties.swift */; };
 		7FB6A8D628DD89E5009C61C5 /* Date+DifferenceToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6A8D528DD89E5009C61C5 /* Date+DifferenceToString.swift */; };
+		7FB6A8D828DD9B13009C61C5 /* TotalDidsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6A8D728DD9B13009C61C5 /* TotalDidsCell.swift */; };
+		7FB6A8DA28DDC2C4009C61C5 /* Date+GetHoursAndMinutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6A8D928DDC2C4009C61C5 /* Date+GetHoursAndMinutes.swift */; };
 		7FC22B6328C88AA500F83122 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22B6128C88AA500F83122 /* DataModel.xcdatamodeld */; };
 		7FC22B6928C9C0E500F83122 /* Did.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22B6828C9C0E500F83122 /* Did.swift */; };
 		7FC22B6C28C9C9E900F83122 /* DidCoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22B6B28C9C9E900F83122 /* DidCoreDataStorage.swift */; };
@@ -82,6 +84,8 @@
 		7FB6A8D128DD5C04009C61C5 /* ManagedDidItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagedDidItem+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7FB6A8D228DD5C04009C61C5 /* ManagedDidItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagedDidItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7FB6A8D528DD89E5009C61C5 /* Date+DifferenceToString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+DifferenceToString.swift"; sourceTree = "<group>"; };
+		7FB6A8D728DD9B13009C61C5 /* TotalDidsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalDidsCell.swift; sourceTree = "<group>"; };
+		7FB6A8D928DDC2C4009C61C5 /* Date+GetHoursAndMinutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+GetHoursAndMinutes.swift"; sourceTree = "<group>"; };
 		7FC22B6228C88AA500F83122 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		7FC22B6828C9C0E500F83122 /* Did.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Did.swift; sourceTree = "<group>"; };
 		7FC22B6B28C9C9E900F83122 /* DidCoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidCoreDataStorage.swift; sourceTree = "<group>"; };
@@ -207,6 +211,7 @@
 		7FC22B5A28C71AF500F83122 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				7FB6A8D728DD9B13009C61C5 /* TotalDidsCell.swift */,
 				7FC22BB928D0547500F83122 /* DidCell.swift */,
 				7FC22BB728CDE19300F83122 /* MainViewController.swift */,
 				7F80EBC628D3245500781DB4 /* MainViewModel.swift */,
@@ -221,6 +226,7 @@
 				50A450592564CFD500812F14 /* Localize.swift */,
 				7F397A7328D86EF1000F89E2 /* Date+ToDouble.swift */,
 				7FB6A8D528DD89E5009C61C5 /* Date+DifferenceToString.swift */,
+				7FB6A8D928DDC2C4009C61C5 /* Date+GetHoursAndMinutes.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -405,6 +411,7 @@
 			files = (
 				7F397A7228D83021000F89E2 /* CreateDidViewModel.swift in Sources */,
 				50A4505A2564CFD500812F14 /* Localize.swift in Sources */,
+				7FB6A8DA28DDC2C4009C61C5 /* Date+GetHoursAndMinutes.swift in Sources */,
 				7FC580A328D1A201008086FD /* PieView.swift in Sources */,
 				504CE0C1254143CC000CC6CF /* AllPie.swift in Sources */,
 				7F397A6828D71E74000F89E2 /* CreateDidViewController.swift in Sources */,
@@ -424,6 +431,7 @@
 				5054D6C3255A8ABE005E8850 /* Pie.swift in Sources */,
 				7FC22B6328C88AA500F83122 /* DataModel.xcdatamodeld in Sources */,
 				504CE044253FDFAA000CC6CF /* SceneDelegate.swift in Sources */,
+				7FB6A8D828DD9B13009C61C5 /* TotalDidsCell.swift in Sources */,
 				504CE0B4253FDFDF000CC6CF /* PreviousVersionModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

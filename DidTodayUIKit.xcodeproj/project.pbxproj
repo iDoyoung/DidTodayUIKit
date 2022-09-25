@@ -184,6 +184,24 @@
 			path = Legacy;
 			sourceTree = "<group>";
 		};
+		7FB6A91F28E079ED009C61C5 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				7FB6A92028E079FC009C61C5 /* Lagecy */,
+				7FC580A228D1A201008086FD /* PieView.swift */,
+			);
+			path = Custom;
+			sourceTree = "<group>";
+		};
+		7FB6A92028E079FC009C61C5 /* Lagecy */ = {
+			isa = PBXGroup;
+			children = (
+				5054D6C2255A8ABE005E8850 /* Pie.swift */,
+				504CE0C0254143CC000CC6CF /* AllPie.swift */,
+			);
+			path = Lagecy;
+			sourceTree = "<group>";
+		};
 		7FC22B5828C71AE400F83122 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -199,10 +217,8 @@
 		7FC22B5928C71AEB00F83122 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				7FB6A91F28E079ED009C61C5 /* Custom */,
 				7FB6A8D028DD526E009C61C5 /* Legacy */,
-				7FC580A228D1A201008086FD /* PieView.swift */,
-				504CE0C0254143CC000CC6CF /* AllPie.swift */,
-				5054D6C2255A8ABE005E8850 /* Pie.swift */,
 				504CE047253FDFAA000CC6CF /* Main.storyboard */,
 				7FC22B5A28C71AF500F83122 /* Main */,
 				7F397A7028D82FF4000F89E2 /* CreateDid */,

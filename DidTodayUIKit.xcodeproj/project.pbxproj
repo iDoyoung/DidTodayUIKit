@@ -34,6 +34,8 @@
 		7FB6A8D828DD9B13009C61C5 /* TotalDidsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6A8D728DD9B13009C61C5 /* TotalDidsCell.swift */; };
 		7FB6A8DA28DDC2C4009C61C5 /* Date+GetHoursAndMinutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6A8D928DDC2C4009C61C5 /* Date+GetHoursAndMinutes.swift */; };
 		7FB6A91E28E07557009C61C5 /* HorizonCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 7FB6A91D28E07557009C61C5 /* HorizonCalendar */; };
+		7FB6A92328E07BE4009C61C5 /* DayLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6A92228E07BE4009C61C5 /* DayLabel.swift */; };
+		7FB6A92528E07BED009C61C5 /* MonthLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6A92428E07BED009C61C5 /* MonthLabel.swift */; };
 		7FC22B6328C88AA500F83122 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22B6128C88AA500F83122 /* DataModel.xcdatamodeld */; };
 		7FC22B6928C9C0E500F83122 /* Did.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22B6828C9C0E500F83122 /* Did.swift */; };
 		7FC22B6C28C9C9E900F83122 /* DidCoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22B6B28C9C9E900F83122 /* DidCoreDataStorage.swift */; };
@@ -87,6 +89,8 @@
 		7FB6A8D528DD89E5009C61C5 /* Date+DifferenceToString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+DifferenceToString.swift"; sourceTree = "<group>"; };
 		7FB6A8D728DD9B13009C61C5 /* TotalDidsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalDidsCell.swift; sourceTree = "<group>"; };
 		7FB6A8D928DDC2C4009C61C5 /* Date+GetHoursAndMinutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+GetHoursAndMinutes.swift"; sourceTree = "<group>"; };
+		7FB6A92228E07BE4009C61C5 /* DayLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayLabel.swift; sourceTree = "<group>"; };
+		7FB6A92428E07BED009C61C5 /* MonthLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthLabel.swift; sourceTree = "<group>"; };
 		7FC22B6228C88AA500F83122 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		7FC22B6828C9C0E500F83122 /* Did.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Did.swift; sourceTree = "<group>"; };
 		7FC22B6B28C9C9E900F83122 /* DidCoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidCoreDataStorage.swift; sourceTree = "<group>"; };
@@ -202,6 +206,15 @@
 			path = Lagecy;
 			sourceTree = "<group>";
 		};
+		7FB6A92128E07BC4009C61C5 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				7FB6A92228E07BE4009C61C5 /* DayLabel.swift */,
+				7FB6A92428E07BED009C61C5 /* MonthLabel.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
 		7FC22B5828C71AE400F83122 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -217,9 +230,9 @@
 		7FC22B5928C71AEB00F83122 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				504CE047253FDFAA000CC6CF /* Main.storyboard */,
 				7FB6A91F28E079ED009C61C5 /* Custom */,
 				7FB6A8D028DD526E009C61C5 /* Legacy */,
-				504CE047253FDFAA000CC6CF /* Main.storyboard */,
 				7FC22B5A28C71AF500F83122 /* Main */,
 				7F397A7028D82FF4000F89E2 /* CreateDid */,
 			);
@@ -229,6 +242,7 @@
 		7FC22B5A28C71AF500F83122 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				7FB6A92128E07BC4009C61C5 /* Calendar */,
 				7FB6A8D728DD9B13009C61C5 /* TotalDidsCell.swift */,
 				7FC22BB928D0547500F83122 /* DidCell.swift */,
 				7FC22BB728CDE19300F83122 /* MainViewController.swift */,
@@ -450,6 +464,8 @@
 				7FB6A8D428DD5C04009C61C5 /* ManagedDidItem+CoreDataProperties.swift in Sources */,
 				7FC22BBA28D0547500F83122 /* DidCell.swift in Sources */,
 				504CE042253FDFAA000CC6CF /* AppDelegate.swift in Sources */,
+				7FB6A92528E07BED009C61C5 /* MonthLabel.swift in Sources */,
+				7FB6A92328E07BE4009C61C5 /* DayLabel.swift in Sources */,
 				7FB6A8D328DD5C04009C61C5 /* ManagedDidItem+CoreDataClass.swift in Sources */,
 				7F397A7428D86EF1000F89E2 /* Date+ToDouble.swift in Sources */,
 				5054D6C3255A8ABE005E8850 /* Pie.swift in Sources */,

@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 final class MainViewController: UIViewController {
-    //MARK: - UI Componets
+    
     ///Section for Did collection view in Main view controller
     private enum Section: Int, CaseIterable {
         case total, list
@@ -17,24 +17,40 @@ final class MainViewController: UIViewController {
     
     var viewModel: (MainViewModelInput & MainViewModelOutput)?
     private var cancellableBag: AnyCancellable?
-    private var didCollectionView: UICollectionView!
     private var dataSource: UICollectionViewDiffableDataSource<Section, AnyHashable>?
-    
+                                            
+    //MARK: - UI Componets
+    private var didCollectionView: UICollectionView!
+    private lazy var todayDateLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(showCalendar))
+    private lazy var todayDateLabel: UILabel = {
+        let label = UILabel()
+        label.text = Date.todayDateToString()
+        label.isUserInteractionEnabled = true
+        label.addGestureRecognizer(todayDateLabelTapGesture)
+        return label
+    }()
     //MARK: - Life Cycle
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         viewModel = MainViewModel(didCoreDataStorage: DidCoreDataStorage())
     }
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         viewModel = MainViewModel(didCoreDataStorage: DidCoreDataStorage.shared)
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigationBar()
         configureCollectionView()
         configureDataSource()
         viewModel?.fetchDids()
         bindViewModel()
+    }
+    
+    private func setupNavigationBar() {
+        navigationItem.titleView = todayDateLabel
     }
     
     private func bindViewModel() {
@@ -51,6 +67,12 @@ final class MainViewController: UIViewController {
         }
     }
     
+    //MARK: Action Method
+    @objc
+    func showCalendar() {
+        let destinationViewController = CalendarViewController()
+        present(destinationViewController, animated: true)
+    }
 }
 
 //MARK: - CollectionView Extentions

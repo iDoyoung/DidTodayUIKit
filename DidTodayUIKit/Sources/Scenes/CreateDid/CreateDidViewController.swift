@@ -14,7 +14,6 @@ final class CreateDidViewController: UIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var pieView: PieView!
-    @IBOutlet weak var addButtonItem: UIBarButtonItem!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var startedTimePicker: UIDatePicker!
     @IBOutlet weak var endedTimePicker: UIDatePicker!
@@ -33,27 +32,24 @@ final class CreateDidViewController: UIViewController {
         startedTimePicker.maximumDate = sender.date
         viewModel?.endedTime = sender.date
     }
-    @IBAction func addDid(_ sender: UIBarButtonItem) {
-        viewModel?.createDid { [weak self] result in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                switch result {
-                case .success:
-                    self.present(self.successAddingAlert(), animated: true)
-                case .failure(let error):
-                    switch error {
-                    case .coreDataError:
-                        self.present(self.errorAlert(), animated: true)
-                    case .startedTimeError:
-                        self.present(self.failedAddingAlert(), animated: true)
-                    }
-                }
-            }
-        }
-    }
-    @IBAction func cancelAddDid(_ sender: UIBarButtonItem) {
-        dismiss(animated: true)
-    }
+//    @IBAction func addDid(_ sender: UIBarButtonItem) {
+//        viewModel?.createDid { [weak self] result in
+//            guard let self = self else { return }
+//            DispatchQueue.main.async {
+//                switch result {
+//                case .success:
+//                    self.present(self.successAddingAlert(), animated: true)
+//                case .failure(let error):
+//                    switch error {
+//                    case .coreDataError:
+//                        self.present(self.errorAlert(), animated: true)
+//                    case .startedTimeError:
+//                        self.present(self.failedAddingAlert(), animated: true)
+//                    }
+//                }
+//            }
+//        }
+//    }
     //MARK: - Life cycle
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -98,12 +94,12 @@ final class CreateDidViewController: UIViewController {
     private func bindViewModel() {
         viewModel?.titlePublisher
             .sink { [weak self] title in
-                if let title = title,
-                   title.trimmingCharacters(in: .whitespaces).isEmpty == false {
-                    self?.addButtonItem.isEnabled = true
-                } else {
-                    self?.addButtonItem.isEnabled = false
-                }
+//                if let title = title,
+//                   title.trimmingCharacters(in: .whitespaces).isEmpty == false {
+//                    self?.addButtonItem.isEnabled = true
+//                } else {
+//                    self?.addButtonItem.isEnabled = false
+//                }
             }
             .store(in: &cancellableBag)
         viewModel?.startedTimePublished

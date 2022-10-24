@@ -29,6 +29,7 @@ final class MainViewController: UIViewController {
         label.addGestureRecognizer(todayDateLabelTapGesture)
         return label
     }()
+    
     //MARK: - Life Cycle
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -51,6 +52,7 @@ final class MainViewController: UIViewController {
     
     private func setupNavigationBar() {
         navigationItem.titleView = todayDateLabel
+        navigationController?.navigationBar.barTintColor = .themeGreen
     }
     
     private func bindViewModel() {
@@ -81,9 +83,10 @@ extension MainViewController: UICollectionViewDelegate {
     private func configureCollectionView() {
         didCollectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createCollectionViewLayout())
         didCollectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        didCollectionView.backgroundColor = .secondarySystemBackground
+        didCollectionView.backgroundColor = .themeGreen
         view.addSubview(didCollectionView)
     }
+    
     private func createCollectionViewLayout() -> UICollectionViewCompositionalLayout {
         let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
             guard let sectionKind = Section(rawValue: sectionIndex) else { return nil }
@@ -104,10 +107,12 @@ extension MainViewController: UICollectionViewDelegate {
                                                       heightDimension: .fractionalHeight(1.0))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                       heightDimension: .absolute(80))
+                                                       heightDimension: .absolute(60))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
-                                                               subitems: [item])
-                group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 12, bottom: 4, trailing: 12)
+                                                               subitem: item,
+                                                               count: 2)
+                group.interItemSpacing = .fixed(8)
+                group.contentInsets = NSDirectionalEdgeInsets(top: 4, leading: 12, bottom: 4, trailing: 12)
                 section = NSCollectionLayoutSection(group: group)
                 section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 12, bottom: 10, trailing: 12)
             }
@@ -115,6 +120,7 @@ extension MainViewController: UICollectionViewDelegate {
         }
         return layout
     }
+    
     private func configureDataSource() {
         let totalCellRegistration = createTotalDidsCellRegistration()
         let didListCellRegistration = createDidListCellRegistration()
@@ -133,12 +139,14 @@ extension MainViewController: UICollectionViewDelegate {
         }
         initailSnapshot([])
     }
+    
     //MARK: - Create Cell Registration
     private func createTotalDidsCellRegistration() -> UICollectionView.CellRegistration<TotalDidsCell, [MainDidItemsViewModel]> {
         return UICollectionView.CellRegistration<TotalDidsCell, [MainDidItemsViewModel]> { cell, IndexPath, item in
             cell.dids = item
         }
     }
+    
     private func createDidListCellRegistration() -> UICollectionView.CellRegistration<DidCell, MainDidItemsViewModel> {
         return UICollectionView.CellRegistration<DidCell, MainDidItemsViewModel> { cell, indexPath, item in
             cell.pieView.start = item.startedTimes * 0.25
@@ -149,6 +157,7 @@ extension MainViewController: UICollectionViewDelegate {
             cell.contentLabel.text = item.content
         }
     }
+    
     //MARK: - Apply Snapshot
     private func initailSnapshot(_ items: [MainDidItemsViewModel]) {
         let sections = Section.allCases
@@ -158,11 +167,13 @@ extension MainViewController: UICollectionViewDelegate {
         applyDidListSnapshot(items)
         applyTotalDidSnapshot(items)
     }
+    
     private func applyTotalDidSnapshot(_ items: [MainDidItemsViewModel]) {
         var snapshot = NSDiffableDataSourceSectionSnapshot<AnyHashable>()
         snapshot.append([items])
         dataSource?.apply(snapshot, to: .total)
     }
+    
     private func applyDidListSnapshot(_ items: [MainDidItemsViewModel]) {
         var snapshot = NSDiffableDataSourceSectionSnapshot<AnyHashable>()
         snapshot.append(items)

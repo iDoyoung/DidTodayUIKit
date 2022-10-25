@@ -12,6 +12,8 @@ enum CreateDidError: Error {
     case coreDataError(CoreDataStoreError)
 }
 
+protocol CreateDidViewModelProtocol: CreateDidViewModelInput, CreateDidViewModelOutput {    }
+
 protocol CreateDidViewModelInput {
     var startedTime: Date? { get set }
     var endedTime: Date? { get set }
@@ -28,7 +30,7 @@ protocol CreateDidViewModelOutput {
     var titlePublisher: Published<String?>.Publisher { get }
 }
 
-final class CreateDidViewModel: CreateDidViewModelInput, CreateDidViewModelOutput {
+final class CreateDidViewModel: CreateDidViewModelProtocol {
     var didCoreDataStorage: DidCoreDataStorable?
     
     init(didCoreDataStorage: DidCoreDataStorable) {

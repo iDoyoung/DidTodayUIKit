@@ -7,6 +7,8 @@
 
 import Combine
 
+protocol MainViewModelProtocol: MainViewModelInput, MainViewModelOutput {   }
+
 protocol MainViewModelInput {
     func fetchDids()
 }
@@ -15,7 +17,7 @@ protocol MainViewModelOutput {
     var fetchedDidsPublisher: Published<[MainDidItemsViewModel]?>.Publisher { get }
 }
 
-final class MainViewModel: MainViewModelInput, MainViewModelOutput {
+final class MainViewModel: MainViewModelProtocol {
     var didCoreDataStorage: DidCoreDataStorable?
     
     init(didCoreDataStorage: DidCoreDataStorable) {

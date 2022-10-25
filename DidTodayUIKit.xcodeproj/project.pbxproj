@@ -22,6 +22,7 @@
 		7F133C47290365460099E55C /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F133C46290365460099E55C /* CalendarViewController.swift */; };
 		7F133C5729063BF00099E55C /* UIColor+theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F133C5629063BF00099E55C /* UIColor+theme.swift */; };
 		7F133C632907C66A0099E55C /* FlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F133C622907C66A0099E55C /* FlowCoordinator.swift */; };
+		7F133C652907CC5A0099E55C /* SceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F133C642907CC5A0099E55C /* SceneDIContainer.swift */; };
 		7F397A6828D71E74000F89E2 /* CreateDidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F397A6728D71E74000F89E2 /* CreateDidViewController.swift */; };
 		7F397A7228D83021000F89E2 /* CreateDidViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F397A7128D83021000F89E2 /* CreateDidViewModel.swift */; };
 		7F397A7428D86EF1000F89E2 /* Date+ToDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F397A7328D86EF1000F89E2 /* Date+ToDouble.swift */; };
@@ -82,6 +83,7 @@
 		7F133C46290365460099E55C /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		7F133C5629063BF00099E55C /* UIColor+theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+theme.swift"; sourceTree = "<group>"; };
 		7F133C622907C66A0099E55C /* FlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowCoordinator.swift; sourceTree = "<group>"; };
+		7F133C642907CC5A0099E55C /* SceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDIContainer.swift; sourceTree = "<group>"; };
 		7F397A6728D71E74000F89E2 /* CreateDidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDidViewController.swift; sourceTree = "<group>"; };
 		7F397A7128D83021000F89E2 /* CreateDidViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDidViewModel.swift; sourceTree = "<group>"; };
 		7F397A7328D86EF1000F89E2 /* Date+ToDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+ToDouble.swift"; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 				504CE041253FDFAA000CC6CF /* AppDelegate.swift */,
 				504CE043253FDFAA000CC6CF /* SceneDelegate.swift */,
 				7F133C622907C66A0099E55C /* FlowCoordinator.swift */,
+				7F133C642907CC5A0099E55C /* SceneDIContainer.swift */,
 			);
 			path = Entry;
 			sourceTree = "<group>";
@@ -477,6 +480,7 @@
 			files = (
 				7F397A7228D83021000F89E2 /* CreateDidViewModel.swift in Sources */,
 				50A4505A2564CFD500812F14 /* Localize.swift in Sources */,
+				7F133C652907CC5A0099E55C /* SceneDIContainer.swift in Sources */,
 				7FB6A8DA28DDC2C4009C61C5 /* Date+GetHoursAndMinutes.swift in Sources */,
 				7FC580A328D1A201008086FD /* PieView.swift in Sources */,
 				504CE0C1254143CC000CC6CF /* AllPie.swift in Sources */,

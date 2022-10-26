@@ -23,6 +23,7 @@
 		7F133C5729063BF00099E55C /* UIColor+theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F133C5629063BF00099E55C /* UIColor+theme.swift */; };
 		7F133C632907C66A0099E55C /* FlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F133C622907C66A0099E55C /* FlowCoordinator.swift */; };
 		7F133C652907CC5A0099E55C /* SceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F133C642907CC5A0099E55C /* SceneDIContainer.swift */; };
+		7F133CA3290902EC0099E55C /* StoryboardInstantiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F133CA2290902EC0099E55C /* StoryboardInstantiable.swift */; };
 		7F397A6828D71E74000F89E2 /* CreateDidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F397A6728D71E74000F89E2 /* CreateDidViewController.swift */; };
 		7F397A7228D83021000F89E2 /* CreateDidViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F397A7128D83021000F89E2 /* CreateDidViewModel.swift */; };
 		7F397A7428D86EF1000F89E2 /* Date+ToDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F397A7328D86EF1000F89E2 /* Date+ToDouble.swift */; };
@@ -84,6 +85,7 @@
 		7F133C5629063BF00099E55C /* UIColor+theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+theme.swift"; sourceTree = "<group>"; };
 		7F133C622907C66A0099E55C /* FlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowCoordinator.swift; sourceTree = "<group>"; };
 		7F133C642907CC5A0099E55C /* SceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDIContainer.swift; sourceTree = "<group>"; };
+		7F133CA2290902EC0099E55C /* StoryboardInstantiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardInstantiable.swift; sourceTree = "<group>"; };
 		7F397A6728D71E74000F89E2 /* CreateDidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDidViewController.swift; sourceTree = "<group>"; };
 		7F397A7128D83021000F89E2 /* CreateDidViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDidViewModel.swift; sourceTree = "<group>"; };
 		7F397A7328D86EF1000F89E2 /* Date+ToDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+ToDouble.swift"; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 		7FC22B5B28C71B1700F83122 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				7F133CA2290902EC0099E55C /* StoryboardInstantiable.swift */,
 				7F5A91C628E68CA7006B8406 /* Date Extensions */,
 				50A450592564CFD500812F14 /* Localize.swift */,
 				7F133C5629063BF00099E55C /* UIColor+theme.swift */,
@@ -508,6 +511,7 @@
 				7FB6A8D828DD9B13009C61C5 /* TotalDidsCell.swift in Sources */,
 				7F133C632907C66A0099E55C /* FlowCoordinator.swift in Sources */,
 				504CE0B4253FDFDF000CC6CF /* PreviousVersionModel.swift in Sources */,
+				7F133CA3290902EC0099E55C /* StoryboardInstantiable.swift in Sources */,
 				7F5A91C828E68CCF006B8406 /* Date+ToString.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

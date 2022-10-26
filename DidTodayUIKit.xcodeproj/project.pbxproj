@@ -50,6 +50,7 @@
 		7FC22BB828CDE19300F83122 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22BB728CDE19300F83122 /* MainViewController.swift */; };
 		7FC22BBA28D0547500F83122 /* DidCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22BB928D0547500F83122 /* DidCell.swift */; };
 		7FC580A328D1A201008086FD /* PieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC580A228D1A201008086FD /* PieView.swift */; };
+		7FD2B04C2909161A0048408F /* StoryboardName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD2B04B2909161A0048408F /* StoryboardName.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +113,7 @@
 		7FC22BB728CDE19300F83122 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7FC22BB928D0547500F83122 /* DidCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidCell.swift; sourceTree = "<group>"; };
 		7FC580A228D1A201008086FD /* PieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieView.swift; sourceTree = "<group>"; };
+		7FD2B04B2909161A0048408F /* StoryboardName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardName.swift; sourceTree = "<group>"; };
 		ADA015A5697AC9D46CCADCEC /* Pods_DidTodayUIKit_DidTodayUIKitUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DidTodayUIKit_DidTodayUIKitUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D52ECED48532DF52D0291955 /* Pods_DidTodayUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DidTodayUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -287,6 +289,7 @@
 		7FC22B5B28C71B1700F83122 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				7FD2B04A2909158A0048408F /* Namespaces */,
 				7F133CA2290902EC0099E55C /* StoryboardInstantiable.swift */,
 				7F5A91C628E68CA7006B8406 /* Date Extensions */,
 				50A450592564CFD500812F14 /* Localize.swift */,
@@ -361,6 +364,14 @@
 				7FC22B7E28CB232600F83122 /* Seeds.swift */,
 			);
 			path = DidTodayUIKitTests;
+			sourceTree = "<group>";
+		};
+		7FD2B04A2909158A0048408F /* Namespaces */ = {
+			isa = PBXGroup;
+			children = (
+				7FD2B04B2909161A0048408F /* StoryboardName.swift */,
+			);
+			path = Namespaces;
 			sourceTree = "<group>";
 		};
 		DAB2CA619C78ADD98AADD0EB /* Frameworks */ = {
@@ -493,6 +504,7 @@
 				7F80EBCB28D4102500781DB4 /* MainDidItemsViewModel.swift in Sources */,
 				504CE046253FDFAA000CC6CF /* PreviousMainViewController.swift in Sources */,
 				7FC22BB828CDE19300F83122 /* MainViewController.swift in Sources */,
+				7FD2B04C2909161A0048408F /* StoryboardName.swift in Sources */,
 				7FC22B6928C9C0E500F83122 /* Did.swift in Sources */,
 				7F133C47290365460099E55C /* CalendarViewController.swift in Sources */,
 				7F80EBC728D3245500781DB4 /* MainViewModel.swift in Sources */,

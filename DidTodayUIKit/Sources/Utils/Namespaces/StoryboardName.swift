@@ -9,4 +9,5 @@ import Foundation
 
 enum StoryboardName {
     static let main = "Main"
+    static let createDid = "CreateDid"
 }

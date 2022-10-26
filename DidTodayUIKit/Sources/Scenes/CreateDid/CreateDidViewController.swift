@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-final class CreateDidViewController: UIViewController {
+final class CreateDidViewController: UIViewController, StoryboardInstantiable {
     var viewModel: (CreateDidViewModelInput & CreateDidViewModelOutput)?
     var cancellableBag = Set<AnyCancellable>()
     
@@ -50,15 +50,13 @@ final class CreateDidViewController: UIViewController {
 //            }
 //        }
 //    }
+    static func create(with viewModel: CreateDidViewModelProtocol) -> CreateDidViewController {
+        let viewController = CreateDidViewController.instantiateViewController(storyboardName: StoryboardName.createDid)
+        viewController.viewModel = viewModel
+        return viewController
+    }
+    
     //MARK: - Life cycle
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        viewModel = CreateDidViewModel(didCoreDataStorage: DidCoreDataStorage.shared)
-    }
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        viewModel = CreateDidViewModel(didCoreDataStorage: DidCoreDataStorage.shared)
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUIObjects()

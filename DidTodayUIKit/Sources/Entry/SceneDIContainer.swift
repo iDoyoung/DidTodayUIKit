@@ -30,8 +30,7 @@ final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
     
     //MARK: Create Did
     func makeCreateDidViewController() -> UIViewController {
-        let viewController = CreateDidViewController()
-        viewController.viewModel = makeCreateDidViewModel()
+        let viewController = CreateDidViewController.create(with: makeCreateDidViewModel())
         return viewController
     }
     

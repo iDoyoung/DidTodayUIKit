@@ -51,6 +51,7 @@
 		7FC22BBA28D0547500F83122 /* DidCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22BB928D0547500F83122 /* DidCell.swift */; };
 		7FC580A328D1A201008086FD /* PieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC580A228D1A201008086FD /* PieView.swift */; };
 		7FD2B04C2909161A0048408F /* StoryboardName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD2B04B2909161A0048408F /* StoryboardName.swift */; };
+		7FD2B05029091AD00048408F /* CreateDid.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FD2B04F29091AD00048408F /* CreateDid.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +115,7 @@
 		7FC22BB928D0547500F83122 /* DidCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidCell.swift; sourceTree = "<group>"; };
 		7FC580A228D1A201008086FD /* PieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieView.swift; sourceTree = "<group>"; };
 		7FD2B04B2909161A0048408F /* StoryboardName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardName.swift; sourceTree = "<group>"; };
+		7FD2B04F29091AD00048408F /* CreateDid.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateDid.storyboard; sourceTree = "<group>"; };
 		ADA015A5697AC9D46CCADCEC /* Pods_DidTodayUIKit_DidTodayUIKitUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DidTodayUIKit_DidTodayUIKitUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D52ECED48532DF52D0291955 /* Pods_DidTodayUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DidTodayUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -187,6 +189,7 @@
 		7F397A7028D82FF4000F89E2 /* CreateDid */ = {
 			isa = PBXGroup;
 			children = (
+				7FD2B04F29091AD00048408F /* CreateDid.storyboard */,
 				7F397A6728D71E74000F89E2 /* CreateDidViewController.swift */,
 				7F397A7128D83021000F89E2 /* CreateDidViewModel.swift */,
 			);
@@ -264,7 +267,6 @@
 		7FC22B5928C71AEB00F83122 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				504CE047253FDFAA000CC6CF /* Main.storyboard */,
 				7FB6A91F28E079ED009C61C5 /* Custom */,
 				7FB6A8D028DD526E009C61C5 /* Legacy */,
 				7FC22B5A28C71AF500F83122 /* Main */,
@@ -277,6 +279,7 @@
 		7FC22B5A28C71AF500F83122 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				504CE047253FDFAA000CC6CF /* Main.storyboard */,
 				7FB6A8D728DD9B13009C61C5 /* TotalDidsCell.swift */,
 				7FC22BB928D0547500F83122 /* DidCell.swift */,
 				7FC22BB728CDE19300F83122 /* MainViewController.swift */,
@@ -473,6 +476,7 @@
 			files = (
 				50A450502564CA8300812F14 /* Localizable.strings in Resources */,
 				504CE04E253FDFAE000CC6CF /* LaunchScreen.storyboard in Resources */,
+				7FD2B05029091AD00048408F /* CreateDid.storyboard in Resources */,
 				504CE04B253FDFAE000CC6CF /* Assets.xcassets in Resources */,
 				504CE049253FDFAA000CC6CF /* Main.storyboard in Resources */,
 			);

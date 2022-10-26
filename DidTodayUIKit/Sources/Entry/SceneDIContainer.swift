@@ -13,8 +13,7 @@ final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
     let didCoreDataStorage = DidCoreDataStorage()
     //MARK: Main
     func makeMainViewController() -> UIViewController {
-        let viewController = MainViewController()
-        viewController.viewModel = makeMainViewModel()
+        let viewController = MainViewController.create(with: makeMainViewModel())
         return viewController
     }
     

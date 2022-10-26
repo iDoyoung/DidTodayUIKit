@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-final class MainViewController: UIViewController {
+final class MainViewController: UIViewController, StoryboardInstantiable {
     
     ///Section for Did collection view in Main view controller
     private enum Section: Int, CaseIterable {
@@ -18,7 +18,6 @@ final class MainViewController: UIViewController {
     var viewModel: (MainViewModelInput & MainViewModelOutput)?
     private var cancellableBag: AnyCancellable?
     private var dataSource: UICollectionViewDiffableDataSource<Section, AnyHashable>?
-                                            
     //MARK: - UI Componets
     private var didCollectionView: UICollectionView!
     private lazy var todayDateLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(showCalendar))
@@ -30,17 +29,12 @@ final class MainViewController: UIViewController {
         return label
     }()
     
+    static func create(with viewModel: MainViewModelProtocol) -> MainViewController {
+        let viewController = MainViewController.instantiateViewController(storyboardName: StoryboardName.main)
+        viewController.viewModel = viewModel
+        return viewController
+    }
     //MARK: - Life Cycle
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        viewModel = MainViewModel(didCoreDataStorage: DidCoreDataStorage())
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        viewModel = MainViewModel(didCoreDataStorage: DidCoreDataStorage.shared)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()

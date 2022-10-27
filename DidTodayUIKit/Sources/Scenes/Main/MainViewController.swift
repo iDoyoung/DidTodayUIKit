@@ -18,15 +18,39 @@ final class MainViewController: UIViewController, StoryboardInstantiable {
     var viewModel: (MainViewModelInput & MainViewModelOutput)?
     private var cancellableBag: AnyCancellable?
     private var dataSource: UICollectionViewDiffableDataSource<Section, AnyHashable>?
-    //MARK: - UI Componets
-    private var didCollectionView: UICollectionView!
     
+    //MARK: - UI Objects
+    private var didCollectionView: UICollectionView!
+    private lazy var quickButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Quick Move", for: .normal)
+        button.menu = UIMenu()
+        button.showsMenuAsPrimaryAction = true
+        return button
+    }()
+    
+    private lazy var quickMenu: UIMenu = {
+        return UIMenu(title: "", options: [], children: quickMenuItems)
+    }()
+    
+    private lazy var quickMenuItems: [UIAction] = {
+        return [UIAction(title: "Information",
+                         image: UIImage(systemName: "info.circle")) { _ in },
+                UIAction(title: "Calendar",
+                         image: UIImage(systemName: "calendar")) { _ in },
+                UIAction(title: "Create",
+                         image: UIImage(systemName: "plus")) { _ in },
+                UIAction(title: "Start",
+                         image: UIImage(systemName: "flag.checkered")) { _ in }]
+    }()
+    
+    //MARK: - Life Cycle
     static func create(with viewModel: MainViewModelProtocol) -> MainViewController {
         let viewController = MainViewController.instantiateViewController(storyboardName: StoryboardName.main)
         viewController.viewModel = viewModel
         return viewController
     }
-    //MARK: - Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()

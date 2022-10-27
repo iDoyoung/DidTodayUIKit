@@ -24,8 +24,10 @@ final class MainViewController: UIViewController {
     private lazy var quickButton: UIButton = {
         let button = UIButton()
         button.setTitle("Quick Move", for: .normal)
-        button.menu = UIMenu()
+        button.setTitleColor(.themeGreen, for: .normal)
+        button.menu = quickMenu
         button.showsMenuAsPrimaryAction = true
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -34,14 +36,22 @@ final class MainViewController: UIViewController {
     }()
     
     private lazy var quickMenuItems: [UIAction] = {
-        return [UIAction(title: "Information",
-                         image: UIImage(systemName: "info.circle")) { _ in },
-                UIAction(title: "Calendar",
-                         image: UIImage(systemName: "calendar")) { _ in },
-                UIAction(title: "Create",
-                         image: UIImage(systemName: "plus")) { _ in },
-                UIAction(title: "Start",
-                         image: UIImage(systemName: "flag.checkered")) { _ in }]
+        return [
+            UIAction(title: "Start",
+                     image: UIImage(systemName: "flag.checkered")) { _ in },
+            UIAction(title: "Create Did",
+                     image: UIImage(systemName: "plus")) { [weak self] _ in
+                         guard let self = self else { return }
+                         self.viewModel?.showCreateDid()
+                     },
+            UIAction(title: "Calendar",
+                     image: UIImage(systemName: "calendar")) { [weak self] _ in
+                         guard let self = self else { return }
+                         self.viewModel?.showCalendar()
+                     },
+            UIAction(title: "Information",
+                     image: UIImage(systemName: "info.circle")) { _ in }
+        ]
     }()
     
     //MARK: - Life Cycle
@@ -53,9 +63,7 @@ final class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNavigationBar()
-        configureCollectionView()
-        configureDataSource()
+        configureUIComponents()
         viewModel?.fetchDids()
         bindViewModel()
     }
@@ -81,11 +89,26 @@ final class MainViewController: UIViewController {
         }
     }
     
-    //MARK: Action Method
+    //MARK: - Setup
+    private func configureUIComponents() {
+        setupNavigationBar()
+        configureCollectionView()
+        configureDataSource()
+        view.addSubview(quickButton)
+        setupConstraintLayout()
+    }
+    
+    private func setupConstraintLayout() {
+        NSLayoutConstraint.activate([
+            quickButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            quickButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+    }
+    
+    //MARK: - Action Method
     @objc
     func showCalendar() {
-        let destinationViewController = CalendarViewController()
-        present(destinationViewController, animated: true)
+        viewModel?.showCalendar()
     }
 }
 

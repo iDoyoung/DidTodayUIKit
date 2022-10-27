@@ -20,14 +20,6 @@ final class MainViewController: UIViewController, StoryboardInstantiable {
     private var dataSource: UICollectionViewDiffableDataSource<Section, AnyHashable>?
     //MARK: - UI Componets
     private var didCollectionView: UICollectionView!
-    private lazy var todayDateLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(showCalendar))
-    private lazy var todayDateLabel: UILabel = {
-        let label = UILabel()
-        label.text = Date.todayDateToString()
-        label.isUserInteractionEnabled = true
-        label.addGestureRecognizer(todayDateLabelTapGesture)
-        return label
-    }()
     
     static func create(with viewModel: MainViewModelProtocol) -> MainViewController {
         let viewController = MainViewController.instantiateViewController(storyboardName: StoryboardName.main)
@@ -45,8 +37,10 @@ final class MainViewController: UIViewController, StoryboardInstantiable {
     }
     
     private func setupNavigationBar() {
-        navigationItem.titleView = todayDateLabel
-        navigationController?.navigationBar.barTintColor = .themeGreen
+        let todayDate = Date.todayDateToString()
+        let buttonItem = UIBarButtonItem(title: todayDate, style: .plain, target: self, action: #selector(showCalendar))
+        buttonItem.tintColor = .themeGreen
+        navigationItem.leftBarButtonItem = buttonItem
     }
     
     private func bindViewModel() {
@@ -77,7 +71,7 @@ extension MainViewController: UICollectionViewDelegate {
     private func configureCollectionView() {
         didCollectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createCollectionViewLayout())
         didCollectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        didCollectionView.backgroundColor = .themeGreen
+        didCollectionView.backgroundColor = .secondarySystemBackground
         view.addSubview(didCollectionView)
     }
     

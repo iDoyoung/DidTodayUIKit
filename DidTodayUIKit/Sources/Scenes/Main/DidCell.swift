@@ -41,20 +41,8 @@ class DidCell: UICollectionViewCell {
         configure()
     }
     
-    func configureVibrancyEffect(to view: UIView) -> UIVisualEffectView {
-        let blurEffect = UIBlurEffect(style: .systemMaterial)
-        let blurredEffectView = UIVisualEffectView(effect: blurEffect)
-        let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
-        let vibrancyEffectView = UIVisualEffectView(effect: vibrancyEffect)
-        blurredEffectView.frame = view.bounds
-        vibrancyEffectView.frame = view.bounds
-        view.addSubview(blurredEffectView)
-        blurredEffectView.contentView.addSubview(vibrancyEffectView)
-        return vibrancyEffectView
-    }
-    
-    func configure() {
-        let vibrancyEffectView = configureVibrancyEffect(to: contentView)
+    private func configure() {
+        contentView.backgroundColor = .systemBackground
         contentView.layer.cornerRadius = 10
         contentView.clipsToBounds = true
         pieView.frame = CGRect(origin: CGPoint(x: 0, y: 0),
@@ -63,9 +51,9 @@ class DidCell: UICollectionViewCell {
                                     .flexibleLeftMargin,
                                     .flexibleWidth,
                                     .flexibleHeight]
-        vibrancyEffectView.contentView.addSubview(timeLabel)
         addSubview(pieView)
         addSubview(contentLabel)
+        addSubview(timeLabel)
         NSLayoutConstraint.activate([
             timeLabel.topAnchor.constraint(equalTo: pieView.centerYAnchor),
             timeLabel.leadingAnchor.constraint(equalTo: pieView.trailingAnchor, constant: 8),

@@ -12,8 +12,7 @@ class TotalDidsCell: UICollectionViewCell {
     var dids = [MainDidItemsViewModel]() {
         didSet {
             setupPiesView()
-            setupTotalDidsLabel()
-            setupTotalTimesLabel()
+            setupDescriptionLabel()
         }
     }
     
@@ -22,19 +21,22 @@ class TotalDidsCell: UICollectionViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    private lazy var labelStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [totalDidLabel, totalTimeLabel])
-        stackView.axis = .vertical
-        stackView.distribution = .fillProportionally
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
+    
+    private let descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        
+        return label
     }()
+    
     private let totalTimeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .monospacedDigitSystemFont(ofSize: 20, weight: .medium)
         return label
     }()
+    
     private let totalDidLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -46,26 +48,29 @@ class TotalDidsCell: UICollectionViewCell {
         super.init(frame: frame)
         configure()
     }
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         configure()
     }
     
     private func configure() {
+        contentView.backgroundColor = .themeGreen
         addSubview(piesView)
-        addSubview(labelStackView)
+        addSubview(descriptionLabel)
         NSLayoutConstraint.activate([
             piesView.leadingAnchor.constraint(equalTo: leadingAnchor),
             piesView.heightAnchor.constraint(equalToConstant: 200),
             piesView.widthAnchor.constraint(equalToConstant: 200),
             piesView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            labelStackView.topAnchor.constraint(equalTo: piesView.topAnchor),
-            labelStackView.leadingAnchor.constraint(equalTo: piesView.trailingAnchor),
-            labelStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
-            labelStackView.bottomAnchor.constraint(equalTo: piesView.bottomAnchor)
+            descriptionLabel.topAnchor.constraint(equalTo: piesView.topAnchor),
+            descriptionLabel.bottomAnchor.constraint(equalTo: piesView.bottomAnchor),
+            descriptionLabel.leadingAnchor.constraint(equalTo: piesView.trailingAnchor),
+            descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
         ])
     }
     
+    //MARK: - Setup
     private func setupPiesView() {
         dids.forEach {
             let pieView = PieView()
@@ -80,14 +85,15 @@ class TotalDidsCell: UICollectionViewCell {
             piesView.addSubview(pieView)
         }
     }
-    private func setupTotalDidsLabel() {
-        totalDidLabel.text = "Did \(dids.count) things"
-    }
-    private func setupTotalTimesLabel() {
-        let sum = dids
+    
+    private func setupDescriptionLabel() {
+        var description: String
+        let countOfDids = dids.count
+        let totalOfSpentTime = dids
             .map { $0.timesToMinutes }
             .reduce(0) { $0 + $1 }
-        let spendTime = String(format: "%02d:%02d", sum/60, sum%60)
-        totalTimeLabel.text = "Total \(spendTime)."
+        let spendTimeToString = String(format: "%02d:%02d", totalOfSpentTime/60, totalOfSpentTime%60)
+        description = (countOfDids == 0 ? "Did nothing" : "Did \(dids.count) things,\nTotal \(spendTimeToString)")
+        descriptionLabel.text = description
     }
 }

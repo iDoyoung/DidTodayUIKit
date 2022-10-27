@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-final class MainViewController: UIViewController, StoryboardInstantiable {
+final class MainViewController: UIViewController {
     
     ///Section for Did collection view in Main view controller
     private enum Section: Int, CaseIterable {
@@ -46,7 +46,7 @@ final class MainViewController: UIViewController, StoryboardInstantiable {
     
     //MARK: - Life Cycle
     static func create(with viewModel: MainViewModelProtocol) -> MainViewController {
-        let viewController = MainViewController.instantiateViewController(storyboardName: StoryboardName.main)
+        let viewController = MainViewController()
         viewController.viewModel = viewModel
         return viewController
     }

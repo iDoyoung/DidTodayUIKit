@@ -8,7 +8,7 @@
 import UIKit
 
 protocol FlowCoordinatorDependenciesProtocol {
-    func makeMainViewController() -> UIViewController
+    func makeMainViewController(router: MainRouter) -> UIViewController
     func makeCalendarViewController() -> UIViewController
     func makeCreateDidViewController() -> UIViewController
 }
@@ -25,11 +25,13 @@ final class FlowCoordinator {
     }
     
     func start() {
-        showMain()
+        let router = MainRouter(showCalendar: showCalendar,
+                                showCreateDid: showCreateDid)
+        showMain(router: router)
     }
     
-    private func showMain() {
-        let viewController = dependencies.makeMainViewController()
+    private func showMain(router: MainRouter) {
+        let viewController = dependencies.makeMainViewController(router: router)
         navigationController?.pushViewController(viewController, animated: false)
     }
     

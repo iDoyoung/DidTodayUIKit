@@ -19,9 +19,11 @@ protocol MainViewModelOutput {
 
 final class MainViewModel: MainViewModelProtocol {
     var didCoreDataStorage: DidCoreDataStorable?
+    var router: MainRouter?
     
-    init(didCoreDataStorage: DidCoreDataStorable) {
+    init(didCoreDataStorage: DidCoreDataStorable, router: MainRouter) {
         self.didCoreDataStorage = didCoreDataStorage
+        self.router = router
     }
     
     //MARK: - Input

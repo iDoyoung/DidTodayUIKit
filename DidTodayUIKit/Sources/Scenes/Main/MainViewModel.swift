@@ -15,11 +15,13 @@ protocol MainViewModelInput {
 
 protocol MainViewModelOutput {
     var fetchedDidsPublisher: Published<[MainDidItemsViewModel]?>.Publisher { get }
+    func showCreateDid()
+    func showCalendar()
 }
 
 final class MainViewModel: MainViewModelProtocol {
-    var didCoreDataStorage: DidCoreDataStorable?
-    var router: MainRouter?
+    private var didCoreDataStorage: DidCoreDataStorable?
+    private var router: MainRouter?
     
     init(didCoreDataStorage: DidCoreDataStorable, router: MainRouter) {
         self.didCoreDataStorage = didCoreDataStorage
@@ -42,4 +44,12 @@ final class MainViewModel: MainViewModelProtocol {
     //MARK: - Output
     @Published  var fetchedDids: [MainDidItemsViewModel]?
     var fetchedDidsPublisher: Published<[MainDidItemsViewModel]?>.Publisher { $fetchedDids }
+    
+    func showCreateDid() {
+        router?.showCreateDid()
+    }
+    
+    func showCalendar() {
+        router?.showCalendar()
+    }
 }

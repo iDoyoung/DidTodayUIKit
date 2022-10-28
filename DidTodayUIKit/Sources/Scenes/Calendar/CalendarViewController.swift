@@ -9,7 +9,8 @@ import UIKit
 import HorizonCalendar
 
 class CalendarViewController: UIViewController {
-
+    
+    var viewModel: CalendarViewModelProtocol?
     private lazy var calendarView: CalendarView = {
         let calendarView = CalendarView(initialContent: configureCalendarViewContents())
         calendarView.translatesAutoresizingMaskIntoConstraints = false
@@ -18,23 +19,23 @@ class CalendarViewController: UIViewController {
     
     ///Selected Day of Calendar View
     private var selectedDay: Day?
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    
+    //MARK: - Life Cycle
+    static func create(with viewModel: CalendarViewModelProtocol) -> CalendarViewController {
+        let viewController = CalendarViewController()
+        viewController.viewModel = viewModel
+        return viewController
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewDidLoad() {
+        super.viewDidLoad()
     }
-    */
-
+    
+    //MARK: - Configure
+    private func configureUIComponents() {
+        view.addSubview(calendarView)
+    }
+    
     private func configureCalendarViewContents() -> CalendarViewContent {
         let selectedDay = self.selectedDay
         let calendar = Calendar.current
@@ -46,14 +47,13 @@ class CalendarViewController: UIViewController {
             calendar: calendar,
             visibleDateRange: startDate...endDate,
             monthsLayout: .vertical(options: VerticalMonthsLayoutOptions()))
-        .monthHeaderItemProvider{ month in
+        .monthHeaderItemProvider { month in
             CalendarItemModel<MonthLabel> (
                 invariantViewProperties: .init(
                     font: .systemFont(ofSize: 20, weight: .medium),
                     textColor: .label,
                     backgroundColor: .clear),
-                viewModel: .init(month: month)
-            )
+                viewModel: .init(month: month))
         }
         .dayItemProvider { day in
             var invariantViewProperties = DayLabel.InvariantViewProperties(font: .systemFont(ofSize: 16, weight: .semibold),

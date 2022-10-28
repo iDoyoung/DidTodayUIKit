@@ -26,21 +26,7 @@ class TotalDidsCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        
-        return label
-    }()
-    
-    private let totalTimeLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .monospacedDigitSystemFont(ofSize: 20, weight: .medium)
-        return label
-    }()
-    
-    private let totalDidLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 20, weight: .medium)
+        label.textColor = .white
         return label
     }()
     
@@ -55,19 +41,17 @@ class TotalDidsCell: UICollectionViewCell {
     }
     
     private func configure() {
-        contentView.backgroundColor = .themeGreen
+        let color = UIColor.gradientEffect(colors: [.themeGreen.withAlphaComponent(0.7),
+                                                    .themeGreen],
+                                           frame: frame,
+                                           stratPoint: CGPoint(x: 0.5,
+                                                               y: 0),
+                                           endPoint: CGPoint(x: 0.5,
+                                                             y: 1))
+        contentView.backgroundColor = color
         addSubview(piesView)
         addSubview(descriptionLabel)
-        NSLayoutConstraint.activate([
-            piesView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            piesView.heightAnchor.constraint(equalToConstant: 200),
-            piesView.widthAnchor.constraint(equalToConstant: 200),
-            piesView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            descriptionLabel.topAnchor.constraint(equalTo: piesView.topAnchor),
-            descriptionLabel.bottomAnchor.constraint(equalTo: piesView.bottomAnchor),
-            descriptionLabel.leadingAnchor.constraint(equalTo: piesView.trailingAnchor),
-            descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
-        ])
+        setupLayoutConstraint()
     }
     
     //MARK: - Setup
@@ -95,5 +79,18 @@ class TotalDidsCell: UICollectionViewCell {
         let spendTimeToString = String(format: "%02d:%02d", totalOfSpentTime/60, totalOfSpentTime%60)
         description = (countOfDids == 0 ? "Did nothing" : "Did \(dids.count) things,\nTotal \(spendTimeToString)")
         descriptionLabel.text = description
+    }
+    
+    private func setupLayoutConstraint() {
+        NSLayoutConstraint.activate([
+            piesView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            piesView.heightAnchor.constraint(equalToConstant: 200),
+            piesView.widthAnchor.constraint(equalToConstant: 200),
+            piesView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            descriptionLabel.topAnchor.constraint(equalTo: piesView.topAnchor),
+            descriptionLabel.bottomAnchor.constraint(equalTo: piesView.bottomAnchor),
+            descriptionLabel.leadingAnchor.constraint(equalTo: piesView.trailingAnchor),
+            descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
+        ])
     }
 }

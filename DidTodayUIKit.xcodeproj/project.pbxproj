@@ -29,6 +29,7 @@
 		7F397A7228D83021000F89E2 /* CreateDidViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F397A7128D83021000F89E2 /* CreateDidViewModel.swift */; };
 		7F397A7428D86EF1000F89E2 /* Date+ToDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F397A7328D86EF1000F89E2 /* Date+ToDouble.swift */; };
 		7F5A91C828E68CCF006B8406 /* Date+ToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A91C728E68CCF006B8406 /* Date+ToString.swift */; };
+		7F71192B290B95FB001DFE99 /* UIColor+GradientEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F71192A290B95FB001DFE99 /* UIColor+GradientEffect.swift */; };
 		7F80EBC728D3245500781DB4 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F80EBC628D3245500781DB4 /* MainViewModel.swift */; };
 		7F80EBC928D334A000781DB4 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F80EBC828D334A000781DB4 /* MainViewModelTests.swift */; };
 		7F80EBCB28D4102500781DB4 /* MainDidItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F80EBCA28D4102500781DB4 /* MainDidItemsViewModel.swift */; };
@@ -94,6 +95,7 @@
 		7F397A7128D83021000F89E2 /* CreateDidViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDidViewModel.swift; sourceTree = "<group>"; };
 		7F397A7328D86EF1000F89E2 /* Date+ToDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+ToDouble.swift"; sourceTree = "<group>"; };
 		7F5A91C728E68CCF006B8406 /* Date+ToString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+ToString.swift"; sourceTree = "<group>"; };
+		7F71192A290B95FB001DFE99 /* UIColor+GradientEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+GradientEffect.swift"; sourceTree = "<group>"; };
 		7F80EBC628D3245500781DB4 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		7F80EBC828D334A000781DB4 /* MainViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTests.swift; sourceTree = "<group>"; };
 		7F80EBCA28D4102500781DB4 /* MainDidItemsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDidItemsViewModel.swift; sourceTree = "<group>"; };
@@ -300,6 +302,7 @@
 				7F5A91C628E68CA7006B8406 /* Date Extensions */,
 				50A450592564CFD500812F14 /* Localize.swift */,
 				7F133C5629063BF00099E55C /* UIColor+theme.swift */,
+				7F71192A290B95FB001DFE99 /* UIColor+GradientEffect.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -526,6 +529,7 @@
 				5054D6C3255A8ABE005E8850 /* Pie.swift in Sources */,
 				7FC22B6328C88AA500F83122 /* DataModel.xcdatamodeld in Sources */,
 				7F2C6CBE290A6EB3002963DE /* MainRouter.swift in Sources */,
+				7F71192B290B95FB001DFE99 /* UIColor+GradientEffect.swift in Sources */,
 				7F133C5729063BF00099E55C /* UIColor+theme.swift in Sources */,
 				504CE044253FDFAA000CC6CF /* SceneDelegate.swift in Sources */,
 				7FB6A8D828DD9B13009C61C5 /* TotalDidsCell.swift in Sources */,

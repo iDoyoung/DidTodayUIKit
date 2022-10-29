@@ -27,13 +27,20 @@ class CalendarViewController: UIViewController {
         return viewController
     }
     
+    override func loadView() {
+        view = UIView()
+        view.backgroundColor = .systemBackground
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureUIComponents()
     }
     
     //MARK: - Configure
     private func configureUIComponents() {
         view.addSubview(calendarView)
+        setupLayoutConstraints()
     }
     
     private func configureCalendarViewContents() -> CalendarViewContent {
@@ -74,5 +81,14 @@ class CalendarViewController: UIViewController {
         }
         .interMonthSpacing(60)
         .horizontalDayMargin(8)
+    }
+    
+    func setupLayoutConstraints() {
+        NSLayoutConstraint.activate([
+          calendarView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+          calendarView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+          calendarView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
+          calendarView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
+        ])
     }
 }

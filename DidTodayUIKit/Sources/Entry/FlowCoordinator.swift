@@ -9,7 +9,7 @@ import UIKit
 
 protocol FlowCoordinatorDependenciesProtocol {
     func makeMainViewController(router: MainRouter) -> UIViewController
-    func makeCalendarViewController() -> UIViewController
+    func makeCalendarViewController(dids: [MainDidItemsViewModel]) -> UIViewController
     func makeCreateDidViewController() -> UIViewController
 }
 
@@ -35,8 +35,8 @@ final class FlowCoordinator {
         navigationController?.pushViewController(viewController, animated: false)
     }
     
-    private func showCalendar() {
-        let viewController = dependencies.makeCalendarViewController()
+    private func showCalendar(dids: [MainDidItemsViewModel]) {
+        let viewController = dependencies.makeCalendarViewController(dids: dids)
         navigationController?.present(viewController, animated: true)
     }
     

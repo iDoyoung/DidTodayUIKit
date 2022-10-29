@@ -17,19 +17,19 @@ final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
         return viewController
     }
     
-    func makeMainViewModel(router: MainRouter) -> MainViewModelProtocol {
+    private func makeMainViewModel(router: MainRouter) -> MainViewModelProtocol {
         let viewModel = MainViewModel(didCoreDataStorage: didCoreDataStorage, router: router)
         return viewModel
     }
     
     //MARK: Calendar
-    func makeCalendarViewController() -> UIViewController {
-        let viewController = CalendarViewController.create(with: makeCalendarViewModel())
+    func makeCalendarViewController(dids: [MainDidItemsViewModel]) -> UIViewController {
+        let viewController = CalendarViewController.create(with: makeCalendarViewModel(by: dids))
         return viewController
     }
     
-    private func makeCalendarViewModel() -> CalendarViewModelProtocol {
-        let viewModel = CalendarViewModel()
+    private func makeCalendarViewModel(by dids: [MainDidItemsViewModel]) -> CalendarViewModelProtocol {
+        let viewModel = CalendarViewModel(dids: dids)
         return viewModel
     }
     
@@ -39,7 +39,7 @@ final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
         return viewController
     }
     
-    func makeCreateDidViewModel() -> CreateDidViewModelProtocol {
+    private func makeCreateDidViewModel() -> CreateDidViewModelProtocol {
         let viewModel = CreateDidViewModel(didCoreDataStorage: didCoreDataStorage)
         return viewModel
     }

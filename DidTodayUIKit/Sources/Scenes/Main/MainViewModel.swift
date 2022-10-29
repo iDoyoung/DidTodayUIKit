@@ -50,6 +50,7 @@ final class MainViewModel: MainViewModelProtocol {
     }
     
     func showCalendar() {
-        router?.showCalendar()
+        guard let dids = fetchedDids else { return }
+        router?.showCalendar(dids)
     }
 }

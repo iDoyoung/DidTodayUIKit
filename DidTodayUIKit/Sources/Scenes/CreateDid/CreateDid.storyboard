@@ -123,17 +123,11 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="uND-sx-Dc8"/>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Af7-RI-UME">
-                                <rect key="frame" x="328" y="776" width="66" height="66"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="66" id="q1H-8m-eTM"/>
-                                    <constraint firstAttribute="height" constant="66" id="xY7-6w-LVh"/>
-                                </constraints>
+                                <rect key="frame" x="293" y="803" width="101" height="39"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                 <color key="tintColor" systemColor="labelColor"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="plus" catalog="system">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20" weight="black"/>
-                                </state>
+                                <state key="normal" title="Create Did"/>
                                 <connections>
                                     <action selector="addDid:" destination="w56-Zd-vuv" eventType="touchUpInside" id="elj-Pm-MJD"/>
                                 </connections>
@@ -142,13 +136,13 @@
                         <viewLayoutGuide key="safeArea" id="LMK-0E-9KY"/>
                         <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Af7-RI-UME" firstAttribute="trailing" secondItem="uzx-VV-xSo" secondAttribute="trailingMargin" id="21I-eC-iEe"/>
                             <constraint firstItem="LMK-0E-9KY" firstAttribute="bottom" secondItem="K90-8v-T0C" secondAttribute="bottom" id="2c8-eE-qpA"/>
                             <constraint firstItem="LMK-0E-9KY" firstAttribute="top" secondItem="K90-8v-T0C" secondAttribute="top" id="6HH-Vb-Wsb"/>
                             <constraint firstItem="LMK-0E-9KY" firstAttribute="trailing" secondItem="K90-8v-T0C" secondAttribute="trailing" id="6V0-fE-OcR"/>
-                            <constraint firstItem="LMK-0E-9KY" firstAttribute="bottom" secondItem="Af7-RI-UME" secondAttribute="bottom" constant="20" id="9Ga-aw-B14"/>
-                            <constraint firstItem="LMK-0E-9KY" firstAttribute="trailing" secondItem="Af7-RI-UME" secondAttribute="trailing" constant="20" id="YVt-ab-pzK"/>
                             <constraint firstItem="Y49-ec-dkd" firstAttribute="leading" secondItem="LMK-0E-9KY" secondAttribute="leading" constant="20" id="aul-2K-Wi1"/>
                             <constraint firstItem="gaU-IO-eq9" firstAttribute="leading" secondItem="LMK-0E-9KY" secondAttribute="leading" constant="20" id="bZO-i8-OZl"/>
+                            <constraint firstItem="LMK-0E-9KY" firstAttribute="bottom" secondItem="Af7-RI-UME" secondAttribute="bottom" constant="20" id="mRq-oM-rIm"/>
                             <constraint firstItem="K90-8v-T0C" firstAttribute="leading" secondItem="LMK-0E-9KY" secondAttribute="leading" id="z3i-hf-fSX"/>
                         </constraints>
                     </view>
@@ -164,12 +158,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nHO-pu-wtC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1480" y="-294"/>
+            <point key="canvasLocation" x="1479.7101449275362" y="-294.64285714285711"/>
         </scene>
     </scenes>
     <resources>
         <image name="paintpalette" catalog="system" width="128" height="105"/>
-        <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

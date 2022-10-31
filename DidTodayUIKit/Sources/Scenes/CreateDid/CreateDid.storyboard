@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="w56-Zd-vuv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="w56-Zd-vuv">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -18,8 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K90-8v-T0C">
-                                <rect key="frame" x="0.0" y="88" width="414" height="673"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K90-8v-T0C">
+                                <rect key="frame" x="0.0" y="48" width="414" height="814"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qCz-Xx-1hp" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="920"/>
@@ -61,7 +61,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" style="inline" translatesAutoresizingMaskIntoConstraints="NO" id="1iT-8V-Sl4">
-                                                        <rect key="frame" x="224" y="5" width="190" height="50"/>
+                                                        <rect key="frame" x="224" y="5" width="190" height="50.5"/>
                                                         <connections>
                                                             <action selector="setStartedTime:" destination="w56-Zd-vuv" eventType="valueChanged" id="FoW-8y-D9B"/>
                                                         </connections>
@@ -122,12 +122,31 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="Tat-FU-4Og"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="uND-sx-Dc8"/>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Af7-RI-UME">
+                                <rect key="frame" x="328" y="776" width="66" height="66"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="66" id="q1H-8m-eTM"/>
+                                    <constraint firstAttribute="height" constant="66" id="xY7-6w-LVh"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="plus" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20" weight="black"/>
+                                </state>
+                                <connections>
+                                    <action selector="addDid:" destination="w56-Zd-vuv" eventType="touchUpInside" id="elj-Pm-MJD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="LMK-0E-9KY"/>
                         <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="LMK-0E-9KY" firstAttribute="bottom" secondItem="K90-8v-T0C" secondAttribute="bottom" id="2c8-eE-qpA"/>
                             <constraint firstItem="LMK-0E-9KY" firstAttribute="top" secondItem="K90-8v-T0C" secondAttribute="top" id="6HH-Vb-Wsb"/>
                             <constraint firstItem="LMK-0E-9KY" firstAttribute="trailing" secondItem="K90-8v-T0C" secondAttribute="trailing" id="6V0-fE-OcR"/>
+                            <constraint firstItem="LMK-0E-9KY" firstAttribute="bottom" secondItem="Af7-RI-UME" secondAttribute="bottom" constant="20" id="9Ga-aw-B14"/>
+                            <constraint firstItem="LMK-0E-9KY" firstAttribute="trailing" secondItem="Af7-RI-UME" secondAttribute="trailing" constant="20" id="YVt-ab-pzK"/>
                             <constraint firstItem="Y49-ec-dkd" firstAttribute="leading" secondItem="LMK-0E-9KY" secondAttribute="leading" constant="20" id="aul-2K-Wi1"/>
                             <constraint firstItem="gaU-IO-eq9" firstAttribute="leading" secondItem="LMK-0E-9KY" secondAttribute="leading" constant="20" id="bZO-i8-OZl"/>
                             <constraint firstItem="K90-8v-T0C" firstAttribute="leading" secondItem="LMK-0E-9KY" secondAttribute="leading" id="z3i-hf-fSX"/>
@@ -135,6 +154,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="6FX-ZL-YFk"/>
                     <connections>
+                        <outlet property="addButton" destination="Af7-RI-UME" id="SA0-9o-gI7"/>
                         <outlet property="endedTimePicker" destination="Egf-xv-qfe" id="WQd-50-Z9X"/>
                         <outlet property="pieView" destination="7Aw-vn-OjH" id="gGn-NT-wnc"/>
                         <outlet property="scrollView" destination="K90-8v-T0C" id="BgD-qS-MvI"/>
@@ -149,6 +169,10 @@
     </scenes>
     <resources>
         <image name="paintpalette" catalog="system" width="128" height="105"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="secondarySystemBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

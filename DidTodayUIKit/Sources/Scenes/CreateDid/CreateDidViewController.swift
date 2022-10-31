@@ -17,6 +17,7 @@ final class CreateDidViewController: UIViewController, StoryboardInstantiable {
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var startedTimePicker: UIDatePicker!
     @IBOutlet weak var endedTimePicker: UIDatePicker!
+    @IBOutlet weak var addButton: UIButton!
     
     @IBAction func showColorPicker(_ sender: UIButton) {
         let colorPickerViewController = UIColorPickerViewController()
@@ -24,32 +25,36 @@ final class CreateDidViewController: UIViewController, StoryboardInstantiable {
         colorPickerViewController.delegate = self
         present(colorPickerViewController, animated: true)
     }
+    
     @IBAction func setStartedTime(_ sender: UIDatePicker) {
         endedTimePicker.minimumDate = sender.date
         viewModel?.startedTime = sender.date
     }
+    
     @IBAction func setEndedTime(_ sender: UIDatePicker) {
         startedTimePicker.maximumDate = sender.date
         viewModel?.endedTime = sender.date
     }
-//    @IBAction func addDid(_ sender: UIBarButtonItem) {
-//        viewModel?.createDid { [weak self] result in
-//            guard let self = self else { return }
-//            DispatchQueue.main.async {
-//                switch result {
-//                case .success:
-//                    self.present(self.successAddingAlert(), animated: true)
-//                case .failure(let error):
-//                    switch error {
-//                    case .coreDataError:
-//                        self.present(self.errorAlert(), animated: true)
-//                    case .startedTimeError:
-//                        self.present(self.failedAddingAlert(), animated: true)
-//                    }
-//                }
-//            }
-//        }
-//    }
+    
+    @IBAction func addDid(_ sender: UIButton) {
+        viewModel?.createDid { [weak self] result in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                switch result {
+                case .success:
+                    self.present(self.successAddingAlert(), animated: true)
+                case .failure(let error):
+                    switch error {
+                    case .coreDataError:
+                        self.present(self.errorAlert(), animated: true)
+                    case .startedTimeError:
+                        self.present(self.failedAddingAlert(), animated: true)
+                    }
+                }
+            }
+        }
+    }
+    
     static func create(with viewModel: CreateDidViewModelProtocol) -> CreateDidViewController {
         let viewController = CreateDidViewController.instantiateViewController(storyboardName: StoryboardName.createDid)
         viewController.viewModel = viewModel
@@ -57,6 +62,12 @@ final class CreateDidViewController: UIViewController, StoryboardInstantiable {
     }
     
     //MARK: - Life cycle
+    static func create(with viewModel: CreateDidViewModel) -> CreateDidViewController {
+        let viewController = CreateDidViewController.instantiateViewController(storyboardName: "CreateDid")
+        viewController.viewModel = viewModel
+        return viewController
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUIObjects()
@@ -73,11 +84,13 @@ final class CreateDidViewController: UIViewController, StoryboardInstantiable {
     private func setupTextFieldAction() {
         titleTextField.addAction(textFieldAction(), for: .editingChanged)
     }
+    
     private func setupDatePicker() {
         endedTimePicker.minimumDate = startedTimePicker.date
         endedTimePicker.maximumDate = Date()
         startedTimePicker.maximumDate = endedTimePicker.date
     }
+    
     private func textFieldAction() -> UIAction {
         return UIAction { [weak self] _ in
             guard let self = self else {
@@ -89,15 +102,17 @@ final class CreateDidViewController: UIViewController, StoryboardInstantiable {
             self.viewModel?.title = self.titleTextField.text
         }
     }
+    
     private func bindViewModel() {
         viewModel?.titlePublisher
             .sink { [weak self] title in
-//                if let title = title,
-//                   title.trimmingCharacters(in: .whitespaces).isEmpty == false {
-//                    self?.addButtonItem.isEnabled = true
-//                } else {
-//                    self?.addButtonItem.isEnabled = false
-//                }
+                guard let self = self else { return }
+                if let title = title,
+                   title.trimmingCharacters(in: .whitespaces).isEmpty == false {
+                    self.addButton.isEnabled = true
+                } else {
+                    self.addButton.isEnabled = false
+                }
             }
             .store(in: &cancellableBag)
         viewModel?.startedTimePublished
@@ -150,6 +165,7 @@ extension CreateDidViewController {
         alert.addAction(confirmAction)
         return alert
     }
+    
     func failedAddingAlert() -> UIAlertController {
         let alert = UIAlertController(title: "Failed adding",
                                       message: "",
@@ -158,6 +174,7 @@ extension CreateDidViewController {
         alert.addAction(confirmAction)
         return alert
     }
+    
     func errorAlert() -> UIAlertController {
         let alert = UIAlertController(title: "Error",
                                       message: "",

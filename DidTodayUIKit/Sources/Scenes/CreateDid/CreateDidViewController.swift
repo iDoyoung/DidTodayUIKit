@@ -81,6 +81,7 @@ final class CreateDidViewController: UIViewController, StoryboardInstantiable {
         setupTextFieldAction()
         setupDatePicker()
     }
+    
     private func setupTextFieldAction() {
         titleTextField.addAction(textFieldAction(), for: .editingChanged)
     }
@@ -160,7 +161,7 @@ extension CreateDidViewController {
                                       message: "",
                                       preferredStyle: .alert)
         let confirmAction = UIAlertAction(title: "OK", style: .cancel) { [weak self] _ in
-            self?.dismiss(animated: true)
+            self?.navigationController?.popViewController(animated: true)
         }
         alert.addAction(confirmAction)
         return alert

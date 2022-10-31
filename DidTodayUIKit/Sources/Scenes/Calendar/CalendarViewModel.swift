@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 protocol CalendarViewModelProtocol: CalendarViewModelInput, CalendarViewModelOutput {   }
 
@@ -14,13 +15,20 @@ protocol CalendarViewModelInput {
 }
 
 protocol CalendarViewModelOutput {
+    var dateOfDids: [Date] { get }
 }
 
 final class CalendarViewModel: CalendarViewModelProtocol {
     
-    @Published var dids: [Did]
+    //MARK: - Input
+    var dids: [Did]
+    
+    //MARK: - Output
+    @Published var dateOfDids: [Date]
     
     init(dids: [Did]) {
         self.dids = dids
+        let dates = dids.map { $0.started.omittedTime() }
+        self.dateOfDids = Array(Set(dates))
     }
 }

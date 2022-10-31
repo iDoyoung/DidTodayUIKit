@@ -6,17 +6,20 @@
 //
 
 import UIKit
+import Combine
 import HorizonCalendar
 
 class CalendarViewController: UIViewController {
     
     var viewModel: CalendarViewModelProtocol?
+    private var cancellableBag: AnyCancellable?
     private lazy var calendarView: CalendarView = {
         let calendarView = CalendarView(initialContent: configureCalendarViewContents())
         calendarView.translatesAutoresizingMaskIntoConstraints = false
         return calendarView
     }()
     
+    //TODO: Need to do bind with view model?
     ///Selected Day of Calendar View
     private var selectedDay: Day?
     
@@ -75,6 +78,12 @@ class CalendarViewController: UIViewController {
                 invariantViewProperties.textColor = .systemBackground
                 invariantViewProperties.backgroundColor = .systemRed
             }
+//            for date in viewModel {
+//                if day.components == Calendar.current.dateComponents([.era, .year, .month, .day], from: ) {
+//                    invariantViewProperties.textColor = .green
+//                    break
+//                }
+//            }
             return CalendarItemModel<DayLabel> (
                 invariantViewProperties: invariantViewProperties,
                 viewModel: .init(day: day))

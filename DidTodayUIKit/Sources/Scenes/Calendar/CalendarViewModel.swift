@@ -10,19 +10,17 @@ import Foundation
 protocol CalendarViewModelProtocol: CalendarViewModelInput, CalendarViewModelOutput {   }
 
 protocol CalendarViewModelInput {
-    var dids: [MainDidItemsViewModel] { get }
+    var dids: [Did] { get }
 }
 
 protocol CalendarViewModelOutput {
-    var didsPublisher: Published<[MainDidItemsViewModel]>.Publisher { get }
 }
 
 final class CalendarViewModel: CalendarViewModelProtocol {
     
-    @Published var dids: [MainDidItemsViewModel]
-    var didsPublisher: Published<[MainDidItemsViewModel]>.Publisher { $dids }
+    @Published var dids: [Did]
     
-    init(dids: [MainDidItemsViewModel]) {
+    init(dids: [Did]) {
         self.dids = dids
     }
 }

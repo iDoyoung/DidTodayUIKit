@@ -77,10 +77,9 @@ final class MainViewController: UIViewController {
     
     private func bindViewModel() {
         guard let viewModel = viewModel else { return }
-        cancellableBag = viewModel.fetchedDidsPublisher
+        cancellableBag = viewModel.didItemsPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] items in
-                guard let items = items else { return }
                 #if DEBUG
                 print(items.count)
                 #endif

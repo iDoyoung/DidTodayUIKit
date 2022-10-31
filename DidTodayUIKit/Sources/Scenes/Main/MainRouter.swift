@@ -8,6 +8,6 @@
 import Foundation
 
 struct MainRouter {
-    let showCalendar: ([MainDidItemsViewModel]) -> Void
+    let showCalendar: ([Did]) -> Void
     let showCreateDid: () -> Void
 }

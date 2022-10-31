@@ -23,12 +23,12 @@ final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
     }
     
     //MARK: Calendar
-    func makeCalendarViewController(dids: [MainDidItemsViewModel]) -> UIViewController {
+    func makeCalendarViewController(dids: [Did]) -> UIViewController {
         let viewController = CalendarViewController.create(with: makeCalendarViewModel(by: dids))
         return viewController
     }
     
-    private func makeCalendarViewModel(by dids: [MainDidItemsViewModel]) -> CalendarViewModelProtocol {
+    private func makeCalendarViewModel(by dids: [Did]) -> CalendarViewModelProtocol {
         let viewModel = CalendarViewModel(dids: dids)
         return viewModel
     }

@@ -15,7 +15,7 @@ protocol CalendarViewModelInput {
 }
 
 protocol CalendarViewModelOutput {
-    var dateOfDids: [Date] { get }
+    var dateOfDidsPublisher: Published<[Date]>.Publisher { get }
 }
 
 final class CalendarViewModel: CalendarViewModelProtocol {
@@ -24,7 +24,11 @@ final class CalendarViewModel: CalendarViewModelProtocol {
     var dids: [Did]
     
     //MARK: - Output
-    @Published var dateOfDids: [Date]
+    @Published private var dateOfDids: [Date]
+    var dateOfDidsPublisher: Published<[Date]>.Publisher {
+        $dateOfDids
+    }
+    
     
     init(dids: [Did]) {
         self.dids = dids

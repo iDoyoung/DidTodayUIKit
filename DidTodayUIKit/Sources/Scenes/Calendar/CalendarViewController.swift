@@ -12,7 +12,7 @@ import HorizonCalendar
 class CalendarViewController: UIViewController {
     
     var viewModel: CalendarViewModelProtocol?
-    private var cancellableBag: AnyCancellable?
+    private var cancellableBag = Set<AnyCancellable>()
     private lazy var calendarView: CalendarView = {
         let calendarView = CalendarView(initialContent: configureCalendarViewContents())
         calendarView.translatesAutoresizingMaskIntoConstraints = false
@@ -51,12 +51,16 @@ class CalendarViewController: UIViewController {
         let calendar = Calendar.current
         //FIXME: - To date of first uploaded date
         let startDate = calendar.date(from: DateComponents(year: 2020, month: 01, day: 01))!
-        let endDate = Date()
+        let endDate = Date().omittedTime()
         
         return CalendarViewContent(
             calendar: calendar,
             visibleDateRange: startDate...endDate,
-            monthsLayout: .vertical(options: VerticalMonthsLayoutOptions()))
+            monthsLayout: .vertical(
+                options: VerticalMonthsLayoutOptions(
+                    pinDaysOfWeekToTop: false,
+                    alwaysShowCompleteBoundaryMonths: false,
+                    scrollsToFirstMonthOnStatusBarTap: false)))
         .monthHeaderItemProvider { month in
             CalendarItemModel<MonthLabel> (
                 invariantViewProperties: .init(
@@ -65,7 +69,7 @@ class CalendarViewController: UIViewController {
                     backgroundColor: .clear),
                 viewModel: .init(month: month))
         }
-        .dayItemProvider { day in
+        .dayItemProvider { [weak self] day in
             var invariantViewProperties = DayLabel.InvariantViewProperties(font: .systemFont(ofSize: 16, weight: .semibold),
                                                                            textColor: .darkGray,
                                                                            backgroundColor: .clear)
@@ -78,12 +82,17 @@ class CalendarViewController: UIViewController {
                 invariantViewProperties.textColor = .systemBackground
                 invariantViewProperties.backgroundColor = .systemRed
             }
-//            for date in viewModel {
-//                if day.components == Calendar.current.dateComponents([.era, .year, .month, .day], from: ) {
-//                    invariantViewProperties.textColor = .green
-//                    break
-//                }
-//            }
+            //TODO: Binding
+            if let viewModel = self?.viewModel {
+                viewModel.dateOfDidsPublisher.sink { dateOfDids in
+                    for date in dateOfDids {
+                        if day.components == Calendar.current.dateComponents([.era, .year, .month, .day], from: date) {
+                            invariantViewProperties.textColor = .green
+                            break
+                        }
+                    }
+                }
+            }
             return CalendarItemModel<DayLabel> (
                 invariantViewProperties: invariantViewProperties,
                 viewModel: .init(day: day))

@@ -29,6 +29,7 @@
 		7F397A6828D71E74000F89E2 /* CreateDidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F397A6728D71E74000F89E2 /* CreateDidViewController.swift */; };
 		7F397A7228D83021000F89E2 /* CreateDidViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F397A7128D83021000F89E2 /* CreateDidViewModel.swift */; };
 		7F397A7428D86EF1000F89E2 /* Date+ToDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F397A7328D86EF1000F89E2 /* Date+ToDouble.swift */; };
+		7F583F2D2910EE90006735AA /* HorizonCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 7F583F2C2910EE90006735AA /* HorizonCalendar */; };
 		7F5A91C828E68CCF006B8406 /* Date+ToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A91C728E68CCF006B8406 /* Date+ToString.swift */; };
 		7F71192B290B95FB001DFE99 /* UIColor+GradientEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F71192A290B95FB001DFE99 /* UIColor+GradientEffect.swift */; };
 		7F71192D290BBC8B001DFE99 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F71192C290BBC8B001DFE99 /* CalendarViewModel.swift */; };
@@ -43,7 +44,6 @@
 		7FB6A8D628DD89E5009C61C5 /* Date+DifferenceToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6A8D528DD89E5009C61C5 /* Date+DifferenceToString.swift */; };
 		7FB6A8D828DD9B13009C61C5 /* TotalDidsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6A8D728DD9B13009C61C5 /* TotalDidsCell.swift */; };
 		7FB6A8DA28DDC2C4009C61C5 /* Date+GetHoursAndMinutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6A8D928DDC2C4009C61C5 /* Date+GetHoursAndMinutes.swift */; };
-		7FB6A91E28E07557009C61C5 /* HorizonCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 7FB6A91D28E07557009C61C5 /* HorizonCalendar */; };
 		7FB6A92328E07BE4009C61C5 /* DayLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6A92228E07BE4009C61C5 /* DayLabel.swift */; };
 		7FB6A92528E07BED009C61C5 /* MonthLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6A92428E07BED009C61C5 /* MonthLabel.swift */; };
 		7FC22B6328C88AA500F83122 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22B6128C88AA500F83122 /* DataModel.xcdatamodeld */; };
@@ -133,7 +133,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7FB6A91E28E07557009C61C5 /* HorizonCalendar in Frameworks */,
+				7F583F2D2910EE90006735AA /* HorizonCalendar in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,7 +416,7 @@
 			);
 			name = DidTodayUIKit;
 			packageProductDependencies = (
-				7FB6A91D28E07557009C61C5 /* HorizonCalendar */,
+				7F583F2C2910EE90006735AA /* HorizonCalendar */,
 			);
 			productName = DidTodayUIKit;
 			productReference = 504CE03E253FDFAA000CC6CF /* DidTodayUIKit.app */;
@@ -469,7 +469,7 @@
 			);
 			mainGroup = 504CE035253FDFA9000CC6CF;
 			packageReferences = (
-				7FB6A91C28E07557009C61C5 /* XCRemoteSwiftPackageReference "HorizonCalendar" */,
+				7F583F2B2910EE90006735AA /* XCRemoteSwiftPackageReference "HorizonCalendar" */,
 			);
 			productRefGroup = 504CE03F253FDFAA000CC6CF /* Products */;
 			projectDirPath = "";
@@ -833,7 +833,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		7FB6A91C28E07557009C61C5 /* XCRemoteSwiftPackageReference "HorizonCalendar" */ = {
+		7F583F2B2910EE90006735AA /* XCRemoteSwiftPackageReference "HorizonCalendar" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/HorizonCalendar";
 			requirement = {
@@ -844,9 +844,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		7FB6A91D28E07557009C61C5 /* HorizonCalendar */ = {
+		7F583F2C2910EE90006735AA /* HorizonCalendar */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7FB6A91C28E07557009C61C5 /* XCRemoteSwiftPackageReference "HorizonCalendar" */;
+			package = 7F583F2B2910EE90006735AA /* XCRemoteSwiftPackageReference "HorizonCalendar" */;
 			productName = HorizonCalendar;
 		};
 /* End XCSwiftPackageProductDependency section */

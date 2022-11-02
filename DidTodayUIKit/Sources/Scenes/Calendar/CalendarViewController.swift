@@ -15,6 +15,8 @@ class CalendarViewController: UIViewController {
     private var cancellableBag = Set<AnyCancellable>()
     private lazy var calendarView: CalendarView = {
         let calendarView = CalendarView(initialContent: configureCalendarViewContents())
+        calendarView.directionalLayoutMargins = NSDirectionalEdgeInsets()
+        calendarView.scroll(toDayContaining: Date(), scrollPosition: .centered, animated: false)
         calendarView.translatesAutoresizingMaskIntoConstraints = false
         return calendarView
     }()
@@ -41,7 +43,6 @@ class CalendarViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUIComponents()
-        calendarView.scroll(toDayContaining: Date(), scrollPosition: .centered, animated: false)
     }
     
     //MARK: - Configure

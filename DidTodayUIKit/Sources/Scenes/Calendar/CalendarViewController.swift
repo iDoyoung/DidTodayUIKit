@@ -13,6 +13,10 @@ class CalendarViewController: UIViewController {
     
     var viewModel: CalendarViewModelProtocol?
     private var cancellableBag = Set<AnyCancellable>()
+    private var dataSource: UICollectionViewDiffableDataSource<Int, AnyHashable>?
+    private var selectedDay: Day?
+    
+    //MARK: - UI Objects
     private lazy var calendarView: CalendarView = {
         let calendarView = CalendarView(initialContent: configureCalendarViewContents())
         calendarView.directionalLayoutMargins = NSDirectionalEdgeInsets()
@@ -21,9 +25,7 @@ class CalendarViewController: UIViewController {
         return calendarView
     }()
     
-    //TODO: Need to do bind with view model?
-    ///Selected Day of Calendar View
-    private var selectedDay: Day?
+    private var didsCollectionView: UICollectionView!
     
     //MARK: - Life Cycle
     static func create(with viewModel: CalendarViewModelProtocol) -> CalendarViewController {
@@ -42,13 +44,14 @@ class CalendarViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUIComponents()
+        configureUI()
     }
     
     //MARK: - Configure
-    private func configureUIComponents() {
+    private func configureUI() {
         view.backgroundColor = .systemBackground
         view.addSubview(calendarView)
+        configureDidsCollectionView()
         setupLayoutConstraints()
     }
     
@@ -107,12 +110,54 @@ class CalendarViewController: UIViewController {
         .horizontalDayMargin(8)
     }
     
-    func setupLayoutConstraints() {
+    private func setupLayoutConstraints() {
         NSLayoutConstraint.activate([
-          calendarView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-          calendarView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-          calendarView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
-          calendarView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
+            didsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            didsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            didsCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            calendarView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            calendarView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+            calendarView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
+            calendarView.bottomAnchor.constraint(equalTo: didsCollectionView.topAnchor),
         ])
+    }
+}
+
+//MARK: - Configure Collection View
+extension CalendarViewController {
+    
+    private func configureDidsCollectionView() {
+        didsCollectionView = UICollectionView(
+            frame: .zero,
+            collectionViewLayout: UICollectionViewFlowLayout())
+        didsCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(didsCollectionView)
+        configureDataSource()
+        didsCollectionView.delegate = self
+    }
+    
+    private func configureDataSource() {
+        let didTitleCellRegistration = createDidTitleCellRegistration()
+        dataSource = UICollectionViewDiffableDataSource(
+            collectionView: didsCollectionView,
+            cellProvider: { collectionView, indexPath, itemIdentifier in
+                collectionView.dequeueConfiguredReusableCell(
+                    using: didTitleCellRegistration,
+                    for: indexPath,
+                    item: itemIdentifier as? String)
+        })
+    }
+    
+    private func createDidTitleCellRegistration() -> UICollectionView.CellRegistration<DidTitleCell, String> {
+        return UICollectionView.CellRegistration { cell, indexPath, itemIdentifier in
+            cell.titleLabel.text = itemIdentifier
+        }
+    }
+}
+
+extension CalendarViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 227, height: 400)
     }
 }

@@ -14,17 +14,9 @@ class CalendarViewController: UIViewController {
     var viewModel: CalendarViewModelProtocol?
     private var cancellableBag = Set<AnyCancellable>()
     private var dataSource: UICollectionViewDiffableDataSource<Int, AnyHashable>?
-    private var selectedDay: Day?
     
     //MARK: - UI Objects
-    private lazy var calendarView: CalendarView = {
-        let calendarView = CalendarView(initialContent: configureCalendarViewContents())
-        calendarView.directionalLayoutMargins = NSDirectionalEdgeInsets()
-        calendarView.scroll(toDayContaining: Date(), scrollPosition: .centered, animated: false)
-        calendarView.translatesAutoresizingMaskIntoConstraints = false
-        return calendarView
-    }()
-    
+    private var calendarView: CalendarView!
     private var didsCollectionView: UICollectionView!
     
     //MARK: - Life Cycle
@@ -50,14 +42,44 @@ class CalendarViewController: UIViewController {
     //MARK: - Configure
     private func configureUI() {
         view.backgroundColor = .systemBackground
-        view.addSubview(calendarView)
+        configureCalendarView()
         configureDidsCollectionView()
         setupLayoutConstraints()
     }
+        
+    private func setupLayoutConstraints() {
+        NSLayoutConstraint.activate([
+            didsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            didsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            didsCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            calendarView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            calendarView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+            calendarView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
+            calendarView.bottomAnchor.constraint(equalTo: didsCollectionView.topAnchor),
+        ])
+    }
+}
+
+//MARK: - Configure Calendar View
+extension CalendarViewController {
     
-    private func configureCalendarViewContents() -> CalendarViewContent {
-        let selectedDay = self.selectedDay
+    private func configureCalendarView() {
+        calendarView = CalendarView(initialContent: setupCalendarViewContents())
+        calendarView.directionalLayoutMargins = NSDirectionalEdgeInsets()
+        calendarView.scroll(toDayContaining: Date(), scrollPosition: .centered, animated: false)
+        calendarView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(calendarView)
+        calendarView.daySelectionHandler = { [weak self] day in
+            guard let self = self else { return }
+            self.viewModel?.selectedDay = day.components
+            let newContent = self.setupCalendarViewContents()
+            self.calendarView.setContent(newContent)
+        }
+    }
+    
+    private func setupCalendarViewContents() -> CalendarViewContent {
         let calendar = Calendar.current
+        //let selectedDate = calendar.dateComponents([.era, .year, .month, .day], from: )
         //FIXME: - To date of first uploaded date
         let startDate = calendar.date(from: DateComponents(year: 2020, month: 01, day: 01))!
         let endDate = Date()
@@ -82,12 +104,12 @@ class CalendarViewController: UIViewController {
             var invariantViewProperties = DayLabel.InvariantViewProperties(font: .systemFont(ofSize: 16, weight: .semibold),
                                                                            textColor: .darkGray,
                                                                            backgroundColor: .clear)
-            if day == selectedDay {
+            if day.components == self?.viewModel?.selectedDay {
                 invariantViewProperties.textColor = .systemBackground
                 invariantViewProperties.backgroundColor = .label
             }
             ///Setup today
-            if day.components == Calendar.current.dateComponents([.era, .year, .month, .day], from: Date()) {
+            if day.components == calendar.dateComponents([.era, .year, .month, .day], from: Date()) {
                 invariantViewProperties.textColor = .systemBackground
                 invariantViewProperties.backgroundColor = .systemRed
             }
@@ -95,7 +117,7 @@ class CalendarViewController: UIViewController {
             if let viewModel = self?.viewModel {
                 viewModel.dateOfDidsPublisher.sink { dateOfDids in
                     for date in dateOfDids {
-                        if day.components == Calendar.current.dateComponents([.era, .year, .month, .day], from: date) {
+                        if day.components == calendar.dateComponents([.era, .year, .month, .day], from: date) {
                             invariantViewProperties.textColor = .green
                             break
                         }
@@ -108,18 +130,6 @@ class CalendarViewController: UIViewController {
         }
         .interMonthSpacing(60)
         .horizontalDayMargin(8)
-    }
-    
-    private func setupLayoutConstraints() {
-        NSLayoutConstraint.activate([
-            didsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            didsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            didsCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            calendarView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-            calendarView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-            calendarView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
-            calendarView.bottomAnchor.constraint(equalTo: didsCollectionView.topAnchor),
-        ])
     }
 }
 

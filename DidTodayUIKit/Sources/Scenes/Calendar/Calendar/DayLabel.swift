@@ -27,11 +27,11 @@ struct DayLabel: CalendarItemViewRepresentable {
         label.textColor = invariantViewProperties.textColor
         label.textAlignment = .center
         label.clipsToBounds = true
-        label.layer.cornerRadius = 12
+        label.layer.cornerRadius = 22
         return label
     }
+    
     static func setViewModel(_ viewModel: ViewModel, on view: UILabel) {
         view.text = "\(viewModel.day.day)"
     }
-    
 }

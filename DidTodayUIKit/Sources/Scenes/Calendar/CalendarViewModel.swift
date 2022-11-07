@@ -12,6 +12,7 @@ protocol CalendarViewModelProtocol: CalendarViewModelInput, CalendarViewModelOut
 
 protocol CalendarViewModelInput {
     var dids: [Did] { get }
+    var selectedDay: DateComponents? { get set }
 }
 
 protocol CalendarViewModelOutput {
@@ -20,8 +21,10 @@ protocol CalendarViewModelOutput {
 
 final class CalendarViewModel: CalendarViewModelProtocol {
     
+    private var cancellableBag = Set<AnyCancellable>()
     //MARK: - Input
-    var dids: [Did]
+    @Published var dids: [Did]
+    @Published var selectedDay: DateComponents?
     
     //MARK: - Output
     @Published private var dateOfDids: [Date]
@@ -29,10 +32,19 @@ final class CalendarViewModel: CalendarViewModelProtocol {
         $dateOfDids
     }
     
-    
+    var titleDidsOfDateSubject = PassthroughSubject<[String], Never>()
+
     init(dids: [Did]) {
         self.dids = dids
         let dates = dids.map { $0.started.omittedTime() }
         self.dateOfDids = Array(Set(dates))
+        $selectedDay.sink { [weak self] day in
+            let titleOfdids = dids
+                .filter { $0.started.omittedTime() == day?.date?.omittedTime() }
+                .map { $0.content }
+            print("selected")
+            self?.titleDidsOfDateSubject.send(titleOfdids)
+        }
+        .store(in: &cancellableBag)
     }
 }

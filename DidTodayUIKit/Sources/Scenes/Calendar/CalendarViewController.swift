@@ -66,7 +66,7 @@ extension CalendarViewController {
     private func configureCalendarView() {
         calendarView = CalendarView(initialContent: setupCalendarViewContents())
         calendarView.directionalLayoutMargins = NSDirectionalEdgeInsets()
-        calendarView.scroll(toDayContaining: Date(), scrollPosition: .centered, animated: false)
+        calendarView.scroll(toDayContaining: Date(), scrollPosition: .firstFullyVisiblePosition, animated: false)
         calendarView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(calendarView)
         calendarView.daySelectionHandler = { [weak self] day in
@@ -77,13 +77,12 @@ extension CalendarViewController {
         }
     }
     
+    //TODO: Refactor
     private func setupCalendarViewContents() -> CalendarViewContent {
         let calendar = Calendar.current
-        //let selectedDate = calendar.dateComponents([.era, .year, .month, .day], from: )
         //FIXME: - To date of first uploaded date
-        let startDate = calendar.date(from: DateComponents(year: 2020, month: 01, day: 01))!
+        let startDate = viewModel?.startedDate ?? Date()
         let endDate = Date()
-        
         return CalendarViewContent(
             calendar: calendar,
             visibleDateRange: startDate...endDate,

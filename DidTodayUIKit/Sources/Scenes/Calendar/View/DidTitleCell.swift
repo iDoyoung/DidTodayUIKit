@@ -7,12 +7,29 @@
 
 import UIKit
 
-class DidTitleCell: UICollectionViewCell {
+final class DidTitleCell: UICollectionViewCell {
     
-    let titleLabel: UILabel = {
-        let label = UILabel()
+    lazy var titleLabel: UILabel = {
+        let label = UILabel(frame: bounds)
         label.textAlignment = .center
-        label.layer.cornerRadius = 8
+        label.textColor = .label
+        label.clipsToBounds = true
+        label.layer.cornerRadius = 15
         return label
     }()
+    
+    private func configureUI() {
+        addSubview(titleLabel)
+        titleLabel.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+    }
+ 
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        configureUI()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        configureUI()
+    }
 }

@@ -31,6 +31,7 @@
 		7F397A7428D86EF1000F89E2 /* Date+ToDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F397A7328D86EF1000F89E2 /* Date+ToDouble.swift */; };
 		7F583F2D2910EE90006735AA /* HorizonCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 7F583F2C2910EE90006735AA /* HorizonCalendar */; };
 		7F583F322914B73B006735AA /* DidTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F583F312914B73B006735AA /* DidTitleCell.swift */; };
+		7F583F34291A61D2006735AA /* DidsOfDayItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F583F33291A61D2006735AA /* DidsOfDayItemViewModel.swift */; };
 		7F5A91C828E68CCF006B8406 /* Date+ToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A91C728E68CCF006B8406 /* Date+ToString.swift */; };
 		7F71192B290B95FB001DFE99 /* UIColor+GradientEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F71192A290B95FB001DFE99 /* UIColor+GradientEffect.swift */; };
 		7F71192D290BBC8B001DFE99 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F71192C290BBC8B001DFE99 /* CalendarViewModel.swift */; };
@@ -99,6 +100,7 @@
 		7F397A7128D83021000F89E2 /* CreateDidViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDidViewModel.swift; sourceTree = "<group>"; };
 		7F397A7328D86EF1000F89E2 /* Date+ToDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+ToDouble.swift"; sourceTree = "<group>"; };
 		7F583F312914B73B006735AA /* DidTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidTitleCell.swift; sourceTree = "<group>"; };
+		7F583F33291A61D2006735AA /* DidsOfDayItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidsOfDayItemViewModel.swift; sourceTree = "<group>"; };
 		7F5A91C728E68CCF006B8406 /* Date+ToString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+ToString.swift"; sourceTree = "<group>"; };
 		7F71192A290B95FB001DFE99 /* UIColor+GradientEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+GradientEffect.swift"; sourceTree = "<group>"; };
 		7F71192C290BBC8B001DFE99 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				7FB6A92128E07BC4009C61C5 /* Calendar */,
 				7F133C46290365460099E55C /* CalendarViewController.swift */,
 				7F71192C290BBC8B001DFE99 /* CalendarViewModel.swift */,
+				7F583F33291A61D2006735AA /* DidsOfDayItemViewModel.swift */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -538,6 +541,7 @@
 				7F80EBC728D3245500781DB4 /* MainViewModel.swift in Sources */,
 				7FC22B6C28C9C9E900F83122 /* DidCoreDataStorage.swift in Sources */,
 				7FB6A8D428DD5C04009C61C5 /* ManagedDidItem+CoreDataProperties.swift in Sources */,
+				7F583F34291A61D2006735AA /* DidsOfDayItemViewModel.swift in Sources */,
 				7FC22BBA28D0547500F83122 /* DidCell.swift in Sources */,
 				504CE042253FDFAA000CC6CF /* AppDelegate.swift in Sources */,
 				7FB6A92528E07BED009C61C5 /* MonthLabel.swift in Sources */,

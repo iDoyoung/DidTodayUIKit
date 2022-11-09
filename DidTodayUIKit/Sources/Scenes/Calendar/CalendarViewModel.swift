@@ -17,6 +17,7 @@ protocol CalendarViewModelInput {
 
 protocol CalendarViewModelOutput {
     var dateOfDidsPublisher: Published<[Date]>.Publisher { get }
+    var didsOfDayItemSubject: PassthroughSubject<[DidsOfDayItemViewModel], Never> { get }
     var startedDate: Date? { get }
 }
 
@@ -33,7 +34,7 @@ final class CalendarViewModel: CalendarViewModelProtocol {
         $dateOfDids
     }
     var startedDate: Date?
-    var titleDidsOfDateSubject = PassthroughSubject<[String], Never>()
+    var didsOfDayItemSubject = PassthroughSubject<[DidsOfDayItemViewModel], Never>()
 
     init(dids: [Did]) {
         self.dids = dids
@@ -41,10 +42,11 @@ final class CalendarViewModel: CalendarViewModelProtocol {
         self.startedDate = dates.first ?? Date()
         self.dateOfDids = Array(Set(dates))
         $selectedDay.sink { [weak self] day in
-            let titleOfdids = dids
-                .filter { $0.started.omittedTime() == day?.date?.omittedTime() }
-                .map { $0.content }
-            self?.titleDidsOfDateSubject.send(titleOfdids)
+            guard let day = day else { return }
+            let item = dids
+                .filter { $0.started.omittedTime() == Calendar.current.date(from: day)?.omittedTime() }
+                .map { DidsOfDayItemViewModel($0) }
+            self?.didsOfDayItemSubject.send(item)
         }
         .store(in: &cancellableBag)
     }

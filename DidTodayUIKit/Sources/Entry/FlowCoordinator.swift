@@ -37,6 +37,8 @@ final class FlowCoordinator {
     
     private func showCalendar(dids: [Did]) {
         let viewController = dependencies.makeCalendarViewController(dids: dids)
+        viewController.modalPresentationStyle = .fullScreen
+        viewController.modalTransitionStyle = .partialCurl
         navigationController?.present(viewController, animated: true)
     }
     
@@ -44,5 +46,4 @@ final class FlowCoordinator {
         let viewController = dependencies.makeCreateDidViewController()
         navigationController?.pushViewController(viewController, animated: true)
     }
-    
 }

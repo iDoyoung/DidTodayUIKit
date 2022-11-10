@@ -54,7 +54,7 @@ final class CalendarViewController: UIViewController {
         didsOfDayCollectionView.translatesAutoresizingMaskIntoConstraints = false
         calendarView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            didsOfDayCollectionView.heightAnchor.constraint(equalToConstant: 50),
+            didsOfDayCollectionView.heightAnchor.constraint(equalToConstant: 70),
             didsOfDayCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             didsOfDayCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             didsOfDayCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -196,5 +196,10 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return sizeOfDidTitleCell[indexPath.row]
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        let margin: CGFloat = 20
+        return UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
     }
 }

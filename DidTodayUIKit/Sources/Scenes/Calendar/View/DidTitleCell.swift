@@ -13,12 +13,11 @@ final class DidTitleCell: UICollectionViewCell {
         let label = UILabel(frame: bounds)
         label.textAlignment = .center
         label.textColor = .label
-        label.clipsToBounds = true
-        label.layer.cornerRadius = 15
         return label
     }()
     
     private func configureUI() {
+        cornerRadius = 10
         addSubview(titleLabel)
         titleLabel.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }

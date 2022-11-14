@@ -58,6 +58,8 @@
 		7FC580A328D1A201008086FD /* PieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC580A228D1A201008086FD /* PieView.swift */; };
 		7FD2B04C2909161A0048408F /* StoryboardName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD2B04B2909161A0048408F /* StoryboardName.swift */; };
 		7FD2B05029091AD00048408F /* CreateDid.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FD2B04F29091AD00048408F /* CreateDid.storyboard */; };
+		7FF48C2B2921F4F600387FE7 /* UIView+Shadow Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF48C2A2921F4F600387FE7 /* UIView+Shadow Effect.swift */; };
+		7FF48C2D2922085A00387FE7 /* UIView+Corner Radius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF48C2C2922085A00387FE7 /* UIView+Corner Radius.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,6 +130,8 @@
 		7FC580A228D1A201008086FD /* PieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieView.swift; sourceTree = "<group>"; };
 		7FD2B04B2909161A0048408F /* StoryboardName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardName.swift; sourceTree = "<group>"; };
 		7FD2B04F29091AD00048408F /* CreateDid.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateDid.storyboard; sourceTree = "<group>"; };
+		7FF48C2A2921F4F600387FE7 /* UIView+Shadow Effect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shadow Effect.swift"; sourceTree = "<group>"; };
+		7FF48C2C2922085A00387FE7 /* UIView+Corner Radius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Corner Radius.swift"; sourceTree = "<group>"; };
 		ADA015A5697AC9D46CCADCEC /* Pods_DidTodayUIKit_DidTodayUIKitUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DidTodayUIKit_DidTodayUIKitUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D52ECED48532DF52D0291955 /* Pods_DidTodayUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DidTodayUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -323,6 +327,8 @@
 				50A450592564CFD500812F14 /* Localize.swift */,
 				7F133C5629063BF00099E55C /* UIColor+theme.swift */,
 				7F71192A290B95FB001DFE99 /* UIColor+GradientEffect.swift */,
+				7FF48C2A2921F4F600387FE7 /* UIView+Shadow Effect.swift */,
+				7FF48C2C2922085A00387FE7 /* UIView+Corner Radius.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -527,6 +533,7 @@
 				7F133C652907CC5A0099E55C /* SceneDIContainer.swift in Sources */,
 				7F583F322914B73B006735AA /* DidTitleCell.swift in Sources */,
 				7FB6A8DA28DDC2C4009C61C5 /* Date+GetHoursAndMinutes.swift in Sources */,
+				7FF48C2D2922085A00387FE7 /* UIView+Corner Radius.swift in Sources */,
 				7FC580A328D1A201008086FD /* PieView.swift in Sources */,
 				504CE0C1254143CC000CC6CF /* AllPie.swift in Sources */,
 				7F397A6828D71E74000F89E2 /* CreateDidViewController.swift in Sources */,
@@ -557,6 +564,7 @@
 				7F133C5729063BF00099E55C /* UIColor+theme.swift in Sources */,
 				504CE044253FDFAA000CC6CF /* SceneDelegate.swift in Sources */,
 				7FB6A8D828DD9B13009C61C5 /* TotalDidsCell.swift in Sources */,
+				7FF48C2B2921F4F600387FE7 /* UIView+Shadow Effect.swift in Sources */,
 				7F133C632907C66A0099E55C /* FlowCoordinator.swift in Sources */,
 				504CE0B4253FDFDF000CC6CF /* PreviousVersionModel.swift in Sources */,
 				7F133CA3290902EC0099E55C /* StoryboardInstantiable.swift in Sources */,

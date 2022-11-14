@@ -19,9 +19,19 @@ final class CalendarViewController: UIViewController {
     private var dataSource: UICollectionViewDiffableDataSource<Section, DidsOfDayItemViewModel>?
     private var sizeOfDidTitleCell: [CGSize] = []
     //MARK: - UI Objects
-    private var calendarView: CalendarView!
+    private lazy var calendarView: CalendarView = CalendarView(initialContent: setupCalendarViewContents())
     private var didsOfDayCollectionView: UICollectionView!
-    
+    private lazy var verticalStactView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [calendarView, didsOfDayCollectionView])
+        stackView.axis = .vertical
+        stackView.layer.masksToBounds = true
+        stackView.layer.cornerRadius = 20
+        stackView.backgroundColor = .clear
+        stackView.layer.borderWidth = 0.5
+        stackView.layer.borderColor = UIColor.separator.cgColor
+        stackView.spacing = 1.5
+        return stackView
+    }()
     //MARK: - Life Cycle
     static func create(with viewModel: CalendarViewModelProtocol) -> CalendarViewController {
         let viewController = CalendarViewController()
@@ -42,27 +52,29 @@ final class CalendarViewController: UIViewController {
         configureUI()
     }
     
-    //MARK: - Configure
+    //MARK: - Configure UI
     private func configureUI() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .secondarySystemBackground
         configureCalendarView()
         configureDidsCollectionView()
+        configureStackView()
         setupLayoutConstraints()
+        calendarView.scroll(toDayContaining: Date(), scrollPosition: .firstFullyVisiblePosition, animated: false)
+    }
+    
+    private func configureStackView() {
+        view.addSubview(verticalStactView)
     }
         
     private func setupLayoutConstraints() {
+        verticalStactView.translatesAutoresizingMaskIntoConstraints = false
         didsOfDayCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        calendarView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            didsOfDayCollectionView.heightAnchor.constraint(equalToConstant: 70),
-            didsOfDayCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            didsOfDayCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            didsOfDayCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            calendarView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-            calendarView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-            calendarView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
-            calendarView.bottomAnchor.constraint(equalTo: didsOfDayCollectionView.topAnchor),
-        ])
+            didsOfDayCollectionView.heightAnchor.constraint(equalToConstant: 50),
+            verticalStactView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
+            verticalStactView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            verticalStactView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
+            verticalStactView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)])
     }
 }
 
@@ -70,10 +82,8 @@ final class CalendarViewController: UIViewController {
 extension CalendarViewController {
     
     private func configureCalendarView() {
-        calendarView = CalendarView(initialContent: setupCalendarViewContents())
-        calendarView.directionalLayoutMargins = NSDirectionalEdgeInsets()
-        calendarView.scroll(toDayContaining: Date(), scrollPosition: .firstFullyVisiblePosition, animated: false)
-        view.addSubview(calendarView)
+        calendarView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
+        calendarView.backgroundColor = .systemBackground
         calendarView.daySelectionHandler = { [weak self] day in
             guard let self = self else { return }
             self.viewModel?.selectedDay = day.components
@@ -99,13 +109,13 @@ extension CalendarViewController {
         .monthHeaderItemProvider { month in
             CalendarItemModel<MonthLabel> (
                 invariantViewProperties: .init(
-                    font: .systemFont(ofSize: 20, weight: .medium),
+                    font: .systemFont(ofSize: 17, weight: .medium),
                     textColor: .label,
                     backgroundColor: .clear),
                 viewModel: .init(month: month))
         }
         .dayItemProvider { [weak self] day in
-            var invariantViewProperties = DayLabel.InvariantViewProperties(font: .systemFont(ofSize: 16, weight: .semibold),
+            var invariantViewProperties = DayLabel.InvariantViewProperties(font: .systemFont(ofSize: 14, weight: .semibold),
                                                                            textColor: .darkGray,
                                                                            backgroundColor: .clear)
             ///Setup Seleted day
@@ -133,8 +143,10 @@ extension CalendarViewController {
                 invariantViewProperties: invariantViewProperties,
                 viewModel: .init(day: day))
         }
+        .monthDayInsets(UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0))
         .interMonthSpacing(60)
         .horizontalDayMargin(8)
+        .verticalDayMargin(8)
     }
 }
 
@@ -147,7 +159,6 @@ extension CalendarViewController {
         didsOfDayCollectionView = UICollectionView(
             frame: .zero,
             collectionViewLayout: layout)
-        view.addSubview(didsOfDayCollectionView)
         configureDataSource()
         didsOfDayCollectionView.delegate = self
     }
@@ -200,6 +211,6 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         let margin: CGFloat = 20
-        return UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
+        return UIEdgeInsets(top: 0, left: margin, bottom: 0, right: margin)
     }
 }

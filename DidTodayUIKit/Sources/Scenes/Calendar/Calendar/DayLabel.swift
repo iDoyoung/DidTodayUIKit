@@ -27,7 +27,7 @@ struct DayLabel: CalendarItemViewRepresentable {
         label.textColor = invariantViewProperties.textColor
         label.textAlignment = .center
         label.clipsToBounds = true
-        label.layer.cornerRadius = 22
+        label.layer.cornerRadius = 20
         return label
     }
     

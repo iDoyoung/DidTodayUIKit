@@ -29,6 +29,7 @@
 		7F397A6828D71E74000F89E2 /* CreateDidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F397A6728D71E74000F89E2 /* CreateDidViewController.swift */; };
 		7F397A7228D83021000F89E2 /* CreateDidViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F397A7128D83021000F89E2 /* CreateDidViewModel.swift */; };
 		7F397A7428D86EF1000F89E2 /* Date+ToDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F397A7328D86EF1000F89E2 /* Date+ToDouble.swift */; };
+		7F4AA14E292471EE004CE62A /* SortingSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4AA14D292471EE004CE62A /* SortingSupplementaryView.swift */; };
 		7F583F2D2910EE90006735AA /* HorizonCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 7F583F2C2910EE90006735AA /* HorizonCalendar */; };
 		7F583F322914B73B006735AA /* DidTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F583F312914B73B006735AA /* DidTitleCell.swift */; };
 		7F583F34291A61D2006735AA /* DidsOfDayItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F583F33291A61D2006735AA /* DidsOfDayItemViewModel.swift */; };
@@ -101,6 +102,7 @@
 		7F397A6728D71E74000F89E2 /* CreateDidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDidViewController.swift; sourceTree = "<group>"; };
 		7F397A7128D83021000F89E2 /* CreateDidViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDidViewModel.swift; sourceTree = "<group>"; };
 		7F397A7328D86EF1000F89E2 /* Date+ToDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+ToDouble.swift"; sourceTree = "<group>"; };
+		7F4AA14D292471EE004CE62A /* SortingSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingSupplementaryView.swift; sourceTree = "<group>"; };
 		7F583F312914B73B006735AA /* DidTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidTitleCell.swift; sourceTree = "<group>"; };
 		7F583F33291A61D2006735AA /* DidsOfDayItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidsOfDayItemViewModel.swift; sourceTree = "<group>"; };
 		7F5A91C728E68CCF006B8406 /* Date+ToString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+ToString.swift"; sourceTree = "<group>"; };
@@ -322,6 +324,7 @@
 				7F80EBC628D3245500781DB4 /* MainViewModel.swift */,
 				7F80EBCA28D4102500781DB4 /* MainDidItemsViewModel.swift */,
 				7F2C6CBD290A6EB3002963DE /* MainRouter.swift */,
+				7F4AA14D292471EE004CE62A /* SortingSupplementaryView.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -569,6 +572,7 @@
 				7FC22B6328C88AA500F83122 /* DataModel.xcdatamodeld in Sources */,
 				7F2C6CBE290A6EB3002963DE /* MainRouter.swift in Sources */,
 				7F71192B290B95FB001DFE99 /* UIColor+GradientEffect.swift in Sources */,
+				7F4AA14E292471EE004CE62A /* SortingSupplementaryView.swift in Sources */,
 				7F133C5729063BF00099E55C /* UIColor+theme.swift in Sources */,
 				504CE044253FDFAA000CC6CF /* SceneDelegate.swift in Sources */,
 				7FB6A8D828DD9B13009C61C5 /* TotalDidsCell.swift in Sources */,

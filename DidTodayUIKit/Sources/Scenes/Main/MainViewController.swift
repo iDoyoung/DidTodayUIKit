@@ -10,6 +10,7 @@ import Combine
 
 final class MainViewController: UIViewController {
     
+    static let sectionHeaderElementKind = "section-header-element-kind"
     ///Section for Did collection view in Main view controller
     private enum Section: Int, CaseIterable {
         case total, list
@@ -63,7 +64,7 @@ final class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUIComponents()
+        configureUI()
         viewModel?.fetchDids()
         bindViewModel()
     }
@@ -89,7 +90,7 @@ final class MainViewController: UIViewController {
     }
     
     //MARK: - Setup
-    private func configureUIComponents() {
+    private func configureUI() {
         setupNavigationBar()
         configureCollectionView()
         configureDataSource()
@@ -149,6 +150,13 @@ extension MainViewController: UICollectionViewDelegate {
                 group.contentInsets = NSDirectionalEdgeInsets(top: 4, leading: 12, bottom: 4, trailing: 12)
                 section = NSCollectionLayoutSection(group: group)
                 section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 12, bottom: 10, trailing: 12)
+                ///setup header
+                let sectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                               heightDimension: .absolute(100))
+                let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: sectionHeaderSize,
+                                                                                elementKind: MainViewController.sectionHeaderElementKind,
+                                                                                alignment: .top)
+                section.boundarySupplementaryItems = [sectionHeader]
             }
             return section
         }
@@ -158,6 +166,8 @@ extension MainViewController: UICollectionViewDelegate {
     private func configureDataSource() {
         let totalCellRegistration = createTotalDidsCellRegistration()
         let didListCellRegistration = createDidListCellRegistration()
+        let sortingSupplementaryRegistration = createSortingSupplementaryRegistration()
+        
         dataSource = UICollectionViewDiffableDataSource<Section, AnyHashable>(collectionView: didCollectionView) { collectionView, indexPath, item in
             guard let section = Section(rawValue: indexPath.section) else { return UICollectionViewCell() }
             switch section {
@@ -171,10 +181,14 @@ extension MainViewController: UICollectionViewDelegate {
                                                                     item: item as? MainDidItemsViewModel)
             }
         }
+        dataSource?.supplementaryViewProvider = { [weak self] supplementaryView, elementKind, indexPath in
+            return self?.didCollectionView.dequeueConfiguredReusableSupplementary(using: sortingSupplementaryRegistration,
+                                                                                  for: indexPath)
+        }
         initailSnapshot([])
     }
     
-    //MARK: - Create Cell Registration
+    //MARK: - Create Registration
     private func createTotalDidsCellRegistration() -> UICollectionView.CellRegistration<TotalDidsCell, [MainDidItemsViewModel]> {
         return UICollectionView.CellRegistration<TotalDidsCell, [MainDidItemsViewModel]> { cell, IndexPath, item in
             cell.dids = item
@@ -189,6 +203,13 @@ extension MainViewController: UICollectionViewDelegate {
             cell.timeLabel.text = item.times
             cell.timeLabel.textColor = item.color
             cell.contentLabel.text = item.content
+        }
+    }
+    
+    private func createSortingSupplementaryRegistration() -> UICollectionView.SupplementaryRegistration<SortingSupplementaryView> {
+        return UICollectionView.SupplementaryRegistration(elementKind: MainViewController.sectionHeaderElementKind) { supplementaryView, elementKind, _ in
+            ///setup button action
+            
         }
     }
     

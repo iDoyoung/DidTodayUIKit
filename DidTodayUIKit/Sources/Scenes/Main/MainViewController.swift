@@ -17,7 +17,7 @@ final class MainViewController: UIViewController {
     }
     
     var viewModel: (MainViewModelInput & MainViewModelOutput)?
-    private var cancellableBag: AnyCancellable?
+    private var cancellableBag = Set<AnyCancellable>()
     private var dataSource: UICollectionViewDiffableDataSource<Section, AnyHashable>?
     
     //MARK: - UI Objects
@@ -76,17 +76,16 @@ final class MainViewController: UIViewController {
         navigationItem.leftBarButtonItem = buttonItem
     }
     
+    //MARK: - Binding
     private func bindViewModel() {
         guard let viewModel = viewModel else { return }
-        cancellableBag = viewModel.didItemsPublisher
+        viewModel.didItemsPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] items in
-                #if DEBUG
-                print(items.count)
-                #endif
                 self?.applyDidListSnapshot(items)
                 self?.applyTotalDidSnapshot(items)
-        }
+            }
+            .store(in: &cancellableBag)
     }
     
     //MARK: - Setup
@@ -106,14 +105,13 @@ final class MainViewController: UIViewController {
     }
     
     //MARK: - Action Method
-    @objc
-    func showCalendar() {
+    @objc func showCalendar() {
         viewModel?.showCalendar()
     }
 }
 
 //MARK: - CollectionView Extentions
-extension MainViewController: UICollectionViewDelegate {
+extension MainViewController {
     /// - Tag: Configure
     private func configureCollectionView() {
         didCollectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createCollectionViewLayout())
@@ -207,9 +205,23 @@ extension MainViewController: UICollectionViewDelegate {
     }
     
     private func createSortingSupplementaryRegistration() -> UICollectionView.SupplementaryRegistration<SortingSupplementaryView> {
-        return UICollectionView.SupplementaryRegistration(elementKind: MainViewController.sectionHeaderElementKind) { supplementaryView, elementKind, _ in
+        return UICollectionView.SupplementaryRegistration(elementKind: MainViewController.sectionHeaderElementKind) { [weak self] supplementaryView, elementKind, _ in
             ///setup button action
+            guard let self = self else { return }
+            supplementaryView.recentlyButton.addTarget(self, action: #selector(self.tapRecentlyButton), for: .touchUpInside)
+            supplementaryView.muchTimeButton.addTarget(self, action: #selector(self.tapMuchTimeButton), for: .touchUpInside)
             
+            //TODO: Binding
+            ///Binding
+            self.viewModel?.isSelectedRecentlyButton
+                .receive(on: DispatchQueue.main)
+                .sink { supplementaryView.recentlyButton.isSelected  = $0 }
+                .store(in: &self.cancellableBag)
+            ///Binding Much Time Button
+            self.viewModel?.isSelectedMuchTimeButton
+                .receive(on: DispatchQueue.main)
+                .sink { supplementaryView.muchTimeButton.isSelected = $0 }
+                .store(in: &self.cancellableBag)
         }
     }
     
@@ -235,7 +247,12 @@ extension MainViewController: UICollectionViewDelegate {
         dataSource?.apply(snapshot, to: .list)
     }
     
-    /// - Tag: Delegate
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    //MARK: Button Action in Supplementary View
+    @objc func tapRecentlyButton() {
+        viewModel?.selectRecently()
+    }
+    
+    @objc func tapMuchTimeButton() {
+        viewModel?.selectMuchTime()
     }
 }

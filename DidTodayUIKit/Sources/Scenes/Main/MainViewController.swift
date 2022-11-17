@@ -79,11 +79,16 @@ final class MainViewController: UIViewController {
     //MARK: - Binding
     private func bindViewModel() {
         guard let viewModel = viewModel else { return }
+        viewModel.totalPieDids
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] items in
+                self?.applyTotalDidSnapshot(items)
+            }
+            .store(in: &cancellableBag)
         viewModel.didItemsPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] items in
                 self?.applyDidListSnapshot(items)
-                self?.applyTotalDidSnapshot(items)
             }
             .store(in: &cancellableBag)
     }
@@ -189,7 +194,7 @@ extension MainViewController {
     //MARK: - Create Registration
     private func createTotalDidsCellRegistration() -> UICollectionView.CellRegistration<TotalDidsCell, [MainDidItemsViewModel]> {
         return UICollectionView.CellRegistration<TotalDidsCell, [MainDidItemsViewModel]> { cell, IndexPath, item in
-            cell.dids = item
+            cell.setupPiesView(by: item)
         }
     }
     

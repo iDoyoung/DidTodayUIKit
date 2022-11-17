@@ -8,21 +8,15 @@
 import UIKit
 
 class TotalDidsCell: UICollectionViewCell {
-    static let reuseIdentifier = "TotalDidsCell"
-    var dids = [MainDidItemsViewModel]() {
-        didSet {
-            setupPiesView()
-            setupDescriptionLabel()
-        }
-    }
-    
-    private let piesView: UIView = {
+    static let reuseIdentifier = "total-dids-cell"
+
+    let piesView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    private let descriptionLabel: UILabel = {
+    let descriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
@@ -55,7 +49,7 @@ class TotalDidsCell: UICollectionViewCell {
     }
     
     //MARK: - Setup
-    private func setupPiesView() {
+    func setupPiesView(by dids: [MainDidItemsViewModel]) {
         dids.forEach {
             let pieView = PieView()
             pieView.frame = CGRect(origin: CGPoint(x: 0, y: 0),
@@ -68,17 +62,6 @@ class TotalDidsCell: UICollectionViewCell {
             pieView.end = $0.finishedTimes * 0.25
             piesView.addSubview(pieView)
         }
-    }
-    
-    private func setupDescriptionLabel() {
-        var description: String
-        let countOfDids = dids.count
-        let totalOfSpentTime = dids
-            .map { $0.timesToMinutes }
-            .reduce(0) { $0 + $1 }
-        let spendTimeToString = String(format: "%02d:%02d", totalOfSpentTime/60, totalOfSpentTime%60)
-        description = (countOfDids == 0 ? "Did nothing" : "Did \(dids.count) things,\nTotal \(spendTimeToString)")
-        descriptionLabel.text = description
     }
     
     private func setupLayoutConstraint() {

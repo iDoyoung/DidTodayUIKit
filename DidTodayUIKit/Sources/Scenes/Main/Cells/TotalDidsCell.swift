@@ -7,10 +7,10 @@
 
 import UIKit
 
-class TotalDidsCell: UICollectionViewCell {
+final class TotalDidsCell: UICollectionViewCell {
     static let reuseIdentifier = "total-dids-cell"
 
-    let piesView: UIView = {
+    private let piesView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -49,8 +49,8 @@ class TotalDidsCell: UICollectionViewCell {
     }
     
     //MARK: - Setup
-    func setupPiesView(by dids: [MainDidItemsViewModel]) {
-        dids.forEach {
+    func setupPiesView(by item: MainTotalOfDidsItemViewModel) {
+        item.totalOfPies.forEach {
             let pieView = PieView()
             pieView.frame = CGRect(origin: CGPoint(x: 0, y: 0),
                                    size: CGSize(width: piesView.frame.height,
@@ -58,8 +58,8 @@ class TotalDidsCell: UICollectionViewCell {
             pieView.autoresizingMask = [.flexibleWidth,
                                         .flexibleHeight]
             pieView.color = $0.color
-            pieView.start = $0.startedTimes * 0.25
-            pieView.end = $0.finishedTimes * 0.25
+            pieView.start = $0.startedTime * 0.25
+            pieView.end = $0.finishedTime * 0.25
             piesView.addSubview(pieView)
         }
     }

@@ -82,7 +82,7 @@ final class MainViewController: UIViewController {
         viewModel.totalPieDids
             .receive(on: DispatchQueue.main)
             .sink { [weak self] items in
-                self?.applyTotalDidSnapshot(items)
+                self?.applyTotalDidSnapshot([items])
             }
             .store(in: &cancellableBag)
         viewModel.didItemsPublisher
@@ -177,7 +177,7 @@ extension MainViewController {
             case .total:
                 return collectionView.dequeueConfiguredReusableCell(using: totalCellRegistration,
                                                                     for: indexPath,
-                                                                    item: item as? [MainDidItemsViewModel])
+                                                                    item: item as? MainTotalOfDidsItemViewModel)
             case .list:
                 return collectionView.dequeueConfiguredReusableCell(using: didListCellRegistration,
                                                                     for: indexPath,
@@ -188,12 +188,13 @@ extension MainViewController {
             return self?.didCollectionView.dequeueConfiguredReusableSupplementary(using: sortingSupplementaryRegistration,
                                                                                   for: indexPath)
         }
-        initailSnapshot([])
+        initailSnapshot()
     }
     
     //MARK: - Create Registration
-    private func createTotalDidsCellRegistration() -> UICollectionView.CellRegistration<TotalDidsCell, [MainDidItemsViewModel]> {
-        return UICollectionView.CellRegistration<TotalDidsCell, [MainDidItemsViewModel]> { cell, IndexPath, item in
+    private func createTotalDidsCellRegistration() -> UICollectionView.CellRegistration<TotalDidsCell, MainTotalOfDidsItemViewModel> {
+        return UICollectionView.CellRegistration<TotalDidsCell, MainTotalOfDidsItemViewModel> { cell, IndexPath, item in
+            cell.descriptionLabel.text = item.description
             cell.setupPiesView(by: item)
         }
     }
@@ -231,18 +232,18 @@ extension MainViewController {
     }
     
     //MARK: - Apply Snapshot
-    private func initailSnapshot(_ items: [MainDidItemsViewModel]) {
+    private func initailSnapshot() {
         let sections = Section.allCases
         var snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
         snapshot.appendSections(sections)
         dataSource?.apply(snapshot)
-        applyDidListSnapshot(items)
-        applyTotalDidSnapshot(items)
+        applyDidListSnapshot([])
+        applyTotalDidSnapshot([])
     }
     
-    private func applyTotalDidSnapshot(_ items: [MainDidItemsViewModel]) {
+    private func applyTotalDidSnapshot(_ items: [MainTotalOfDidsItemViewModel]) {
         var snapshot = NSDiffableDataSourceSectionSnapshot<AnyHashable>()
-        snapshot.append([items])
+        snapshot.append(items)
         dataSource?.apply(snapshot, to: .total)
     }
     

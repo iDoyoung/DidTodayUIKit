@@ -19,7 +19,7 @@ protocol MainViewModelOutput {
     var didItemsPublisher: Published<[MainDidItemsViewModel]>.Publisher { get }
     var isSelectedRecentlyButton: CurrentValueSubject<Bool, Never> { get }
     var isSelectedMuchTimeButton: CurrentValueSubject<Bool, Never> { get }
-    var totalPieDids: CurrentValueSubject<[MainDidItemsViewModel], Never> { get }
+    var totalPieDids: CurrentValueSubject<MainTotalOfDidsItemViewModel, Never> { get }
     func showCreateDid()
     func showCalendar()
 }
@@ -36,9 +36,13 @@ final class MainViewModel: MainViewModelProtocol {
         fetchedDids
             .map { $0.map { MainDidItemsViewModel($0) }}
             .sink { [weak self] items in
-                let dids = items.sorted { $0.startedTimes < $1.startedTimes }
-                self?.totalPieDids.send(dids)
-                self?.itemsListDids.send(dids)
+                self?.itemsListDids.send(items)
+            }
+            .store(in: &cancellableBag)
+        fetchedDids
+            .map { MainTotalOfDidsItemViewModel($0) }
+            .sink { [weak self] item in
+                self?.totalPieDids.send(item)
             }
             .store(in: &cancellableBag)
     }
@@ -48,7 +52,8 @@ final class MainViewModel: MainViewModelProtocol {
         didCoreDataStorage?.fetchDids { [weak self] dids, error in
             guard let self = self else { return }
             if error == nil {
-                self.fetchedDids.send(dids)
+                let output = dids.sorted { $0.started < $1.started }
+                self.fetchedDids.send(output)
 //                self.didsItem = dids
 //                    .sorted { $0.started < $1.started }
 //                    .map { MainDidItemsViewModel($0) }
@@ -89,7 +94,7 @@ final class MainViewModel: MainViewModelProtocol {
     private var fetchedDids = CurrentValueSubject<[Did], Never>([])
     var isSelectedRecentlyButton = CurrentValueSubject<Bool, Never>(true)
     var isSelectedMuchTimeButton = CurrentValueSubject<Bool, Never>(false)
-    var totalPieDids = CurrentValueSubject<[MainDidItemsViewModel], Never>([])
+    var totalPieDids = CurrentValueSubject<MainTotalOfDidsItemViewModel, Never>(MainTotalOfDidsItemViewModel([]))
     var itemsListDids = CurrentValueSubject<[MainDidItemsViewModel], Never>([])
     
     @Published private var didsItem: [MainDidItemsViewModel] = []
@@ -106,29 +111,3 @@ final class MainViewModel: MainViewModelProtocol {
         router?.showCalendar(dids)
     }
 }
-
-//private func setupPiesView() {
-//    dids.forEach {
-//        let pieView = PieView()
-//        pieView.frame = CGRect(origin: CGPoint(x: 0, y: 0),
-//                               size: CGSize(width: piesView.frame.height,
-//                                            height: piesView.frame.width))
-//        pieView.autoresizingMask = [.flexibleWidth,
-//                                    .flexibleHeight]
-//        pieView.color = $0.color
-//        pieView.start = $0.startedTimes * 0.25
-//        pieView.end = $0.finishedTimes * 0.25
-//        piesView.addSubview(pieView)
-//    }
-//}
-//
-//private func setupDescriptionLabel() {
-//    var description: String
-//    let countOfDids = dids.count
-//    let totalOfSpentTime = dids
-//        .map { $0.timesToMinutes }
-//        .reduce(0) { $0 + $1 }
-//    let spendTimeToString = String(format: "%02d:%02d", totalOfSpentTime/60, totalOfSpentTime%60)
-//    description = (countOfDids == 0 ? "Did nothing" : "Did \(dids.count) things,\nTotal \(spendTimeToString)")
-//    descriptionLabel.text = description
-//}

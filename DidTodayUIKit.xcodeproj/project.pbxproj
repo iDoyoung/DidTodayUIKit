@@ -25,6 +25,7 @@
 		7F133C632907C66A0099E55C /* FlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F133C622907C66A0099E55C /* FlowCoordinator.swift */; };
 		7F133C652907CC5A0099E55C /* SceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F133C642907CC5A0099E55C /* SceneDIContainer.swift */; };
 		7F133CA3290902EC0099E55C /* StoryboardInstantiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F133CA2290902EC0099E55C /* StoryboardInstantiable.swift */; };
+		7F135C402925FF33005156E0 /* MainTotalOfDidsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F135C3F2925FF33005156E0 /* MainTotalOfDidsViewModel.swift */; };
 		7F2C6CBE290A6EB3002963DE /* MainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2C6CBD290A6EB3002963DE /* MainRouter.swift */; };
 		7F397A6828D71E74000F89E2 /* CreateDidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F397A6728D71E74000F89E2 /* CreateDidViewController.swift */; };
 		7F397A7228D83021000F89E2 /* CreateDidViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F397A7128D83021000F89E2 /* CreateDidViewModel.swift */; };
@@ -98,6 +99,7 @@
 		7F133C622907C66A0099E55C /* FlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowCoordinator.swift; sourceTree = "<group>"; };
 		7F133C642907CC5A0099E55C /* SceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDIContainer.swift; sourceTree = "<group>"; };
 		7F133CA2290902EC0099E55C /* StoryboardInstantiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardInstantiable.swift; sourceTree = "<group>"; };
+		7F135C3F2925FF33005156E0 /* MainTotalOfDidsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTotalOfDidsViewModel.swift; sourceTree = "<group>"; };
 		7F2C6CBD290A6EB3002963DE /* MainRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouter.swift; sourceTree = "<group>"; };
 		7F397A6728D71E74000F89E2 /* CreateDidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDidViewController.swift; sourceTree = "<group>"; };
 		7F397A7128D83021000F89E2 /* CreateDidViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDidViewModel.swift; sourceTree = "<group>"; };
@@ -325,6 +327,7 @@
 				7F80EBCA28D4102500781DB4 /* MainDidItemsViewModel.swift */,
 				7F2C6CBD290A6EB3002963DE /* MainRouter.swift */,
 				7F4AA14D292471EE004CE62A /* SortingSupplementaryView.swift */,
+				7F135C3F2925FF33005156E0 /* MainTotalOfDidsViewModel.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -568,6 +571,7 @@
 				7F397A7428D86EF1000F89E2 /* Date+ToDouble.swift in Sources */,
 				7F076FC2290FC25500DF4EDC /* Date+OmittedTime.swift in Sources */,
 				7F71192D290BBC8B001DFE99 /* CalendarViewModel.swift in Sources */,
+				7F135C402925FF33005156E0 /* MainTotalOfDidsViewModel.swift in Sources */,
 				5054D6C3255A8ABE005E8850 /* Pie.swift in Sources */,
 				7FC22B6328C88AA500F83122 /* DataModel.xcdatamodeld in Sources */,
 				7F2C6CBE290A6EB3002963DE /* MainRouter.swift in Sources */,

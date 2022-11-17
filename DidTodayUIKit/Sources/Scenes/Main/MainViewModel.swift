@@ -16,10 +16,11 @@ protocol MainViewModelInput {
 }
 
 protocol MainViewModelOutput {
-    var didItemsPublisher: Published<[MainDidItemsViewModel]>.Publisher { get }
+    var totalPieDids: CurrentValueSubject<MainTotalOfDidsItemViewModel, Never> { get }
+    var didItemsList: CurrentValueSubject<[MainDidItemsViewModel], Never> { get }
     var isSelectedRecentlyButton: CurrentValueSubject<Bool, Never> { get }
     var isSelectedMuchTimeButton: CurrentValueSubject<Bool, Never> { get }
-    var totalPieDids: CurrentValueSubject<MainTotalOfDidsItemViewModel, Never> { get }
+    
     func showCreateDid()
     func showCalendar()
 }
@@ -36,7 +37,7 @@ final class MainViewModel: MainViewModelProtocol {
         fetchedDids
             .map { $0.map { MainDidItemsViewModel($0) }}
             .sink { [weak self] items in
-                self?.itemsListDids.send(items)
+                self?.didItemsList.send(items)
             }
             .store(in: &cancellableBag)
         fetchedDids
@@ -54,9 +55,6 @@ final class MainViewModel: MainViewModelProtocol {
             if error == nil {
                 let output = dids.sorted { $0.started < $1.started }
                 self.fetchedDids.send(output)
-//                self.didsItem = dids
-//                    .sorted { $0.started < $1.started }
-//                    .map { MainDidItemsViewModel($0) }
             } else {
                 //TODO: Alert 사용해서 Core Data Fetch 실패를 알려야 하나
                 #if DEBUG
@@ -83,11 +81,11 @@ final class MainViewModel: MainViewModelProtocol {
     }
     
     private func sortByRecently() {
-        didsItem.sort { $0.startedTimes < $1.startedTimes }
+        didItemsList.value.sort { $0.startedTimes < $1.startedTimes }
     }
     
     private func sortByMuchTime() {
-        didsItem.sort { ($0.finishedTimes - $0.startedTimes) < ($1.finishedTimes - $1.startedTimes) }
+        didItemsList.value.sort { ($0.finishedTimes - $0.startedTimes) < ($1.finishedTimes - $1.startedTimes) }
     }
     
     //MARK: - Output
@@ -95,12 +93,7 @@ final class MainViewModel: MainViewModelProtocol {
     var isSelectedRecentlyButton = CurrentValueSubject<Bool, Never>(true)
     var isSelectedMuchTimeButton = CurrentValueSubject<Bool, Never>(false)
     var totalPieDids = CurrentValueSubject<MainTotalOfDidsItemViewModel, Never>(MainTotalOfDidsItemViewModel([]))
-    var itemsListDids = CurrentValueSubject<[MainDidItemsViewModel], Never>([])
-    
-    @Published private var didsItem: [MainDidItemsViewModel] = []
-    var didItemsPublisher: Published<[MainDidItemsViewModel]>.Publisher {
-        $didsItem
-    }
+    var didItemsList = CurrentValueSubject<[MainDidItemsViewModel], Never>([])
     
     func showCreateDid() {
         router?.showCreateDid()

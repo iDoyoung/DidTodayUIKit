@@ -85,7 +85,7 @@ final class MainViewController: UIViewController {
                 self?.applyTotalDidSnapshot([items])
             }
             .store(in: &cancellableBag)
-        viewModel.didItemsPublisher
+        viewModel.didItemsList
             .receive(on: DispatchQueue.main)
             .sink { [weak self] items in
                 self?.applyDidListSnapshot(items)

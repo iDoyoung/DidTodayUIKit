@@ -55,7 +55,7 @@ class DidCoreDataStorageTests: XCTestCase {
     //MARK: - Tests
     func test_create_shouldCotainAddedMock_whenFetched() {
         //given
-        let mock = Seeds.Dids.mock
+        let mock = Seeds.Dids.newYearParty
         let promise = expectation(description: "")
         sut.create(mock) { did, error in
             if error == nil {

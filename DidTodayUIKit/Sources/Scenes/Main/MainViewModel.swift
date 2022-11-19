@@ -6,6 +6,7 @@
 //
 
 import Combine
+import Foundation
 
 protocol MainViewModelProtocol: MainViewModelInput, MainViewModelOutput {   }
 
@@ -53,7 +54,9 @@ final class MainViewModel: MainViewModelProtocol {
         didCoreDataStorage?.fetchDids { [weak self] dids, error in
             guard let self = self else { return }
             if error == nil {
-                let output = dids.sorted { $0.started < $1.started }
+                let output = dids
+                    .filter { $0.started.omittedTime() == Date().omittedTime()}
+                    .sorted { $0.started < $1.started }
                 self.fetchedDids.send(output)
             } else {
                 //TODO: Alert 사용해서 Core Data Fetch 실패를 알려야 하나

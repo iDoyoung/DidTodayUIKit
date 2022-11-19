@@ -88,7 +88,7 @@ final class MainViewModel: MainViewModelProtocol {
     }
     
     private func sortByMuchTime() {
-        didItemsList.value.sort { ($0.finishedTimes - $0.startedTimes) < ($1.finishedTimes - $1.startedTimes) }
+        didItemsList.value.sort { ($0.finishedTimes - $0.startedTimes) > ($1.finishedTimes - $1.startedTimes) }
     }
     
     //MARK: - Output

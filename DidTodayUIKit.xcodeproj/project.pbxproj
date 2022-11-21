@@ -20,6 +20,7 @@
 		50A450502564CA8300812F14 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 50A450522564CA8300812F14 /* Localizable.strings */; };
 		50A4505A2564CFD500812F14 /* Localize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A450592564CFD500812F14 /* Localize.swift */; };
 		7F076FC2290FC25500DF4EDC /* Date+OmittedTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F076FC1290FC25500DF4EDC /* Date+OmittedTime.swift */; };
+		7F0B97B7292B793F0071DF98 /* BoardLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0B97B6292B793F0071DF98 /* BoardLabel.swift */; };
 		7F133C47290365460099E55C /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F133C46290365460099E55C /* CalendarViewController.swift */; };
 		7F133C5729063BF00099E55C /* UIColor+theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F133C5629063BF00099E55C /* UIColor+theme.swift */; };
 		7F133C632907C66A0099E55C /* FlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F133C622907C66A0099E55C /* FlowCoordinator.swift */; };
@@ -94,6 +95,7 @@
 		50A450592564CFD500812F14 /* Localize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localize.swift; sourceTree = "<group>"; };
 		50C6A1A525B28E40001B435C /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
 		7F076FC1290FC25500DF4EDC /* Date+OmittedTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+OmittedTime.swift"; sourceTree = "<group>"; };
+		7F0B97B6292B793F0071DF98 /* BoardLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardLabel.swift; sourceTree = "<group>"; };
 		7F133C46290365460099E55C /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		7F133C5629063BF00099E55C /* UIColor+theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+theme.swift"; sourceTree = "<group>"; };
 		7F133C622907C66A0099E55C /* FlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowCoordinator.swift; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 			children = (
 				7FB6A92028E079FC009C61C5 /* Lagecy */,
 				7FC580A228D1A201008086FD /* PieView.swift */,
+				7F0B97B6292B793F0071DF98 /* BoardLabel.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -557,6 +560,7 @@
 				504CE046253FDFAA000CC6CF /* PreviousMainViewController.swift in Sources */,
 				7FC22BB828CDE19300F83122 /* MainViewController.swift in Sources */,
 				7FD2B04C2909161A0048408F /* StoryboardName.swift in Sources */,
+				7F0B97B7292B793F0071DF98 /* BoardLabel.swift in Sources */,
 				7FC22B6928C9C0E500F83122 /* Did.swift in Sources */,
 				7F133C47290365460099E55C /* CalendarViewController.swift in Sources */,
 				7F80EBC728D3245500781DB4 /* MainViewModel.swift in Sources */,

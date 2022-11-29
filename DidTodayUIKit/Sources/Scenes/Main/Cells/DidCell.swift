@@ -21,13 +21,11 @@ class DidCell: UICollectionViewCell {
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         label.font = .monospacedDigitSystemFont(ofSize: 20, weight: .medium)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     let contentLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -42,9 +40,7 @@ class DidCell: UICollectionViewCell {
     }
     
     private func configure() {
-        contentView.backgroundColor = .systemBackground
-        contentView.layer.cornerRadius = 10
-        contentView.clipsToBounds = true
+        setupContentView()
         pieView.frame = CGRect(origin: CGPoint(x: 0, y: 0),
                                size: CGSize(width: contentView.frame.height, height: contentView.frame.height))
         pieView.autoresizingMask = [.flexibleTopMargin,
@@ -54,6 +50,21 @@ class DidCell: UICollectionViewCell {
         addSubview(pieView)
         addSubview(contentLabel)
         addSubview(timeLabel)
+        setupLayoutConstraint()
+    }
+    
+    private func setupContentView() {
+        contentView.backgroundColor = .systemBackground
+        contentView.cornerRadius = 10
+        contentView.shadowOpacity = 0.5
+        contentView.shadowRadius = 2
+        contentView.shadowColor = .systemGray
+        contentView.shadowOffset = CGSize(width: 0, height: 1)
+    }
+    
+    private func setupLayoutConstraint() {
+        timeLabel.translatesAutoresizingMaskIntoConstraints = false
+        contentLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             timeLabel.topAnchor.constraint(equalTo: pieView.centerYAnchor),
             timeLabel.leadingAnchor.constraint(equalTo: pieView.trailingAnchor, constant: 8),

@@ -40,7 +40,7 @@ final class MainViewController: UIViewController {
     private lazy var quickButton: UIButton = {
         let button = UIButton()
         button.setTitle("Quick Move", for: .normal)
-        button.setTitleColor(.themeGreen, for: .normal)
+        button.setTitleColor(.customGreen, for: .normal)
         button.menu = quickMenu
         button.showsMenuAsPrimaryAction = true
         return button
@@ -100,7 +100,7 @@ final class MainViewController: UIViewController {
     private func setupNavigationBar() {
         let todayDate = Date.todayDateToString()
         let buttonItem = UIBarButtonItem(title: todayDate, style: .plain, target: self, action: #selector(showCalendar))
-        buttonItem.tintColor = .themeGreen
+        buttonItem.tintColor = .label
         navigationItem.leftBarButtonItem = buttonItem
     }
     
@@ -161,7 +161,7 @@ extension MainViewController {
     private func configureCollectionView() {
         didCollectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createCollectionViewLayout())
         didCollectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        didCollectionView.backgroundColor = .secondarySystemBackground
+        didCollectionView.backgroundColor = .customBackground
         view.addSubview(didCollectionView)
     }
     
@@ -180,6 +180,7 @@ extension MainViewController {
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
                                                                subitems: [item])
                 section = NSCollectionLayoutSection(group: group)
+                section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0)
             case .list:
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                       heightDimension: .fractionalHeight(1.0))
@@ -192,10 +193,10 @@ extension MainViewController {
                 group.interItemSpacing = .fixed(8)
                 group.contentInsets = NSDirectionalEdgeInsets(top: 4, leading: 12, bottom: 4, trailing: 12)
                 section = NSCollectionLayoutSection(group: group)
-                section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 12, bottom: 10, trailing: 12)
+                section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 12, bottom: 10, trailing: 12)
                 ///setup header
                 let sectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                               heightDimension: .absolute(100))
+                                                               heightDimension: .absolute(50))
                 let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: sectionHeaderSize,
                                                                                 elementKind: MainViewController.sectionHeaderElementKind,
                                                                                 alignment: .top)
@@ -234,7 +235,8 @@ extension MainViewController {
     //MARK: - Create Registration
     private func createTotalDidsCellRegistration() -> UICollectionView.CellRegistration<TotalDidsCell, MainTotalOfDidsItemViewModel> {
         return UICollectionView.CellRegistration<TotalDidsCell, MainTotalOfDidsItemViewModel> { cell, IndexPath, item in
-            cell.descriptionLabel.text = item.description
+            cell.descriptionCountLabel.text = item.descriptionCount
+            cell.descriptionTimeLabel.text = item.descriptionTime
             cell.setupPiesView(by: item)
         }
     }

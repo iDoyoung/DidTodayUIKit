@@ -12,15 +12,28 @@ final class TotalDidsCell: UICollectionViewCell {
 
     private let piesView: UIView = {
         let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    let descriptionLabel: UILabel = {
+    private lazy var verticalStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [descriptionCountLabel, descriptionTimeLabel])
+        stackView.axis = .vertical
+        return stackView
+    }()
+    
+    let descriptionCountLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
-        label.textColor = .white
+        label.sizeToFit()
+        label.font = .systemFont(ofSize: 25, weight: .heavy)
+        label.textColor = .customGreen
+        return label
+    }()
+    
+    let descriptionTimeLabel: UILabel = {
+        let label = UILabel()
+        label.sizeToFit()
+        label.font = .monospacedDigitSystemFont(ofSize: 50, weight: .black)
+        label.textColor = .customGreen
         return label
     }()
     
@@ -35,16 +48,8 @@ final class TotalDidsCell: UICollectionViewCell {
     }
     
     private func configure() {
-        let color = UIColor.gradientEffect(colors: [.themeGreen.withAlphaComponent(0.7),
-                                                    .themeGreen],
-                                           frame: frame,
-                                           stratPoint: CGPoint(x: 0.5,
-                                                               y: 0),
-                                           endPoint: CGPoint(x: 0.5,
-                                                             y: 1))
-        contentView.backgroundColor = color
         addSubview(piesView)
-        addSubview(descriptionLabel)
+        addSubview(verticalStackView)
         setupLayoutConstraint()
     }
     
@@ -65,15 +70,16 @@ final class TotalDidsCell: UICollectionViewCell {
     }
     
     private func setupLayoutConstraint() {
+        piesView.translatesAutoresizingMaskIntoConstraints = false
+        verticalStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             piesView.leadingAnchor.constraint(equalTo: leadingAnchor),
             piesView.heightAnchor.constraint(equalToConstant: 200),
             piesView.widthAnchor.constraint(equalToConstant: 200),
             piesView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            descriptionLabel.topAnchor.constraint(equalTo: piesView.topAnchor),
-            descriptionLabel.bottomAnchor.constraint(equalTo: piesView.bottomAnchor),
-            descriptionLabel.leadingAnchor.constraint(equalTo: piesView.trailingAnchor),
-            descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
+            verticalStackView.centerYAnchor.constraint(equalTo: piesView.centerYAnchor),
+            verticalStackView.leadingAnchor.constraint(equalTo: piesView.trailingAnchor),
+            verticalStackView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
         ])
     }
 }

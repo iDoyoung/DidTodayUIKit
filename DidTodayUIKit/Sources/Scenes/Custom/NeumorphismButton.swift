@@ -21,7 +21,7 @@ final class NeumorphismButton: UIControl {
         let label = UILabel()
         label.borderWidth = 0.5
         label.borderColor = .systemBackground
-        label.backgroundColor = .secondarySystemBackground
+        label.backgroundColor = .systemBackground
         label.text = "button"
         label.layer.masksToBounds = true
         label.cornerRadius = (frame.height - margin * 2) / 2

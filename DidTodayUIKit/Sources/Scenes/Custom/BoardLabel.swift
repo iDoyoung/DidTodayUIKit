@@ -70,6 +70,7 @@ import UIKit
     
     private func configure() {
         addSubview(label)
+        layer.masksToBounds = true
         setupConstraintsLayout()
     }
     

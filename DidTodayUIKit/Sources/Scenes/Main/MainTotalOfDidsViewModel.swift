@@ -8,7 +8,8 @@
 import UIKit
 
 struct MainTotalOfDidsItemViewModel: Hashable {
-    let description: String
+    let descriptionCount: String
+    let descriptionTime: String
     let totalOfPies: [MainPieViewModel]
     
     init(_ dids: [Did]) {
@@ -17,7 +18,8 @@ struct MainTotalOfDidsItemViewModel: Hashable {
             .map { Date.differenceToMinutes(from: $0.started, to: $0.finished) }
             .reduce(0) { $0 + $1 }
         let spendTimeToString = String(format: "%02d:%02d", totalOfSpentTime/60, totalOfSpentTime%60)
-        description = (countOfDids == 0 ? "Did nothing" : "Did \(dids.count) things,\nTotal \(spendTimeToString)")
+        descriptionCount = (countOfDids == 0 ? "Did nothing" : "Did \(dids.count) things")
+        descriptionTime = "\(spendTimeToString)"
         totalOfPies = dids.map { MainPieViewModel($0) }
     }
 }

@@ -22,13 +22,27 @@ final class MainViewController: UIViewController {
     
     //MARK: - UI Objects
     private var didCollectionView: UICollectionView!
+    
+    private lazy var startButton: NeumorphismButton = {
+        let button = NeumorphismButton(frame: CGRect(x: 0, y: 0, width: 90, height: 90))
+        button.text = "Start"
+        return button
+    }()
+    
+    private let informationLabel: BoardLabel = {
+        let label = BoardLabel()
+        label.font = .systemFont(ofSize: 18, weight: .bold)
+        label.textColor = .systemGray
+        label.texts = ["아래 버튼을 누르면 시간을 재기 시작해요", "터치하여 무슨 일이던 시작해보세요"]
+        return label
+    }()
+    
     private lazy var quickButton: UIButton = {
         let button = UIButton()
         button.setTitle("Quick Move", for: .normal)
         button.setTitleColor(.themeGreen, for: .normal)
         button.menu = quickMenu
         button.showsMenuAsPrimaryAction = true
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -51,8 +65,7 @@ final class MainViewController: UIViewController {
                          self.viewModel?.showCalendar()
                      },
             UIAction(title: "Information",
-                     image: UIImage(systemName: "info.circle")) { _ in }
-        ]
+                     image: UIImage(systemName: "info.circle")) { _ in }]
     }()
     
     //MARK: - Life Cycle
@@ -62,11 +75,26 @@ final class MainViewController: UIViewController {
         return viewController
     }
     
+    ///Primary setup
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
         viewModel?.fetchDids()
         bindViewModel()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        informationLabel.startAnimation()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        informationLabel.stopAnimation()
     }
     
     private func setupNavigationBar() {
@@ -99,13 +127,25 @@ final class MainViewController: UIViewController {
         configureCollectionView()
         configureDataSource()
         view.addSubview(quickButton)
+        view.addSubview(startButton)
+        view.addSubview(informationLabel)
         setupConstraintLayout()
     }
     
     private func setupConstraintLayout() {
+        quickButton.translatesAutoresizingMaskIntoConstraints = false
+        startButton.translatesAutoresizingMaskIntoConstraints = false
+        informationLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             quickButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            quickButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            quickButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            startButton.heightAnchor.constraint(equalToConstant: startButton.frame.height),
+            startButton.widthAnchor.constraint(equalToConstant: startButton.frame.width),
+            startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            startButton.bottomAnchor.constraint(equalTo: quickButton.topAnchor),
+            informationLabel.widthAnchor.constraint(equalToConstant: 300),
+            informationLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            informationLabel.bottomAnchor.constraint(equalTo: startButton.topAnchor, constant: -10)
         ])
     }
     

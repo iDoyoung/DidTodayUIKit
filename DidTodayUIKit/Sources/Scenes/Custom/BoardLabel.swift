@@ -89,7 +89,7 @@ private extension UILabel {
     func flipAnimation() {
         let animation = CATransition()
         animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-        animation.type = .push
+        animation.type = .moveIn
         animation.subtype = .fromTop
         animation.duration = 0.5
         layer.add(animation, forKey: CATransitionType.push.rawValue)

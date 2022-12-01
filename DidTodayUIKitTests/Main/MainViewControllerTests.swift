@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import Combine
 @testable import DidTodayUIKit
 
 class MainViewControllerTests: XCTestCase {
@@ -23,15 +24,39 @@ class MainViewControllerTests: XCTestCase {
     
     //MARK: - Test Doubles
     private class MainViewModelSpy: MainViewModelInput, MainViewModelOutput {
-        /// Input
-        var fetchDidsCalled = false
+        ///Input
+        var fetchDidsCalled  = false
+        var selectRecentlyCalled = false
+        var selectMuchTimeCalled = false
+        
         func fetchDids() {
             fetchDidsCalled = true
         }
-        /// Output
-        @Published var fetchedDids: [MainDidItemsViewModel]?
-        var fetchedDidsPublisher: Published<[MainDidItemsViewModel]?>.Publisher {
-            $fetchedDids
+        
+        func selectRecently() {
+            selectRecentlyCalled = true
+        }
+        
+        func selectMuchTime() {
+            selectMuchTimeCalled = true
+        }
+        
+        ///Output
+        var showCreateDidCalled = false
+        var showCalendarCalled = false
+        
+        var totalPieDids = CurrentValueSubject<MainTotalOfDidsItemViewModel, Never>(MainTotalOfDidsItemViewModel([]))
+        
+        var didItemsList = CurrentValueSubject<[MainDidItemsViewModel], Never>([])
+        var isSelectedRecentlyButton = CurrentValueSubject<Bool, Never>(true)
+        var isSelectedMuchTimeButton = CurrentValueSubject<Bool, Never>(true)
+        
+        func showCreateDid() {
+            showCreateDidCalled = true
+        }
+
+        func showCalendar() {
+            showCalendarCalled = true
         }
     }
     

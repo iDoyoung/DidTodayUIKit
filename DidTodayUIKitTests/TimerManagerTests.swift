@@ -54,4 +54,21 @@ final class TimerManagerTests: XCTestCase {
             XCTAssertEqual(self?.sut.count, 3)
         }
     }
+    
+    func test_startTimer_whenRestartAfterStopTimer() {
+        ///given
+        sut.configureTimer()
+        ///when
+        sut.startTimer()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+            self?.sut.stopTimer()
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak self] in
+            self?.sut.startTimer()
+        }
+        ///then
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10) { [weak self] in
+            XCTAssertEqual(self?.sut.count, 8)
+        }
+    }
 }

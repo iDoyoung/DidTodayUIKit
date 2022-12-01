@@ -18,7 +18,6 @@ final class TimerManagerTests: XCTestCase {
     }
 
     override func tearDownWithError() throws {
-        sut.timer?.cancel()
         sut = nil
         try super.tearDownWithError()
     }
@@ -29,7 +28,6 @@ final class TimerManagerTests: XCTestCase {
         sut.configureTimer()
         ///then
         XCTAssertNotNil(sut.timer)
-        sut.timer?.resume()
     }
     
     func test_startTimer_shouldCountThreeDuringThreeSeconds() {

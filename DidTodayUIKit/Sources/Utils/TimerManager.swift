@@ -30,4 +30,10 @@ final class TimerManager {
     private func countTime() {
         count += 1
     }
+    
+    deinit {
+        timer?.resume()
+        timer?.cancel()
+        timer = nil
+    }
 }

@@ -53,6 +53,8 @@
 		7FB6A8DA28DDC2C4009C61C5 /* Date+GetHoursAndMinutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6A8D928DDC2C4009C61C5 /* Date+GetHoursAndMinutes.swift */; };
 		7FB6A92328E07BE4009C61C5 /* DayLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6A92228E07BE4009C61C5 /* DayLabel.swift */; };
 		7FB6A92528E07BED009C61C5 /* MonthLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6A92428E07BED009C61C5 /* MonthLabel.swift */; };
+		7FC1159E293833250056237A /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC1159D293833250056237A /* TimerManager.swift */; };
+		7FC115A0293835190056237A /* TimerManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC1159F293835190056237A /* TimerManagerTests.swift */; };
 		7FC22B6328C88AA500F83122 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22B6128C88AA500F83122 /* DataModel.xcdatamodeld */; };
 		7FC22B6928C9C0E500F83122 /* Did.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22B6828C9C0E500F83122 /* Did.swift */; };
 		7FC22B6C28C9C9E900F83122 /* DidCoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22B6B28C9C9E900F83122 /* DidCoreDataStorage.swift */; };
@@ -129,6 +131,8 @@
 		7FB6A8D928DDC2C4009C61C5 /* Date+GetHoursAndMinutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+GetHoursAndMinutes.swift"; sourceTree = "<group>"; };
 		7FB6A92228E07BE4009C61C5 /* DayLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayLabel.swift; sourceTree = "<group>"; };
 		7FB6A92428E07BED009C61C5 /* MonthLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthLabel.swift; sourceTree = "<group>"; };
+		7FC1159D293833250056237A /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
+		7FC1159F293835190056237A /* TimerManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManagerTests.swift; sourceTree = "<group>"; };
 		7FC22B6228C88AA500F83122 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		7FC22B6828C9C0E500F83122 /* Did.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Did.swift; sourceTree = "<group>"; };
 		7FC22B6B28C9C9E900F83122 /* DidCoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidCoreDataStorage.swift; sourceTree = "<group>"; };
@@ -301,6 +305,13 @@
 			path = Calendar;
 			sourceTree = "<group>";
 		};
+		7FC11596293654400056237A /* Doing */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Doing;
+			sourceTree = "<group>";
+		};
 		7FC22B5828C71AE400F83122 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -316,11 +327,12 @@
 		7FC22B5928C71AEB00F83122 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				7FB6A91F28E079ED009C61C5 /* Custom */,
 				7FB6A8D028DD526E009C61C5 /* Legacy */,
+				7FB6A91F28E079ED009C61C5 /* Custom */,
 				7FC22B5A28C71AF500F83122 /* Main */,
 				7F133C45290364300099E55C /* Calendar */,
 				7F397A7028D82FF4000F89E2 /* CreateDid */,
+				7FC11596293654400056237A /* Doing */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -343,8 +355,8 @@
 		7FC22B5B28C71B1700F83122 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				7FD2B04A2909158A0048408F /* Namespaces */,
 				7F133CA2290902EC0099E55C /* StoryboardInstantiable.swift */,
+				7FD2B04A2909158A0048408F /* Namespaces */,
 				7F5A91C628E68CA7006B8406 /* Date Extensions */,
 				50A450592564CFD500812F14 /* Localize.swift */,
 				7F133C5629063BF00099E55C /* UIColor+theme.swift */,
@@ -352,6 +364,7 @@
 				7FF48C2A2921F4F600387FE7 /* UIView+Shadow Effect.swift */,
 				7FF48C2C2922085A00387FE7 /* UIView+Corner Radius.swift */,
 				7F0B97BA292C7ACA0071DF98 /* UIView+Border.swift */,
+				7FC1159D293833250056237A /* TimerManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -420,6 +433,7 @@
 				7F397A6428D709D3000F89E2 /* Main */,
 				7FC22B6E28CB137E00F83122 /* DidCoreDataStorageTests.swift */,
 				7FC22B7E28CB232600F83122 /* Seeds.swift */,
+				7FC1159F293835190056237A /* TimerManagerTests.swift */,
 			);
 			path = DidTodayUIKitTests;
 			sourceTree = "<group>";
@@ -560,6 +574,7 @@
 				7FF48C2D2922085A00387FE7 /* UIView+Corner Radius.swift in Sources */,
 				7FC580A328D1A201008086FD /* PieView.swift in Sources */,
 				504CE0C1254143CC000CC6CF /* AllPie.swift in Sources */,
+				7FC1159E293833250056237A /* TimerManager.swift in Sources */,
 				7F397A6828D71E74000F89E2 /* CreateDidViewController.swift in Sources */,
 				504CE0B9253FDFE9000CC6CF /* ViewModel.swift in Sources */,
 				7FB6A8D628DD89E5009C61C5 /* Date+DifferenceToString.swift in Sources */,
@@ -610,6 +625,7 @@
 				7FC22B7F28CB232600F83122 /* Seeds.swift in Sources */,
 				7FB6A8CB28DAF529009C61C5 /* CreateDidViewModelTests.swift in Sources */,
 				7FA60AE928D6FB7A0098F3D2 /* MainViewControllerTests.swift in Sources */,
+				7FC115A0293835190056237A /* TimerManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

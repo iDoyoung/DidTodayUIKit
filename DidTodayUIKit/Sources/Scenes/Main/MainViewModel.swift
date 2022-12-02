@@ -22,6 +22,7 @@ protocol MainViewModelOutput {
     var isSelectedRecentlyButton: CurrentValueSubject<Bool, Never> { get }
     var isSelectedMuchTimeButton: CurrentValueSubject<Bool, Never> { get }
     
+    func showDoing()
     func showCreateDid()
     func showCalendar()
 }
@@ -105,5 +106,9 @@ final class MainViewModel: MainViewModelProtocol {
     func showCalendar() {
         let dids = fetchedDids.value
         router?.showCalendar(dids)
+    }
+    
+    func showDoing() {
+        router?.showDoing()
     }
 }

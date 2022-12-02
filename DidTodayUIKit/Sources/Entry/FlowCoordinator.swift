@@ -11,6 +11,7 @@ protocol FlowCoordinatorDependenciesProtocol {
     func makeMainViewController(router: MainRouter) -> UIViewController
     func makeCalendarViewController(dids: [Did]) -> UIViewController
     func makeCreateDidViewController() -> UIViewController
+    func makeDoingViewController() -> UIViewController
 }
 
 final class FlowCoordinator {
@@ -26,7 +27,8 @@ final class FlowCoordinator {
     
     func start() {
         let router = MainRouter(showCalendar: showCalendar,
-                                showCreateDid: showCreateDid)
+                                showCreateDid: showCreateDid,
+                                showDoing: showDoing)
         showMain(router: router)
     }
     
@@ -43,6 +45,11 @@ final class FlowCoordinator {
     
     private func showCreateDid() {
         let viewController = dependencies.makeCreateDidViewController()
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func showDoing() {
+        let viewController = dependencies.makeDoingViewController()
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

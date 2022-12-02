@@ -53,7 +53,10 @@ final class MainViewController: UIViewController {
     private lazy var quickMenuItems: [UIAction] = {
         return [
             UIAction(title: "Start",
-                     image: UIImage(systemName: "flag.checkered")) { _ in },
+                     image: UIImage(systemName: "flag.checkered")) { [weak self] _ in
+                         guard let self = self else { return }
+                         self.viewModel?.showDoing()
+                     },
             UIAction(title: "Create Did",
                      image: UIImage(systemName: "plus")) { [weak self] _ in
                          guard let self = self else { return }

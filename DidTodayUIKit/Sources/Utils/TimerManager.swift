@@ -7,12 +7,19 @@
 
 import Foundation
 
-final class TimerManager {
+protocol TimerManagerProtocol {
+    var count: Double { get }
+    func configureTimer()
+    func startTimer()
+    func stopTimer()
+}
+
+final class TimerManager: TimerManagerProtocol {
     
     var timer: DispatchSourceTimer?
     var count: Double = 0
     
-    func configureTimer()  {
+    func configureTimer() {
         let timer = DispatchSource.makeTimerSource(queue: .main)
         timer.schedule(deadline: .now(), repeating: 1)
         timer.setEventHandler(handler: countTime)

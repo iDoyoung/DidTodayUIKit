@@ -55,6 +55,8 @@
 		7FB6A92528E07BED009C61C5 /* MonthLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6A92428E07BED009C61C5 /* MonthLabel.swift */; };
 		7FC1159E293833250056237A /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC1159D293833250056237A /* TimerManager.swift */; };
 		7FC115A0293835190056237A /* TimerManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC1159F293835190056237A /* TimerManagerTests.swift */; };
+		7FC115A229386B930056237A /* DoingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC115A129386B930056237A /* DoingViewModel.swift */; };
+		7FC115A5293875510056237A /* DoingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC115A4293875510056237A /* DoingViewModelTests.swift */; };
 		7FC22B6328C88AA500F83122 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22B6128C88AA500F83122 /* DataModel.xcdatamodeld */; };
 		7FC22B6928C9C0E500F83122 /* Did.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22B6828C9C0E500F83122 /* Did.swift */; };
 		7FC22B6C28C9C9E900F83122 /* DidCoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22B6B28C9C9E900F83122 /* DidCoreDataStorage.swift */; };
@@ -133,6 +135,8 @@
 		7FB6A92428E07BED009C61C5 /* MonthLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthLabel.swift; sourceTree = "<group>"; };
 		7FC1159D293833250056237A /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		7FC1159F293835190056237A /* TimerManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManagerTests.swift; sourceTree = "<group>"; };
+		7FC115A129386B930056237A /* DoingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoingViewModel.swift; sourceTree = "<group>"; };
+		7FC115A4293875510056237A /* DoingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoingViewModelTests.swift; sourceTree = "<group>"; };
 		7FC22B6228C88AA500F83122 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		7FC22B6828C9C0E500F83122 /* Did.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Did.swift; sourceTree = "<group>"; };
 		7FC22B6B28C9C9E900F83122 /* DidCoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidCoreDataStorage.swift; sourceTree = "<group>"; };
@@ -308,6 +312,15 @@
 		7FC11596293654400056237A /* Doing */ = {
 			isa = PBXGroup;
 			children = (
+				7FC115A129386B930056237A /* DoingViewModel.swift */,
+			);
+			path = Doing;
+			sourceTree = "<group>";
+		};
+		7FC115A3293875370056237A /* Doing */ = {
+			isa = PBXGroup;
+			children = (
+				7FC115A4293875510056237A /* DoingViewModelTests.swift */,
 			);
 			path = Doing;
 			sourceTree = "<group>";
@@ -429,8 +442,9 @@
 		7FC22B7528CB145300F83122 /* DidTodayUIKitTests */ = {
 			isa = PBXGroup;
 			children = (
-				7FB6A8C928DAF514009C61C5 /* CreateDid */,
 				7F397A6428D709D3000F89E2 /* Main */,
+				7FB6A8C928DAF514009C61C5 /* CreateDid */,
+				7FC115A3293875370056237A /* Doing */,
 				7FC22B6E28CB137E00F83122 /* DidCoreDataStorageTests.swift */,
 				7FC22B7E28CB232600F83122 /* Seeds.swift */,
 				7FC1159F293835190056237A /* TimerManagerTests.swift */,
@@ -609,6 +623,7 @@
 				7FB6A8D828DD9B13009C61C5 /* TotalDidsCell.swift in Sources */,
 				7FF48C2B2921F4F600387FE7 /* UIView+Shadow Effect.swift in Sources */,
 				7F133C632907C66A0099E55C /* FlowCoordinator.swift in Sources */,
+				7FC115A229386B930056237A /* DoingViewModel.swift in Sources */,
 				504CE0B4253FDFDF000CC6CF /* PreviousVersionModel.swift in Sources */,
 				7F133CA3290902EC0099E55C /* StoryboardInstantiable.swift in Sources */,
 				7F5A91C828E68CCF006B8406 /* Date+ToString.swift in Sources */,
@@ -623,6 +638,7 @@
 				7FC22B7D28CB145D00F83122 /* DidCoreDataStorageTests.swift in Sources */,
 				7FB6A8CF28DB00E3009C61C5 /* CreateDidViewControllerTests.swift in Sources */,
 				7FC22B7F28CB232600F83122 /* Seeds.swift in Sources */,
+				7FC115A5293875510056237A /* DoingViewModelTests.swift in Sources */,
 				7FB6A8CB28DAF529009C61C5 /* CreateDidViewModelTests.swift in Sources */,
 				7FA60AE928D6FB7A0098F3D2 /* MainViewControllerTests.swift in Sources */,
 				7FC115A0293835190056237A /* TimerManagerTests.swift in Sources */,

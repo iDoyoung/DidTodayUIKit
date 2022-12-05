@@ -10,9 +10,18 @@ import UIKit
 class DoingViewController: UIViewController, StoryboardInstantiable {
     
     var viewModel: DoingViewModelProtocol?
+    
     @IBOutlet weak var timerView: UIView!
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var timerShadowEffectView: UIView!
+    @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
+    
+    @IBAction func done(_ sender: UIButton) {
+    }
+    
+    @IBAction func cancel(_ sender: UIButton) {
+    }
     
     //MARK: Life Cycle
     override func viewDidLoad() {

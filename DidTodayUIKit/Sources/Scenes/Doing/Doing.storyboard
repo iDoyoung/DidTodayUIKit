@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
-    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,18 +15,15 @@
             <objects>
                 <viewController id="Y6W-OH-hqX" customClass="DoingViewController" customModule="DidTodayUIKit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sgx-bt-Ji8">
-                                <rect key="frame" x="20" y="253.66666666666663" width="350" height="350"/>
+                                <rect key="frame" x="20" y="79" width="353" height="353"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1jp-NY-CD9">
-                                        <rect key="frame" x="0.0" y="0.0" width="350" height="350"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="353" height="353"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="1jp-NY-CD9" secondAttribute="height" multiplier="1:1" id="WJo-aT-cdM"/>
-                                        </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
                                                 <size key="value" width="0.0" height="7"/>
@@ -48,7 +46,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Ma-d8-agg">
-                                        <rect key="frame" x="0.0" y="121.00000000000003" width="350" height="107.66666666666666"/>
+                                        <rect key="frame" x="0.0" y="122.66666666666666" width="353" height="107.66666666666666"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="90"/>
                                         <color key="textColor" name="custom.green"/>
@@ -58,12 +56,14 @@
                                 <color key="backgroundColor" name="custom.background"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="1jp-NY-CD9" secondAttribute="trailing" id="1fC-lY-Bii"/>
+                                    <constraint firstAttribute="width" secondItem="Sgx-bt-Ji8" secondAttribute="height" multiplier="1:1" id="4mc-8g-ERu"/>
                                     <constraint firstItem="1jp-NY-CD9" firstAttribute="leading" secondItem="Sgx-bt-Ji8" secondAttribute="leading" id="WGA-5r-7hf"/>
-                                    <constraint firstAttribute="width" secondItem="Sgx-bt-Ji8" secondAttribute="height" multiplier="1:1" id="eqg-Rf-W2F"/>
                                     <constraint firstItem="9Ma-d8-agg" firstAttribute="centerY" secondItem="Sgx-bt-Ji8" secondAttribute="centerY" id="f3l-ix-s3B"/>
                                     <constraint firstAttribute="trailing" secondItem="9Ma-d8-agg" secondAttribute="trailing" id="hyA-Vi-oaL"/>
+                                    <constraint firstAttribute="bottom" secondItem="1jp-NY-CD9" secondAttribute="bottom" constant="5.6843418860808015e-14" id="jDW-4j-rMR"/>
                                     <constraint firstItem="9Ma-d8-agg" firstAttribute="leading" secondItem="Sgx-bt-Ji8" secondAttribute="leading" id="pnj-aN-28g"/>
                                     <constraint firstItem="1jp-NY-CD9" firstAttribute="centerY" secondItem="Sgx-bt-Ji8" secondAttribute="centerY" id="sC4-Ap-b9z"/>
+                                    <constraint firstItem="1jp-NY-CD9" firstAttribute="top" secondItem="Sgx-bt-Ji8" secondAttribute="top" id="unQ-02-h5I"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
@@ -71,18 +71,58 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="TqH-Yv-nOY">
+                                <rect key="frame" x="100" y="763.66666666666663" width="193" height="34.333333333333371"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JuF-O4-FFn">
+                                        <rect key="frame" x="0.0" y="0.0" width="86.666666666666671" height="34.333333333333336"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Cancel"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="17"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="cancel:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="k26-YS-ZZw"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x4M-7V-xpD">
+                                        <rect key="frame" x="106.66666666666666" y="0.0" width="86.333333333333343" height="34.333333333333336"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Done"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="17"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="done:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="IZD-cJ-jOL"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="custom.background"/>
                         <constraints>
-                            <constraint firstItem="Sgx-bt-Ji8" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="6H8-CG-yYS"/>
+                            <constraint firstItem="TqH-Yv-nOY" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="100" id="3qk-ms-7FY"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Sgx-bt-Ji8" secondAttribute="trailing" constant="20" id="DBj-8R-p4c"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="TqH-Yv-nOY" secondAttribute="trailing" constant="100" id="W4q-ii-ySZ"/>
                             <constraint firstItem="Sgx-bt-Ji8" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="iYX-2G-z2j"/>
+                            <constraint firstItem="Sgx-bt-Ji8" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="tgK-Yd-5yX"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="TqH-Yv-nOY" secondAttribute="bottom" constant="20" id="xof-rg-JXs"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="timerContentView" destination="1jp-NY-CD9" id="YcI-zf-bLy"/>
+                        <outlet property="cancelButton" destination="JuF-O4-FFn" id="fDK-WX-iS1"/>
+                        <outlet property="doneButton" destination="x4M-7V-xpD" id="4xc-VJ-m6v"/>
                         <outlet property="timerLabel" destination="9Ma-d8-agg" id="kYe-Nj-evZ"/>
+                        <outlet property="timerShadowEffectView" destination="1jp-NY-CD9" id="xgP-No-Gej"/>
                         <outlet property="timerView" destination="Sgx-bt-Ji8" id="wWU-Va-mnC"/>
                     </connections>
                 </viewController>

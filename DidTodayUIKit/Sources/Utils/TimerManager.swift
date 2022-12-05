@@ -28,9 +28,15 @@ final class TimerManager: TimerManagerProtocol {
     
     func startTimer() {
         timer?.resume()
+        #if DEBUG
+        print("Start Timer at \(Date())")
+        #endif
     }
     
     func stopTimer() {
+        #if DEBUG
+        print("Stop Timer at \(Date())")
+        #endif
         timer?.suspend()
     }
     

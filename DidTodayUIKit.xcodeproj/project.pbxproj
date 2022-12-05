@@ -43,6 +43,7 @@
 		7F80EBC728D3245500781DB4 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F80EBC628D3245500781DB4 /* MainViewModel.swift */; };
 		7F80EBC928D334A000781DB4 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F80EBC828D334A000781DB4 /* MainViewModelTests.swift */; };
 		7F80EBCB28D4102500781DB4 /* MainDidItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F80EBCA28D4102500781DB4 /* MainDidItemsViewModel.swift */; };
+		7F9C0B9E293DAA8C0094C2A5 /* TimerAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9C0B9D293DAA8C0094C2A5 /* TimerAlert.swift */; };
 		7FA60AE928D6FB7A0098F3D2 /* MainViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA60AE828D6FB7A0098F3D2 /* MainViewControllerTests.swift */; };
 		7FB6A8CB28DAF529009C61C5 /* CreateDidViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6A8CA28DAF529009C61C5 /* CreateDidViewModelTests.swift */; };
 		7FB6A8CF28DB00E3009C61C5 /* CreateDidViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6A8CE28DB00E3009C61C5 /* CreateDidViewControllerTests.swift */; };
@@ -125,6 +126,7 @@
 		7F80EBC628D3245500781DB4 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		7F80EBC828D334A000781DB4 /* MainViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTests.swift; sourceTree = "<group>"; };
 		7F80EBCA28D4102500781DB4 /* MainDidItemsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDidItemsViewModel.swift; sourceTree = "<group>"; };
+		7F9C0B9D293DAA8C0094C2A5 /* TimerAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerAlert.swift; sourceTree = "<group>"; };
 		7FA60AE828D6FB7A0098F3D2 /* MainViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerTests.swift; sourceTree = "<group>"; };
 		7FB6A8CA28DAF529009C61C5 /* CreateDidViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDidViewModelTests.swift; sourceTree = "<group>"; };
 		7FB6A8CE28DB00E3009C61C5 /* CreateDidViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDidViewControllerTests.swift; sourceTree = "<group>"; };
@@ -319,6 +321,7 @@
 				7FC115A82939EAFF0056237A /* Doing.storyboard */,
 				7FC115A62939EAF50056237A /* DoingViewController.swift */,
 				7FC115A129386B930056237A /* DoingViewModel.swift */,
+				7F9C0B9D293DAA8C0094C2A5 /* TimerAlert.swift */,
 			);
 			path = Doing;
 			sourceTree = "<group>";
@@ -624,6 +627,7 @@
 				5054D6C3255A8ABE005E8850 /* Pie.swift in Sources */,
 				7FC22B6328C88AA500F83122 /* DataModel.xcdatamodeld in Sources */,
 				7F2C6CBE290A6EB3002963DE /* MainRouter.swift in Sources */,
+				7F9C0B9E293DAA8C0094C2A5 /* TimerAlert.swift in Sources */,
 				7F71192B290B95FB001DFE99 /* UIColor+GradientEffect.swift in Sources */,
 				7F4AA14E292471EE004CE62A /* SortingSupplementaryView.swift in Sources */,
 				7F133C5729063BF00099E55C /* UIColor+theme.swift in Sources */,

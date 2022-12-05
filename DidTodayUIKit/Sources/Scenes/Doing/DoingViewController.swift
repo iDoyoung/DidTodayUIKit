@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DoingViewController: UIViewController, StoryboardInstantiable {
+final class DoingViewController: UIViewController, StoryboardInstantiable {
     
     var viewModel: DoingViewModelProtocol?
     
@@ -18,15 +18,27 @@ class DoingViewController: UIViewController, StoryboardInstantiable {
     @IBOutlet weak var cancelButton: UIButton!
     
     @IBAction func done(_ sender: UIButton) {
+        present(doneTimerAlert(), animated: true)
     }
     
     @IBAction func cancel(_ sender: UIButton) {
+        present(cancelTimerAlert(), animated: true)
     }
     
     //MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTimerView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        viewModel?.startDoing()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        viewModel?.stopDoing()
     }
     
     static func create(with viewModel: DoingViewModelProtocol) -> DoingViewController {
@@ -39,5 +51,16 @@ class DoingViewController: UIViewController, StoryboardInstantiable {
         timerView.layer.masksToBounds = true
         timerView.cornerRadius = timerView.bounds.height / 2
         timerShadowEffectView.cornerRadius = timerShadowEffectView.bounds.height / 2
+    }
+}
+
+extension DoingViewController: TimerAlert {
+    
+    func cancelTimer() {
+        dismiss(animated: true)
+    }
+    
+    func doneTimer() {
+        
     }
 }

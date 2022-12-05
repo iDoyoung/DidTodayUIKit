@@ -50,6 +50,7 @@ final class FlowCoordinator {
     
     private func showDoing() {
         let viewController = dependencies.makeDoingViewController()
-        navigationController?.pushViewController(viewController, animated: true)
+        viewController.modalPresentationStyle = .fullScreen
+        navigationController?.present(viewController, animated: true)
     }
 }

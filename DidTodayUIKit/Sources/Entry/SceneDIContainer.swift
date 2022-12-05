@@ -9,7 +9,6 @@ import UIKit
 
 final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
     
-    let timerManager = TimerManager()
     //MARK: Core Data Storage
     let didCoreDataStorage = DidCoreDataStorage()
     //MARK: Main
@@ -52,7 +51,7 @@ final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
     }
     
     private func makeDoingViewModel() -> DoingViewModelProtocol {
-        let viewModel = DoingViewModel(timerManager: timerManager)
+        let viewModel = DoingViewModel(timerManager: TimerManager())
         return viewModel
     }
 }

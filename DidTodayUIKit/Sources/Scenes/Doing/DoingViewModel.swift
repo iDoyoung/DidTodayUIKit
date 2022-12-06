@@ -17,6 +17,7 @@ protocol DoingViewModelInput {
 
 protocol DoingViewModelOutput {
     var timesOfTimer: CurrentValueSubject<String, Never> { get }
+    var doneIsEnabled: CurrentValueSubject<Bool, Never> { get }
 }
 
 final class DoingViewModel: DoingViewModelProtocol {
@@ -29,9 +30,11 @@ final class DoingViewModel: DoingViewModelProtocol {
         self.timerManager = timerManager
         timerManager.configureTimer(handler: countSeconds)
         count
-            .map { count in count.toTimeWithHoursMinutes() }
             .sink { [weak self] time in
-                self?.timesOfTimer.send(time)
+                if time > 60 {
+                    self?.doneIsEnabled.send(true)
+                }
+                self?.timesOfTimer.send(time.toTimeWithHoursMinutes())
             }
             .store(in: &cancellableBag)
     }
@@ -55,4 +58,5 @@ final class DoingViewModel: DoingViewModelProtocol {
     
     //MARK: Output
     var timesOfTimer = CurrentValueSubject<String, Never>("00:00")
+    var doneIsEnabled =  CurrentValueSubject<Bool, Never>(false)
 }

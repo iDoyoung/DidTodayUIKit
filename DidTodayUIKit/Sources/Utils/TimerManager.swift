@@ -8,8 +8,7 @@
 import Foundation
 
 protocol TimerManagerProtocol {
-    var count: Double { get }
-    func configureTimer()
+    func configureTimer(handler: @escaping () -> Void)
     func startTimer()
     func stopTimer()
 }
@@ -17,12 +16,11 @@ protocol TimerManagerProtocol {
 final class TimerManager: TimerManagerProtocol {
     
     var timer: DispatchSourceTimer?
-    var count: Double = 0
     
-    func configureTimer() {
+    func configureTimer(handler: @escaping () -> Void) {
         let timer = DispatchSource.makeTimerSource(queue: .main)
         timer.schedule(deadline: .now(), repeating: 1)
-        timer.setEventHandler(handler: countTime)
+        timer.setEventHandler(handler: handler)
         self.timer = timer
     }
     
@@ -38,10 +36,6 @@ final class TimerManager: TimerManagerProtocol {
         print("Stop Timer at \(Date())")
         #endif
         timer?.suspend()
-    }
-    
-    private func countTime() {
-        count += 1
     }
     
     deinit {

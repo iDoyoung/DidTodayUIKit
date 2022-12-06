@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import Combine
 
 final class DoingViewController: UIViewController, StoryboardInstantiable {
     
     var viewModel: DoingViewModelProtocol?
+    private var cancellableBag = Set<AnyCancellable>()
     
     @IBOutlet weak var timerView: UIView!
     @IBOutlet weak var timerLabel: UILabel!
@@ -29,6 +31,7 @@ final class DoingViewController: UIViewController, StoryboardInstantiable {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTimerView()
+        bindViewModel()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -51,6 +54,15 @@ final class DoingViewController: UIViewController, StoryboardInstantiable {
         timerView.layer.masksToBounds = true
         timerView.cornerRadius = timerView.bounds.height / 2
         timerShadowEffectView.cornerRadius = timerShadowEffectView.bounds.height / 2
+    }
+    
+    private func bindViewModel() {
+        viewModel?.timesOfTimer
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] output in
+                self?.timerLabel.text = output
+            }
+            .store(in: &cancellableBag)
     }
 }
 

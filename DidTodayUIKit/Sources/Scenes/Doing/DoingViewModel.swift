@@ -11,6 +11,8 @@ import Combine
 protocol DoingViewModelProtocol: DoingViewModelInput, DoingViewModelOutput {   }
 
 protocol DoingViewModelInput {
+    func setTitle(_ title: String)
+    func setColorOfPie(red: Float, green: Float, blue: Float)
     func startDoing()
     func stopDoing()
 }
@@ -18,6 +20,8 @@ protocol DoingViewModelInput {
 protocol DoingViewModelOutput {
     var timesOfTimer: CurrentValueSubject<String, Never> { get }
     var doneIsEnabled: CurrentValueSubject<Bool, Never> { get }
+    var colorOfPie: CurrentValueSubject<Did.PieColor?, Never> { get }
+    var titleOfDid: CurrentValueSubject<String?, Never> { get }
 }
 
 final class DoingViewModel: DoingViewModelProtocol {
@@ -44,6 +48,18 @@ final class DoingViewModel: DoingViewModelProtocol {
     }
     
     //MARK: Input
+    func setTitle(_ title: String) {
+        titleOfDid.send(title)
+    }
+    
+    func setColorOfPie(red: Float, green: Float, blue: Float) {
+        let color = Did.PieColor(red: red,
+                                 green: green,
+                                 blue: blue,
+                                 alpha: 1)
+        colorOfPie.send(color)
+    }
+    
     func startDoing() {
         timerManager?.startTimer()
     }
@@ -59,4 +75,6 @@ final class DoingViewModel: DoingViewModelProtocol {
     //MARK: Output
     var timesOfTimer = CurrentValueSubject<String, Never>("00:00")
     var doneIsEnabled =  CurrentValueSubject<Bool, Never>(false)
+    var colorOfPie = CurrentValueSubject<Did.PieColor?, Never>(nil)
+    var titleOfDid = CurrentValueSubject<String?, Never>(nil)
 }

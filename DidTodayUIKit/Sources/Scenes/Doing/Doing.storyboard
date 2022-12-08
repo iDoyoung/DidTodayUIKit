@@ -61,17 +61,35 @@
                                         <color key="textColor" name="custom.green"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tdP-iG-tie" customClass="CircularLabel" customModule="DidTodayUIKit" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="353" height="353"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" name="custom.green"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="text" value="00:00"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="textSize">
+                                                <real key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="startAngle">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" name="custom.background"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="1jp-NY-CD9" secondAttribute="trailing" id="1fC-lY-Bii"/>
                                     <constraint firstAttribute="width" secondItem="Sgx-bt-Ji8" secondAttribute="height" multiplier="1:1" id="4mc-8g-ERu"/>
                                     <constraint firstItem="1jp-NY-CD9" firstAttribute="leading" secondItem="Sgx-bt-Ji8" secondAttribute="leading" id="WGA-5r-7hf"/>
+                                    <constraint firstAttribute="trailing" secondItem="tdP-iG-tie" secondAttribute="trailing" id="cfG-c8-mtJ"/>
+                                    <constraint firstAttribute="bottom" secondItem="tdP-iG-tie" secondAttribute="bottom" id="dX7-LL-nB7"/>
                                     <constraint firstItem="9Ma-d8-agg" firstAttribute="centerY" secondItem="Sgx-bt-Ji8" secondAttribute="centerY" id="f3l-ix-s3B"/>
+                                    <constraint firstItem="tdP-iG-tie" firstAttribute="leading" secondItem="Sgx-bt-Ji8" secondAttribute="leading" id="fAo-c3-sB6"/>
                                     <constraint firstAttribute="trailing" secondItem="9Ma-d8-agg" secondAttribute="trailing" id="hyA-Vi-oaL"/>
                                     <constraint firstAttribute="bottom" secondItem="1jp-NY-CD9" secondAttribute="bottom" constant="5.6843418860808015e-14" id="jDW-4j-rMR"/>
                                     <constraint firstItem="9Ma-d8-agg" firstAttribute="leading" secondItem="Sgx-bt-Ji8" secondAttribute="leading" id="pnj-aN-28g"/>
                                     <constraint firstItem="1jp-NY-CD9" firstAttribute="centerY" secondItem="Sgx-bt-Ji8" secondAttribute="centerY" id="sC4-Ap-b9z"/>
+                                    <constraint firstItem="tdP-iG-tie" firstAttribute="top" secondItem="Sgx-bt-Ji8" secondAttribute="top" id="ue0-Xf-C2N"/>
                                     <constraint firstItem="1jp-NY-CD9" firstAttribute="top" secondItem="Sgx-bt-Ji8" secondAttribute="top" id="unQ-02-h5I"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>

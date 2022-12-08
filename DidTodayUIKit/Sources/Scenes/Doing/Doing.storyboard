@@ -18,8 +18,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rHv-or-Rdn" customClass="BoardLabel" customModule="DidTodayUIKit" customModuleProvider="target">
+                                <rect key="frame" x="40" y="188.33333333333334" width="313" height="0.0"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                        <color key="value" systemColor="systemGrayColor"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sgx-bt-Ji8">
-                                <rect key="frame" x="20" y="79" width="353" height="353"/>
+                                <rect key="frame" x="20" y="208.33333333333337" width="353" height="353"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1jp-NY-CD9">
                                         <rect key="frame" x="0.0" y="0.0" width="353" height="353"/>
@@ -107,7 +116,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EVB-dD-MYI">
-                                <rect key="frame" x="313" y="492" width="60" height="60"/>
+                                <rect key="frame" x="313" y="621.33333333333337" width="60" height="60"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="chz-9a-khb"/>
@@ -128,7 +137,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title" textAlignment="center" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="5RZ-PI-7Ri">
-                                <rect key="frame" x="167" y="440" width="59.333333333333343" height="44"/>
+                                <rect key="frame" x="167" y="569.33333333333337" width="59.333333333333343" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="8li-6D-Rnn"/>
                                 </constraints>
@@ -143,7 +152,9 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="custom.background"/>
                         <constraints>
+                            <constraint firstItem="Sgx-bt-Ji8" firstAttribute="top" secondItem="rHv-or-Rdn" secondAttribute="bottom" constant="20" id="1aN-y3-0Iw"/>
                             <constraint firstItem="TqH-Yv-nOY" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="100" id="3qk-ms-7FY"/>
+                            <constraint firstItem="rHv-or-Rdn" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="40" id="ANy-57-4TM"/>
                             <constraint firstItem="5RZ-PI-7Ri" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vDu-zF-Fre" secondAttribute="leading" id="DAW-e7-Y71"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Sgx-bt-Ji8" secondAttribute="trailing" constant="20" id="DBj-8R-p4c"/>
                             <constraint firstItem="5RZ-PI-7Ri" firstAttribute="top" secondItem="Sgx-bt-Ji8" secondAttribute="bottom" constant="8" symbolic="YES" id="T2y-51-Vgz"/>
@@ -153,14 +164,16 @@
                             <constraint firstItem="5RZ-PI-7Ri" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="fnx-AI-mvE"/>
                             <constraint firstItem="Sgx-bt-Ji8" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="iYX-2G-z2j"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5RZ-PI-7Ri" secondAttribute="trailing" id="lJy-5y-pgh"/>
-                            <constraint firstItem="Sgx-bt-Ji8" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="tgK-Yd-5yX"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="rHv-or-Rdn" secondAttribute="trailing" constant="40" id="nPD-77-iup"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="TqH-Yv-nOY" secondAttribute="bottom" constant="20" id="xof-rg-JXs"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="centerY" secondItem="9Ma-d8-agg" secondAttribute="bottom" id="yZd-X5-oc9"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="cancelButton" destination="JuF-O4-FFn" id="fDK-WX-iS1"/>
                         <outlet property="colorPickerButton" destination="EVB-dD-MYI" id="Pct-VH-tHs"/>
                         <outlet property="doneButton" destination="x4M-7V-xpD" id="4xc-VJ-m6v"/>
+                        <outlet property="informationBoardLabel" destination="rHv-or-Rdn" id="6Fn-10-PMN"/>
                         <outlet property="timerLabel" destination="9Ma-d8-agg" id="kYe-Nj-evZ"/>
                         <outlet property="timerShadowEffectView" destination="1jp-NY-CD9" id="xgP-No-Gej"/>
                         <outlet property="timerView" destination="Sgx-bt-Ji8" id="wWU-Va-mnC"/>

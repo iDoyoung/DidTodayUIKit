@@ -20,6 +20,7 @@ final class DoingViewController: UIViewController, StoryboardInstantiable {
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var colorPickerButton: UIButton!
+    @IBOutlet weak var informationBoardLabel: BoardLabel!
     
     @IBAction func done(_ sender: UIButton) {
         present(doneTimerAlert(), animated: true)
@@ -39,31 +40,39 @@ final class DoingViewController: UIViewController, StoryboardInstantiable {
     //MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        createDismissKeyboardTapGesuture()
+        createDismissKeyboardTapGesture()
         setupTimerView()
+        setupInformationLabel()
         bindViewModel()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         viewModel?.startDoing()
+        informationBoardLabel.startAnimation()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         viewModel?.stopDoing()
+        informationBoardLabel.stopAnimation()
     }
     
     static func create(with viewModel: DoingViewModelProtocol) -> DoingViewController {
-        let viewControlelr = DoingViewController.instantiateViewController(storyboardName: "Doing")
-        viewControlelr.viewModel = viewModel
-        return viewControlelr
+        let viewController = DoingViewController.instantiateViewController(storyboardName: "Doing")
+        viewController.viewModel = viewModel
+        return viewController
     }
     
     private func setupTimerView() {
         timerView.layer.masksToBounds = true
         timerView.cornerRadius = timerView.bounds.height / 2
         timerShadowEffectView.cornerRadius = timerShadowEffectView.bounds.height / 2
+    }
+    
+    private func setupInformationLabel() {
+        informationBoardLabel.texts = ["앱을 닫을 경우 앱이 중지됩니다.", "1분후부터 저장 가능합니다"]
+        informationBoardLabel.font = .systemFont(ofSize: 18, weight: .bold)
     }
     
     private func bindViewModel() {
@@ -80,19 +89,19 @@ final class DoingViewController: UIViewController, StoryboardInstantiable {
         ///Bind Pie Color
         viewModel?.colorOfPie
             .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] ouput in
-                guard let ouput = ouput else { return }
-                let color = UIColor.init(red: CGFloat(ouput.red),
-                                         green: CGFloat(ouput.green),
-                                         blue: CGFloat(ouput.blue),
-                                         alpha: CGFloat(ouput.alpha))
+            .sink(receiveValue: { [weak self] output in
+                guard let output = output else { return }
+                let color = UIColor.init(red: CGFloat(output.red),
+                                         green: CGFloat(output.green),
+                                         blue: CGFloat(output.blue),
+                                         alpha: CGFloat(output.alpha))
                 self?.colorPickerButton.tintColor = color
                 self?.timerLabel.textColor = color
             })
             .store(in: &cancellableBag)
     }
     
-    private func createDismissKeyboardTapGesuture() {
+    private func createDismissKeyboardTapGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tapGesture.cancelsTouchesInView = false
         view.addGestureRecognizer(tapGesture)

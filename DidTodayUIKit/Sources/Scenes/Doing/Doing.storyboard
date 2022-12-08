@@ -76,8 +76,8 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JuF-O4-FFn">
                                         <rect key="frame" x="0.0" y="0.0" width="86.666666666666671" height="34.333333333333336"/>
-                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Cancel"/>
                                         <userDefinedRuntimeAttributes>
@@ -91,7 +91,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x4M-7V-xpD">
                                         <rect key="frame" x="106.66666666666666" y="0.0" width="86.333333333333343" height="34.333333333333336"/>
-                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Done"/>
@@ -106,34 +106,76 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EVB-dD-MYI">
+                                <rect key="frame" x="313" y="492" width="60" height="60"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="chz-9a-khb"/>
+                                    <constraint firstAttribute="height" constant="60" id="eOB-VX-u9q"/>
+                                </constraints>
+                                <color key="tintColor" name="custom.green"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="paintpalette" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30" weight="black"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="setPieColor:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="reA-cP-CZO"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title" textAlignment="center" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="5RZ-PI-7Ri">
+                                <rect key="frame" x="167" y="440" width="59.333333333333343" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="8li-6D-Rnn"/>
+                                </constraints>
+                                <color key="textColor" name="custom.green"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="Ks3-f3-bh8"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="custom.background"/>
                         <constraints>
                             <constraint firstItem="TqH-Yv-nOY" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="100" id="3qk-ms-7FY"/>
+                            <constraint firstItem="5RZ-PI-7Ri" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vDu-zF-Fre" secondAttribute="leading" id="DAW-e7-Y71"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Sgx-bt-Ji8" secondAttribute="trailing" constant="20" id="DBj-8R-p4c"/>
+                            <constraint firstItem="5RZ-PI-7Ri" firstAttribute="top" secondItem="Sgx-bt-Ji8" secondAttribute="bottom" constant="8" symbolic="YES" id="T2y-51-Vgz"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="EVB-dD-MYI" secondAttribute="trailing" constant="20" id="U7M-aZ-H7U"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="TqH-Yv-nOY" secondAttribute="trailing" constant="100" id="W4q-ii-ySZ"/>
+                            <constraint firstItem="EVB-dD-MYI" firstAttribute="top" secondItem="5RZ-PI-7Ri" secondAttribute="bottom" constant="8" symbolic="YES" id="avg-wm-ikp"/>
+                            <constraint firstItem="5RZ-PI-7Ri" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="fnx-AI-mvE"/>
                             <constraint firstItem="Sgx-bt-Ji8" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="iYX-2G-z2j"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5RZ-PI-7Ri" secondAttribute="trailing" id="lJy-5y-pgh"/>
                             <constraint firstItem="Sgx-bt-Ji8" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="tgK-Yd-5yX"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="TqH-Yv-nOY" secondAttribute="bottom" constant="20" id="xof-rg-JXs"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="cancelButton" destination="JuF-O4-FFn" id="fDK-WX-iS1"/>
+                        <outlet property="colorPickerButton" destination="EVB-dD-MYI" id="Pct-VH-tHs"/>
                         <outlet property="doneButton" destination="x4M-7V-xpD" id="4xc-VJ-m6v"/>
                         <outlet property="timerLabel" destination="9Ma-d8-agg" id="kYe-Nj-evZ"/>
                         <outlet property="timerShadowEffectView" destination="1jp-NY-CD9" id="xgP-No-Gej"/>
                         <outlet property="timerView" destination="Sgx-bt-Ji8" id="wWU-Va-mnC"/>
+                        <outlet property="titleTextField" destination="5RZ-PI-7Ri" id="ctb-5A-6oP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="135.38461538461539" y="3.5545023696682461"/>
+            <point key="canvasLocation" x="135.1145038167939" y="3.5211267605633805"/>
         </scene>
     </scenes>
     <resources>
+        <image name="paintpalette" catalog="system" width="128" height="105"/>
         <namedColor name="custom.background">
-            <color red="0.99215686274509807" green="1" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.9882352941176471" green="1" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="custom.green">
             <color red="0.0" green="0.47058823529411764" blue="0.22745098039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

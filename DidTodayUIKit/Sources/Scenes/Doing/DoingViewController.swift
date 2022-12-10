@@ -44,6 +44,7 @@ final class DoingViewController: UIViewController, StoryboardInstantiable {
         createDismissKeyboardTapGesture()
         setupTimerView()
         setupInformationLabel()
+        setupTimerLabel()
         bindViewModel()
     }
     
@@ -69,6 +70,10 @@ final class DoingViewController: UIViewController, StoryboardInstantiable {
         timerView.layer.masksToBounds = true
         timerView.cornerRadius = timerView.bounds.height / 2
         timerShadowEffectView.cornerRadius = timerShadowEffectView.bounds.height / 2
+    }
+    
+    private func setupTimerLabel() {
+        timerLabel.font = .monospacedDigitSystemFont(ofSize: 90, weight: .regular)
     }
     
     private func setupInformationLabel() {

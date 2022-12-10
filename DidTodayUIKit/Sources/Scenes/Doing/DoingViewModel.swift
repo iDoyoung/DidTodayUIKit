@@ -19,6 +19,7 @@ protocol DoingViewModelInput {
 }
 
 protocol DoingViewModelOutput {
+    var startedTime: PassthroughSubject<String, Never> { get }
     var timesOfTimer: CurrentValueSubject<String, Never> { get }
     var doneIsEnabled: CurrentValueSubject<Bool, Never> { get }
     var colorOfPie: CurrentValueSubject<Did.PieColor?, Never> { get }
@@ -95,8 +96,15 @@ final class DoingViewModel: DoingViewModelProtocol {
     }
     
     //MARK: Output
-    var startedDate: Date?
+    ///It is output?. didSet is bad choice?
+    var startedDate: Date? {
+        didSet {
+            startedTime.send("Started Time: \(startedDate?.currentTimeToString() ?? "00:00")")
+        }
+    }
     var endedDate: Date?
+    
+    var startedTime = PassthroughSubject<String, Never>()
     var timesOfTimer = CurrentValueSubject<String, Never>("00:00")
     var doneIsEnabled =  CurrentValueSubject<Bool, Never>(false)
     var colorOfPie = CurrentValueSubject<Did.PieColor?, Never>(nil)

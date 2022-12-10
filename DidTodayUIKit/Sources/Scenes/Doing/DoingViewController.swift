@@ -21,6 +21,7 @@ final class DoingViewController: UIViewController, StoryboardInstantiable {
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var colorPickerButton: UIButton!
     @IBOutlet weak var informationBoardLabel: BoardLabel!
+    @IBOutlet weak var startTimeLabel: CircularLabel!
     
     @IBAction func done(_ sender: UIButton) {
         present(doneTimerAlert(), animated: true)
@@ -98,6 +99,11 @@ final class DoingViewController: UIViewController, StoryboardInstantiable {
                 self?.colorPickerButton.tintColor = color
                 self?.timerLabel.textColor = color
             })
+            .store(in: &cancellableBag)
+        viewModel?.startedTime
+            .sink { [weak self] output in
+                self?.startTimeLabel.text = output
+            }
             .store(in: &cancellableBag)
     }
     

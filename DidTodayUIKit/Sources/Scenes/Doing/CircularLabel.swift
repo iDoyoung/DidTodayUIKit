@@ -9,7 +9,11 @@ import UIKit
 
 final class CircularLabel: UIView {
 
-    @IBInspectable var text: String?
+    @IBInspectable var text: String? {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
     @IBInspectable var textSize: CGFloat = 17
     @IBInspectable var isClockwise: Bool = true
     @IBInspectable var startAngle: CGFloat = 0

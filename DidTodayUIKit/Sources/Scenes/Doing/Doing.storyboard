@@ -66,12 +66,11 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" name="custom.green"/>
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="text" value="00:00"/>
                                             <userDefinedRuntimeAttribute type="number" keyPath="textSize">
                                                 <real key="value" value="20"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="startAngle">
-                                                <real key="value" value="0.0"/>
+                                                <real key="value" value="315"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
@@ -192,6 +191,7 @@
                         <outlet property="colorPickerButton" destination="EVB-dD-MYI" id="Pct-VH-tHs"/>
                         <outlet property="doneButton" destination="x4M-7V-xpD" id="4xc-VJ-m6v"/>
                         <outlet property="informationBoardLabel" destination="rHv-or-Rdn" id="6Fn-10-PMN"/>
+                        <outlet property="startTimeLabel" destination="tdP-iG-tie" id="3aQ-rW-S5R"/>
                         <outlet property="timerLabel" destination="9Ma-d8-agg" id="kYe-Nj-evZ"/>
                         <outlet property="timerShadowEffectView" destination="1jp-NY-CD9" id="xgP-No-Gej"/>
                         <outlet property="timerView" destination="Sgx-bt-Ji8" id="wWU-Va-mnC"/>

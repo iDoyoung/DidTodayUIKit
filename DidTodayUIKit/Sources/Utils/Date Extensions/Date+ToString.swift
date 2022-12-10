@@ -13,4 +13,11 @@ extension Date {
         dateFormatter.dateFormat = "MMM dd, yyyy"
         return dateFormatter.string(from: Date())
     }
+    
+    func currentTimeToString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .none
+        dateFormatter.timeStyle = .short
+        return dateFormatter.string(from: self)
+    }
 }

@@ -10,6 +10,12 @@ import Combine
 
 final class DoingViewController: UIViewController, StoryboardInstantiable {
     
+    enum EnableToComplete {
+        case titleIsEmpty
+        case lessThanOneMinutes
+        case enable
+    }
+    
     var viewModel: DoingViewModelProtocol?
     private var cancellableBag = Set<AnyCancellable>()
     
@@ -24,7 +30,20 @@ final class DoingViewController: UIViewController, StoryboardInstantiable {
     @IBOutlet weak var startTimeLabel: CircularLabel!
     
     @IBAction func done(_ sender: UIButton) {
-        guard let viewModel = viewModel else { return }
+        switch checkEnableDoneButtonAction() {
+        case .enable:
+            //TODO: Complete Save To Core Data
+            print("Success Create")
+        case .titleIsEmpty:
+            titleTextField.animateToShake()
+        case .lessThanOneMinutes:
+            timerLabel.animateToShake()
+        case .none:
+            #if DEBUG
+            print("View Model Is Nil")
+            #endif
+            break
+        }
     }
     
     @IBAction func cancel(_ sender: UIButton) {
@@ -107,12 +126,14 @@ final class DoingViewController: UIViewController, StoryboardInstantiable {
             .store(in: &cancellableBag)
     }
     
-    private func checkEnableDoneButtonAction() -> Bool {
-        guard let viewModel = viewModel else { return false }
-        if viewModel.titleIsEmpty.value || viewModel.isLessThanTime.value {
-            return false
+    private func checkEnableDoneButtonAction() -> EnableToComplete? {
+        guard let viewModel = viewModel else { return nil }
+        if viewModel.titleIsEmpty.value {
+            return .titleIsEmpty
+        } else if viewModel.isLessThanTime.value {
+            return .lessThanOneMinutes
         } else {
-            return true
+            return .enable
         }
     }
     

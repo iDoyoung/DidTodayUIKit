@@ -19,6 +19,18 @@ final class DoingViewController: UIViewController, StoryboardInstantiable {
     var viewModel: DoingViewModelProtocol?
     private var cancellableBag = Set<AnyCancellable>()
     
+    private var feedbackGenerator: UIFeedbackGenerator?
+    
+    private func configureFeedBackGenerator() {
+        feedbackGenerator = UINotificationFeedbackGenerator()
+        feedbackGenerator?.prepare()
+    }
+    
+    private func occurFeedback() {
+        (feedbackGenerator as? UINotificationFeedbackGenerator)?.notificationOccurred(.error)
+        feedbackGenerator = nil
+    }
+    
     @IBOutlet weak var timerView: UIView!
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var timerShadowEffectView: UIView!
@@ -28,6 +40,10 @@ final class DoingViewController: UIViewController, StoryboardInstantiable {
     @IBOutlet weak var colorPickerButton: UIButton!
     @IBOutlet weak var informationBoardLabel: BoardLabel!
     @IBOutlet weak var startTimeLabel: CircularLabel!
+   
+    @IBAction func touchDownDoneButton(_ sender: UIButton) {
+        configureFeedBackGenerator()
+    }
     
     @IBAction func done(_ sender: UIButton) {
         switch checkEnableDoneButtonAction() {
@@ -35,8 +51,10 @@ final class DoingViewController: UIViewController, StoryboardInstantiable {
             //TODO: Complete Save To Core Data
             print("Success Create")
         case .titleIsEmpty:
+            occurFeedback()
             titleTextField.animateToShake()
         case .lessThanOneMinutes:
+            occurFeedback()
             timerLabel.animateToShake()
         case .none:
             #if DEBUG
@@ -46,7 +64,11 @@ final class DoingViewController: UIViewController, StoryboardInstantiable {
         }
     }
     
-    @IBAction func cancel(_ sender: UIButton) {
+    @IBAction func cancelDone(_ sender: UIButton) {
+        feedbackGenerator = nil
+    }
+    
+    @IBAction func cancelDoing(_ sender: UIButton) {
         present(cancelTimerAlert(), animated: true)
     }
     

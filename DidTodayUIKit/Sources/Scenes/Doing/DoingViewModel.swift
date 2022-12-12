@@ -21,11 +21,12 @@ protocol DoingViewModelInput {
 protocol DoingViewModelOutput {
     var startedTime: PassthroughSubject<String, Never> { get }
     var timesOfTimer: CurrentValueSubject<String, Never> { get }
-    var doneIsEnabled: CurrentValueSubject<Bool, Never> { get }
     var colorOfPie: CurrentValueSubject<Did.PieColor?, Never> { get }
     var titleOfDid: CurrentValueSubject<String?, Never> { get }
     var isSucceededCreated: CurrentValueSubject<Bool, Never> { get }
     var error: CurrentValueSubject<CoreDataStoreError?, Never> { get }
+    var titleIsEmpty: CurrentValueSubject<Bool, Never> { get }
+    var isLessThanTime: CurrentValueSubject<Bool, Never> { get }
 }
 
 final class DoingViewModel: DoingViewModelProtocol {
@@ -39,12 +40,23 @@ final class DoingViewModel: DoingViewModelProtocol {
         self.didCoreDataStorage = didCoreDataStorage
         self.timerManager = timerManager
         timerManager.configureTimer(handler: countSeconds)
+        ///Observe Count Time
         count
             .sink { [weak self] time in
-                if time > 60 {
-                    self?.doneIsEnabled.send(true)
+                if time == 60 {
+                    self?.isLessThanTime.send(true)
                 }
                 self?.timesOfTimer.send(time.toTimeWithHoursMinutes())
+            }
+            .store(in: &cancellableBag)
+        ///Observe Title Texts
+        titleOfDid
+            .sink { [weak self] text in
+                if let text = text, !text.isEmpty {
+                    self?.titleIsEmpty.send(false)
+                } else {
+                    self?.titleIsEmpty.send(true)
+                }
             }
             .store(in: &cancellableBag)
     }
@@ -106,9 +118,10 @@ final class DoingViewModel: DoingViewModelProtocol {
     
     var startedTime = PassthroughSubject<String, Never>()
     var timesOfTimer = CurrentValueSubject<String, Never>("00:00")
-    var doneIsEnabled =  CurrentValueSubject<Bool, Never>(false)
     var colorOfPie = CurrentValueSubject<Did.PieColor?, Never>(nil)
     var titleOfDid = CurrentValueSubject<String?, Never>(nil)
     var isSucceededCreated = CurrentValueSubject<Bool, Never>(false)
     var error = CurrentValueSubject<CoreDataStoreError?, Never>(nil)
+    var titleIsEmpty =  CurrentValueSubject<Bool, Never>(true)
+    var isLessThanTime = CurrentValueSubject<Bool, Never>(true)
 }

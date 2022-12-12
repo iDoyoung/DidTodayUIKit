@@ -24,7 +24,7 @@ final class DoingViewController: UIViewController, StoryboardInstantiable {
     @IBOutlet weak var startTimeLabel: CircularLabel!
     
     @IBAction func done(_ sender: UIButton) {
-        present(doneTimerAlert(), animated: true)
+        guard let viewModel = viewModel else { return }
     }
     
     @IBAction func cancel(_ sender: UIButton) {
@@ -87,11 +87,6 @@ final class DoingViewController: UIViewController, StoryboardInstantiable {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] output in self?.timerLabel.text = output }
             .store(in: &cancellableBag)
-        ///Bind With Done Button
-        viewModel?.doneIsEnabled
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] output in }
-            .store(in: &cancellableBag)
         ///Bind Pie Color
         viewModel?.colorOfPie
             .receive(on: DispatchQueue.main)
@@ -110,6 +105,15 @@ final class DoingViewController: UIViewController, StoryboardInstantiable {
                 self?.startTimeLabel.text = output
             }
             .store(in: &cancellableBag)
+    }
+    
+    private func checkEnableDoneButtonAction() -> Bool {
+        guard let viewModel = viewModel else { return false }
+        if viewModel.titleIsEmpty.value || viewModel.isLessThanTime.value {
+            return false
+        } else {
+            return true
+        }
     }
     
     private func createDismissKeyboardTapGesture() {

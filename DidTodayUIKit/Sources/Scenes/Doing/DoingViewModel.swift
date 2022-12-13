@@ -5,14 +5,14 @@
 //  Created by Doyoung on 2022/12/01.
 //
 
-import Foundation
+import UIKit ///Is that Right?
 import Combine
 
 protocol DoingViewModelProtocol: DoingViewModelInput, DoingViewModelOutput {   }
 
 protocol DoingViewModelInput {
     func setTitle(_ title: String)
-    func setColorOfPie(red: Float, green: Float, blue: Float)
+    func setColorOfPie(_ color: UIColor)
     func startDoing()
     func stopDoing()
     func createDid()
@@ -21,7 +21,7 @@ protocol DoingViewModelInput {
 protocol DoingViewModelOutput {
     var startedTime: PassthroughSubject<String, Never> { get }
     var timesOfTimer: CurrentValueSubject<String, Never> { get }
-    var colorOfPie: CurrentValueSubject<Did.PieColor?, Never> { get }
+    var colorOfPie: CurrentValueSubject<UIColor, Never> { get }
     var titleOfDid: CurrentValueSubject<String?, Never> { get }
     var isSucceededCreated: CurrentValueSubject<Bool, Never> { get }
     var error: CurrentValueSubject<CoreDataStoreError?, Never> { get }
@@ -44,7 +44,7 @@ final class DoingViewModel: DoingViewModelProtocol {
         count
             .sink { [weak self] time in
                 if time == 60 {
-                    self?.isLessThanTime.send(true)
+                    self?.isLessThanTime.send(false)
                 }
                 self?.timesOfTimer.send(time.toTimeWithHoursMinutes())
             }
@@ -70,11 +70,7 @@ final class DoingViewModel: DoingViewModelProtocol {
         titleOfDid.send(title)
     }
     
-    func setColorOfPie(red: Float, green: Float, blue: Float) {
-        let color = Did.PieColor(red: red,
-                                 green: green,
-                                 blue: blue,
-                                 alpha: 1)
+    func setColorOfPie(_ color: UIColor) {
         colorOfPie.send(color)
     }
     
@@ -88,16 +84,20 @@ final class DoingViewModel: DoingViewModelProtocol {
     }
     
     func endDoing() {
-        endedDate = Date()
         timerManager?.stopTimer()
     }
     
     func createDid() {
         guard let startedDate = startedDate,
-              let endedDate = endedDate,
-              let title = titleOfDid.value,
-              let color = colorOfPie.value else { return }
-        let did = Did(enforced: false, started: startedDate, finished: endedDate, content: title, color: color)
+              let title = titleOfDid.value else { return }
+        let did = Did(enforced: false,
+                      started: startedDate,
+                      finished: Date(),
+                      content: title,
+                      color: Did.PieColor(red: Float(colorOfPie.value.getRedOfRGB()),
+                                          green: Float(colorOfPie.value.getGreenOfRGB()),
+                                          blue: Float(colorOfPie.value.getBlueRGB()),
+                                          alpha: Float(colorOfPie.value.getAlpha())))
         didCoreDataStorage?.create(did) { [weak self] did, error in
             if error == nil {
                 self?.isSucceededCreated.send(true)
@@ -114,11 +114,10 @@ final class DoingViewModel: DoingViewModelProtocol {
             startedTime.send("Started Time: \(startedDate?.currentTimeToString() ?? "00:00")")
         }
     }
-    var endedDate: Date?
     
     var startedTime = PassthroughSubject<String, Never>()
     var timesOfTimer = CurrentValueSubject<String, Never>("00:00")
-    var colorOfPie = CurrentValueSubject<Did.PieColor?, Never>(nil)
+    var colorOfPie = CurrentValueSubject<UIColor, Never>(.customGreen)
     var titleOfDid = CurrentValueSubject<String?, Never>(nil)
     var isSucceededCreated = CurrentValueSubject<Bool, Never>(false)
     var error = CurrentValueSubject<CoreDataStoreError?, Never>(nil)

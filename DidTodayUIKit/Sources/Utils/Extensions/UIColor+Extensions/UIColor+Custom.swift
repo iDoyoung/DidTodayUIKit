@@ -16,6 +16,10 @@ extension UIColor {
         UIColor(named: "custom.background") ?? .systemBackground
     }
     
+    class var secondaryCustomBackground: UIColor {
+        UIColor(named: "secondary.custom.background") ?? .systemBackground
+    }
+    
     class var customGreen: UIColor {
         UIColor(named: "custom.green") ?? .systemGreen
     }

@@ -25,7 +25,7 @@
 		7F0B97BB292C7ACA0071DF98 /* UIView+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0B97BA292C7ACA0071DF98 /* UIView+Border.swift */; };
 		7F0C251C29419BAE00304A0D /* CircularLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0C251B29419BAE00304A0D /* CircularLabel.swift */; };
 		7F133C47290365460099E55C /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F133C46290365460099E55C /* CalendarViewController.swift */; };
-		7F133C5729063BF00099E55C /* UIColor+theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F133C5629063BF00099E55C /* UIColor+theme.swift */; };
+		7F133C5729063BF00099E55C /* UIColor+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F133C5629063BF00099E55C /* UIColor+Custom.swift */; };
 		7F133C632907C66A0099E55C /* FlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F133C622907C66A0099E55C /* FlowCoordinator.swift */; };
 		7F133C652907CC5A0099E55C /* SceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F133C642907CC5A0099E55C /* SceneDIContainer.swift */; };
 		7F133CA3290902EC0099E55C /* StoryboardInstantiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F133CA2290902EC0099E55C /* StoryboardInstantiable.swift */; };
@@ -112,7 +112,7 @@
 		7F0B97BA292C7ACA0071DF98 /* UIView+Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Border.swift"; sourceTree = "<group>"; };
 		7F0C251B29419BAE00304A0D /* CircularLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularLabel.swift; sourceTree = "<group>"; };
 		7F133C46290365460099E55C /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
-		7F133C5629063BF00099E55C /* UIColor+theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+theme.swift"; sourceTree = "<group>"; };
+		7F133C5629063BF00099E55C /* UIColor+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Custom.swift"; sourceTree = "<group>"; };
 		7F133C622907C66A0099E55C /* FlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowCoordinator.swift; sourceTree = "<group>"; };
 		7F133C642907CC5A0099E55C /* SceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDIContainer.swift; sourceTree = "<group>"; };
 		7F133CA2290902EC0099E55C /* StoryboardInstantiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardInstantiable.swift; sourceTree = "<group>"; };
@@ -288,11 +288,10 @@
 		7F61A03A294438E10084A3F6 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				7F133C5629063BF00099E55C /* UIColor+theme.swift */,
-				7F71192A290B95FB001DFE99 /* UIColor+GradientEffect.swift */,
 				7F9C0B9F293DC1BA0094C2A5 /* Double+ToStringOfTimer.swift */,
-				7F61A039294438A50084A3F6 /* UIView+Extensions */,
 				7F5A91C628E68CA7006B8406 /* Date+Extensions */,
+				7F61A039294438A50084A3F6 /* UIView+Extensions */,
+				7FE4C06D29481F6E0048F24E /* UIColor+Extensions */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -494,6 +493,15 @@
 			path = Namespaces;
 			sourceTree = "<group>";
 		};
+		7FE4C06D29481F6E0048F24E /* UIColor+Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7F133C5629063BF00099E55C /* UIColor+Custom.swift */,
+				7F71192A290B95FB001DFE99 /* UIColor+GradientEffect.swift */,
+			);
+			path = "UIColor+Extensions";
+			sourceTree = "<group>";
+		};
 		DAB2CA619C78ADD98AADD0EB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -658,7 +666,7 @@
 				7F9C0B9E293DAA8C0094C2A5 /* TimerAlert.swift in Sources */,
 				7F71192B290B95FB001DFE99 /* UIColor+GradientEffect.swift in Sources */,
 				7F4AA14E292471EE004CE62A /* SortingSupplementaryView.swift in Sources */,
-				7F133C5729063BF00099E55C /* UIColor+theme.swift in Sources */,
+				7F133C5729063BF00099E55C /* UIColor+Custom.swift in Sources */,
 				504CE044253FDFAA000CC6CF /* SceneDelegate.swift in Sources */,
 				7FB6A8D828DD9B13009C61C5 /* TotalDidsCell.swift in Sources */,
 				7FF48C2B2921F4F600387FE7 /* UIView+Shadow Effect.swift in Sources */,

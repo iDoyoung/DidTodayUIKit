@@ -39,7 +39,7 @@ final class DoingViewController: UIViewController, StoryboardInstantiable {
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var colorPickerButton: UIButton!
     @IBOutlet weak var informationBoardLabel: BoardLabel!
-    @IBOutlet weak var startTimeLabel: CircularLabel!
+    @IBOutlet weak var startedTimeLabel: CircularLabel!
    
     @IBAction func touchDownDoneButton(_ sender: UIButton) {
         configureFeedBackGenerator()
@@ -48,8 +48,7 @@ final class DoingViewController: UIViewController, StoryboardInstantiable {
     @IBAction func done(_ sender: UIButton) {
         switch checkEnableDoneButtonAction() {
         case .enable:
-            //TODO: Complete Save To Core Data
-            print("Success Create")
+            present(doneTimerAlert(), animated: true)
         case .titleIsEmpty:
             occurFeedback()
             titleTextField.animateToShake()
@@ -140,18 +139,32 @@ final class DoingViewController: UIViewController, StoryboardInstantiable {
         viewModel?.colorOfPie
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] output in
-                guard let output = output else { return }
-                let color = UIColor.init(red: CGFloat(output.red),
-                                         green: CGFloat(output.green),
-                                         blue: CGFloat(output.blue),
-                                         alpha: CGFloat(output.alpha))
-                self?.colorPickerButton.tintColor = color
-                self?.timerLabel.textColor = color
+                self?.colorPickerButton.tintColor = output
+                self?.timerLabel.textColor = output
             })
             .store(in: &cancellableBag)
+        ///Bind StartedTime
         viewModel?.startedTime
             .sink { [weak self] output in
-                self?.startTimeLabel.text = output
+                self?.startedTimeLabel.text = output
+            }
+            .store(in: &cancellableBag)
+        ///Bind Result of Core Data
+        viewModel?.isSucceededCreated
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] result in
+                if result {
+                    self?.dismiss(animated: true)
+                }
+            }
+            .store(in: &cancellableBag)
+        viewModel?.error
+            .sink { error in
+                if error != nil {
+                    #if DEBUG
+                    print("Core Data Error: \(String(describing: error))")
+                    #endif
+                }
             }
             .store(in: &cancellableBag)
     }
@@ -185,15 +198,14 @@ extension DoingViewController: TimerAlert {
     }
     
     func doneTimer() {
-        
+        viewModel?.createDid()
     }
 }
 
 extension DoingViewController: UIColorPickerViewControllerDelegate {
     
     func colorPickerViewController(_ viewController: UIColorPickerViewController, didSelect color: UIColor, continuously: Bool) {
-        guard let colorComponents = color.cgColor.components else { return }
-        viewModel?.setColorOfPie(red: Float(colorComponents[0]), green: Float(colorComponents[1]), blue: Float(colorComponents[2]))
+        viewModel?.setColorOfPie(color)
     }
 }
 

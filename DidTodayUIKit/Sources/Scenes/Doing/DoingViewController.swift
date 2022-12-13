@@ -83,9 +83,7 @@ final class DoingViewController: UIViewController, StoryboardInstantiable {
     override func viewDidLoad() {
         super.viewDidLoad()
         createDismissKeyboardTapGesture()
-        setupTimerView()
-        setupInformationLabel()
-        setupTimerLabel()
+        setupView()
         bindViewModel()
     }
     
@@ -105,6 +103,16 @@ final class DoingViewController: UIViewController, StoryboardInstantiable {
         let viewController = DoingViewController.instantiateViewController(storyboardName: "Doing")
         viewController.viewModel = viewModel
         return viewController
+    }
+    
+    private func setupView() {
+        view.backgroundColor = UIColor.gradientEffect(colors: [.customBackground, .secondaryCustomBackground],
+                                                      frame: view.bounds,
+                                                      stratPoint: CGPoint(x: 0.5, y: 0),
+                                                      endPoint: CGPoint(x: 0.5, y: 1.3))
+        setupTimerView()
+        setupTimerLabel()
+        setupInformationLabel()
     }
     
     private func setupTimerView() {

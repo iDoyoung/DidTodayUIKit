@@ -73,6 +73,7 @@
 		7FC580A328D1A201008086FD /* PieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC580A228D1A201008086FD /* PieView.swift */; };
 		7FD2B04C2909161A0048408F /* StoryboardName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD2B04B2909161A0048408F /* StoryboardName.swift */; };
 		7FD2B05029091AD00048408F /* CreateDid.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FD2B04F29091AD00048408F /* CreateDid.storyboard */; };
+		7FE4C06F294852020048F24E /* UIColor+GetRGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE4C06E294852020048F24E /* UIColor+GetRGB.swift */; };
 		7FF48C2B2921F4F600387FE7 /* UIView+Shadow Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF48C2A2921F4F600387FE7 /* UIView+Shadow Effect.swift */; };
 		7FF48C2D2922085A00387FE7 /* UIView+Corner Radius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF48C2C2922085A00387FE7 /* UIView+Corner Radius.swift */; };
 /* End PBXBuildFile section */
@@ -160,6 +161,7 @@
 		7FC580A228D1A201008086FD /* PieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieView.swift; sourceTree = "<group>"; };
 		7FD2B04B2909161A0048408F /* StoryboardName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardName.swift; sourceTree = "<group>"; };
 		7FD2B04F29091AD00048408F /* CreateDid.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateDid.storyboard; sourceTree = "<group>"; };
+		7FE4C06E294852020048F24E /* UIColor+GetRGB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+GetRGB.swift"; sourceTree = "<group>"; };
 		7FF48C2A2921F4F600387FE7 /* UIView+Shadow Effect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shadow Effect.swift"; sourceTree = "<group>"; };
 		7FF48C2C2922085A00387FE7 /* UIView+Corner Radius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Corner Radius.swift"; sourceTree = "<group>"; };
 		ADA015A5697AC9D46CCADCEC /* Pods_DidTodayUIKit_DidTodayUIKitUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DidTodayUIKit_DidTodayUIKitUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -498,6 +500,7 @@
 			children = (
 				7F133C5629063BF00099E55C /* UIColor+Custom.swift */,
 				7F71192A290B95FB001DFE99 /* UIColor+GradientEffect.swift */,
+				7FE4C06E294852020048F24E /* UIColor+GetRGB.swift */,
 			);
 			path = "UIColor+Extensions";
 			sourceTree = "<group>";
@@ -626,6 +629,7 @@
 				50A4505A2564CFD500812F14 /* Localize.swift in Sources */,
 				7F133C652907CC5A0099E55C /* SceneDIContainer.swift in Sources */,
 				7F583F322914B73B006735AA /* DidTitleCell.swift in Sources */,
+				7FE4C06F294852020048F24E /* UIColor+GetRGB.swift in Sources */,
 				7F0B97BB292C7ACA0071DF98 /* UIView+Border.swift in Sources */,
 				7FB6A8DA28DDC2C4009C61C5 /* Date+GetHoursAndMinutes.swift in Sources */,
 				7FF48C2D2922085A00387FE7 /* UIView+Corner Radius.swift in Sources */,

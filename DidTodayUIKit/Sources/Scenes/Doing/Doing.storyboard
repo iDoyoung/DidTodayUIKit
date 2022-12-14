@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rHv-or-Rdn" customClass="BoardLabel" customModule="DidTodayUIKit" customModuleProvider="target">
-                                <rect key="frame" x="40" y="69" width="313" height="119.33333333333331"/>
+                                <rect key="frame" x="30" y="192.33333333333334" width="333" height="0.0"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="textColor">
@@ -35,7 +35,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                                <size key="value" width="0.0" height="6"/>
+                                                <size key="value" width="0.0" height="7"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
                                                 <real key="value" value="0.80000000000000004"/>
@@ -50,7 +50,7 @@
                                                 <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="7"/>
+                                                <real key="value" value="5"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
@@ -112,7 +112,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="cancel:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="k26-YS-ZZw"/>
+                                            <action selector="cancelDoing:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="eTc-d2-0Bh"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x4M-7V-xpD">
@@ -127,78 +127,36 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
+                                            <action selector="cancelDone:" destination="Y6W-OH-hqX" eventType="touchUpOutside" id="3Ze-t2-vSZ"/>
                                             <action selector="done:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="IZD-cJ-jOL"/>
                                             <action selector="touchDownDoneButton:" destination="Y6W-OH-hqX" eventType="touchDown" id="QNv-9q-Dnj"/>
-                                            <action selector="touchUpOutsideDoneButton:" destination="Y6W-OH-hqX" eventType="touchUpOutside" id="J80-kT-0hi"/>
                                         </connections>
                                     </button>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EVB-dD-MYI">
-                                <rect key="frame" x="313" y="621.33333333333337" width="60" height="60"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="chz-9a-khb"/>
-                                    <constraint firstAttribute="height" constant="60" id="eOB-VX-u9q"/>
-                                </constraints>
-                                <color key="tintColor" name="custom.green"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="paintpalette" catalog="system">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30" weight="black"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="30"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="setPieColor:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="reA-cP-CZO"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title" textAlignment="center" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="5RZ-PI-7Ri">
-                                <rect key="frame" x="167" y="569.33333333333337" width="59.333333333333343" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="8li-6D-Rnn"/>
-                                </constraints>
-                                <color key="textColor" name="custom.green"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="Ks3-f3-bh8"/>
-                                </connections>
-                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="custom.background"/>
                         <constraints>
-                            <constraint firstItem="Sgx-bt-Ji8" firstAttribute="top" secondItem="rHv-or-Rdn" secondAttribute="bottom" constant="20" id="1aN-y3-0Iw"/>
                             <constraint firstItem="TqH-Yv-nOY" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="100" id="3qk-ms-7FY"/>
-                            <constraint firstItem="rHv-or-Rdn" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="40" id="ANy-57-4TM"/>
-                            <constraint firstItem="5RZ-PI-7Ri" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vDu-zF-Fre" secondAttribute="leading" id="DAW-e7-Y71"/>
+                            <constraint firstItem="rHv-or-Rdn" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="30" id="ANy-57-4TM"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Sgx-bt-Ji8" secondAttribute="trailing" constant="20" id="DBj-8R-p4c"/>
-                            <constraint firstItem="rHv-or-Rdn" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="Ff6-JV-NMp"/>
-                            <constraint firstItem="5RZ-PI-7Ri" firstAttribute="top" secondItem="Sgx-bt-Ji8" secondAttribute="bottom" constant="8" symbolic="YES" id="T2y-51-Vgz"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="EVB-dD-MYI" secondAttribute="trailing" constant="20" id="U7M-aZ-H7U"/>
+                            <constraint firstItem="Sgx-bt-Ji8" firstAttribute="top" secondItem="rHv-or-Rdn" secondAttribute="bottom" constant="16" id="Lmm-48-hsj"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="TqH-Yv-nOY" secondAttribute="trailing" constant="100" id="W4q-ii-ySZ"/>
-                            <constraint firstItem="EVB-dD-MYI" firstAttribute="top" secondItem="5RZ-PI-7Ri" secondAttribute="bottom" constant="8" symbolic="YES" id="avg-wm-ikp"/>
-                            <constraint firstItem="5RZ-PI-7Ri" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="fnx-AI-mvE"/>
                             <constraint firstItem="Sgx-bt-Ji8" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="iYX-2G-z2j"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5RZ-PI-7Ri" secondAttribute="trailing" id="lJy-5y-pgh"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="rHv-or-Rdn" secondAttribute="trailing" constant="40" id="nPD-77-iup"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="rHv-or-Rdn" secondAttribute="trailing" constant="30" id="nPD-77-iup"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="TqH-Yv-nOY" secondAttribute="bottom" constant="20" id="xof-rg-JXs"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="centerY" secondItem="9Ma-d8-agg" secondAttribute="bottom" id="yZd-X5-oc9"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="cancelButton" destination="JuF-O4-FFn" id="fDK-WX-iS1"/>
-                        <outlet property="colorPickerButton" destination="EVB-dD-MYI" id="Pct-VH-tHs"/>
                         <outlet property="doneButton" destination="x4M-7V-xpD" id="4xc-VJ-m6v"/>
                         <outlet property="informationBoardLabel" destination="rHv-or-Rdn" id="6Fn-10-PMN"/>
-                        <outlet property="startTimeLabel" destination="tdP-iG-tie" id="3aQ-rW-S5R"/>
+                        <outlet property="startedTimeLabel" destination="tdP-iG-tie" id="3aQ-rW-S5R"/>
                         <outlet property="timerLabel" destination="9Ma-d8-agg" id="kYe-Nj-evZ"/>
                         <outlet property="timerShadowEffectView" destination="1jp-NY-CD9" id="xgP-No-Gej"/>
                         <outlet property="timerView" destination="Sgx-bt-Ji8" id="wWU-Va-mnC"/>
-                        <outlet property="titleTextField" destination="5RZ-PI-7Ri" id="ctb-5A-6oP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -207,7 +165,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="paintpalette" catalog="system" width="128" height="105"/>
         <namedColor name="custom.background">
             <color red="0.9882352941176471" green="1" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -215,7 +172,7 @@
             <color red="0.0" green="0.47058823529411764" blue="0.22745098039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="secondary.custom.background">
-            <color red="0.94901960784313721" green="0.96078431372549022" blue="0.92941176470588238" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.87058823529411766" green="0.88235294117647056" blue="0.85098039215686272" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

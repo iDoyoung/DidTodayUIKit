@@ -10,7 +10,7 @@ import Combine
 
 final class CreateDidViewController: UIViewController, StoryboardInstantiable {
     var viewModel: (CreateDidViewModelInput & CreateDidViewModelOutput)?
-    var cancellableBag = Set<AnyCancellable>()
+    private var cancellableBag = Set<AnyCancellable>()
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var pieView: PieView!
@@ -28,31 +28,16 @@ final class CreateDidViewController: UIViewController, StoryboardInstantiable {
     
     @IBAction func setStartedTime(_ sender: UIDatePicker) {
         endedTimePicker.minimumDate = sender.date
-        viewModel?.startedTime = sender.date
+        viewModel?.startedTime.send(sender.date)
     }
     
     @IBAction func setEndedTime(_ sender: UIDatePicker) {
         startedTimePicker.maximumDate = sender.date
-        viewModel?.endedTime = sender.date
+        viewModel?.endedTime.send(sender.date)
     }
     
     @IBAction func addDid(_ sender: UIButton) {
-        viewModel?.createDid { [weak self] result in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                switch result {
-                case .success:
-                    self.present(self.successAddingAlert(), animated: true)
-                case .failure(let error):
-                    switch error {
-                    case .coreDataError:
-                        self.present(self.errorAlert(), animated: true)
-                    case .startedTimeError:
-                        self.present(self.failedAddingAlert(), animated: true)
-                    }
-                }
-            }
-        }
+        viewModel?.createDid()
     }
     
     static func create(with viewModel: CreateDidViewModelProtocol) -> CreateDidViewController {
@@ -78,76 +63,31 @@ final class CreateDidViewController: UIViewController, StoryboardInstantiable {
     private func setupUIObjects() {
         titleTextField.delegate = self
         scrollView.keyboardDismissMode = .onDrag
-        setupTextFieldAction()
         setupDatePicker()
     }
-    
-    private func setupTextFieldAction() {
-        titleTextField.addAction(textFieldAction(), for: .editingChanged)
-    }
-    
+   
     private func setupDatePicker() {
         endedTimePicker.minimumDate = startedTimePicker.date
         endedTimePicker.maximumDate = Date()
         startedTimePicker.maximumDate = endedTimePicker.date
     }
     
-    private func textFieldAction() -> UIAction {
-        return UIAction { [weak self] _ in
-            guard let self = self else {
-                #if DEBUG
-                print("\(String(describing: self)) IS NIL")
-                #endif
-                return
-            }
-            self.viewModel?.title = self.titleTextField.text
-        }
-    }
-    
     private func bindViewModel() {
-        viewModel?.titlePublisher
-            .sink { [weak self] title in
-                guard let self = self else { return }
-                if let title = title,
-                   title.trimmingCharacters(in: .whitespaces).isEmpty == false {
-                    self.addButton.isEnabled = true
-                } else {
-                    self.addButton.isEnabled = false
-                }
+        viewModel?.degreeOfStartedTime
+            .sink { [weak self] output in
+                guard let output = output else { return }
+                self?.pieView.start = output
             }
             .store(in: &cancellableBag)
-        viewModel?.startedTimePublished
-            .compactMap {
-                $0?.timesCalculateToMinutes()
-            }
-            .map {
-                Double($0) * 0.25
-            }
-            .sink { [weak self] time in
-                self?.pieView.start = time
-                #if DEBUG
-                print("SET STARTED TIME \(time)")
-                #endif
+        viewModel?.degreeOfEndedTime
+            .sink { [weak self] output in
+                guard let output = output else { return }
+                self?.pieView.end = output
             }
             .store(in: &cancellableBag)
-        viewModel?.endedTimePublished
-            .compactMap {
-                $0?.timesCalculateToMinutes()
-            }
-            .map {
-                Double($0) * 0.25
-            }
-            .sink { [weak self] time in
-                self?.pieView.end = time
-                #if DEBUG
-                print("SET ENDED TIME: \(time)")
-                #endif
-            }
-            .store(in: &cancellableBag)
-        viewModel?.colorPublished
-            .compactMap { $0 }
-            .sink { [weak self] color in
-                self?.pieView.color = color
+        viewModel?.colorOfPie
+            .sink { [weak self] output in
+                self?.pieView.color = output
             }
             .store(in: &cancellableBag)
     }
@@ -188,7 +128,7 @@ extension CreateDidViewController {
 
 extension CreateDidViewController: UIColorPickerViewControllerDelegate {
     func colorPickerViewController(_ viewController: UIColorPickerViewController, didSelect color: UIColor, continuously: Bool) {
-        viewModel?.color = color
+        viewModel?.setColorOfPie(color)
     }
 }
 

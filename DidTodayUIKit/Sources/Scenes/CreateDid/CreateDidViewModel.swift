@@ -61,7 +61,7 @@ final class CreateDidViewModel: CreateDidViewModelProtocol {
     
     //MARK: - Input(Property vs Method)
     var startedTime = CurrentValueSubject<Date?, Never>(nil)
-    var endedTime = CurrentValueSubject<Date?, Never>(nil)
+    var endedTime = CurrentValueSubject<Date?, Never>(Date())
 
     func setTitle(_ title: String) {
         titleOfDid.send(title)

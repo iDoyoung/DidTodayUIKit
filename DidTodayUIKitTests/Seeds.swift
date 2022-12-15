@@ -9,7 +9,7 @@ import XCTest
 @testable import DidTodayUIKit
 
 struct Seeds {
-    
+   
     struct Dids {
         
         private static var calendar = Calendar.current
@@ -47,5 +47,10 @@ struct Seeds {
                                          green: 0,
                                          blue: 0,
                                          alpha: 0)
+    }
+    
+    struct MockDate {
+        static let midnight = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: Date())
+        static let noon = Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: Date())
     }
 }

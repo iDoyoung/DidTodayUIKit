@@ -54,18 +54,30 @@ class CreateDidViewModelTests: XCTestCase {
     }
     
     //MARK: - Tests
-    func test_setTitle() {
+    
+    ///Test Set Title
+    func test_setTitle_shouldSendInputToOutputOfTitleAndNotTitleIsEmpty_whenTextIsNotEmpty() {
         let text = "Mock"
         sut.setTitle(text)
         XCTAssertEqual(text, sut.titleOfDid.value)
+        XCTAssertFalse(sut.titleIsEmpty.value)
     }
     
+    func test_setTitle_shouldSendInputToOutputOfTitleAndTitleIsEmptyIsTrue_whenTextIsEmpty() {
+        let text = ""
+        sut.setTitle(text)
+        XCTAssertEqual(text, sut.titleOfDid.value)
+        XCTAssert(sut.titleIsEmpty.value)
+    }
+   
+    ///Test Set Color
     func test_setColorOfPie() {
         let themeColor = UIColor.themeGreen
         sut.setColorOfPie(themeColor)
         XCTAssertEqual(themeColor, sut.colorOfPie.value)
     }
     
+    ///Test Set Time
     func test_degreeOfStartedTime_whenTimeIsMidnight() {
         let midnight = Seeds.MockDate.midnight
         sut.startedTime.send(midnight)
@@ -100,6 +112,7 @@ class CreateDidViewModelTests: XCTestCase {
         XCTAssertNil(sut.degreeOfEndedTime.value)
     }
     
+    ///Test Create
     func test_createShouldBeCompletedCallCoreDataStorage_whenInputAllAndErrorIsNil() {
         ///given
         let text = "Title"

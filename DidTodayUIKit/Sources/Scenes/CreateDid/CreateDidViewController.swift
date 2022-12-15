@@ -134,7 +134,21 @@ extension CreateDidViewController: UIColorPickerViewControllerDelegate {
 
 extension CreateDidViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        scrollView.scrollToBottom()
+        scrollView.scrollsToTop = true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let text = textField.text else { return }
+        if !text.trimmingCharacters(in: .whitespaces).isEmpty {
+            viewModel?.setTitle(text)
+        } else {
+            textField.text = ""
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return false
     }
 }
 

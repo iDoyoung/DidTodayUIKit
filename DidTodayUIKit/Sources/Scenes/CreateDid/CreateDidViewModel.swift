@@ -16,75 +16,87 @@ enum CreateDidError: Error {
 protocol CreateDidViewModelProtocol: CreateDidViewModelInput, CreateDidViewModelOutput {    }
 
 protocol CreateDidViewModelInput {
-    func setTitle(_ title: String)
-    func setStartedTime(_ date: Date)
-    func setEndedTime(_ date: Date)
-    func setColorOfPie(_ color: UIColor)
+    var startedTime: CurrentValueSubject<Date?, Never> { get }
+    var endedTime: CurrentValueSubject<Date?, Never> { get }
     
-    func createDid(completion: @escaping (Result<Did, CreateDidError>) -> Void)
+    func setTitle(_ title: String)
+    func setColorOfPie(_ color: UIColor)
+    func createDid()
 }
 
 protocol CreateDidViewModelOutput {
     var titleOfDid: CurrentValueSubject<String?, Never> { get }
     var colorOfPie: CurrentValueSubject<UIColor, Never> { get }
-    var startedTime: PassthroughSubject<Date, Never> { get }
-    var endedTime: PassthroughSubject<Date, Never> { get }
+    var degreeOfStartedTime: CurrentValueSubject<Double?, Never> { get }
+    var degreeOfEndedTime: CurrentValueSubject<Double?, Never> { get }
+    var isCompleted: CurrentValueSubject<Bool, Never> { get }
+    var error: CurrentValueSubject<CoreDataStoreError?, Never> { get }
 }
 
 final class CreateDidViewModel: CreateDidViewModelProtocol {
-   
+    
     var didCoreDataStorage: DidCoreDataStorable?
+    private var cancellableBag = Set<AnyCancellable>()
     
     init(didCoreDataStorage: DidCoreDataStorable) {
         self.didCoreDataStorage = didCoreDataStorage
+        
+        startedTime
+            .compactMap { $0?.timesCalculateToMinutes() }
+            .map { Double($0) * 0.25 }
+            .sink { [weak self] output in
+                self?.degreeOfStartedTime.send(output)
+            }
+            .store(in: &cancellableBag)
+        
+        endedTime
+            .compactMap { $0?.timesCalculateToMinutes() }
+            .map { Double($0) * 0.25 }
+            .sink { [weak self] output in
+                self?.degreeOfEndedTime.send(output)
+            }
+            .store(in: &cancellableBag)
     }
     
-    //MARK: - Input
+    //MARK: - Input(Property vs Method)
+    var startedTime = CurrentValueSubject<Date?, Never>(nil)
+    var endedTime = CurrentValueSubject<Date?, Never>(nil)
+
     func setTitle(_ title: String) {
         titleOfDid.send(title)
     }
     
-    func setStartedTime(_ date: Date) {
-        startedTime.send(date)
-    }
-    
-    func setEndedTime(_ date: Date) {
-        endedTime.send(date)
-    }
-     
     func setColorOfPie(_ color: UIColor) {
         colorOfPie.send(color)
     }
     
-    func createDid(completion: @escaping (Result<Did, CreateDidError>) -> Void) {
-        guard let startedTime = startedTime,
-              let endedTime = endedTime,
-              let title = title,
-              let color = color?.cgColor.components else {
-            completion(.failure(CreateDidError.startedTimeError))
+    func createDid() {
+        guard let startedTime = startedTime.value,
+              let endedTime = endedTime.value,
+              let title = titleOfDid.value else {
             return
         }
-        let pieColor = Did.PieColor(red: Float(color[0]),
-                                    green: Float(color[1]),
-                                    blue: Float(color[2]),
-                                    alpha: Float(color[3]))
-        let did = Did(enforced: true,
-                      started: startedTime,
+        let did = Did(started: startedTime,
                       finished: endedTime,
                       content: title,
-                      color: pieColor)
-        didCoreDataStorage?.create(did) { did, error in
-            if let error = error {
-                completion(.failure(CreateDidError.coreDataError(error)))
+                      color:  Did.PieColor(red: Float(colorOfPie.value.getRedOfRGB()),
+                                           green: Float(colorOfPie.value.getGreenOfRGB()),
+                                           blue: Float(colorOfPie.value.getBlueRGB()),
+                                           alpha: Float(colorOfPie.value.getAlpha())))
+        didCoreDataStorage?.create(did) { [weak self] did, error in
+            if error == nil {
+                self?.isCompleted.send(true)
             } else {
-                completion(.success(did))
+                self?.error.send(error)
             }
         }
     }
     
     //MARK: - Output
     var titleOfDid = CurrentValueSubject<String?, Never>(nil)
-    var startedTime = PassthroughSubject<Date, Never>()
-    var endedTime = PassthroughSubject<Date, Never>()
+    var degreeOfStartedTime = CurrentValueSubject<Double?, Never>(nil)
+    var degreeOfEndedTime = CurrentValueSubject<Double?, Never>(nil)
     var colorOfPie = CurrentValueSubject<UIColor, Never>(.customGreen)
+    var isCompleted = CurrentValueSubject<Bool, Never>(false)
+    var error = CurrentValueSubject<CoreDataStoreError?, Never>(nil)
 }

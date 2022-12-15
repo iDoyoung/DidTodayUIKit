@@ -26,6 +26,7 @@ protocol CreateDidViewModelInput {
 
 protocol CreateDidViewModelOutput {
     var titleOfDid: CurrentValueSubject<String?, Never> { get }
+    var titleIsEmpty: CurrentValueSubject<Bool, Never> { get }
     var colorOfPie: CurrentValueSubject<UIColor, Never> { get }
     var degreeOfStartedTime: CurrentValueSubject<Double?, Never> { get }
     var degreeOfEndedTime: CurrentValueSubject<Double?, Never> { get }
@@ -64,6 +65,11 @@ final class CreateDidViewModel: CreateDidViewModelProtocol {
 
     func setTitle(_ title: String) {
         titleOfDid.send(title)
+        if title.isEmpty {
+            titleIsEmpty.send(true)
+        } else {
+            titleIsEmpty.send(false)
+        }
     }
     
     func setColorOfPie(_ color: UIColor) {
@@ -94,6 +100,7 @@ final class CreateDidViewModel: CreateDidViewModelProtocol {
     
     //MARK: - Output
     var titleOfDid = CurrentValueSubject<String?, Never>(nil)
+    var titleIsEmpty = CurrentValueSubject<Bool, Never>(true)
     var degreeOfStartedTime = CurrentValueSubject<Double?, Never>(nil)
     var degreeOfEndedTime = CurrentValueSubject<Double?, Never>(nil)
     var colorOfPie = CurrentValueSubject<UIColor, Never>(.customGreen)

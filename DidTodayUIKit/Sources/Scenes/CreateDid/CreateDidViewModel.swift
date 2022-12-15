@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 enum CreateDidError: Error {
     case startedTimeError
@@ -15,22 +16,23 @@ enum CreateDidError: Error {
 protocol CreateDidViewModelProtocol: CreateDidViewModelInput, CreateDidViewModelOutput {    }
 
 protocol CreateDidViewModelInput {
-    var startedTime: Date? { get set }
-    var endedTime: Date? { get set }
-    var color: UIColor? { get set }
-    var title: String? { get set }
+    func setTitle(_ title: String)
+    func setStartedTime(_ date: Date)
+    func setEndedTime(_ date: Date)
+    func setColorOfPie(_ color: UIColor)
     
     func createDid(completion: @escaping (Result<Did, CreateDidError>) -> Void)
 }
 
 protocol CreateDidViewModelOutput {
-    var startedTimePublished: Published<Date?>.Publisher { get }
-    var endedTimePublished: Published<Date?>.Publisher { get }
-    var colorPublished: Published<UIColor?>.Publisher { get }
-    var titlePublisher: Published<String?>.Publisher { get }
+    var titleOfDid: CurrentValueSubject<String?, Never> { get }
+    var colorOfPie: CurrentValueSubject<UIColor, Never> { get }
+    var startedTime: PassthroughSubject<Date, Never> { get }
+    var endedTime: PassthroughSubject<Date, Never> { get }
 }
 
 final class CreateDidViewModel: CreateDidViewModelProtocol {
+   
     var didCoreDataStorage: DidCoreDataStorable?
     
     init(didCoreDataStorage: DidCoreDataStorable) {
@@ -38,10 +40,21 @@ final class CreateDidViewModel: CreateDidViewModelProtocol {
     }
     
     //MARK: - Input
-    @Published var startedTime: Date? = Date()
-    @Published var endedTime: Date? = Date()
-    @Published var color: UIColor? = .green
-    @Published var title: String?
+    func setTitle(_ title: String) {
+        titleOfDid.send(title)
+    }
+    
+    func setStartedTime(_ date: Date) {
+        startedTime.send(date)
+    }
+    
+    func setEndedTime(_ date: Date) {
+        endedTime.send(date)
+    }
+     
+    func setColorOfPie(_ color: UIColor) {
+        colorOfPie.send(color)
+    }
     
     func createDid(completion: @escaping (Result<Did, CreateDidError>) -> Void) {
         guard let startedTime = startedTime,
@@ -70,8 +83,8 @@ final class CreateDidViewModel: CreateDidViewModelProtocol {
     }
     
     //MARK: - Output
-    var startedTimePublished: Published<Date?>.Publisher { $startedTime }
-    var endedTimePublished: Published<Date?>.Publisher { $endedTime }
-    var colorPublished: Published<UIColor?>.Publisher { $color }
-    var titlePublisher: Published<String?>.Publisher { $title }
+    var titleOfDid = CurrentValueSubject<String?, Never>(nil)
+    var startedTime = PassthroughSubject<Date, Never>()
+    var endedTime = PassthroughSubject<Date, Never>()
+    var colorOfPie = CurrentValueSubject<UIColor, Never>(.customGreen)
 }

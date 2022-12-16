@@ -44,7 +44,8 @@ final class FlowCoordinator {
     }
     
     private func showCreateDid() {
-        let viewController = dependencies.makeCreateDidViewController()
+        let viewController = UINavigationController(rootViewController: dependencies.makeCreateDidViewController())
+        viewController.navigationBar.tintColor = .label
         viewController.modalPresentationStyle = .fullScreen
         navigationController?.present(viewController, animated: true)
     }

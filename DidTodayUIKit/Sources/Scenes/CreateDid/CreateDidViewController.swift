@@ -62,10 +62,19 @@ final class CreateDidViewController: UIViewController, StoryboardInstantiable {
     //MARK: - Setup
     private func setupUIObjects() {
         titleTextField.delegate = self
+        setupNavigationBar()
         scrollView.keyboardDismissMode = .onDrag
         setupDatePicker()
     }
    
+    private func setupNavigationBar() {
+        let imageConfiguration = UIImage.SymbolConfiguration(pointSize: 20, weight: .black, scale: .default)
+        let xmarkImage = UIImage(systemName: "xmark", withConfiguration: imageConfiguration)
+        let rightBarButton = UIBarButtonItem(image: xmarkImage, style: .plain, target: self, action: #selector(closeView))
+        navigationItem.rightBarButtonItem = rightBarButton
+        title = "Create Did"
+    }
+    
     private func setupDatePicker() {
         endedTimePicker.minimumDate = startedTimePicker.date
         endedTimePicker.maximumDate = Date()
@@ -108,6 +117,10 @@ final class CreateDidViewController: UIViewController, StoryboardInstantiable {
                 }
             }
             .store(in: &cancellableBag)
+    }
+    
+    @objc func closeView() {
+        present(discardToCreateDidAlert(), animated: true)
     }
 }
 

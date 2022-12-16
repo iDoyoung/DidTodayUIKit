@@ -9,6 +9,7 @@ import UIKit
 import Combine
 
 final class CreateDidViewController: UIViewController, StoryboardInstantiable {
+    
     var viewModel: (CreateDidViewModelInput & CreateDidViewModelOutput)?
     private var cancellableBag = Set<AnyCancellable>()
     
@@ -37,18 +38,17 @@ final class CreateDidViewController: UIViewController, StoryboardInstantiable {
     }
     
     @IBAction func addDid(_ sender: UIButton) {
-        viewModel?.createDid()
+        guard let viewModel = viewModel else { return }
+        if viewModel.titleIsEmpty.value {
+            titleTextField.animateToShake()
+        } else {
+            viewModel.createDid()
+        }
     }
-    
+   
+    //MARK: - Life cycle
     static func create(with viewModel: CreateDidViewModelProtocol) -> CreateDidViewController {
         let viewController = CreateDidViewController.instantiateViewController(storyboardName: StoryboardName.createDid)
-        viewController.viewModel = viewModel
-        return viewController
-    }
-    
-    //MARK: - Life cycle
-    static func create(with viewModel: CreateDidViewModel) -> CreateDidViewController {
-        let viewController = CreateDidViewController.instantiateViewController(storyboardName: "CreateDid")
         viewController.viewModel = viewModel
         return viewController
     }
@@ -90,39 +90,6 @@ final class CreateDidViewController: UIViewController, StoryboardInstantiable {
                 self?.pieView.color = output
             }
             .store(in: &cancellableBag)
-    }
-}
-
-//MARK: - Alert Action
-extension CreateDidViewController {
-    //TODO: - Add Message When Compleate UI
-    func successAddingAlert() -> UIAlertController {
-        let alert = UIAlertController(title: "Succeeded adding",
-                                      message: "",
-                                      preferredStyle: .alert)
-        let confirmAction = UIAlertAction(title: "OK", style: .cancel) { [weak self] _ in
-            self?.navigationController?.popViewController(animated: true)
-        }
-        alert.addAction(confirmAction)
-        return alert
-    }
-    
-    func failedAddingAlert() -> UIAlertController {
-        let alert = UIAlertController(title: "Failed adding",
-                                      message: "",
-                                      preferredStyle: .alert)
-        let confirmAction = UIAlertAction(title: "OK", style: .cancel)
-        alert.addAction(confirmAction)
-        return alert
-    }
-    
-    func errorAlert() -> UIAlertController {
-        let alert = UIAlertController(title: "Error",
-                                      message: "",
-                                      preferredStyle: .alert)
-        let confirmAction = UIAlertAction(title: "OK", style: .cancel)
-        alert.addAction(confirmAction)
-        return alert
     }
 }
 

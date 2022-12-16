@@ -42,7 +42,7 @@ final class CreateDidViewController: UIViewController, StoryboardInstantiable {
         if viewModel.titleIsEmpty.value {
             titleTextField.animateToShake()
         } else {
-            viewModel.createDid()
+            present(completeToCreateDidAlert(), animated: true)
         }
     }
    
@@ -93,6 +93,15 @@ final class CreateDidViewController: UIViewController, StoryboardInstantiable {
     }
 }
 
+extension UIScrollView {
+    func scrollToBottom() {
+        let bottomOffset = CGPoint(x: 0, y: contentSize.height - bounds.size.height + contentInset.bottom)
+        if(bottomOffset.y > 0) {
+            setContentOffset(bottomOffset, animated: true)
+        }
+    }
+}
+
 extension CreateDidViewController: UIColorPickerViewControllerDelegate {
     func colorPickerViewController(_ viewController: UIColorPickerViewController, didSelect color: UIColor, continuously: Bool) {
         viewModel?.setColorOfPie(color)
@@ -119,11 +128,13 @@ extension CreateDidViewController: UITextFieldDelegate {
     }
 }
 
-extension UIScrollView {
-    func scrollToBottom() {
-        let bottomOffset = CGPoint(x: 0, y: contentSize.height - bounds.size.height + contentInset.bottom)
-        if(bottomOffset.y > 0) {
-            setContentOffset(bottomOffset, animated: true)
-        }
+extension CreateDidViewController: CreateDidAlert {
+    
+    func completeToCreateDid() {
+        viewModel?.createDid()
+    }
+    
+    func discardToCreateDid() {
+        dismiss(animated: true)
     }
 }

@@ -90,6 +90,13 @@ final class CreateDidViewController: UIViewController, StoryboardInstantiable {
                 self?.pieView.color = output
             }
             .store(in: &cancellableBag)
+        viewModel?.isCompleted
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isCompleted in
+                if isCompleted {
+                }
+            }
+            .store(in: &cancellableBag)
     }
 }
 

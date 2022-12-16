@@ -94,6 +94,15 @@ final class CreateDidViewController: UIViewController, StoryboardInstantiable {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] isCompleted in
                 if isCompleted {
+                    self?.dismiss(animated: true)
+                }
+            }
+            .store(in: &cancellableBag)
+        viewModel?.error
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] ouput in
+                if ouput != nil {
+                   //TODO Error Alert
                 }
             }
             .store(in: &cancellableBag)

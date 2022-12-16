@@ -13,6 +13,8 @@ final class CreateDidViewController: UIViewController, StoryboardInstantiable {
     var viewModel: (CreateDidViewModelInput & CreateDidViewModelOutput)?
     private var cancellableBag = Set<AnyCancellable>()
     
+    private var feedbackGenerator: UIFeedbackGenerator?
+    
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var pieView: PieView!
     @IBOutlet weak var titleTextField: UITextField!
@@ -37,13 +39,33 @@ final class CreateDidViewController: UIViewController, StoryboardInstantiable {
         viewModel?.endedTime.send(sender.date)
     }
     
-    @IBAction func addDid(_ sender: UIButton) {
+    @IBAction func tryToCreateAdd(_ sender: UIButton) {
+        configureFeedbackGenerator()
+    }
+    
+    @IBAction func createDid(_ sender: UIButton) {
         guard let viewModel = viewModel else { return }
         if viewModel.titleIsEmpty.value {
             titleTextField.animateToShake()
+            occurFeedback()
         } else {
             present(completeToCreateDidAlert(), animated: true)
         }
+    }
+    
+    @IBAction func skipCreateDid(_ sender: UIButton) {
+        feedbackGenerator = nil
+    }
+    
+    ///For Feedback Generator
+    private func configureFeedbackGenerator() {
+        feedbackGenerator = UINotificationFeedbackGenerator()
+        feedbackGenerator?.prepare()
+    }
+    
+    private func occurFeedback() {
+        (feedbackGenerator as? UINotificationFeedbackGenerator)?.notificationOccurred(.error)
+        feedbackGenerator = nil
     }
    
     //MARK: - Life cycle

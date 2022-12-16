@@ -156,7 +156,9 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="addDid:" destination="w56-Zd-vuv" eventType="touchUpInside" id="elj-Pm-MJD"/>
+                                    <action selector="createDid:" destination="w56-Zd-vuv" eventType="touchUpInside" id="c51-9a-s27"/>
+                                    <action selector="skipCreateDid:" destination="w56-Zd-vuv" eventType="touchUpOutside" id="fuH-AI-MUD"/>
+                                    <action selector="tryToCreateAdd:" destination="w56-Zd-vuv" eventType="touchDown" id="7WL-TK-WKm"/>
                                 </connections>
                             </button>
                         </subviews>

@@ -100,9 +100,11 @@ final class CreateDidViewController: UIViewController, StoryboardInstantiable {
             .store(in: &cancellableBag)
         viewModel?.error
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] ouput in
-                if ouput != nil {
-                   //TODO Error Alert
+            .sink { [weak self] output in
+                guard let self = self else { return }
+                if output != nil {
+                    //TODO: Understanding Core Data Error
+                    self.present(self.errorAlert(), animated: true)
                 }
             }
             .store(in: &cancellableBag)

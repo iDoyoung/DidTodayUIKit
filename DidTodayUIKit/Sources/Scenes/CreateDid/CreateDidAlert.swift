@@ -39,4 +39,14 @@ extension CreateDidAlert {
         alert.addAction(disCardAction)
         return alert
     }
+    
+    //TODO: Understanding Core Data Error
+    func errorAlert() -> UIAlertController {
+        let alert = UIAlertController(title: CreateDidViewText.errorAlertTitle,
+                                      message: CreateDidViewText.errorMessage,
+                                      preferredStyle: .alert)
+        let okAction = UIAlertAction(title: CreateDidViewText.okActionTitle, style: .default)
+        alert.addAction(okAction)
+        return alert
+    }
 }

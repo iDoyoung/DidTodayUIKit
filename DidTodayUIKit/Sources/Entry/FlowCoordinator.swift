@@ -45,7 +45,7 @@ final class FlowCoordinator {
     
     private func showCreateDid() {
         let viewController = dependencies.makeCreateDidViewController()
-        navigationController?.pushViewController(viewController, animated: true)
+        navigationController?.present(viewController, animated: true)
     }
     
     private func showDoing() {

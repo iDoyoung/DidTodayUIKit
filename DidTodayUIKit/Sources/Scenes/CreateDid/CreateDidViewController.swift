@@ -78,6 +78,7 @@ final class CreateDidViewController: UIViewController, StoryboardInstantiable {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUIObjects()
+        createDismissKeyboardTapGesture()
         bindViewModel()
     }
     
@@ -139,6 +140,16 @@ final class CreateDidViewController: UIViewController, StoryboardInstantiable {
                 }
             }
             .store(in: &cancellableBag)
+    }
+    
+    private func createDismissKeyboardTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
+    }
+ 
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     @objc func closeView() {

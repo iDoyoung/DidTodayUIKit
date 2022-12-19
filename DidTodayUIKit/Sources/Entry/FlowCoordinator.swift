@@ -10,7 +10,7 @@ import UIKit
 protocol FlowCoordinatorDependenciesProtocol {
     func makeMainViewController(router: MainRouter) -> UIViewController
     func makeCalendarViewController(dids: [Did]) -> UIViewController
-    func makeCreateDidViewController() -> UIViewController
+    func makeCreateDidViewController(startedDate: Date?, endedDate: Date?) -> UIViewController
     func makeDoingViewController() -> UIViewController
 }
 
@@ -44,7 +44,7 @@ final class FlowCoordinator {
     }
     
     private func showCreateDid(startedDate: Date? = nil, endedDate: Date? = nil) {
-        let viewController = UINavigationController(rootViewController: dependencies.makeCreateDidViewController())
+        let viewController = UINavigationController(rootViewController: dependencies.makeCreateDidViewController(startedDate: startedDate, endedDate: endedDate))
         viewController.navigationBar.tintColor = .label
         viewController.modalPresentationStyle = .fullScreen
         navigationController?.present(viewController, animated: true)

@@ -87,7 +87,7 @@ final class CreateDidViewController: UIViewController, StoryboardInstantiable {
         titleTextField.delegate = self
         setupNavigationBar()
         scrollView.keyboardDismissMode = .onDrag
-        setupDatePicker()
+        setupDatePickers()
     }
    
     private func setupNavigationBar() {
@@ -98,13 +98,16 @@ final class CreateDidViewController: UIViewController, StoryboardInstantiable {
         title = "Create Did"
     }
     
-    private func setupDatePicker() {
+    private func setupDatePickers() {
         guard let viewModel = viewModel else { return }
         startedTimePicker.date = viewModel.initialStartedTime()
         endedTimePicker.date = viewModel.initialEndedTime()
         endedTimePicker.minimumDate = startedTimePicker.date
         endedTimePicker.maximumDate = Date()
         startedTimePicker.maximumDate = endedTimePicker.date
+        //FIXME: -
+        viewModel.startedTime.send(startedTimePicker.date)
+        viewModel.endedTime.send(endedTimePicker.date)
     }
     
     private func bindViewModel() {

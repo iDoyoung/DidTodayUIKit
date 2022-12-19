@@ -80,7 +80,6 @@ final class CreateDidViewController: UIViewController, StoryboardInstantiable {
         setupUIObjects()
         createDismissKeyboardTapGesture()
         bindViewModel()
-        startedTimePicker.date = Calendar.current.startOfDay(for: Date())
     }
     
     //MARK: - Setup
@@ -100,6 +99,9 @@ final class CreateDidViewController: UIViewController, StoryboardInstantiable {
     }
     
     private func setupDatePicker() {
+        guard let viewModel = viewModel else { return }
+        startedTimePicker.date = viewModel.initialStartedTime()
+        endedTimePicker.date = viewModel.initialEndedTime()
         endedTimePicker.minimumDate = startedTimePicker.date
         endedTimePicker.maximumDate = Date()
         startedTimePicker.maximumDate = endedTimePicker.date

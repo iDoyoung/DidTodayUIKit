@@ -32,6 +32,8 @@ protocol CreateDidViewModelOutput {
     var degreeOfEndedTime: CurrentValueSubject<Double?, Never> { get }
     var isCompleted: CurrentValueSubject<Bool, Never> { get }
     var error: CurrentValueSubject<CoreDataStoreError?, Never> { get }
+    func initialStartedTime() -> Date
+    func initialEndedTime() -> Date
 }
 
 final class CreateDidViewModel: CreateDidViewModelProtocol {
@@ -39,7 +41,7 @@ final class CreateDidViewModel: CreateDidViewModelProtocol {
     var didCoreDataStorage: DidCoreDataStorable?
     private var cancellableBag = Set<AnyCancellable>()
     
-    init(didCoreDataStorage: DidCoreDataStorable) {
+    init(didCoreDataStorage: DidCoreDataStorable, startedDate: Date?, endedDate: Date?) {
         self.didCoreDataStorage = didCoreDataStorage
         
         startedTime
@@ -57,6 +59,9 @@ final class CreateDidViewModel: CreateDidViewModelProtocol {
                 self?.degreeOfEndedTime.send(output)
             }
             .store(in: &cancellableBag)
+        
+        startedTime.send(startedDate)
+        endedTime.send(endedDate)
     }
     
     //MARK: - Input(Property vs Method)
@@ -106,4 +111,21 @@ final class CreateDidViewModel: CreateDidViewModelProtocol {
     var colorOfPie = CurrentValueSubject<UIColor, Never>(.customGreen)
     var isCompleted = CurrentValueSubject<Bool, Never>(false)
     var error = CurrentValueSubject<CoreDataStoreError?, Never>(nil)
+    
+    func initialStartedTime() -> Date {
+        let startOfDay = Calendar.current.startOfDay(for: Date())
+        if let startedTime = startedTime.value {
+            return startedTime
+        } else {
+            return startOfDay
+        }
+    }
+    
+    func initialEndedTime() -> Date {
+        if let endedTime = endedTime.value {
+            return endedTime
+        } else {
+            return Date()
+        }
+    }
 }

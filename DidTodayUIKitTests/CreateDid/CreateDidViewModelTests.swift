@@ -16,7 +16,6 @@ class CreateDidViewModelTests: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         didCoreDataStorageSpy = DidCoreDataStorageSpy()
-        sut = CreateDidViewModel(didCoreDataStorage: didCoreDataStorageSpy)
     }
 
     override func tearDownWithError() throws {
@@ -42,12 +41,15 @@ class CreateDidViewModelTests: XCTestCase {
             createDidCalled = true
             completion(did, error)
         }
+        
         func fetchDids(completion: @escaping ([Did], CoreDataStoreError?) -> Void) {
             fetchDidsCalled = true
         }
+        
         func update(_ did: Did, completion: @escaping (Did, CoreDataStoreError?) -> Void) {
             updateDidCalled = true
         }
+        
         func delete(_ did: Did, completion: @escaping (Did, CoreDataStoreError?) -> Void) {
             deleteDidCalled = true
         }
@@ -57,6 +59,7 @@ class CreateDidViewModelTests: XCTestCase {
     
     ///Test Set Title
     func test_setTitle_shouldSendInputToOutputOfTitleAndNotTitleIsEmpty_whenTextIsNotEmpty() {
+        sut = CreateDidViewModel(didCoreDataStorage: didCoreDataStorageSpy, startedDate: nil, endedDate: nil)
         let text = "Mock"
         sut.setTitle(text)
         XCTAssertEqual(text, sut.titleOfDid.value)
@@ -64,6 +67,7 @@ class CreateDidViewModelTests: XCTestCase {
     }
     
     func test_setTitle_shouldSendInputToOutputOfTitleAndTitleIsEmptyIsTrue_whenTextIsEmpty() {
+        sut = CreateDidViewModel(didCoreDataStorage: didCoreDataStorageSpy, startedDate: nil, endedDate: nil)
         let text = ""
         sut.setTitle(text)
         XCTAssertEqual(text, sut.titleOfDid.value)
@@ -72,6 +76,7 @@ class CreateDidViewModelTests: XCTestCase {
    
     ///Test Set Color
     func test_setColorOfPie() {
+        sut = CreateDidViewModel(didCoreDataStorage: didCoreDataStorageSpy, startedDate: nil, endedDate: nil)
         let themeColor = UIColor.themeGreen
         sut.setColorOfPie(themeColor)
         XCTAssertEqual(themeColor, sut.colorOfPie.value)
@@ -79,41 +84,48 @@ class CreateDidViewModelTests: XCTestCase {
     
     ///Test Set Time
     func test_degreeOfStartedTime_whenTimeIsMidnight() {
+        sut = CreateDidViewModel(didCoreDataStorage: didCoreDataStorageSpy, startedDate: nil, endedDate: nil)
         let midnight = Seeds.MockDate.midnight
         sut.startedTime.send(midnight)
         XCTAssertEqual(sut.degreeOfStartedTime.value, 0)
     }
     
     func test_degreeOfStartedTime_whenTimeIsNoon() {
+        sut = CreateDidViewModel(didCoreDataStorage: didCoreDataStorageSpy, startedDate: nil, endedDate: nil)
         let noon = Seeds.MockDate.noon
         sut.startedTime.send(noon)
         XCTAssertEqual(sut.degreeOfStartedTime.value, 180)
     }
     
     func test_degreeOfEndedTime_whenTimeIsMidnight() {
+        sut = CreateDidViewModel(didCoreDataStorage: didCoreDataStorageSpy, startedDate: nil, endedDate: nil)
         let midnight = Seeds.MockDate.midnight
         sut.startedTime.send(midnight)
         XCTAssertEqual(sut.degreeOfStartedTime.value, 0)
     }
     
     func test_degreeOfEndedTime_whenTimeIsNoon() {
+        sut = CreateDidViewModel(didCoreDataStorage: didCoreDataStorageSpy, startedDate: nil, endedDate: nil)
         let noon = Seeds.MockDate.noon
         sut.startedTime.send(noon)
         XCTAssertEqual(sut.degreeOfStartedTime.value, 180)
     }
     
     func test_degreeOfStartedTimeShouldBeNil_whenInputOfStartedTimeIsNil() {
+        sut = CreateDidViewModel(didCoreDataStorage: didCoreDataStorageSpy, startedDate: nil, endedDate: nil)
         sut.startedTime.send(nil)
         XCTAssertNil(sut.degreeOfStartedTime.value)
     }
     
-    func test_degreeOfEndedTimeShouldBeNil_whenInputOfEndedTimeIsNil() {
+    func test_degreeOfEndedTimeShouldBeNotNil_whenInputOfEndedTimeIsNil() {
+        sut = CreateDidViewModel(didCoreDataStorage: didCoreDataStorageSpy, startedDate: nil, endedDate: nil)
         sut.endedTime.send(nil)
-        XCTAssertNil(sut.degreeOfEndedTime.value)
+        XCTAssertNotNil(sut.degreeOfEndedTime.value)
     }
     
     ///Test Create
     func test_createShouldBeCompletedCallCoreDataStorage_whenInputAllAndErrorIsNil() {
+        sut = CreateDidViewModel(didCoreDataStorage: didCoreDataStorageSpy, startedDate: nil, endedDate: nil)
         ///given
         let text = "Title"
         let themeColor = UIColor.themeGreen
@@ -133,6 +145,7 @@ class CreateDidViewModelTests: XCTestCase {
     }
     
     func test_createShouldNotBeCompletedAndNotCallCoreDataStorage_whenTitleOuputIsNil() {
+        sut = CreateDidViewModel(didCoreDataStorage: didCoreDataStorageSpy, startedDate: nil, endedDate: nil)
         ///given
         let themeColor = UIColor.themeGreen
         let midnight = Seeds.MockDate.midnight
@@ -150,6 +163,7 @@ class CreateDidViewModelTests: XCTestCase {
     }
     
     func test_createShouldBeCompletedAndCallCoreDataStorage_whenDontSetColor() {
+        sut = CreateDidViewModel(didCoreDataStorage: didCoreDataStorageSpy, startedDate: nil, endedDate: nil)
         ///given
         let text = "Title"///
         let midnight = Seeds.MockDate.midnight
@@ -167,6 +181,7 @@ class CreateDidViewModelTests: XCTestCase {
     }
     
     func test_createShouldNotBeCompletedAndNotCallCoreDataStorage_whenEndedTimeOutputIsNil() {
+        sut = CreateDidViewModel(didCoreDataStorage: didCoreDataStorageSpy, startedDate: nil, endedDate: nil)
         ///given
         let text = "Title"///
         let noon = Seeds.MockDate.noon
@@ -182,6 +197,7 @@ class CreateDidViewModelTests: XCTestCase {
     }
     
     func test_createShouldNotBeCompletedAndNotCallCoreDataStorage_whenStartedTimeOutputIsNil() {
+        sut = CreateDidViewModel(didCoreDataStorage: didCoreDataStorageSpy, startedDate: nil, endedDate: nil)
         ///given
         let text = "Title"
         let midnight = Seeds.MockDate.midnight
@@ -198,6 +214,7 @@ class CreateDidViewModelTests: XCTestCase {
     
     
     func test_create_shouldBeNotCompletedAndCallCoreDataStorageAndOutputOfErrorIsNotNil_whenReceiveCoreDataError() {
+        sut = CreateDidViewModel(didCoreDataStorage: didCoreDataStorageSpy, startedDate: nil, endedDate: nil)
         ///given
         let saveError = CoreDataStoreError.saveError(ErrorMock.someError)
         let text = "Title"

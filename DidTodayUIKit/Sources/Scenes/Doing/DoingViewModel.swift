@@ -5,7 +5,7 @@
 //  Created by Doyoung on 2022/12/01.
 //
 
-import UIKit ///Is that Right?
+import Foundation
 import Combine
 
 protocol DoingViewModelProtocol: DoingViewModelInput, DoingViewModelOutput {   }

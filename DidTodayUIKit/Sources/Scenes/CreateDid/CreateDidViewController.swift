@@ -80,6 +80,7 @@ final class CreateDidViewController: UIViewController, StoryboardInstantiable {
         setupUIObjects()
         createDismissKeyboardTapGesture()
         bindViewModel()
+        startedTimePicker.date = Calendar.current.startOfDay(for: Date())
     }
     
     //MARK: - Setup

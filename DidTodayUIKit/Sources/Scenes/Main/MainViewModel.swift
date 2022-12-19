@@ -100,7 +100,11 @@ final class MainViewModel: MainViewModelProtocol {
     var didItemsList = CurrentValueSubject<[MainDidItemsViewModel], Never>([])
     
     func showCreateDid() {
-        router?.showCreateDid()
+        guard let recentDid = fetchedDids.value.last else {
+            router?.showCreateDid(nil, nil)
+           return
+        }
+        router?.showCreateDid(recentDid.finished, nil)
     }
     
     func showCalendar() {

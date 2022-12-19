@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import Combine
 @testable import DidTodayUIKit
 
 class CreateDidViewControllerTests: XCTestCase {
@@ -22,34 +23,59 @@ class CreateDidViewControllerTests: XCTestCase {
     }
     
     //MARK: - Test Doubles
-    class CreateDidViewModelSpy: CreateDidViewModelInput, CreateDidViewModelOutput {
-        var createDidCalled = false
-        //MARK: - Input
-        @Published var startedTime: Date?
-        @Published var endedTime: Date?
-        @Published var color: UIColor?
-        @Published var title: String?
+    class CreateDidViewModelSpy: CreateDidViewModelProtocol {
         
-        func createDid(completion: @escaping (Result<Did, CreateDidError>) -> Void) {
-            createDidCalled = true
+        //MARK: - Input
+        
+        var setTitleCalled = false
+        var setColorOfPieCalled = false
+        var createCalled = false
+        
+        var startedTime = CurrentValueSubject<Date?, Never>(nil)
+        var endedTime = CurrentValueSubject<Date?, Never>(nil)
+        
+        func setTitle(_ title: String) {
+            setTitleCalled = true
+        }
+        
+        func setColorOfPie(_ color: UIColor) {
+            setColorOfPieCalled = true
+        }
+        
+        func createDid() {
+            createCalled = true
         }
         
         //MARK: - Output
-        var startedTimePublished: Published<Date?>.Publisher { $startedTime }
-        var endedTimePublished: Published<Date?>.Publisher { $endedTime }
-        var colorPublished: Published<UIColor?>.Publisher { $color }
-        var titlePublisher: Published<String?>.Publisher { $title }
+        var titleOfDid = CurrentValueSubject<String?, Never>(nil)
+        var titleIsEmpty = CurrentValueSubject<Bool, Never>(true)
+        var colorOfPie = CurrentValueSubject<UIColor, Never>(.customGreen)
+        var degreeOfStartedTime = CurrentValueSubject<Double?, Never>(nil)
+        var degreeOfEndedTime = CurrentValueSubject<Double?, Never>(nil)
+        var isCompleted = CurrentValueSubject<Bool, Never>(false)
+        var error = CurrentValueSubject<DidTodayUIKit.CoreDataStoreError?, Never>(nil)
+        
+        func initialStartedTime() -> Date {
+            return Calendar.current.startOfDay(for: Date())
+        }
+        
+        func initialEndedTime() -> Date {
+            return Date()
+        }
     }
     
+    //TODO: Interface Builder Test?
+    ///Storyboard와 사용한 View Controller의 경우 Interface Builder의 옵셔널 언랩핑을 사용여부
+    ///UI Delegate의 경우 테스트 여부
     //MARK: - Tests
-    func test_addDid_shouldCallViewModel() {
+    func test_createDid_shouldCallViewModel() {
         //given
         let viewModelSpy = CreateDidViewModelSpy()
+        viewModelSpy.titleIsEmpty.send(false)
         sut.viewModel = viewModelSpy
         //when
-        //sut.addDid(UIBarButtonItem())
+        sut.createDid(UIButton())
         //then
-        //XCTAssert(viewModelSpy.createDidCalled)
+        XCTAssert(viewModelSpy.setTitleCalled)
     }
-    
 }

@@ -23,6 +23,7 @@
 		7F0B97B7292B793F0071DF98 /* BoardLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0B97B6292B793F0071DF98 /* BoardLabel.swift */; };
 		7F0B97B9292C58060071DF98 /* NeumorphismButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0B97B8292C58060071DF98 /* NeumorphismButton.swift */; };
 		7F0B97BB292C7ACA0071DF98 /* UIView+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0B97BA292C7ACA0071DF98 /* UIView+Border.swift */; };
+		7F0BECF82950776C00C0CF1C /* DoingRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0BECF72950776C00C0CF1C /* DoingRouter.swift */; };
 		7F0C251C29419BAE00304A0D /* CircularLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0C251B29419BAE00304A0D /* CircularLabel.swift */; };
 		7F133C47290365460099E55C /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F133C46290365460099E55C /* CalendarViewController.swift */; };
 		7F133C5729063BF00099E55C /* UIColor+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F133C5629063BF00099E55C /* UIColor+Custom.swift */; };
@@ -113,6 +114,7 @@
 		7F0B97B6292B793F0071DF98 /* BoardLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardLabel.swift; sourceTree = "<group>"; };
 		7F0B97B8292C58060071DF98 /* NeumorphismButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeumorphismButton.swift; sourceTree = "<group>"; };
 		7F0B97BA292C7ACA0071DF98 /* UIView+Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Border.swift"; sourceTree = "<group>"; };
+		7F0BECF72950776C00C0CF1C /* DoingRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoingRouter.swift; sourceTree = "<group>"; };
 		7F0C251B29419BAE00304A0D /* CircularLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularLabel.swift; sourceTree = "<group>"; };
 		7F133C46290365460099E55C /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		7F133C5629063BF00099E55C /* UIColor+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Custom.swift"; sourceTree = "<group>"; };
@@ -358,6 +360,7 @@
 				7FC115A62939EAF50056237A /* DoingViewController.swift */,
 				7FC115A129386B930056237A /* DoingViewModel.swift */,
 				7F9C0B9D293DAA8C0094C2A5 /* TimerAlert.swift */,
+				7F0BECF72950776C00C0CF1C /* DoingRouter.swift */,
 			);
 			path = Doing;
 			sourceTree = "<group>";
@@ -680,6 +683,7 @@
 				7F4AA14E292471EE004CE62A /* SortingSupplementaryView.swift in Sources */,
 				7F133C5729063BF00099E55C /* UIColor+Custom.swift in Sources */,
 				504CE044253FDFAA000CC6CF /* SceneDelegate.swift in Sources */,
+				7F0BECF82950776C00C0CF1C /* DoingRouter.swift in Sources */,
 				7FB6A8D828DD9B13009C61C5 /* TotalDidsCell.swift in Sources */,
 				7FF48C2B2921F4F600387FE7 /* UIView+Shadow Effect.swift in Sources */,
 				7F133C632907C66A0099E55C /* FlowCoordinator.swift in Sources */,

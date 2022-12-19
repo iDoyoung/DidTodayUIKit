@@ -24,13 +24,14 @@ protocol DoingViewModelOutput {
 
 final class DoingViewModel: DoingViewModelProtocol {
     
-    private var didCoreDataStorage: DidCoreDataStorable?
     private var timerManager: TimerManagerProtocol?
+    private var router: DoingRouter?
     private var cancellableBag = Set<AnyCancellable>()
     private var count = CurrentValueSubject<Double, Never>(0)
     
-    init(timerManager: TimerManagerProtocol) {
+    init(timerManager: TimerManagerProtocol, router: DoingRouter) {
         self.timerManager = timerManager
+        self.router = router
         timerManager.configureTimer(handler: countSeconds)
         ///Observe Count Time
         count

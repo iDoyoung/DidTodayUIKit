@@ -45,13 +45,13 @@ final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
     }
     
     //MARK: Doing
-    func makeDoingViewController() -> UIViewController {
-        let viewController = DoingViewController.create(with: makeDoingViewModel())
+    func makeDoingViewController(router: DoingRouter) -> UIViewController {
+        let viewController = DoingViewController.create(with: makeDoingViewModel(router: router))
         return viewController
     }
     
-    private func makeDoingViewModel() -> DoingViewModelProtocol {
-        let viewModel = DoingViewModel(timerManager: TimerManager())
+    private func makeDoingViewModel(router: DoingRouter) -> DoingViewModelProtocol {
+        let viewModel = DoingViewModel(timerManager: TimerManager(), router: router)
         return viewModel
     }
 }

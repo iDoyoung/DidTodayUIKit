@@ -51,7 +51,7 @@ final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
     }
     
     private func makeDoingViewModel() -> DoingViewModelProtocol {
-        let viewModel = DoingViewModel(timerManager: TimerManager(), didCoreDataStorage: didCoreDataStorage)
+        let viewModel = DoingViewModel(timerManager: TimerManager())
         return viewModel
     }
 }

@@ -24,6 +24,8 @@
 		7F0B97B9292C58060071DF98 /* NeumorphismButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0B97B8292C58060071DF98 /* NeumorphismButton.swift */; };
 		7F0B97BB292C7ACA0071DF98 /* UIView+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0B97BA292C7ACA0071DF98 /* UIView+Border.swift */; };
 		7F0BECF82950776C00C0CF1C /* DoingRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0BECF72950776C00C0CF1C /* DoingRouter.swift */; };
+		7F0BECFC2951644B00C0CF1C /* DoingFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0BECFB2951644B00C0CF1C /* DoingFlowCoordinator.swift */; };
+		7F0BECFF295171E500C0CF1C /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0BECFE295171E500C0CF1C /* Coordinator.swift */; };
 		7F0C251C29419BAE00304A0D /* CircularLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0C251B29419BAE00304A0D /* CircularLabel.swift */; };
 		7F133C47290365460099E55C /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F133C46290365460099E55C /* CalendarViewController.swift */; };
 		7F133C5729063BF00099E55C /* UIColor+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F133C5629063BF00099E55C /* UIColor+Custom.swift */; };
@@ -115,6 +117,8 @@
 		7F0B97B8292C58060071DF98 /* NeumorphismButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeumorphismButton.swift; sourceTree = "<group>"; };
 		7F0B97BA292C7ACA0071DF98 /* UIView+Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Border.swift"; sourceTree = "<group>"; };
 		7F0BECF72950776C00C0CF1C /* DoingRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoingRouter.swift; sourceTree = "<group>"; };
+		7F0BECFB2951644B00C0CF1C /* DoingFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoingFlowCoordinator.swift; sourceTree = "<group>"; };
+		7F0BECFE295171E500C0CF1C /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		7F0C251B29419BAE00304A0D /* CircularLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularLabel.swift; sourceTree = "<group>"; };
 		7F133C46290365460099E55C /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		7F133C5629063BF00099E55C /* UIColor+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Custom.swift"; sourceTree = "<group>"; };
@@ -220,6 +224,16 @@
 				7FC22B5E28C76CBD00F83122 /* Supportings */,
 			);
 			path = DidTodayUIKit;
+			sourceTree = "<group>";
+		};
+		7F0BECFD295171C400C0CF1C /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				7F0BECFE295171E500C0CF1C /* Coordinator.swift */,
+				7F133C622907C66A0099E55C /* FlowCoordinator.swift */,
+				7F0BECFB2951644B00C0CF1C /* DoingFlowCoordinator.swift */,
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 		7F133C45290364300099E55C /* Calendar */ = {
@@ -428,9 +442,9 @@
 		7FC22B5C28C7224000F83122 /* Entry */ = {
 			isa = PBXGroup;
 			children = (
+				7F0BECFD295171C400C0CF1C /* Coordinator */,
 				504CE041253FDFAA000CC6CF /* AppDelegate.swift */,
 				504CE043253FDFAA000CC6CF /* SceneDelegate.swift */,
-				7F133C622907C66A0099E55C /* FlowCoordinator.swift */,
 				7F133C642907CC5A0099E55C /* SceneDIContainer.swift */,
 			);
 			path = Entry;
@@ -646,6 +660,7 @@
 				7FC580A328D1A201008086FD /* PieView.swift in Sources */,
 				504CE0C1254143CC000CC6CF /* AllPie.swift in Sources */,
 				7FC1159E293833250056237A /* TimerManager.swift in Sources */,
+				7F0BECFC2951644B00C0CF1C /* DoingFlowCoordinator.swift in Sources */,
 				7F397A6828D71E74000F89E2 /* CreateDidViewController.swift in Sources */,
 				504CE0B9253FDFE9000CC6CF /* ViewModel.swift in Sources */,
 				7F55E3FF294C08A0007B2706 /* CreateDidAlert.swift in Sources */,
@@ -656,6 +671,7 @@
 				7F0B97B9292C58060071DF98 /* NeumorphismButton.swift in Sources */,
 				7FD2B04C2909161A0048408F /* StoryboardName.swift in Sources */,
 				7F9C0BA0293DC1BA0094C2A5 /* Double+ToStringOfTimer.swift in Sources */,
+				7F0BECFF295171E500C0CF1C /* Coordinator.swift in Sources */,
 				7F0B97B7292B793F0071DF98 /* BoardLabel.swift in Sources */,
 				7FC22B6928C9C0E500F83122 /* Did.swift in Sources */,
 				7F133C47290365460099E55C /* CalendarViewController.swift in Sources */,

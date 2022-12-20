@@ -7,20 +7,21 @@
 
 import UIKit
 
-protocol FlowCoordinatorDependenciesProtocol {
+protocol MainFlowCoordinatorDependenciesProtocol {
     func makeMainViewController(router: MainRouter) -> UIViewController
     func makeCalendarViewController(dids: [Did]) -> UIViewController
     func makeCreateDidViewController(startedDate: Date?, endedDate: Date?) -> UIViewController
     func makeDoingViewController(router: DoingRouter) -> UIViewController
 }
 
-final class FlowCoordinator {
+final class MainFlowCoordinator: Coordinator {
     
+    var children = [Coordinator]()
     private weak var navigationController: UINavigationController?
-    private let dependencies: FlowCoordinatorDependenciesProtocol
+    private let dependencies: MainFlowCoordinatorDependenciesProtocol
     
     init(navigationController: UINavigationController,
-         dependencies: FlowCoordinatorDependenciesProtocol) {
+         dependencies: MainFlowCoordinatorDependenciesProtocol) {
         self.navigationController = navigationController
         self.dependencies = dependencies
     }

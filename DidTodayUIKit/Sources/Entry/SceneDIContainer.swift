@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
+final class SceneDIContainer: MainFlowCoordinatorDependenciesProtocol {
     
     //MARK: Core Data Storage
     let didCoreDataStorage = DidCoreDataStorage()

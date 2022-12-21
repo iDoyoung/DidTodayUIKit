@@ -82,12 +82,12 @@ final class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        viewModel?.fetchDids()
         bindViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        viewModel?.fetchDids()
     }
     
     override func viewDidAppear(_ animated: Bool) {

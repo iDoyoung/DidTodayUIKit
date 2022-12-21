@@ -95,7 +95,6 @@ final class CreateDidViewController: UIViewController, StoryboardInstantiable {
         let xmarkImage = UIImage(systemName: "xmark", withConfiguration: imageConfiguration)
         let rightBarButton = UIBarButtonItem(image: xmarkImage, style: .plain, target: self, action: #selector(closeView))
         navigationItem.rightBarButtonItem = rightBarButton
-        title = "Create Did"
     }
     
     private func setupDatePickers() {
@@ -111,8 +110,11 @@ final class CreateDidViewController: UIViewController, StoryboardInstantiable {
     }
     
     private func bindViewModel() {
+        viewModel?.title
+            .sink { [weak self] output in
+                self?.title = output
+            }
         viewModel?.timePickerEnable
-            .receive(on: DispatchQueue.main)
             .sink { [weak self] output in
                 self?.startedTimePicker.isEnabled = output
                 self?.endedTimePicker.isEnabled = output

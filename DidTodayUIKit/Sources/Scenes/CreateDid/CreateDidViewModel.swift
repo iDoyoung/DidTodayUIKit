@@ -19,13 +19,14 @@ protocol CreateDidViewModelInput {
     var startedTime: CurrentValueSubject<Date?, Never> { get }
     var endedTime: CurrentValueSubject<Date?, Never> { get }
     
-    func setTimePickerEnable()
+    func setupFromDoing()
     func setTitle(_ title: String)
     func setColorOfPie(_ color: UIColor)
     func createDid()
 }
 
 protocol CreateDidViewModelOutput {
+    var title: CurrentValueSubject<String, Never> { get }
     var titleOfDid: CurrentValueSubject<String?, Never> { get }
     var titleIsEmpty: CurrentValueSubject<Bool, Never> { get }
     var colorOfPie: CurrentValueSubject<UIColor, Never> { get }
@@ -65,15 +66,16 @@ final class CreateDidViewModel: CreateDidViewModelProtocol {
         
         startedTime.send(startedDate)
         endedTime.send(endedDate)
-        if fromDoing { setTimePickerEnable() }
+        if fromDoing { setupFromDoing() }
     }
     
     //MARK: - Input(Property vs Method)
     var startedTime = CurrentValueSubject<Date?, Never>(nil)
     var endedTime = CurrentValueSubject<Date?, Never>(Date())
 
-    func setTimePickerEnable() {
+    func setupFromDoing() {
         timePickerEnable.send(false)
+        title.send("Finishing touches")
     }
     
     func setTitle(_ title: String) {
@@ -112,6 +114,7 @@ final class CreateDidViewModel: CreateDidViewModelProtocol {
     }
     
     //MARK: - Output
+    var title = CurrentValueSubject<String, Never>("Create Did")
     var titleOfDid = CurrentValueSubject<String?, Never>(nil)
     var titleIsEmpty = CurrentValueSubject<Bool, Never>(true)
     var degreeOfStartedTime = CurrentValueSubject<Double?, Never>(nil)

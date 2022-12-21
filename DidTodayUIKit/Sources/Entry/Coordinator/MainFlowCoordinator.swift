@@ -46,6 +46,7 @@ final class MainFlowCoordinator: Coordinator {
     private func showDoingCoordinator() {
         let viewController = UINavigationController()
         let coordinator = DoingFlowCoordinator(navigationController: viewController, dependencies: dependencies)
+        viewController.modalPresentationStyle = .fullScreen
         navigationController?.present(viewController, animated: true)
         coordinator.start()
     }

@@ -37,7 +37,7 @@ final class MainFlowCoordinator: Coordinator {
     }
     
     private func showCreateDid(startedDate: Date? = nil, endedDate: Date? = nil) {
-        let viewController = UINavigationController(rootViewController: dependencies.makeCreateDidViewController(startedDate: startedDate, endedDate: endedDate))
+        let viewController = UINavigationController(rootViewController: dependencies.makeCreateDidViewController(startedDate: startedDate, endedDate: endedDate, fromDoing: false))
         viewController.navigationBar.tintColor = .label
         viewController.modalPresentationStyle = .fullScreen
         navigationController?.present(viewController, animated: true)

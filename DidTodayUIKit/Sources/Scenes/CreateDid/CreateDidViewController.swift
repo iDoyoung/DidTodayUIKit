@@ -111,23 +111,34 @@ final class CreateDidViewController: UIViewController, StoryboardInstantiable {
     }
     
     private func bindViewModel() {
+        viewModel?.timePickerEnable
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] output in
+                self?.startedTimePicker.isEnabled = output
+                self?.endedTimePicker.isEnabled = output
+            }
+            .store(in: &cancellableBag)
+        
         viewModel?.degreeOfStartedTime
             .sink { [weak self] output in
                 guard let output = output else { return }
                 self?.pieView.start = output
             }
             .store(in: &cancellableBag)
+        
         viewModel?.degreeOfEndedTime
             .sink { [weak self] output in
                 guard let output = output else { return }
                 self?.pieView.end = output
             }
             .store(in: &cancellableBag)
+        
         viewModel?.colorOfPie
             .sink { [weak self] output in
                 self?.pieView.color = output
             }
             .store(in: &cancellableBag)
+        
         viewModel?.isCompleted
             .receive(on: DispatchQueue.main)
             .sink { [weak self] isCompleted in
@@ -136,6 +147,7 @@ final class CreateDidViewController: UIViewController, StoryboardInstantiable {
                 }
             }
             .store(in: &cancellableBag)
+        
         viewModel?.error
             .receive(on: DispatchQueue.main)
             .sink { [weak self] output in

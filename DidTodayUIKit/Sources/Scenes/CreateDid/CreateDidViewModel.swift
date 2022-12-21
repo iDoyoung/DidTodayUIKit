@@ -19,6 +19,7 @@ protocol CreateDidViewModelInput {
     var startedTime: CurrentValueSubject<Date?, Never> { get }
     var endedTime: CurrentValueSubject<Date?, Never> { get }
     
+    func setTimePickerEnable()
     func setTitle(_ title: String)
     func setColorOfPie(_ color: UIColor)
     func createDid()
@@ -32,6 +33,8 @@ protocol CreateDidViewModelOutput {
     var degreeOfEndedTime: CurrentValueSubject<Double?, Never> { get }
     var isCompleted: CurrentValueSubject<Bool, Never> { get }
     var error: CurrentValueSubject<CoreDataStoreError?, Never> { get }
+    var timePickerEnable: CurrentValueSubject<Bool, Never> { get }
+    
     func initialStartedTime() -> Date
     func initialEndedTime() -> Date
 }
@@ -41,7 +44,7 @@ final class CreateDidViewModel: CreateDidViewModelProtocol {
     var didCoreDataStorage: DidCoreDataStorable?
     private var cancellableBag = Set<AnyCancellable>()
     
-    init(didCoreDataStorage: DidCoreDataStorable, startedDate: Date?, endedDate: Date?) {
+    init(didCoreDataStorage: DidCoreDataStorable, startedDate: Date?, endedDate: Date?, fromDoing: Bool) {
         self.didCoreDataStorage = didCoreDataStorage
         
         startedTime
@@ -62,12 +65,17 @@ final class CreateDidViewModel: CreateDidViewModelProtocol {
         
         startedTime.send(startedDate)
         endedTime.send(endedDate)
+        if fromDoing { setTimePickerEnable() }
     }
     
     //MARK: - Input(Property vs Method)
     var startedTime = CurrentValueSubject<Date?, Never>(nil)
     var endedTime = CurrentValueSubject<Date?, Never>(Date())
 
+    func setTimePickerEnable() {
+        timePickerEnable.send(false)
+    }
+    
     func setTitle(_ title: String) {
         titleOfDid.send(title)
         if title.isEmpty {
@@ -111,6 +119,7 @@ final class CreateDidViewModel: CreateDidViewModelProtocol {
     var colorOfPie = CurrentValueSubject<UIColor, Never>(.customGreen)
     var isCompleted = CurrentValueSubject<Bool, Never>(false)
     var error = CurrentValueSubject<CoreDataStoreError?, Never>(nil)
+    var timePickerEnable = CurrentValueSubject<Bool, Never>(true)
     
     func initialStartedTime() -> Date {
         let startOfDay = Calendar.current.startOfDay(for: Date())

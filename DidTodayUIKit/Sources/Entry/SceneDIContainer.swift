@@ -10,7 +10,7 @@ import UIKit
 protocol FlowCoordinatorDependenciesProtocol {
     func makeMainViewController(router: MainRouter) -> UIViewController
     func makeCalendarViewController(dids: [Did]) -> UIViewController
-    func makeCreateDidViewController(startedDate: Date?, endedDate: Date?) -> UIViewController
+    func makeCreateDidViewController(startedDate: Date?, endedDate: Date?, fromDoing: Bool) -> UIViewController
     func makeDoingViewController(router: DoingRouter) -> UIViewController
 }
 
@@ -41,13 +41,13 @@ final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
     }
     
     //MARK: Create Did
-    func makeCreateDidViewController(startedDate: Date?, endedDate: Date?) -> UIViewController {
-        let viewController = CreateDidViewController.create(with: makeCreateDidViewModel(startedDate: startedDate, endedDate: endedDate))
+    func makeCreateDidViewController(startedDate: Date?, endedDate: Date?, fromDoing: Bool) -> UIViewController {
+        let viewController = CreateDidViewController.create(with: makeCreateDidViewModel(startedDate: startedDate, endedDate: endedDate, fromDoing: fromDoing))
         return viewController
     }
     
-    private func makeCreateDidViewModel(startedDate: Date?, endedDate: Date?) -> CreateDidViewModelProtocol {
-        let viewModel = CreateDidViewModel(didCoreDataStorage: didCoreDataStorage, startedDate: startedDate, endedDate: endedDate)
+    private func makeCreateDidViewModel(startedDate: Date?, endedDate: Date?, fromDoing: Bool) -> CreateDidViewModelProtocol {
+        let viewModel = CreateDidViewModel(didCoreDataStorage: didCoreDataStorage, startedDate: startedDate, endedDate: endedDate, fromDoing: fromDoing)
         return viewModel
     }
     

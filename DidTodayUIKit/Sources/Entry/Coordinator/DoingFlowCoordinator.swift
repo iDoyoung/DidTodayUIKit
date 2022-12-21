@@ -28,7 +28,7 @@ final class DoingFlowCoordinator: Coordinator {
     }
     
     private func showCreateDid(startedDate: Date?, endedDate: Date?) {
-        let viewController = dependencies.makeCreateDidViewController(startedDate: startedDate, endedDate: endedDate)
+        let viewController = dependencies.makeCreateDidViewController(startedDate: startedDate, endedDate: endedDate, fromDoing: true)
         navigationController?.pushViewController(viewController, animated: true)
     }
     

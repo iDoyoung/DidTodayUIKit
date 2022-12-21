@@ -97,13 +97,17 @@ final class CreateDidViewModel: CreateDidViewModelProtocol {
               let title = titleOfDid.value else {
             return
         }
-        let did = Did(started: startedTime,
+        //TODO: Refactor Better
+        let isRecordedTime = !timePickerEnable.value
+        let color = Did.PieColor(red: Float(colorOfPie.value.getRedOfRGB()),
+                                 green: Float(colorOfPie.value.getGreenOfRGB()),
+                                 blue: Float(colorOfPie.value.getBlueRGB()),
+                                 alpha: Float(colorOfPie.value.getAlpha()))
+        let did = Did(withTimer: isRecordedTime,
+                      started: startedTime,
                       finished: endedTime,
                       content: title,
-                      color:  Did.PieColor(red: Float(colorOfPie.value.getRedOfRGB()),
-                                           green: Float(colorOfPie.value.getGreenOfRGB()),
-                                           blue: Float(colorOfPie.value.getBlueRGB()),
-                                           alpha: Float(colorOfPie.value.getAlpha())))
+                      color: color)
         didCoreDataStorage?.create(did) { [weak self] did, error in
             if error == nil {
                 self?.isCompleted.send(true)

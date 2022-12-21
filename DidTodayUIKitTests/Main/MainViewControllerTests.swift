@@ -44,6 +44,7 @@ class MainViewControllerTests: XCTestCase {
         ///Output
         var showCreateDidCalled = false
         var showCalendarCalled = false
+        var showDoingCalled = false
         
         var totalPieDids = CurrentValueSubject<MainTotalOfDidsItemViewModel, Never>(MainTotalOfDidsItemViewModel([]))
         
@@ -57,6 +58,10 @@ class MainViewControllerTests: XCTestCase {
 
         func showCalendar() {
             showCalendarCalled = true
+        }
+        
+        func showDoing() {
+            showDoingCalled = true
         }
     }
     

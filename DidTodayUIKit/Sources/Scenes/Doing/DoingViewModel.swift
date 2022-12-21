@@ -20,6 +20,8 @@ protocol DoingViewModelOutput {
     var timesOfTimer: CurrentValueSubject<String, Never> { get }
     var titleIsEmpty: CurrentValueSubject<Bool, Never> { get }
     var isLessThanTime: CurrentValueSubject<Bool, Never> { get }
+    
+    func showCreateDid()
 }
 
 final class DoingViewModel: DoingViewModelProtocol {
@@ -60,6 +62,7 @@ final class DoingViewModel: DoingViewModelProtocol {
     
     func endDoing() {
         timerManager?.stopTimer()
+        endedDate = Date()
     }
     
     //MARK: Output
@@ -69,9 +72,17 @@ final class DoingViewModel: DoingViewModelProtocol {
             startedTime.send("Started Time: \(startedDate?.currentTimeToString() ?? "00:00")")
         }
     }
+    var endedDate: Date?
     
     var startedTime = PassthroughSubject<String, Never>()
     var timesOfTimer = CurrentValueSubject<String, Never>("00:00")
     var titleIsEmpty =  CurrentValueSubject<Bool, Never>(true)
     var isLessThanTime = CurrentValueSubject<Bool, Never>(true)
+
+    func showCreateDid() {
+        endDoing()
+        if startedDate != nil, endedDate != nil {
+            router?.showCreateDid(startedDate, endedDate)
+        }
+    }
 }

@@ -137,6 +137,6 @@ extension DoingViewController: TimerAlert {
     }
     
     func doneTimer() {
-        //TODO: Show Create Did
+        viewModel?.showCreateDid()
     }
 }

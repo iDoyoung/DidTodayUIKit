@@ -9,25 +9,29 @@ import XCTest
 @testable import DidTodayUIKit
 
 final class DoingViewModelTests: XCTestCase {
-
+    
     var sut: DoingViewModel!
     var timerMangerMock: TimerManagerSpy!
     var didCoreDataStorageSpy: DidCoreDataStorageSpy!
+    var coordinatorSpy: CoordinatorSpy!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
         timerMangerMock = TimerManagerSpy()
+        coordinatorSpy = CoordinatorSpy()
         didCoreDataStorageSpy = DidCoreDataStorageSpy()
-        sut = DoingViewModel(timerManager: timerMangerMock, didCoreDataStorage: didCoreDataStorageSpy)
+        let mockRouter = DoingRouter(showCreateDid: coordinatorSpy.showCreateDid(started:ended:))
+        sut = DoingViewModel(timerManager: timerMangerMock, router: mockRouter)
     }
-
+    
     override func tearDownWithError() throws {
         try super.tearDownWithError()
         sut = nil
         timerMangerMock = nil
         didCoreDataStorageSpy = nil
+        coordinatorSpy = nil
     }
-
+    
     //MARK: Test Doubles
     final class DidCoreDataStorageSpy: DidCoreDataStorable {
         
@@ -61,7 +65,7 @@ final class DoingViewModelTests: XCTestCase {
         var startTimerCalled = false
         var stopTimerCalled = false
         var count: Double = 0
-       
+        
         func configureTimer(handler: @escaping () -> Void) {
             configureTimerCalled = true
         }
@@ -74,7 +78,26 @@ final class DoingViewModelTests: XCTestCase {
             stopTimerCalled = true
         }
     }
-
+    
+    class CoordinatorSpy {
+        
+        var showCalendarCalled = false
+        var showCreateDidCalled = false
+        var showDoingCalled = false
+        
+        func showCalendar(dids: [Did]) {
+            showCalendarCalled = true
+        }
+        
+        func showCreateDid(started: Date?, ended: Date?) {
+            showCreateDidCalled = true
+        }
+        
+        func showDoing() {
+            showDoingCalled = true
+        }
+    }
+    
     enum ErrorMock: Error {
         case someError
     }
@@ -99,78 +122,5 @@ final class DoingViewModelTests: XCTestCase {
         sut.stopDoing()
         ///then
         XCTAssert(timerMangerMock.stopTimerCalled)
-    }
-   
-    func test_createDid_whenTitleIsNil_shouldNotCallDidCoreDataStorage() {
-        ///given
-        sut.colorOfPie.value = Did.PieColor(red: 1, green: 1, blue: 1, alpha: 1)
-        sut.startedDate = Date()
-        sut.endedDate = Date()
-        ///when
-        sut.createDid()
-        ///then
-        XCTAssertFalse(didCoreDataStorageSpy.createDidCalled)
-    }
-    
-    func test_createDid_whenColorIsNil_shouldNotCallDidCoreDataStorage() {
-        ///given
-        sut.titleOfDid.value = "Test"
-        sut.startedDate = Date()
-        sut.endedDate = Date()
-        ///when
-        sut.createDid()
-        ///then
-        XCTAssertFalse(didCoreDataStorageSpy.createDidCalled)
-    }
-    
-    func test_createDid_whenEndDateIsNil_shouldNotCallDidCoreDataStorage() {
-        ///given
-        sut.titleOfDid.value = "Test"
-        sut.colorOfPie.value = Did.PieColor(red: 1, green: 1, blue: 1, alpha: 1)
-        sut.startedDate = Date()
-        ///when
-        sut.createDid()
-        ///then
-        XCTAssertFalse(didCoreDataStorageSpy.createDidCalled)
-    }
-    
-    func test_createDid_whenStartDateIsNil_shouldNotCallDidCoreDataStorage() {
-        ///given
-        sut.titleOfDid.value = "Test"
-        sut.colorOfPie.value = Did.PieColor(red: 1, green: 1, blue: 1, alpha: 1)
-        sut.endedDate = Date()
-        ///when
-        sut.createDid()
-        ///then
-        XCTAssertFalse(didCoreDataStorageSpy.createDidCalled)
-    }
-    
-    func test_createDid_whenSucceedCreate_shouldCallDidCoreDataStorageAndBeErrorNilAndIsSucceededCreated() {
-        ///given
-        sut.titleOfDid.value = "Test"
-        sut.colorOfPie.value = Did.PieColor(red: 1, green: 1, blue: 1, alpha: 1)
-        sut.startedDate = Date()
-        sut.endedDate = Date()
-        ///when
-        sut.createDid()
-        ///then
-        XCTAssert(didCoreDataStorageSpy.createDidCalled)
-        XCTAssertNil(sut.error.value)
-        XCTAssert(sut.isSucceededCreated.value)
-    }
-    
-    func test_createDid_whenFailCreateWithError_shouldCallDidCoreDataStorageAndBeErrorIsNotNilAndIsSucceededCreatedFalse() {
-       ///given
-        sut.titleOfDid.value = "Test"
-        sut.colorOfPie.value = Did.PieColor(red: 1, green: 1, blue: 1, alpha: 1)
-        sut.startedDate = Date()
-        sut.endedDate = Date()
-        didCoreDataStorageSpy.error = CoreDataStoreError.saveError(ErrorMock.someError)
-        ///when
-        sut.createDid()
-        ///then
-        XCTAssert(didCoreDataStorageSpy.createDidCalled)
-        XCTAssertNotNil(sut.error.value)
-        XCTAssertFalse(sut.isSucceededCreated.value)
     }
 }

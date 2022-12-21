@@ -7,21 +7,13 @@
 
 import UIKit
 
-protocol MainFlowCoordinatorDependenciesProtocol {
-    func makeMainViewController(router: MainRouter) -> UIViewController
-    func makeCalendarViewController(dids: [Did]) -> UIViewController
-    func makeCreateDidViewController(startedDate: Date?, endedDate: Date?) -> UIViewController
-    func makeDoingViewController(router: DoingRouter) -> UIViewController
-}
-
 final class MainFlowCoordinator: Coordinator {
     
-    var children = [Coordinator]()
     private weak var navigationController: UINavigationController?
-    private let dependencies: MainFlowCoordinatorDependenciesProtocol
+    private let dependencies: FlowCoordinatorDependenciesProtocol
     
     init(navigationController: UINavigationController,
-         dependencies: MainFlowCoordinatorDependenciesProtocol) {
+         dependencies: FlowCoordinatorDependenciesProtocol) {
         self.navigationController = navigationController
         self.dependencies = dependencies
     }
@@ -33,7 +25,7 @@ final class MainFlowCoordinator: Coordinator {
     private func showMain() {
         let router = MainRouter(showCalendar: showCalendar,
                                 showCreateDid: showCreateDid,
-                                showDoing: showDoing)
+                                showDoing: showDoingCoordinator)
         let viewController = dependencies.makeMainViewController(router: router)
         navigationController?.pushViewController(viewController, animated: false)
     }
@@ -51,10 +43,10 @@ final class MainFlowCoordinator: Coordinator {
         navigationController?.present(viewController, animated: true)
     }
     
-    private func showDoing() {
-        let router = DoingRouter(showCreateDid: showCreateDid(startedDate:endedDate:))
-        let viewController = dependencies.makeDoingViewController(router: router)
-        viewController.modalPresentationStyle = .fullScreen
+    private func showDoingCoordinator() {
+        let viewController = UINavigationController()
+        let coordinator = DoingFlowCoordinator(navigationController: viewController, dependencies: dependencies)
         navigationController?.present(viewController, animated: true)
+        coordinator.start()
     }
 }

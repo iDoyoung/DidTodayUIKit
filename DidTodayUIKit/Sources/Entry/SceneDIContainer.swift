@@ -7,7 +7,14 @@
 
 import UIKit
 
-final class SceneDIContainer: MainFlowCoordinatorDependenciesProtocol {
+protocol FlowCoordinatorDependenciesProtocol {
+    func makeMainViewController(router: MainRouter) -> UIViewController
+    func makeCalendarViewController(dids: [Did]) -> UIViewController
+    func makeCreateDidViewController(startedDate: Date?, endedDate: Date?) -> UIViewController
+    func makeDoingViewController(router: DoingRouter) -> UIViewController
+}
+
+final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
     
     //MARK: Core Data Storage
     let didCoreDataStorage = DidCoreDataStorage()

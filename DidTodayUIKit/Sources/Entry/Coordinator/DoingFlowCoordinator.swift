@@ -7,34 +7,34 @@
 
 import UIKit
 
-protocol DoingFlowCoordinatorDependenciesProtocol {
-    func makeDoingViewController(router: DoingRouter) -> UIViewController
-    func makeCreateDidViewController(startedDate: Date?, endedDate: Date?) -> UIViewController
-}
-
 final class DoingFlowCoordinator: Coordinator {
     
+    private weak var navigationController: UINavigationController?
+    private let dependencies: FlowCoordinatorDependenciesProtocol
     
-    var children = [Coordinator]()
-    private weak var navigationConroller: UINavigationController?
-    private let dependencies: DoingFlowCoordinatorDependenciesProtocol
-    //private let dependencies
-    
-    init(navigationConroller: UINavigationController? = nil, dependencies: DoingFlowCoordinatorDependenciesProtocol) {
-        self.navigationConroller = navigationConroller
+    init(navigationController: UINavigationController?, dependencies: FlowCoordinatorDependenciesProtocol) {
+        self.navigationController = navigationController
         self.dependencies = dependencies
     }
     
     func start() {
-        
+        showDoing()
     }
     
     private func showDoing() {
-        
+        let router = DoingRouter(showCreateDid: showCreateDid(startedDate:endedDate:))
+        let viewController = dependencies.makeDoingViewController(router: router)
+        navigationController?.pushViewController(viewController, animated: false)
     }
     
     private func showCreateDid(startedDate: Date?, endedDate: Date?) {
-        let viewController = UINavigationController(rootViewController: dependencies.makeCreateDidViewController(startedDate: startedDate, endedDate: endedDate))
-        navigationConroller?.pushViewController(viewController, animated: true)
+        let viewController = dependencies.makeCreateDidViewController(startedDate: startedDate, endedDate: endedDate)
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    deinit {
+        #if DEBUG
+        print("Deinit Doing Flow Coordinator)")
+        #endif
     }
 }

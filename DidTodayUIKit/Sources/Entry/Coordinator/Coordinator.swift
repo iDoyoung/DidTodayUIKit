@@ -8,7 +8,6 @@
 import UIKit
 
 protocol Coordinator {
-    var children: [Coordinator] { get set }
-    
+    //var children: [Coordinator] { get set }
     func start()
 }

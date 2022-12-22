@@ -25,7 +25,8 @@ final class MainFlowCoordinator: Coordinator {
     private func showMain() {
         let router = MainRouter(showCalendar: showCalendar,
                                 showCreateDid: showCreateDid,
-                                showDoing: showDoingCoordinator)
+                                showDoing: showDoingCoordinator,
+                                showInformation: showInformation)
         let viewController = dependencies.makeMainViewController(router: router)
         navigationController?.pushViewController(viewController, animated: false)
     }
@@ -40,6 +41,11 @@ final class MainFlowCoordinator: Coordinator {
         let viewController = UINavigationController(rootViewController: dependencies.makeCreateDidViewController(startedDate: startedDate, endedDate: endedDate, fromDoing: false))
         viewController.navigationBar.tintColor = .label
         viewController.modalPresentationStyle = .fullScreen
+        navigationController?.present(viewController, animated: true)
+    }
+    
+    private func showInformation() {
+        let viewController = UINavigationController(rootViewController: dependencies.makeInformationViewController())
         navigationController?.present(viewController, animated: true)
     }
     

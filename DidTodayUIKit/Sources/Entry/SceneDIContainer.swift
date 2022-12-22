@@ -12,13 +12,15 @@ protocol FlowCoordinatorDependenciesProtocol {
     func makeCalendarViewController(dids: [Did]) -> UIViewController
     func makeCreateDidViewController(startedDate: Date?, endedDate: Date?, fromDoing: Bool) -> UIViewController
     func makeDoingViewController(router: DoingRouter) -> UIViewController
+    func makeInformationViewController() -> UIViewController
 }
 
 final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
     
     //MARK: Core Data Storage
     let didCoreDataStorage = DidCoreDataStorage()
-    //MARK: Main
+    
+    //MARK: Main VC
     func makeMainViewController(router: MainRouter) -> UIViewController {
         let viewController = MainViewController.create(with: makeMainViewModel(router: router))
         return viewController
@@ -29,7 +31,7 @@ final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
         return viewModel
     }
     
-    //MARK: Calendar
+    //MARK: Calendar VC
     func makeCalendarViewController(dids: [Did]) -> UIViewController {
         let viewController = CalendarViewController.create(with: makeCalendarViewModel(by: dids))
         return viewController
@@ -40,7 +42,7 @@ final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
         return viewModel
     }
     
-    //MARK: Create Did
+    //MARK: Create Did VC
     func makeCreateDidViewController(startedDate: Date?, endedDate: Date?, fromDoing: Bool) -> UIViewController {
         let viewController = CreateDidViewController.create(with: makeCreateDidViewModel(startedDate: startedDate, endedDate: endedDate, fromDoing: fromDoing))
         return viewController
@@ -51,7 +53,7 @@ final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
         return viewModel
     }
     
-    //MARK: Doing
+    //MARK: Doing VC
     func makeDoingViewController(router: DoingRouter) -> UIViewController {
         let viewController = DoingViewController.create(with: makeDoingViewModel(router: router))
         return viewController
@@ -59,6 +61,17 @@ final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
     
     private func makeDoingViewModel(router: DoingRouter) -> DoingViewModelProtocol {
         let viewModel = DoingViewModel(timerManager: TimerManager(), router: router)
+        return viewModel
+    }
+    
+    //MARK: Information VC
+    func makeInformationViewController() -> UIViewController {
+        let viewController = InformationViewController()
+        return viewController
+    }
+    
+    private func makeInformationViewModel() -> InformationViewModelProtocol {
+        let viewModel = InformationViewModel()
         return viewModel
     }
 }

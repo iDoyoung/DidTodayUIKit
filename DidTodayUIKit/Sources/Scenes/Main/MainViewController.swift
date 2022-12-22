@@ -68,7 +68,10 @@ final class MainViewController: UIViewController {
                          self.viewModel?.showCalendar()
                      },
             UIAction(title: "Information",
-                     image: UIImage(systemName: "info.circle")) { _ in }]
+                     image: UIImage(systemName: "info.circle")) { [weak self] _ in
+                         guard let self = self else { return }
+                         self.viewModel?.showInformation()
+                     }]
     }()
     
     //MARK: - Life Cycle

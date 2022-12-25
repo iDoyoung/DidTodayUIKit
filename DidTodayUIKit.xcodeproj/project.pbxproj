@@ -249,11 +249,10 @@
 		7F133C45290364300099E55C /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
-				7F583F2E2912ADF6006735AA /* View */,
-				7FB6A92128E07BC4009C61C5 /* Calendar */,
 				7F133C46290365460099E55C /* CalendarViewController.swift */,
-				7F71192C290BBC8B001DFE99 /* CalendarViewModel.swift */,
-				7F583F33291A61D2006735AA /* DidsOfDayItemViewModel.swift */,
+				7FB6A92128E07BC4009C61C5 /* Calendar */,
+				7F583F2E2912ADF6006735AA /* Cell */,
+				7FF770B7295888AA00A665B5 /* ViewModel */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -287,12 +286,12 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		7F583F2E2912ADF6006735AA /* View */ = {
+		7F583F2E2912ADF6006735AA /* Cell */ = {
 			isa = PBXGroup;
 			children = (
 				7F583F312914B73B006735AA /* DidTitleCell.swift */,
 			);
-			path = View;
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		7F5A91C628E68CA7006B8406 /* Date+Extensions */ = {
@@ -563,6 +562,15 @@
 				7FB3345E2953E5FC00E9FB88 /* AboutViewModel.swift */,
 				7FF770B329557ED500A665B5 /* AboutDid.swift */,
 				7FF770B529569DDA00A665B5 /* AboutItem.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		7FF770B7295888AA00A665B5 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7F71192C290BBC8B001DFE99 /* CalendarViewModel.swift */,
+				7F583F33291A61D2006735AA /* DidsOfDayItemViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";

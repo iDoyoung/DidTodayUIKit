@@ -53,8 +53,8 @@
 		7F9C0B9E293DAA8C0094C2A5 /* TimerAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9C0B9D293DAA8C0094C2A5 /* TimerAlert.swift */; };
 		7F9C0BA0293DC1BA0094C2A5 /* Double+ToStringOfTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9C0B9F293DC1BA0094C2A5 /* Double+ToStringOfTimer.swift */; };
 		7FA60AE928D6FB7A0098F3D2 /* MainViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA60AE828D6FB7A0098F3D2 /* MainViewControllerTests.swift */; };
-		7FB3345D2953E58000E9FB88 /* InformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB3345C2953E58000E9FB88 /* InformationViewController.swift */; };
-		7FB3345F2953E5FC00E9FB88 /* InformationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB3345E2953E5FC00E9FB88 /* InformationViewModel.swift */; };
+		7FB3345D2953E58000E9FB88 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB3345C2953E58000E9FB88 /* AboutViewController.swift */; };
+		7FB3345F2953E5FC00E9FB88 /* AboutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB3345E2953E5FC00E9FB88 /* AboutViewModel.swift */; };
 		7FB6A8CB28DAF529009C61C5 /* CreateDidViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6A8CA28DAF529009C61C5 /* CreateDidViewModelTests.swift */; };
 		7FB6A8CF28DB00E3009C61C5 /* CreateDidViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6A8CE28DB00E3009C61C5 /* CreateDidViewControllerTests.swift */; };
 		7FB6A8D328DD5C04009C61C5 /* ManagedDidItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6A8D128DD5C04009C61C5 /* ManagedDidItem+CoreDataClass.swift */; };
@@ -150,8 +150,8 @@
 		7F9C0B9D293DAA8C0094C2A5 /* TimerAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerAlert.swift; sourceTree = "<group>"; };
 		7F9C0B9F293DC1BA0094C2A5 /* Double+ToStringOfTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+ToStringOfTimer.swift"; sourceTree = "<group>"; };
 		7FA60AE828D6FB7A0098F3D2 /* MainViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerTests.swift; sourceTree = "<group>"; };
-		7FB3345C2953E58000E9FB88 /* InformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationViewController.swift; sourceTree = "<group>"; };
-		7FB3345E2953E5FC00E9FB88 /* InformationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationViewModel.swift; sourceTree = "<group>"; };
+		7FB3345C2953E58000E9FB88 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		7FB3345E2953E5FC00E9FB88 /* AboutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewModel.swift; sourceTree = "<group>"; };
 		7FB6A8CA28DAF529009C61C5 /* CreateDidViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDidViewModelTests.swift; sourceTree = "<group>"; };
 		7FB6A8CE28DB00E3009C61C5 /* CreateDidViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDidViewControllerTests.swift; sourceTree = "<group>"; };
 		7FB6A8D128DD5C04009C61C5 /* ManagedDidItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagedDidItem+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -332,7 +332,7 @@
 		7FB3345B2953E36700E9FB88 /* Information */ = {
 			isa = PBXGroup;
 			children = (
-				7FB3345C2953E58000E9FB88 /* InformationViewController.swift */,
+				7FB3345C2953E58000E9FB88 /* AboutViewController.swift */,
 				7FF770B229557EA800A665B5 /* ViewModel */,
 				7FF770AF2955621300A665B5 /* Cells */,
 			);
@@ -560,7 +560,7 @@
 		7FF770B229557EA800A665B5 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				7FB3345E2953E5FC00E9FB88 /* InformationViewModel.swift */,
+				7FB3345E2953E5FC00E9FB88 /* AboutViewModel.swift */,
 				7FF770B329557ED500A665B5 /* AboutDid.swift */,
 				7FF770B529569DDA00A665B5 /* AboutItem.swift */,
 			);
@@ -690,7 +690,7 @@
 				7F397A7228D83021000F89E2 /* CreateDidViewModel.swift in Sources */,
 				50A4505A2564CFD500812F14 /* Localize.swift in Sources */,
 				7F133C652907CC5A0099E55C /* SceneDIContainer.swift in Sources */,
-				7FB3345F2953E5FC00E9FB88 /* InformationViewModel.swift in Sources */,
+				7FB3345F2953E5FC00E9FB88 /* AboutViewModel.swift in Sources */,
 				7F583F322914B73B006735AA /* DidTitleCell.swift in Sources */,
 				7FE4C06F294852020048F24E /* UIColor+GetRGB.swift in Sources */,
 				7F0B97BB292C7ACA0071DF98 /* UIView+Border.swift in Sources */,
@@ -750,7 +750,7 @@
 				504CE0B4253FDFDF000CC6CF /* PreviousVersionModel.swift in Sources */,
 				7F133CA3290902EC0099E55C /* StoryboardInstantiable.swift in Sources */,
 				7F5A91C828E68CCF006B8406 /* Date+ToString.swift in Sources */,
-				7FB3345D2953E58000E9FB88 /* InformationViewController.swift in Sources */,
+				7FB3345D2953E58000E9FB88 /* AboutViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

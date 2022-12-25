@@ -17,7 +17,7 @@ protocol InformationViewModelOuput {
     var items: [AboutItem] { get }
 }
 
-final class InformationViewModel: InformationViewModelProtocol {
+final class AboutViewModel: InformationViewModelProtocol {
     let about = AboutDid()
     let items = [AboutItem(title: "Recommend Did"),
                  AboutItem(title: "Write a review"),

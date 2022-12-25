@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class InformationViewController: UITableViewController {
+final class AboutViewController: UITableViewController {
     
     private enum Section: Int, CaseIterable {
         case about, link
@@ -17,8 +17,8 @@ final class InformationViewController: UITableViewController {
     private var dataSource: UICollectionViewDiffableDataSource<Section, AnyHashable>?
     
     //MARK: - Life Cycle
-    static func create(with viewModel: InformationViewModelProtocol) -> InformationViewController {
-        let viewController = InformationViewController(style: .insetGrouped)
+    static func create(with viewModel: InformationViewModelProtocol) -> AboutViewController {
+        let viewController = AboutViewController(style: .insetGrouped)
         viewController.viewModel = viewModel
         return viewController
     }
@@ -51,7 +51,7 @@ final class InformationViewController: UITableViewController {
 }
 
 //MARK: - Table View
-extension InformationViewController {
+extension AboutViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return Section.allCases.count
@@ -97,7 +97,7 @@ extension InformationViewController {
 }
 
 //MARK: Action
-extension InformationViewController {
+extension AboutViewController {
     
     @objc private func back() {
         dismiss(animated: true)

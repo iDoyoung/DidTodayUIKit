@@ -329,14 +329,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		7FB3345B2953E36700E9FB88 /* Information */ = {
+		7FB3345B2953E36700E9FB88 /* About */ = {
 			isa = PBXGroup;
 			children = (
 				7FB3345C2953E58000E9FB88 /* AboutViewController.swift */,
 				7FF770B229557EA800A665B5 /* ViewModel */,
 				7FF770AF2955621300A665B5 /* Cells */,
 			);
-			path = Information;
+			path = About;
 			sourceTree = "<group>";
 		};
 		7FB6A8C928DAF514009C61C5 /* CreateDid */ = {
@@ -426,7 +426,7 @@
 				7FC11596293654400056237A /* Doing */,
 				7F397A7028D82FF4000F89E2 /* CreateDid */,
 				7F133C45290364300099E55C /* Calendar */,
-				7FB3345B2953E36700E9FB88 /* Information */,
+				7FB3345B2953E36700E9FB88 /* About */,
 				7FB6A8D028DD526E009C61C5 /* Legacy */,
 				7FB6A91F28E079ED009C61C5 /* Custom */,
 			);

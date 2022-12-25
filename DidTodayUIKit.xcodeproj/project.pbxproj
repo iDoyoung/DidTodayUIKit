@@ -83,6 +83,9 @@
 		7FE4C06F294852020048F24E /* UIColor+GetRGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE4C06E294852020048F24E /* UIColor+GetRGB.swift */; };
 		7FF48C2B2921F4F600387FE7 /* UIView+Shadow Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF48C2A2921F4F600387FE7 /* UIView+Shadow Effect.swift */; };
 		7FF48C2D2922085A00387FE7 /* UIView+Corner Radius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF48C2C2922085A00387FE7 /* UIView+Corner Radius.swift */; };
+		7FF770B12955625400A665B5 /* AboutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF770B02955625400A665B5 /* AboutCell.swift */; };
+		7FF770B429557ED500A665B5 /* AboutDid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF770B329557ED500A665B5 /* AboutDid.swift */; };
+		7FF770B629569DDA00A665B5 /* AboutItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF770B529569DDA00A665B5 /* AboutItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -178,6 +181,9 @@
 		7FE4C06E294852020048F24E /* UIColor+GetRGB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+GetRGB.swift"; sourceTree = "<group>"; };
 		7FF48C2A2921F4F600387FE7 /* UIView+Shadow Effect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shadow Effect.swift"; sourceTree = "<group>"; };
 		7FF48C2C2922085A00387FE7 /* UIView+Corner Radius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Corner Radius.swift"; sourceTree = "<group>"; };
+		7FF770B02955625400A665B5 /* AboutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutCell.swift; sourceTree = "<group>"; };
+		7FF770B329557ED500A665B5 /* AboutDid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutDid.swift; sourceTree = "<group>"; };
+		7FF770B529569DDA00A665B5 /* AboutItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutItem.swift; sourceTree = "<group>"; };
 		ADA015A5697AC9D46CCADCEC /* Pods_DidTodayUIKit_DidTodayUIKitUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DidTodayUIKit_DidTodayUIKitUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D52ECED48532DF52D0291955 /* Pods_DidTodayUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DidTodayUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -327,7 +333,8 @@
 			isa = PBXGroup;
 			children = (
 				7FB3345C2953E58000E9FB88 /* InformationViewController.swift */,
-				7FB3345E2953E5FC00E9FB88 /* InformationViewModel.swift */,
+				7FF770B229557EA800A665B5 /* ViewModel */,
+				7FF770AF2955621300A665B5 /* Cells */,
 			);
 			path = Information;
 			sourceTree = "<group>";
@@ -542,6 +549,24 @@
 			path = "UIColor+Extensions";
 			sourceTree = "<group>";
 		};
+		7FF770AF2955621300A665B5 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				7FF770B02955625400A665B5 /* AboutCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		7FF770B229557EA800A665B5 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7FB3345E2953E5FC00E9FB88 /* InformationViewModel.swift */,
+				7FF770B329557ED500A665B5 /* AboutDid.swift */,
+				7FF770B529569DDA00A665B5 /* AboutItem.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		DAB2CA619C78ADD98AADD0EB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -670,7 +695,9 @@
 				7FE4C06F294852020048F24E /* UIColor+GetRGB.swift in Sources */,
 				7F0B97BB292C7ACA0071DF98 /* UIView+Border.swift in Sources */,
 				7FB6A8DA28DDC2C4009C61C5 /* Date+GetHoursAndMinutes.swift in Sources */,
+				7FF770B429557ED500A665B5 /* AboutDid.swift in Sources */,
 				7FF48C2D2922085A00387FE7 /* UIView+Corner Radius.swift in Sources */,
+				7FF770B629569DDA00A665B5 /* AboutItem.swift in Sources */,
 				7F0C251C29419BAE00304A0D /* CircularLabel.swift in Sources */,
 				7FC580A328D1A201008086FD /* PieView.swift in Sources */,
 				504CE0C1254143CC000CC6CF /* AllPie.swift in Sources */,
@@ -702,6 +729,7 @@
 				7FB6A8D328DD5C04009C61C5 /* ManagedDidItem+CoreDataClass.swift in Sources */,
 				7F397A7428D86EF1000F89E2 /* Date+ToDouble.swift in Sources */,
 				7F076FC2290FC25500DF4EDC /* Date+OmittedTime.swift in Sources */,
+				7FF770B12955625400A665B5 /* AboutCell.swift in Sources */,
 				7F61A03C294439A80084A3F6 /* UIView+animateToShake.swift in Sources */,
 				7F71192D290BBC8B001DFE99 /* CalendarViewModel.swift in Sources */,
 				7F55E401294C115A007B2706 /* CreateDidViewText.swift in Sources */,

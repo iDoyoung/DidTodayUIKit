@@ -66,7 +66,7 @@ final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
     
     //MARK: Information VC
     func makeInformationViewController() -> UIViewController {
-        let viewController = InformationViewController()
+        let viewController = InformationViewController.create(with: makeInformationViewModel())
         return viewController
     }
     

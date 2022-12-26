@@ -53,12 +53,12 @@ final class CalendarViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()
+        configure()
     }
     
     //MARK: - Configure UI
-    private func configureUI() {
-        view.backgroundColor = .secondarySystemBackground
+    private func configure() {
+        view.backgroundColor = .customBackground
         setupNavigationBar()
         configureCalendarView()
         configureDidsCollectionView()
@@ -154,7 +154,7 @@ extension CalendarViewController {
                     .sink { dateOfDids in
                         for date in dateOfDids {
                             if day.components == calendar.dateComponents([.era, .year, .month, .day], from: date) {
-                                invariantViewProperties.textColor = .green
+                                invariantViewProperties.textColor = .customGreen
                                 break
                             }
                         }

@@ -139,25 +139,27 @@ extension CalendarViewController {
                                                                            textColor: .darkGray,
                                                                            backgroundColor: .clear)
             ///Setup Seleted day
-            if day.components == self?.viewModel?.selectedDay {
-                invariantViewProperties.textColor = .systemBackground
-                invariantViewProperties.backgroundColor = .label
-            }
-            ///Setup today
-            if day.components == calendar.dateComponents([.era, .year, .month, .day], from: Date()) {
-                invariantViewProperties.textColor = .systemBackground
-                invariantViewProperties.backgroundColor = .systemRed
-            }
-            //TODO: Binding
-            if let viewModel = self?.viewModel {
-                viewModel.dateOfDidsPublisher.sink { dateOfDids in
-                    for date in dateOfDids {
-                        if day.components == calendar.dateComponents([.era, .year, .month, .day], from: date) {
-                            invariantViewProperties.textColor = .green
-                            break
+            if let self = self, let viewModel = self.viewModel {
+                if day.components == viewModel.selectedDay {
+                    invariantViewProperties.textColor = .systemBackground
+                    invariantViewProperties.backgroundColor = .label
+                }
+                ///Setup today
+                if day.components == calendar.dateComponents([.era, .year, .month, .day], from: Date()) {
+                    invariantViewProperties.textColor = .systemBackground
+                    invariantViewProperties.backgroundColor = .systemRed
+                }
+                //TODO: Binding
+                viewModel.dateOfDidsPublisher
+                    .sink { dateOfDids in
+                        for date in dateOfDids {
+                            if day.components == calendar.dateComponents([.era, .year, .month, .day], from: date) {
+                                invariantViewProperties.textColor = .green
+                                break
+                            }
                         }
                     }
-                }
+                    .store(in: &self.cancellableBag)
             }
             return CalendarItemModel<DayLabel> (
                 invariantViewProperties: invariantViewProperties,

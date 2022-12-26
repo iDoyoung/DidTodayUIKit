@@ -14,10 +14,12 @@ final class CalendarViewController: UIViewController {
     private enum Section: CaseIterable {
         case title
     }
+    
     var viewModel: CalendarViewModelProtocol?
     private var cancellableBag = Set<AnyCancellable>()
     private var dataSource: UICollectionViewDiffableDataSource<Section, DidsOfDayItemViewModel>?
     private var sizeOfDidTitleCell: [CGSize] = []
+    
     //MARK: - UI Objects
     private lazy var calendarView: CalendarView = CalendarView(initialContent: setupCalendarViewContents())
     private var didsOfDayCollectionView: UICollectionView!
@@ -33,6 +35,7 @@ final class CalendarViewController: UIViewController {
         stackView.spacing = 1.5
         return stackView
     }()
+    
     //MARK: - Life Cycle
     static func create(with viewModel: CalendarViewModelProtocol) -> CalendarViewController {
         let viewController = CalendarViewController()
@@ -56,11 +59,20 @@ final class CalendarViewController: UIViewController {
     //MARK: - Configure UI
     private func configureUI() {
         view.backgroundColor = .secondarySystemBackground
+        setupNavigationBar()
         configureCalendarView()
         configureDidsCollectionView()
         configureStackView()
         setupLayoutConstraints()
         calendarView.scroll(toDayContaining: Date(), scrollPosition: .firstFullyVisiblePosition, animated: false)
+    }
+    
+    private func setupNavigationBar() {
+        navigationController?.navigationBar.tintColor = .label
+        let imageConfiguration = UIImage.SymbolConfiguration(pointSize: 20, weight: .black, scale: .default)
+        let xmarkImage = UIImage(systemName: "xmark", withConfiguration: imageConfiguration)
+        let rightBarButton = UIBarButtonItem(image: xmarkImage, style: .plain, target: self, action: #selector(close))
+        navigationItem.rightBarButtonItem = rightBarButton
     }
     
     private func configureStackView() {
@@ -76,6 +88,13 @@ final class CalendarViewController: UIViewController {
             verticalStactView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
             verticalStactView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
             didsOfDayCollectionView.heightAnchor.constraint(equalToConstant: 50)])
+    }
+}
+
+extension CalendarViewController {
+    
+    @objc private func close() {
+        dismiss(animated: true)
     }
 }
 

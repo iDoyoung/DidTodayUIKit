@@ -11,20 +11,21 @@ import HorizonCalendar
 
 final class CalendarViewController: UIViewController {
     
-    private enum Section: CaseIterable {
-        case title
+    static let sectionHeaderElementKind = "layout-header-element-kind"
+    
+    private enum Section: Int, CaseIterable {
+        case didsOfSelected
     }
     
     var viewModel: CalendarViewModelProtocol?
     private var cancellableBag = Set<AnyCancellable>()
     private var dataSource: UICollectionViewDiffableDataSource<Section, DidsOfDayItemViewModel>?
-    private var sizeOfDidTitleCell: [CGSize] = []
     
     //MARK: - UI Objects
     private lazy var calendarView: CalendarView = CalendarView(initialContent: setupCalendarViewContents())
-    private var didsOfDayCollectionView: UICollectionView!
+    private var collectionView: UICollectionView!
     private lazy var verticalStactView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [calendarView, didsOfDayCollectionView])
+        let stackView = UIStackView(arrangedSubviews: [collectionView, calendarView])
         stackView.axis = .vertical
         stackView.backgroundColor = .systemBackground
         stackView.layer.borderColor = UIColor.separator.cgColor
@@ -61,7 +62,7 @@ final class CalendarViewController: UIViewController {
         view.backgroundColor = .customBackground
         setupNavigationBar()
         configureCalendarView()
-        configureDidsCollectionView()
+        configureCollectionView()
         configureStackView()
         setupLayoutConstraints()
         calendarView.scroll(toDayContaining: Date(), scrollPosition: .firstFullyVisiblePosition, animated: false)
@@ -81,13 +82,11 @@ final class CalendarViewController: UIViewController {
         
     private func setupLayoutConstraints() {
         verticalStactView.translatesAutoresizingMaskIntoConstraints = false
-        didsOfDayCollectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             verticalStactView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
             verticalStactView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
             verticalStactView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
-            verticalStactView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-            didsOfDayCollectionView.heightAnchor.constraint(equalToConstant: 50)])
+            verticalStactView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)])
     }
 }
 
@@ -150,7 +149,7 @@ extension CalendarViewController {
                     invariantViewProperties.backgroundColor = .systemRed
                 }
                 //TODO: Binding
-                viewModel.dateOfDidsPublisher
+                viewModel.dateOfDids
                     .sink { dateOfDids in
                         for date in dateOfDids {
                             if day.components == calendar.dateComponents([.era, .year, .month, .day], from: date) {
@@ -175,65 +174,84 @@ extension CalendarViewController {
 //MARK: - Configure Collection View
 extension CalendarViewController {
     
-    private func configureDidsCollectionView() {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        didsOfDayCollectionView = UICollectionView(
-            frame: .zero,
-            collectionViewLayout: layout)
-        didsOfDayCollectionView.backgroundColor = .clear
+    private func configureCollectionView() {
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createCollectionViewLayout())
+        collectionView.backgroundColor = .clear
+        collectionView.isScrollEnabled = false
         configureDataSource()
-        didsOfDayCollectionView.delegate = self
+    }
+    
+    private func createCollectionViewLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(10),
+                                              heightDimension: .fractionalHeight(1))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(0),
+                                               heightDimension: .absolute(38))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
+                                                       subitems: [item])
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing =  10
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0,
+                                                        leading: 10,
+                                                        bottom: 0,
+                                                        trailing: 10)
+        ///setup header
+        let sectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(60))
+        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: sectionHeaderSize,
+                                                                        elementKind: CalendarViewController.sectionHeaderElementKind,
+                                                                        alignment: .top)
+        section.boundarySupplementaryItems = [sectionHeader]
+        section.orthogonalScrollingBehavior = .continuous
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        return layout
     }
     
     private func configureDataSource() {
         let didTitleCellRegistration = createDidTitleCellRegistration()
+        let didsOfSelectedSupplementaryRegistration = createDidsOfSelectedSupplementaryRegistration()
         dataSource = UICollectionViewDiffableDataSource<Section, DidsOfDayItemViewModel>(
-            collectionView: didsOfDayCollectionView,
+            collectionView: collectionView,
             cellProvider: { collectionView, indexPath, itemIdentifier in
                 collectionView.dequeueConfiguredReusableCell(
                     using: didTitleCellRegistration,
                     for: indexPath,
                     item: itemIdentifier)
             })
-        viewModel?.didsOfDayItemSubject
+        dataSource?.supplementaryViewProvider = { [weak self] supplementaryView, elementKind, indexPath in
+            self?.collectionView.dequeueConfiguredReusableSupplementary(using: didsOfSelectedSupplementaryRegistration, for: indexPath)
+        }
+        viewModel?.didsOfDayItem
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] items in
                 guard let self = self else { return }
-                self.sizeOfDidTitleCell = items.map {
-                    let stringSize = $0.title.size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17)])
-                    return CGSize(
-                        width: stringSize.width + 25,
-                        height: 30)
-                }
-                self.initailSnapshot(items)
+                self.initialSnapshot(items)
             })
             .store(in: &cancellableBag)
     }
     
+    //MARK: - Create Registration
+    private func createDidsOfSelectedSupplementaryRegistration() -> UICollectionView.SupplementaryRegistration<DetailDidSupplementaryView> {
+        UICollectionView.SupplementaryRegistration(elementKind: CalendarViewController.sectionHeaderElementKind) { [weak self] supplementaryView, elementKind, indexPath in
+            guard let self = self,
+                  let viewModel = self.viewModel else { return }
+            viewModel.descriptionOfSelectedDay
+                .sink { supplementaryView.descriptionCountLabel.text = $0 }
+                .store(in: &self.cancellableBag)
+        }
+    }
+    
     private func createDidTitleCellRegistration() -> UICollectionView.CellRegistration<DidTitleCell, DidsOfDayItemViewModel> {
         return UICollectionView.CellRegistration { cell, indexPath, itemIdentifier in
+            cell.sizeToFit()
             cell.titleLabel.text = itemIdentifier.title
             cell.backgroundColor = itemIdentifier.color
         }
     }
    
-    private func initailSnapshot(_ items: [DidsOfDayItemViewModel]) {
+    private func initialSnapshot(_ items: [DidsOfDayItemViewModel]) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, DidsOfDayItemViewModel>()
         snapshot.appendSections(Section.allCases)
         snapshot.appendItems(items)
-        dataSource?.apply(snapshot, animatingDifferences: false)
-    }
-}
-
-extension CalendarViewController: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return sizeOfDidTitleCell[indexPath.row]
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        let margin: CGFloat = 20
-        return UIEdgeInsets(top: 0, left: margin, bottom: 0, right: margin)
+        dataSource?.apply(snapshot, animatingDifferences: true)
     }
 }

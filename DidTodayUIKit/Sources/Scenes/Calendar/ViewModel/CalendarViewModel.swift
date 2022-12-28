@@ -5,7 +5,7 @@
 //  Created by Doyoung on 2022/10/28.
 //
 
-import Foundation
+import UIKit
 import Combine
 
 protocol CalendarViewModelProtocol: CalendarViewModelInput, CalendarViewModelOutput {   }
@@ -16,38 +16,42 @@ protocol CalendarViewModelInput {
 }
 
 protocol CalendarViewModelOutput {
-    var dateOfDidsPublisher: Published<[Date]>.Publisher { get }
-    var didsOfDayItemSubject: PassthroughSubject<[DidsOfDayItemViewModel], Never> { get }
+    var dateOfDids: CurrentValueSubject<[Date], Never> { get }
+    var didsOfDayItem: PassthroughSubject<[DidsOfDayItemViewModel], Never> { get }
+    var descriptionOfSelectedDay: CurrentValueSubject<String?, Never> { get }
     var startedDate: Date? { get }
 }
 
 final class CalendarViewModel: CalendarViewModelProtocol {
     
     private var cancellableBag = Set<AnyCancellable>()
+    
+    init(dids: [Did]) {
+        self.dids = dids
+        let dates = dids.map { $0.started.omittedTime() }
+        self.startedDate = dates.first ?? Date()
+        dateOfDids.send(dates)
+        $selectedDay
+            .sink { [weak self] day in
+                guard let day = day else { return }
+                let item = dids
+                    .filter { $0.started.omittedTime() == Calendar.current.date(from: day)?.omittedTime() }
+                    .map { DidsOfDayItemViewModel($0) }
+                self?.didsOfDayItem.send(item)
+                if item.count == 0 {
+                    self?.descriptionOfSelectedDay.send("Dids \(item.count) Things")
+                }
+            }
+            .store(in: &cancellableBag)
+    }
+   
     //MARK: - Input
     @Published var dids: [Did]
     @Published var selectedDay: DateComponents?
     
     //MARK: - Output
-    @Published private var dateOfDids: [Date]
-    var dateOfDidsPublisher: Published<[Date]>.Publisher {
-        $dateOfDids
-    }
+    var dateOfDids = CurrentValueSubject<[Date], Never>([])
     var startedDate: Date?
-    var didsOfDayItemSubject = PassthroughSubject<[DidsOfDayItemViewModel], Never>()
-
-    init(dids: [Did]) {
-        self.dids = dids
-        let dates = dids.map { $0.started.omittedTime() }
-        self.startedDate = dates.first ?? Date()
-        self.dateOfDids = Array(Set(dates))
-        $selectedDay.sink { [weak self] day in
-            guard let day = day else { return }
-            let item = dids
-                .filter { $0.started.omittedTime() == Calendar.current.date(from: day)?.omittedTime() }
-                .map { DidsOfDayItemViewModel($0) }
-            self?.didsOfDayItemSubject.send(item)
-        }
-        .store(in: &cancellableBag)
-    }
+    var descriptionOfSelectedDay = CurrentValueSubject<String?, Never>(nil)
+    var didsOfDayItem = PassthroughSubject<[DidsOfDayItemViewModel], Never>()
 }

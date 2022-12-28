@@ -66,6 +66,7 @@ final class CalendarViewController: UIViewController {
         configureStackView()
         setupLayoutConstraints()
         calendarView.scroll(toDayContaining: Date(), scrollPosition: .firstFullyVisiblePosition, animated: false)
+        bindViewModel()
     }
     
     private func setupNavigationBar() {
@@ -87,6 +88,16 @@ final class CalendarViewController: UIViewController {
             verticalStactView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
             verticalStactView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
             verticalStactView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)])
+    }
+    
+       private func bindViewModel() {
+           viewModel?.didsOfDayItem
+               .receive(on: DispatchQueue.main)
+               .sink { [weak self] items in
+                   guard let collectionView = self?.collectionView else { return }
+                   items.isEmpty ? collectionView.hideWithAnimation() : collectionView.showWithAnimation()
+               }
+               .store(in: &cancellableBag)
     }
 }
 

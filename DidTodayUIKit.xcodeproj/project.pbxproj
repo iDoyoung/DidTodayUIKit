@@ -82,6 +82,7 @@
 		7FD2B05029091AD00048408F /* CreateDid.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FD2B04F29091AD00048408F /* CreateDid.storyboard */; };
 		7FE4C06F294852020048F24E /* UIColor+GetRGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE4C06E294852020048F24E /* UIColor+GetRGB.swift */; };
 		7FEB006029595D120073B90C /* DetailDidSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FEB005F29595D120073B90C /* DetailDidSupplementaryView.swift */; };
+		7FEB0064295C242D0073B90C /* UIView+Animate To Hide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FEB0063295C242D0073B90C /* UIView+Animate To Hide.swift */; };
 		7FF48C2B2921F4F600387FE7 /* UIView+Shadow Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF48C2A2921F4F600387FE7 /* UIView+Shadow Effect.swift */; };
 		7FF48C2D2922085A00387FE7 /* UIView+Corner Radius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF48C2C2922085A00387FE7 /* UIView+Corner Radius.swift */; };
 		7FF770B12955625400A665B5 /* AboutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF770B02955625400A665B5 /* AboutCell.swift */; };
@@ -181,6 +182,7 @@
 		7FD2B04F29091AD00048408F /* CreateDid.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateDid.storyboard; sourceTree = "<group>"; };
 		7FE4C06E294852020048F24E /* UIColor+GetRGB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+GetRGB.swift"; sourceTree = "<group>"; };
 		7FEB005F29595D120073B90C /* DetailDidSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDidSupplementaryView.swift; sourceTree = "<group>"; };
+		7FEB0063295C242D0073B90C /* UIView+Animate To Hide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Animate To Hide.swift"; sourceTree = "<group>"; };
 		7FF48C2A2921F4F600387FE7 /* UIView+Shadow Effect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shadow Effect.swift"; sourceTree = "<group>"; };
 		7FF48C2C2922085A00387FE7 /* UIView+Corner Radius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Corner Radius.swift"; sourceTree = "<group>"; };
 		7FF770B02955625400A665B5 /* AboutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutCell.swift; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 				7FF48C2C2922085A00387FE7 /* UIView+Corner Radius.swift */,
 				7F0B97BA292C7ACA0071DF98 /* UIView+Border.swift */,
 				7F61A03B294439A80084A3F6 /* UIView+animateToShake.swift */,
+				7FEB0063295C242D0073B90C /* UIView+Animate To Hide.swift */,
 			);
 			path = "UIView+Extensions";
 			sourceTree = "<group>";
@@ -719,6 +722,7 @@
 				7F55E3FF294C08A0007B2706 /* CreateDidAlert.swift in Sources */,
 				7FB6A8D628DD89E5009C61C5 /* Date+DifferenceToString.swift in Sources */,
 				7F80EBCB28D4102500781DB4 /* MainDidItemsViewModel.swift in Sources */,
+				7FEB0064295C242D0073B90C /* UIView+Animate To Hide.swift in Sources */,
 				504CE046253FDFAA000CC6CF /* PreviousMainViewController.swift in Sources */,
 				7FC22BB828CDE19300F83122 /* MainViewController.swift in Sources */,
 				7F0B97B9292C58060071DF98 /* NeumorphismButton.swift in Sources */,

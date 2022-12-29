@@ -17,7 +17,7 @@ protocol CalendarViewModelInput {
 
 protocol CalendarViewModelOutput {
     var dateOfDids: CurrentValueSubject<[Date], Never> { get }
-    var didsOfDayItem: PassthroughSubject<[DidsOfDayItemViewModel], Never> { get }
+    var didsOfDayItem: CurrentValueSubject<[DidsOfDayItemViewModel], Never> { get }
     var descriptionOfSelectedDay: CurrentValueSubject<String?, Never> { get }
     var startedDate: Date? { get }
 }
@@ -53,5 +53,5 @@ final class CalendarViewModel: CalendarViewModelProtocol {
     var dateOfDids = CurrentValueSubject<[Date], Never>([])
     var startedDate: Date?
     var descriptionOfSelectedDay = CurrentValueSubject<String?, Never>(nil)
-    var didsOfDayItem = PassthroughSubject<[DidsOfDayItemViewModel], Never>()
+    var didsOfDayItem = CurrentValueSubject<[DidsOfDayItemViewModel], Never>([])
 }

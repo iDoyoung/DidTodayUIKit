@@ -33,7 +33,7 @@ final class MainFlowCoordinator: Coordinator {
     
     private func showCalendar(dids: [Did]) {
         let viewController = UINavigationController(rootViewController: dependencies.makeCalendarViewController(dids: dids))
-        viewController.modalPresentationStyle = .fullScreen
+        viewController.modalPresentationStyle = .overFullScreen
         navigationController?.present(viewController, animated: true)
     }
     

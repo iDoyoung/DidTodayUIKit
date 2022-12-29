@@ -58,12 +58,20 @@ final class CalendarViewController: UIViewController {
     
     //MARK: - Configure UI
     private func configure() {
-        view.backgroundColor = .customBackground
+        setupView()
         setupNavigationBar()
         configureCollectionView()
         configureStackView()
         setupLayoutConstraints()
         configureCalendarView()
+    }
+    
+    private func setupView() {
+        view.borderColor = .clear
+        let blurEffect = UIBlurEffect(style: .systemMaterial)
+        let blurredEffectView = UIVisualEffectView(effect: blurEffect)
+        blurredEffectView.frame = view.bounds
+        view.addSubview(blurredEffectView)
     }
     
     private func setupNavigationBar() {

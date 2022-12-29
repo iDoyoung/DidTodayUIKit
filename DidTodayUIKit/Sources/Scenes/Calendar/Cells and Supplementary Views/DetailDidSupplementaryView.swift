@@ -11,22 +11,10 @@ final class DetailDidSupplementaryView: UICollectionReusableView {
     
     static let reuseIdentifier = "detail-did-supplementary-view"
     
-    private lazy var horizontalStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [pieView, descriptionCountLabel])
-        stackView.axis = .horizontal
-        return stackView
-    }()
-    
-    let pieView: PieView = {
-        let pieView = PieView()
-        return pieView
-    }()
-    
     let descriptionCountLabel: UILabel = {
         let label = UILabel()
-        label.sizeToFit()
-        label.font = .systemFont(ofSize: 25, weight: .heavy)
-        label.textColor = .customGreen
+        label.font = .preferredFont(forTextStyle: .headline)
+        label.textColor = .label
         return label
     }()
     
@@ -40,17 +28,17 @@ final class DetailDidSupplementaryView: UICollectionReusableView {
     }
     
     private func configure() {
-        addSubview(horizontalStackView)
+        addSubview(descriptionCountLabel)
         setupLayoutConstraint()
     }
     
     private func setupLayoutConstraint() {
-        horizontalStackView.translatesAutoresizingMaskIntoConstraints = false
+        descriptionCountLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            horizontalStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            horizontalStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            horizontalStackView.topAnchor.constraint(equalTo: topAnchor),
-            horizontalStackView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            descriptionCountLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            descriptionCountLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            descriptionCountLabel.topAnchor.constraint(equalTo: topAnchor),
+            descriptionCountLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
 }

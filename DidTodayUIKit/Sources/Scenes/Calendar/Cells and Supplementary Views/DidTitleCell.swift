@@ -11,13 +11,14 @@ final class DidTitleCell: UICollectionViewCell {
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 17, weight: .bold)
+        label.textColor = .systemGray
+        label.font = .preferredFont(forTextStyle: .callout)
         label.textAlignment = .center
         return label
     }()
     
     private func configure() {
-        cornerRadius = 16
+        cornerRadius = 15
         addSubview(titleLabel)
         setupLayoutConstraint()
     }

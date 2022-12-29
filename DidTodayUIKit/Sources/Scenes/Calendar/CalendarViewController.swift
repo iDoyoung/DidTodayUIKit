@@ -25,15 +25,14 @@ final class CalendarViewController: UIViewController {
     private lazy var calendarView: CalendarView = CalendarView(initialContent: setupCalendarViewContents())
     private var collectionView: UICollectionView!
     private lazy var verticalStactView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [collectionView, calendarView])
+        let stackView = UIStackView(arrangedSubviews: [calendarView, collectionView])
         stackView.axis = .vertical
-        stackView.backgroundColor = .systemBackground
+        stackView.backgroundColor = .separator
         stackView.layer.borderColor = UIColor.separator.cgColor
         stackView.layer.borderWidth = 0.5
         stackView.cornerRadius = 20
-        stackView.shadowOpacity = 0.3
-        stackView.shadowRadius = 10
-        stackView.spacing = 1.5
+        stackView.layer.masksToBounds = true
+        stackView.spacing = 0.5
         return stackView
     }()
     
@@ -61,12 +60,10 @@ final class CalendarViewController: UIViewController {
     private func configure() {
         view.backgroundColor = .customBackground
         setupNavigationBar()
-        configureCalendarView()
         configureCollectionView()
         configureStackView()
         setupLayoutConstraints()
-        calendarView.scroll(toDayContaining: Date(), scrollPosition: .firstFullyVisiblePosition, animated: false)
-        bindViewModel()
+        configureCalendarView()
     }
     
     private func setupNavigationBar() {
@@ -83,11 +80,14 @@ final class CalendarViewController: UIViewController {
         
     private func setupLayoutConstraints() {
         verticalStactView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             verticalStactView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
             verticalStactView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
             verticalStactView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
-            verticalStactView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)])
+            verticalStactView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+            collectionView.heightAnchor.constraint(equalToConstant: 100)
+        ])
     }
     
        private func bindViewModel() {
@@ -114,13 +114,13 @@ extension CalendarViewController {
     private func configureCalendarView() {
         calendarView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
         calendarView.backgroundColor = .systemBackground
-        calendarView.cornerRadius = 20
         calendarView.daySelectionHandler = { [weak self] day in
             guard let self = self else { return }
             self.viewModel?.selectedDay = day.components
             let newContent = self.setupCalendarViewContents()
             self.calendarView.setContent(newContent)
         }
+        scrollToToday()
     }
     
     //TODO: Refactor
@@ -150,7 +150,8 @@ extension CalendarViewController {
                                                                            textColor: .darkGray,
                                                                            backgroundColor: .clear)
             ///Setup Seleted day
-            if let self = self, let viewModel = self.viewModel {
+            if let self = self,
+               let viewModel = self.viewModel {
                 if day.components == viewModel.selectedDay {
                     invariantViewProperties.textColor = .systemBackground
                     invariantViewProperties.backgroundColor = .label
@@ -181,6 +182,10 @@ extension CalendarViewController {
         .horizontalDayMargin(8)
         .verticalDayMargin(8)
     }
+    
+    private func scrollToToday() {
+        calendarView.scroll(toMonthContaining: Date(), scrollPosition: .lastFullyVisiblePosition, animated: true)
+    }
 }
 
 //MARK: - Configure Collection View
@@ -188,7 +193,7 @@ extension CalendarViewController {
     
     private func configureCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createCollectionViewLayout())
-        collectionView.backgroundColor = .clear
+        collectionView.backgroundColor = .systemBackground
         collectionView.isScrollEnabled = false
         configureDataSource()
     }
@@ -198,7 +203,7 @@ extension CalendarViewController {
                                               heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(0),
-                                               heightDimension: .absolute(38))
+                                               heightDimension: .absolute(34))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
                                                        subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
@@ -232,6 +237,7 @@ extension CalendarViewController {
         dataSource?.supplementaryViewProvider = { [weak self] supplementaryView, elementKind, indexPath in
             self?.collectionView.dequeueConfiguredReusableSupplementary(using: didsOfSelectedSupplementaryRegistration, for: indexPath)
         }
+        ///Binding with View Model
         viewModel?.didsOfDayItem
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] items in
@@ -246,8 +252,11 @@ extension CalendarViewController {
         UICollectionView.SupplementaryRegistration(elementKind: CalendarViewController.sectionHeaderElementKind) { [weak self] supplementaryView, elementKind, indexPath in
             guard let self = self,
                   let viewModel = self.viewModel else { return }
+            ///Binding with ViewModel
             viewModel.descriptionOfSelectedDay
-                .sink { supplementaryView.descriptionCountLabel.text = $0 }
+                .sink {
+                    supplementaryView.descriptionCountLabel.text = $0
+                }
                 .store(in: &self.cancellableBag)
         }
     }
@@ -255,6 +264,8 @@ extension CalendarViewController {
     private func createDidTitleCellRegistration() -> UICollectionView.CellRegistration<DidTitleCell, DidsOfDayItemViewModel> {
         return UICollectionView.CellRegistration { cell, indexPath, itemIdentifier in
             cell.sizeToFit()
+            cell.borderWidth = 1
+            cell.borderColor = .systemGray
             cell.titleLabel.text = itemIdentifier.title
             cell.backgroundColor = itemIdentifier.color
         }

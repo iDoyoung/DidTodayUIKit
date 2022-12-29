@@ -113,7 +113,8 @@ extension CalendarViewController {
     
     private func configureCalendarView() {
         calendarView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
-        calendarView.backgroundColor = .clear
+        calendarView.backgroundColor = .systemBackground
+        calendarView.cornerRadius = 20
         calendarView.daySelectionHandler = { [weak self] day in
             guard let self = self else { return }
             self.viewModel?.selectedDay = day.components

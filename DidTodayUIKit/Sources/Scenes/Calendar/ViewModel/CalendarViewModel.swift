@@ -38,11 +38,14 @@ final class CalendarViewModel: CalendarViewModelProtocol {
                     .filter { $0.started.omittedTime() == Calendar.current.date(from: day)?.omittedTime() }
                     .map { DidsOfDayItemViewModel($0) }
                 self?.didsOfDayItem.send(item)
-                if item.count == 0 {
-                    self?.descriptionOfSelectedDay.send("Dids \(item.count) Things")
+                if item.isEmpty {
+                    self?.descriptionOfSelectedDay.send("Select Day")
+                } else {
+                    self?.descriptionOfSelectedDay.send("Did \(item.count) Things")
                 }
             }
             .store(in: &cancellableBag)
+        selectedDay = nil
     }
    
     //MARK: - Input
@@ -52,6 +55,6 @@ final class CalendarViewModel: CalendarViewModelProtocol {
     //MARK: - Output
     var dateOfDids = CurrentValueSubject<[Date], Never>([])
     var startedDate: Date?
-    var descriptionOfSelectedDay = CurrentValueSubject<String?, Never>(nil)
+    var descriptionOfSelectedDay = CurrentValueSubject<String?, Never>("Select Day")
     var didsOfDayItem = CurrentValueSubject<[DidsOfDayItemViewModel], Never>([])
 }

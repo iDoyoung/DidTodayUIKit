@@ -37,14 +37,23 @@ final class MainViewModel: MainViewModelProtocol {
     init(didCoreDataStorage: DidCoreDataStorable, router: MainRouter) {
         self.didCoreDataStorage = didCoreDataStorage
         self.router = router
+        let calendar = Calendar.current
         fetchedDids
-            .map { $0.map { MainDidItemsViewModel($0) }}
+            .map {
+                $0
+                    .filter { calendar.isDateInToday($0.started) }
+                    .map { MainDidItemsViewModel($0) }
+                    .sorted { $0.startedTimes > $1.startedTimes }
+            }
             .sink { [weak self] items in
                 self?.didItemsList.send(items)
             }
             .store(in: &cancellableBag)
         fetchedDids
-            .map { MainTotalOfDidsItemViewModel($0) }
+            .map {
+                let output = $0.filter { calendar.isDateInToday($0.started) }
+                return MainTotalOfDidsItemViewModel(output)
+            }
             .sink { [weak self] item in
                 self?.totalPieDids.send(item)
             }
@@ -56,10 +65,7 @@ final class MainViewModel: MainViewModelProtocol {
         didCoreDataStorage?.fetchDids { [weak self] dids, error in
             guard let self = self else { return }
             if error == nil {
-                let output = dids
-                    .filter { $0.started.omittedTime() == Date().omittedTime()}
-                    .sorted { $0.started < $1.started }
-                self.fetchedDids.send(output)
+                self.fetchedDids.send(dids)
             } else {
                 //TODO: Alert 사용해서 Core Data Fetch 실패를 알려야 하나
                 #if DEBUG

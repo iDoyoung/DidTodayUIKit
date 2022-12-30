@@ -8,6 +8,7 @@
 import UIKit
 
 final class TotalDidsCell: UICollectionViewCell {
+    
     static let reuseIdentifier = "total-dids-cell"
 
     private let piesView: UIView = {
@@ -48,12 +49,24 @@ final class TotalDidsCell: UICollectionViewCell {
     }
     
     private func configure() {
+        setupContentView()
         addSubview(piesView)
         addSubview(verticalStackView)
         setupLayoutConstraint()
     }
     
     //MARK: - Setup
+    private func setupContentView() {
+        cornerRadius = 20
+        ///Set gradient
+        borderWidth = 0.5
+        borderColor = .separator
+        backgroundColor = UIColor.gradientEffect(colors: [.customBackground, .secondaryCustomBackground],
+                                                 frame: bounds,
+                                                 stratPoint: CGPoint(x: 0, y: 0),
+                                                 endPoint: CGPoint(x: 1, y: 1))
+    }
+    
     func setupPiesView(by item: MainTotalOfDidsItemViewModel) {
         item.totalOfPies.forEach {
             let pieView = PieView()

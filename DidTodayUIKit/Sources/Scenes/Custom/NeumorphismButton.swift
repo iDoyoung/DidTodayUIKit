@@ -17,14 +17,19 @@ final class NeumorphismButton: UIControl {
     private var feedbackGenerator: UIImpactFeedbackGenerator?
     private var longTapAction: (() -> Void)?
     
+    lazy var effectView: UIVisualEffectView = {
+        let effect = UIBlurEffect(style: .systemMaterial)
+        let effectView = UIVisualEffectView(effect: effect)
+        effectView.cornerRadius = (frame.height - margin * 2) / 2
+        effectView.borderColor = .systemBackground
+        effectView.borderWidth = 0.5
+        effectView.layer.masksToBounds = true
+        return effectView
+    }()
+    
     private lazy var buttonView: UILabel = {
         let label = UILabel()
-        label.borderWidth = 0.5
-        label.borderColor = .systemBackground
-        label.backgroundColor = .systemBackground
         label.text = "button"
-        label.layer.masksToBounds = true
-        label.cornerRadius = (frame.height - margin * 2) / 2
         label.font = .systemFont(ofSize: 17, weight: .bold)
         label.textAlignment = .center
         return label
@@ -41,6 +46,7 @@ final class NeumorphismButton: UIControl {
     }
     
     private func configure() {
+        addSubview(effectView)
         addSubview(buttonView)
         setupBackgroundView()
         setupControl()
@@ -96,8 +102,13 @@ final class NeumorphismButton: UIControl {
     }
     
     private func setupLayoutConstraints() {
+        effectView.translatesAutoresizingMaskIntoConstraints = false
         buttonView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
+            effectView.topAnchor.constraint(equalTo: topAnchor, constant: margin),
+            effectView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: margin),
+            effectView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -margin),
+            effectView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -margin),
             buttonView.topAnchor.constraint(equalTo: topAnchor, constant: margin),
             buttonView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: margin),
             buttonView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -margin),

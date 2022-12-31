@@ -83,7 +83,7 @@ final class MainViewController: UIViewController {
     ///Primary setup
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()
+        configure()
         bindViewModel()
     }
     
@@ -127,7 +127,7 @@ final class MainViewController: UIViewController {
     }
     
     //MARK: - Setup
-    private func configureUI() {
+    private func configure() {
         setupNavigationBar()
         configureCollectionView()
         configureDataSource()
@@ -167,6 +167,7 @@ extension MainViewController {
         didCollectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createCollectionViewLayout())
         didCollectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         didCollectionView.backgroundColor = .customBackground
+        didCollectionView.delegate = self
         view.addSubview(didCollectionView)
     }
     
@@ -311,5 +312,20 @@ extension MainViewController {
     
     @objc func tapMuchTimeButton() {
         viewModel?.selectMuchTime()
+    }
+}
+
+extension MainViewController: UICollectionViewDelegate {
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        informationLabel.alpha = 0
+        startButton.isHidden = true
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        if velocity.y < 0 {
+            informationLabel.alpha = 1
+            startButton.isHidden = false
+        }
     }
 }

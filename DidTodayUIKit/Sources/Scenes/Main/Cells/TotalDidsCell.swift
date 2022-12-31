@@ -25,15 +25,16 @@ final class TotalDidsCell: UICollectionViewCell {
     let descriptionCountLabel: UILabel = {
         let label = UILabel()
         label.sizeToFit()
-        label.font = .systemFont(ofSize: 25, weight: .heavy)
+        label.font = .preferredFont(forTextStyle: .title2)
         label.textColor = .customGreen
         return label
     }()
     
     let descriptionTimeLabel: UILabel = {
         let label = UILabel()
+        let monoSystemFont = UIFont.monospacedSystemFont(ofSize: 0, weight: .bold)
+        label.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: monoSystemFont)
         label.sizeToFit()
-        label.font = .monospacedDigitSystemFont(ofSize: 50, weight: .black)
         label.textColor = .customGreen
         return label
     }()
@@ -86,13 +87,13 @@ final class TotalDidsCell: UICollectionViewCell {
         piesView.translatesAutoresizingMaskIntoConstraints = false
         verticalStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            piesView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            piesView.heightAnchor.constraint(equalToConstant: 200),
-            piesView.widthAnchor.constraint(equalToConstant: 200),
+            piesView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            piesView.heightAnchor.constraint(equalToConstant: 160),
+            piesView.widthAnchor.constraint(equalToConstant: 160),
             piesView.centerYAnchor.constraint(equalTo: centerYAnchor),
             verticalStackView.centerYAnchor.constraint(equalTo: piesView.centerYAnchor),
-            verticalStackView.leadingAnchor.constraint(equalTo: piesView.trailingAnchor),
-            verticalStackView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
+            verticalStackView.leadingAnchor.constraint(equalTo: piesView.trailingAnchor, constant: 20),
+            verticalStackView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor, constant: -20),
         ])
     }
 }

@@ -8,11 +8,7 @@
 import UIKit
 
 final class NeumorphismButton: UIControl {
-    
-    @IBInspectable var text: String? {
-        get { buttonView.text }
-        set { buttonView.text = newValue }
-    }
+
     private let margin: CGFloat = 10
     private var feedbackGenerator: UIImpactFeedbackGenerator?
     private var longTapAction: (() -> Void)?
@@ -24,17 +20,10 @@ final class NeumorphismButton: UIControl {
         effectView.borderColor = .systemBackground
         effectView.borderWidth = 0.5
         effectView.layer.masksToBounds = true
+        effectView.isUserInteractionEnabled = false
         return effectView
     }()
-    
-    private lazy var buttonView: UILabel = {
-        let label = UILabel()
-        label.text = "button"
-        label.font = .systemFont(ofSize: 17, weight: .bold)
-        label.textAlignment = .center
-        return label
-    }()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -47,7 +36,6 @@ final class NeumorphismButton: UIControl {
     
     private func configure() {
         addSubview(effectView)
-        addSubview(buttonView)
         setupBackgroundView()
         setupControl()
         setupLayoutConstraints()
@@ -103,16 +91,11 @@ final class NeumorphismButton: UIControl {
     
     private func setupLayoutConstraints() {
         effectView.translatesAutoresizingMaskIntoConstraints = false
-        buttonView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             effectView.topAnchor.constraint(equalTo: topAnchor, constant: margin),
             effectView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: margin),
             effectView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -margin),
             effectView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -margin),
-            buttonView.topAnchor.constraint(equalTo: topAnchor, constant: margin),
-            buttonView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: margin),
-            buttonView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -margin),
-            buttonView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -margin)
         ])
     }
 }
@@ -122,13 +105,13 @@ extension NeumorphismButton {
     
     func animateTouchDown() {
         UIView.animate(withDuration: 0.1, delay: 0.0, options: [.allowUserInteraction, .curveEaseIn], animations: { [weak self] in
-            self?.buttonView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            self?.effectView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
         }, completion: nil)
     }
 
     func animateTouchUp() {
         UIView.animate(withDuration: 0.1, delay: 0.0, options: [.allowUserInteraction, .curveEaseOut], animations: { [weak self] in
-            self?.buttonView.transform = CGAffineTransform.identity
+            self?.effectView.transform = CGAffineTransform.identity
         }, completion: nil)
     }
 }

@@ -25,7 +25,6 @@ final class MainViewController: UIViewController {
     
     private lazy var startButton: NeumorphismButton = {
         let button = NeumorphismButton(frame: CGRect(x: 0, y: 0, width: 90, height: 90))
-        button.text = "Start"
         return button
     }()
     
@@ -181,6 +180,10 @@ extension MainViewController {
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                       heightDimension: .fractionalHeight(1.0))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                item.contentInsets = NSDirectionalEdgeInsets(top: 0,
+                                                             leading: 10,
+                                                             bottom: 0,
+                                                             trailing: 10)
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                        heightDimension: .absolute(200))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,

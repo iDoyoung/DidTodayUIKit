@@ -118,10 +118,21 @@ final class MainViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
-        //let todayDate = Date.todayDateToString()
-        //let buttonItem = UIBarButtonItem(title: todayDate, style: .plain, target: self, action: #selector(showCalendar))
-        let rightBarItem = UIBarButtonItem(image: UIImage(named: "app.logo"), style: .plain, target: self, action: #selector(showAbout))
-        navigationItem.leftBarButtonItem = rightBarItem
+        let imageConfiguration = UIImage.SymbolConfiguration(weight: .bold)
+        let logoImage = UIImage(named: "app.logo")
+        let plusImage = UIImage(systemName: "plus", withConfiguration: imageConfiguration)
+        let calendarImage = UIImage(systemName: "calendar", withConfiguration: imageConfiguration)
+        
+        ///Setup Left Item
+        let logoItem = UIBarButtonItem(image: logoImage, style: .plain, target: self, action: #selector(showAbout))
+        navigationItem.leftBarButtonItem = logoItem
+        
+        ///Setup Right Items
+        let addItem = UIBarButtonItem(image: plusImage, style: .plain, target: self, action: #selector(showCreateDid))
+        let calendarItem = UIBarButtonItem(image: calendarImage, style: .plain, target: self, action: #selector(showCalendar))
+        navigationItem.rightBarButtonItems = [addItem, calendarItem]
+        
+        navigationController?.navigationBar.tintColor = .customGreen
     }
     
     //MARK: - Binding
@@ -160,12 +171,16 @@ final class MainViewController: UIViewController {
     }
     
     //MARK: - Action Method
+    @objc func showAbout() {
+        viewModel?.showAbout()
+    }
+    
     @objc func showCalendar() {
         viewModel?.showCalendar()
     }
     
-    @objc func showAbout() {
-        viewModel?.showAbout()
+    @objc func showCreateDid() {
+        viewModel?.showCreateDid()
     }
 }
 

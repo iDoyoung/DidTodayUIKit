@@ -50,6 +50,7 @@
 		7F80EBC728D3245500781DB4 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F80EBC628D3245500781DB4 /* MainViewModel.swift */; };
 		7F80EBC928D334A000781DB4 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F80EBC828D334A000781DB4 /* MainViewModelTests.swift */; };
 		7F80EBCB28D4102500781DB4 /* MainDidItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F80EBCA28D4102500781DB4 /* MainDidItemsViewModel.swift */; };
+		7F850C612961AEC80083522A /* ParentUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F850C602961AEC80083522A /* ParentUIViewController.swift */; };
 		7F9C0B9E293DAA8C0094C2A5 /* TimerAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9C0B9D293DAA8C0094C2A5 /* TimerAlert.swift */; };
 		7F9C0BA0293DC1BA0094C2A5 /* Double+ToStringOfTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9C0B9F293DC1BA0094C2A5 /* Double+ToStringOfTimer.swift */; };
 		7FA60AE928D6FB7A0098F3D2 /* MainViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA60AE828D6FB7A0098F3D2 /* MainViewControllerTests.swift */; };
@@ -149,6 +150,7 @@
 		7F80EBC628D3245500781DB4 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		7F80EBC828D334A000781DB4 /* MainViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTests.swift; sourceTree = "<group>"; };
 		7F80EBCA28D4102500781DB4 /* MainDidItemsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDidItemsViewModel.swift; sourceTree = "<group>"; };
+		7F850C602961AEC80083522A /* ParentUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentUIViewController.swift; sourceTree = "<group>"; };
 		7F9C0B9D293DAA8C0094C2A5 /* TimerAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerAlert.swift; sourceTree = "<group>"; };
 		7F9C0B9F293DC1BA0094C2A5 /* Double+ToStringOfTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+ToStringOfTimer.swift"; sourceTree = "<group>"; };
 		7FA60AE828D6FB7A0098F3D2 /* MainViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerTests.swift; sourceTree = "<group>"; };
@@ -445,6 +447,7 @@
 				7FB3345B2953E36700E9FB88 /* About */,
 				7FB6A8D028DD526E009C61C5 /* Legacy */,
 				7FB6A91F28E079ED009C61C5 /* Custom */,
+				7F850C602961AEC80083522A /* ParentUIViewController.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -754,6 +757,7 @@
 				7F076FC2290FC25500DF4EDC /* Date+OmittedTime.swift in Sources */,
 				7FF770B12955625400A665B5 /* AboutCell.swift in Sources */,
 				7F61A03C294439A80084A3F6 /* UIView+animateToShake.swift in Sources */,
+				7F850C612961AEC80083522A /* ParentUIViewController.swift in Sources */,
 				7F71192D290BBC8B001DFE99 /* CalendarViewModel.swift in Sources */,
 				7F55E401294C115A007B2706 /* CreateDidViewText.swift in Sources */,
 				7F135C402925FF33005156E0 /* MainTotalOfDidsViewModel.swift in Sources */,

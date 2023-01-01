@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class AboutViewController: UITableViewController {
+final class AboutViewController: ParentUITableViewController {
     
     private enum Section: Int, CaseIterable {
         case about, link

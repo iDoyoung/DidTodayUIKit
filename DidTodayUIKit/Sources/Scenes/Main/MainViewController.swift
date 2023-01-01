@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-final class MainViewController: UIViewController {
+final class MainViewController: ParentUIViewController {
     
     static let sectionHeaderElementKind = "section-header-element-kind"
     ///Section for Did collection view in Main view controller

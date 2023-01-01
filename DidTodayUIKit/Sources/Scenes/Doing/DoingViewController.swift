@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-final class DoingViewController: UIViewController, StoryboardInstantiable {
+final class DoingViewController: ParentUIViewController, StoryboardInstantiable {
  
     var viewModel: DoingViewModelProtocol?
     private var cancellableBag = Set<AnyCancellable>()

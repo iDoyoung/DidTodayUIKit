@@ -9,7 +9,7 @@ import UIKit
 import Combine
 import HorizonCalendar
 
-final class CalendarViewController: UIViewController {
+final class CalendarViewController: ParentUIViewController {
     
     static let sectionHeaderElementKind = "layout-header-element-kind"
     

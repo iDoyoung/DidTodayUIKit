@@ -36,34 +36,6 @@ final class MainViewController: UIViewController {
         return label
     }()
     
-    private lazy var quickMenu: UIMenu = {
-        return UIMenu(title: "", options: [], children: quickMenuItems)
-    }()
-    
-    private lazy var quickMenuItems: [UIAction] = {
-        return [
-            UIAction(title: "Start",
-                     image: UIImage(systemName: "flag.checkered")) { [weak self] _ in
-                         guard let self = self else { return }
-                         self.viewModel?.showDoing()
-                     },
-            UIAction(title: "Create Did",
-                     image: UIImage(systemName: "plus")) { [weak self] _ in
-                         guard let self = self else { return }
-                         self.viewModel?.showCreateDid()
-                     },
-            UIAction(title: "Calendar",
-                     image: UIImage(systemName: "calendar")) { [weak self] _ in
-                         guard let self = self else { return }
-                         self.viewModel?.showCalendar()
-                     },
-            UIAction(title: "Information",
-                     image: UIImage(systemName: "info.circle")) { [weak self] _ in
-                         guard let self = self else { return }
-                         self.viewModel?.showAbout()
-                     }]
-    }()
-    
     //MARK: - Life Cycle
     static func create(with viewModel: MainViewModelProtocol) -> MainViewController {
         let viewController = MainViewController()

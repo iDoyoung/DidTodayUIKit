@@ -92,7 +92,7 @@ final class MainViewModel: MainViewModelProtocol {
     }
     
     private func sortByRecently() {
-        didItemsList.value.sort { $0.startedTimes < $1.startedTimes }
+        didItemsList.value.sort { $0.startedTimes > $1.startedTimes }
     }
     
     private func sortByMuchTime() {

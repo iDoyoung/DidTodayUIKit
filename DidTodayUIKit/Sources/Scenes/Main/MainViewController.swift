@@ -36,15 +36,6 @@ final class MainViewController: UIViewController {
         return label
     }()
     
-    private lazy var quickButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Quick Move", for: .normal)
-        button.setTitleColor(.customGreen, for: .normal)
-        button.menu = quickMenu
-        button.showsMenuAsPrimaryAction = true
-        return button
-    }()
-    
     private lazy var quickMenu: UIMenu = {
         return UIMenu(title: "", options: [], children: quickMenuItems)
     }()
@@ -109,7 +100,6 @@ final class MainViewController: UIViewController {
         configureCollectionView()
         configureDataSource()
         
-        view.addSubview(quickButton)
         view.addSubview(startButton)
         view.addSubview(informationLabel)
         setupConstraintLayout()
@@ -159,16 +149,13 @@ final class MainViewController: UIViewController {
     
     //MARK: - Setup
     private func setupConstraintLayout() {
-        quickButton.translatesAutoresizingMaskIntoConstraints = false
         startButton.translatesAutoresizingMaskIntoConstraints = false
         informationLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            quickButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            quickButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             startButton.heightAnchor.constraint(equalToConstant: startButton.frame.height),
             startButton.widthAnchor.constraint(equalToConstant: startButton.frame.width),
             startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            startButton.bottomAnchor.constraint(equalTo: quickButton.topAnchor),
+            startButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             informationLabel.widthAnchor.constraint(equalToConstant: 300),
             informationLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             informationLabel.bottomAnchor.constraint(equalTo: startButton.topAnchor, constant: -10)

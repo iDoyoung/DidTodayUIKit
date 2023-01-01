@@ -25,6 +25,7 @@ final class MainViewController: UIViewController {
     
     private lazy var startButton: NeumorphismButton = {
         let button = NeumorphismButton(frame: CGRect(x: 0, y: 0, width: 90, height: 90))
+        button.addTarget(self, action: #selector(showDoing), for: .touchUpInside)
         return button
     }()
     
@@ -63,7 +64,6 @@ final class MainViewController: UIViewController {
         super.viewWillDisappear(animated)
         informationLabel.stopAnimation()
     }
-    
     
     private func configure() {
         setupNavigationBar()
@@ -145,6 +145,10 @@ final class MainViewController: UIViewController {
     
     @objc func showCreateDid() {
         viewModel?.showCreateDid()
+    }
+    
+    @objc func showDoing() {
+        viewModel?.showDoing()
     }
 }
 

@@ -103,13 +103,13 @@ final class NeumorphismButton: UIControl {
 //MARK: Animation
 extension NeumorphismButton {
     
-    func animateTouchDown() {
+    private func animateTouchDown() {
         UIView.animate(withDuration: 0.1, delay: 0.0, options: [.allowUserInteraction, .curveEaseIn], animations: { [weak self] in
             self?.effectView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
         }, completion: nil)
     }
 
-    func animateTouchUp() {
+    private func animateTouchUp() {
         UIView.animate(withDuration: 0.1, delay: 0.0, options: [.allowUserInteraction, .curveEaseOut], animations: { [weak self] in
             self?.effectView.transform = CGAffineTransform.identity
         }, completion: nil)

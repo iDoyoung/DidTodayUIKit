@@ -69,7 +69,7 @@ final class MainViewController: UIViewController {
             UIAction(title: "Information",
                      image: UIImage(systemName: "info.circle")) { [weak self] _ in
                          guard let self = self else { return }
-                         self.viewModel?.showInformation()
+                         self.viewModel?.showAbout()
                      }]
     }()
     
@@ -84,7 +84,6 @@ final class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
-        bindViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -102,11 +101,27 @@ final class MainViewController: UIViewController {
         informationLabel.stopAnimation()
     }
     
+    
+    private func configure() {
+        setupNavigationBar()
+        ///Layout Herarchy: Collection View 부터 구성후 버튼을 추가해야한다.
+        ///Collection View
+        configureCollectionView()
+        configureDataSource()
+        
+        view.addSubview(quickButton)
+        view.addSubview(startButton)
+        view.addSubview(informationLabel)
+        setupConstraintLayout()
+        ///Bind
+        bindViewModel()
+    }
+    
     private func setupNavigationBar() {
-        let todayDate = Date.todayDateToString()
-        let buttonItem = UIBarButtonItem(title: todayDate, style: .plain, target: self, action: #selector(showCalendar))
-        buttonItem.tintColor = .label
-        navigationItem.leftBarButtonItem = buttonItem
+        //let todayDate = Date.todayDateToString()
+        //let buttonItem = UIBarButtonItem(title: todayDate, style: .plain, target: self, action: #selector(showCalendar))
+        let rightBarItem = UIBarButtonItem(image: UIImage(named: "app.logo"), style: .plain, target: self, action: #selector(showAbout))
+        navigationItem.leftBarButtonItem = rightBarItem
     }
     
     //MARK: - Binding
@@ -127,16 +142,6 @@ final class MainViewController: UIViewController {
     }
     
     //MARK: - Setup
-    private func configure() {
-        setupNavigationBar()
-        configureCollectionView()
-        configureDataSource()
-        view.addSubview(quickButton)
-        view.addSubview(startButton)
-        view.addSubview(informationLabel)
-        setupConstraintLayout()
-    }
-    
     private func setupConstraintLayout() {
         quickButton.translatesAutoresizingMaskIntoConstraints = false
         startButton.translatesAutoresizingMaskIntoConstraints = false
@@ -157,6 +162,10 @@ final class MainViewController: UIViewController {
     //MARK: - Action Method
     @objc func showCalendar() {
         viewModel?.showCalendar()
+    }
+    
+    @objc func showAbout() {
+        viewModel?.showAbout()
     }
 }
 

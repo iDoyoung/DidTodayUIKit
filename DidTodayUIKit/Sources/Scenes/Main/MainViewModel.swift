@@ -14,7 +14,7 @@ protocol MainViewModelInput {
     func fetchDids()
     func selectRecently()
     func selectMuchTime()
-    func showInformation()
+    func showAbout()
 }
 
 protocol MainViewModelOutput {
@@ -123,7 +123,7 @@ final class MainViewModel: MainViewModelProtocol {
         router?.showDoing()
     }
     
-    func showInformation() {
+    func showAbout() {
         router?.showInformation()
     }
 }

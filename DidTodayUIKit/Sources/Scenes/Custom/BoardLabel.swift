@@ -37,9 +37,9 @@ import UIKit
             guard let self = self else { return }
             while self.isAnimated! {
                 self.texts?.forEach { text in
-                    #if DEBUG
-                    print("Changing Label Text..")
-                    #endif
+//                    #if DEBUG
+//                    print("Changing Label Text..")
+//                    #endif
                     self.animatToLabelChange(to: text)
                     sleep(4)
                 }

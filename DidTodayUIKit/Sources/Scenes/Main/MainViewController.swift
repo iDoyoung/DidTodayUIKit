@@ -118,6 +118,11 @@ final class MainViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
+        /// - Title
+        let dateOfToday = Date.todayDateToString()
+        navigationController?.navigationBar.prefersLargeTitles = true
+        title = dateOfToday
+        /// - Bar Items
         let imageConfiguration = UIImage.SymbolConfiguration(weight: .bold)
         let logoImage = UIImage(named: "app.logo")
         let plusImage = UIImage(systemName: "plus", withConfiguration: imageConfiguration)

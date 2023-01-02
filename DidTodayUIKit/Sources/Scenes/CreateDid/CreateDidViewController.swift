@@ -114,6 +114,7 @@ final class CreateDidViewController: ParentUIViewController, StoryboardInstantia
             .sink { [weak self] output in
                 self?.title = output
             }
+            .store(in: &cancellableBag)
         viewModel?.timePickerEnable
             .sink { [weak self] output in
                 self?.startedTimePicker.isEnabled = output

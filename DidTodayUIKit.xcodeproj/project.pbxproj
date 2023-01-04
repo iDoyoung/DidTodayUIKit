@@ -51,6 +51,7 @@
 		7F80EBC928D334A000781DB4 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F80EBC828D334A000781DB4 /* MainViewModelTests.swift */; };
 		7F80EBCB28D4102500781DB4 /* MainDidItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F80EBCA28D4102500781DB4 /* MainDidItemsViewModel.swift */; };
 		7F850C612961AEC80083522A /* ParentUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F850C602961AEC80083522A /* ParentUIViewController.swift */; };
+		7F850CB4296509820083522A /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F850CB3296509820083522A /* AuthorizationManager.swift */; };
 		7F9C0B9E293DAA8C0094C2A5 /* TimerAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9C0B9D293DAA8C0094C2A5 /* TimerAlert.swift */; };
 		7F9C0BA0293DC1BA0094C2A5 /* Double+ToStringOfTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9C0B9F293DC1BA0094C2A5 /* Double+ToStringOfTimer.swift */; };
 		7FA60AE928D6FB7A0098F3D2 /* MainViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA60AE828D6FB7A0098F3D2 /* MainViewControllerTests.swift */; };
@@ -151,6 +152,7 @@
 		7F80EBC828D334A000781DB4 /* MainViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTests.swift; sourceTree = "<group>"; };
 		7F80EBCA28D4102500781DB4 /* MainDidItemsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDidItemsViewModel.swift; sourceTree = "<group>"; };
 		7F850C602961AEC80083522A /* ParentUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentUIViewController.swift; sourceTree = "<group>"; };
+		7F850CB3296509820083522A /* AuthorizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationManager.swift; sourceTree = "<group>"; };
 		7F9C0B9D293DAA8C0094C2A5 /* TimerAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerAlert.swift; sourceTree = "<group>"; };
 		7F9C0B9F293DC1BA0094C2A5 /* Double+ToStringOfTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+ToStringOfTimer.swift"; sourceTree = "<group>"; };
 		7FA60AE828D6FB7A0098F3D2 /* MainViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerTests.swift; sourceTree = "<group>"; };
@@ -433,6 +435,7 @@
 				7FC22B5D28C76C9A00F83122 /* Models */,
 				7FC22B5928C71AEB00F83122 /* Scenes */,
 				7FC22B5B28C71B1700F83122 /* Utils */,
+				7F850CB3296509820083522A /* AuthorizationManager.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -747,6 +750,7 @@
 				7FC22B6C28C9C9E900F83122 /* DidCoreDataStorage.swift in Sources */,
 				7FB6A8D428DD5C04009C61C5 /* ManagedDidItem+CoreDataProperties.swift in Sources */,
 				7F583F34291A61D2006735AA /* DidsOfDayItemViewModel.swift in Sources */,
+				7F850CB4296509820083522A /* AuthorizationManager.swift in Sources */,
 				7FC22BBA28D0547500F83122 /* DidCell.swift in Sources */,
 				504CE042253FDFAA000CC6CF /* AppDelegate.swift in Sources */,
 				7FB6A92528E07BED009C61C5 /* MonthLabel.swift in Sources */,

@@ -78,6 +78,18 @@ final class CreateDidViewModel: CreateDidViewModelProtocol {
         title.send("Finishing touches")
     }
     
+    func loadView() {
+        ///Notify day is changed
+        NotificationCenter.default
+            .publisher(for: Notification.Name.NSCalendarDayChanged)
+            .sink { [weak self] _ in
+                #if DEBUG
+                print("Day is Changed")
+                #endif
+            }
+            .store(in: &cancellableBag)
+    }
+    
     func setTitle(_ title: String) {
         titleOfDid.send(title)
         if title.isEmpty {

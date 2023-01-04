@@ -54,6 +54,7 @@
 		7F850CB4296509820083522A /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F850CB3296509820083522A /* AuthorizationManager.swift */; };
 		7F850CB62965130E0083522A /* UserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F850CB52965130E0083522A /* UserNotificationManager.swift */; };
 		7F850CB829651EE00083522A /* DayIsChangedNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F850CB729651EE00083522A /* DayIsChangedNotification.swift */; };
+		7F850CBB29655C2E0083522A /* DetailDayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F850CBA29655C2E0083522A /* DetailDayViewController.swift */; };
 		7F9C0B9E293DAA8C0094C2A5 /* TimerAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9C0B9D293DAA8C0094C2A5 /* TimerAlert.swift */; };
 		7F9C0BA0293DC1BA0094C2A5 /* Double+ToStringOfTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9C0B9F293DC1BA0094C2A5 /* Double+ToStringOfTimer.swift */; };
 		7FA60AE928D6FB7A0098F3D2 /* MainViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA60AE828D6FB7A0098F3D2 /* MainViewControllerTests.swift */; };
@@ -157,6 +158,7 @@
 		7F850CB3296509820083522A /* AuthorizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationManager.swift; sourceTree = "<group>"; };
 		7F850CB52965130E0083522A /* UserNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationManager.swift; sourceTree = "<group>"; };
 		7F850CB729651EE00083522A /* DayIsChangedNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayIsChangedNotification.swift; sourceTree = "<group>"; };
+		7F850CBA29655C2E0083522A /* DetailDayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDayViewController.swift; sourceTree = "<group>"; };
 		7F9C0B9D293DAA8C0094C2A5 /* TimerAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerAlert.swift; sourceTree = "<group>"; };
 		7F9C0B9F293DC1BA0094C2A5 /* Double+ToStringOfTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+ToStringOfTimer.swift"; sourceTree = "<group>"; };
 		7FA60AE828D6FB7A0098F3D2 /* MainViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerTests.swift; sourceTree = "<group>"; };
@@ -353,6 +355,14 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		7F850CB929655C100083522A /* Detail Day */ = {
+			isa = PBXGroup;
+			children = (
+				7F850CBA29655C2E0083522A /* DetailDayViewController.swift */,
+			);
+			path = "Detail Day";
+			sourceTree = "<group>";
+		};
 		7FB3345B2953E36700E9FB88 /* About */ = {
 			isa = PBXGroup;
 			children = (
@@ -453,6 +463,7 @@
 				7FC11596293654400056237A /* Doing */,
 				7F397A7028D82FF4000F89E2 /* CreateDid */,
 				7F133C45290364300099E55C /* Calendar */,
+				7F850CB929655C100083522A /* Detail Day */,
 				7FB3345B2953E36700E9FB88 /* About */,
 				7FB6A8D028DD526E009C61C5 /* Legacy */,
 				7FB6A91F28E079ED009C61C5 /* Custom */,
@@ -774,6 +785,7 @@
 				7F55E401294C115A007B2706 /* CreateDidViewText.swift in Sources */,
 				7F135C402925FF33005156E0 /* MainTotalOfDidsViewModel.swift in Sources */,
 				5054D6C3255A8ABE005E8850 /* Pie.swift in Sources */,
+				7F850CBB29655C2E0083522A /* DetailDayViewController.swift in Sources */,
 				7FC22B6328C88AA500F83122 /* DataModel.xcdatamodeld in Sources */,
 				7F2C6CBE290A6EB3002963DE /* MainRouter.swift in Sources */,
 				7F9C0B9E293DAA8C0094C2A5 /* TimerAlert.swift in Sources */,

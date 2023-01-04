@@ -52,6 +52,8 @@
 		7F80EBCB28D4102500781DB4 /* MainDidItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F80EBCA28D4102500781DB4 /* MainDidItemsViewModel.swift */; };
 		7F850C612961AEC80083522A /* ParentUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F850C602961AEC80083522A /* ParentUIViewController.swift */; };
 		7F850CB4296509820083522A /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F850CB3296509820083522A /* AuthorizationManager.swift */; };
+		7F850CB62965130E0083522A /* UserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F850CB52965130E0083522A /* UserNotificationManager.swift */; };
+		7F850CB829651EE00083522A /* DayIsChangedNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F850CB729651EE00083522A /* DayIsChangedNotification.swift */; };
 		7F9C0B9E293DAA8C0094C2A5 /* TimerAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9C0B9D293DAA8C0094C2A5 /* TimerAlert.swift */; };
 		7F9C0BA0293DC1BA0094C2A5 /* Double+ToStringOfTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9C0B9F293DC1BA0094C2A5 /* Double+ToStringOfTimer.swift */; };
 		7FA60AE928D6FB7A0098F3D2 /* MainViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA60AE828D6FB7A0098F3D2 /* MainViewControllerTests.swift */; };
@@ -153,6 +155,8 @@
 		7F80EBCA28D4102500781DB4 /* MainDidItemsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDidItemsViewModel.swift; sourceTree = "<group>"; };
 		7F850C602961AEC80083522A /* ParentUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentUIViewController.swift; sourceTree = "<group>"; };
 		7F850CB3296509820083522A /* AuthorizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationManager.swift; sourceTree = "<group>"; };
+		7F850CB52965130E0083522A /* UserNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationManager.swift; sourceTree = "<group>"; };
+		7F850CB729651EE00083522A /* DayIsChangedNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayIsChangedNotification.swift; sourceTree = "<group>"; };
 		7F9C0B9D293DAA8C0094C2A5 /* TimerAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerAlert.swift; sourceTree = "<group>"; };
 		7F9C0B9F293DC1BA0094C2A5 /* Double+ToStringOfTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+ToStringOfTimer.swift"; sourceTree = "<group>"; };
 		7FA60AE828D6FB7A0098F3D2 /* MainViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerTests.swift; sourceTree = "<group>"; };
@@ -415,6 +419,7 @@
 				7FC115A129386B930056237A /* DoingViewModel.swift */,
 				7F9C0B9D293DAA8C0094C2A5 /* TimerAlert.swift */,
 				7F0BECF72950776C00C0CF1C /* DoingRouter.swift */,
+				7F850CB729651EE00083522A /* DayIsChangedNotification.swift */,
 			);
 			path = Doing;
 			sourceTree = "<group>";
@@ -430,12 +435,13 @@
 		7FC22B5828C71AE400F83122 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				7F850CB3296509820083522A /* AuthorizationManager.swift */,
+				7F850CB52965130E0083522A /* UserNotificationManager.swift */,
 				7FC22B6028C88A3A00F83122 /* Services */,
 				7FC22B5C28C7224000F83122 /* Entry */,
 				7FC22B5D28C76C9A00F83122 /* Models */,
 				7FC22B5928C71AEB00F83122 /* Scenes */,
 				7FC22B5B28C71B1700F83122 /* Utils */,
-				7F850CB3296509820083522A /* AuthorizationManager.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -733,6 +739,7 @@
 				7F0BECFC2951644B00C0CF1C /* DoingFlowCoordinator.swift in Sources */,
 				7F397A6828D71E74000F89E2 /* CreateDidViewController.swift in Sources */,
 				504CE0B9253FDFE9000CC6CF /* ViewModel.swift in Sources */,
+				7F850CB62965130E0083522A /* UserNotificationManager.swift in Sources */,
 				7F55E3FF294C08A0007B2706 /* CreateDidAlert.swift in Sources */,
 				7FB6A8D628DD89E5009C61C5 /* Date+DifferenceToString.swift in Sources */,
 				7F80EBCB28D4102500781DB4 /* MainDidItemsViewModel.swift in Sources */,
@@ -746,6 +753,7 @@
 				7F0B97B7292B793F0071DF98 /* BoardLabel.swift in Sources */,
 				7FC22B6928C9C0E500F83122 /* Did.swift in Sources */,
 				7F133C47290365460099E55C /* CalendarViewController.swift in Sources */,
+				7F850CB829651EE00083522A /* DayIsChangedNotification.swift in Sources */,
 				7F80EBC728D3245500781DB4 /* MainViewModel.swift in Sources */,
 				7FC22B6C28C9C9E900F83122 /* DidCoreDataStorage.swift in Sources */,
 				7FB6A8D428DD5C04009C61C5 /* ManagedDidItem+CoreDataProperties.swift in Sources */,

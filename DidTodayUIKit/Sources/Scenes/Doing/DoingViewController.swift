@@ -60,6 +60,7 @@ final class DoingViewController: ParentUIViewController, StoryboardInstantiable 
         createDismissKeyboardTapGesture()
         setupView()
         bindViewModel()
+        observeDayIsChanged()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -124,6 +125,19 @@ final class DoingViewController: ParentUIViewController, StoryboardInstantiable 
         tapGesture.cancelsTouchesInView = false
         view.addGestureRecognizer(tapGesture)
     }
+    
+    private func observeDayIsChanged() {
+        ///Notify day is changed
+        NotificationCenter.default
+            .publisher(for: Notification.Name.NSCalendarDayChanged)
+            .sink { [weak self] _ in
+                #if DEBUG
+                print("Day is Changed")
+                #endif
+                self?.requestUserNotification(with: "day-is-changed")
+            }
+            .store(in: &cancellableBag)
+    }
  
     @objc func dismissKeyboard() {
         view.endEditing(true)
@@ -140,3 +154,5 @@ extension DoingViewController: TimerAlert {
         viewModel?.showCreateDid()
     }
 }
+
+extension DoingViewController: DayIsChangedNotification {   }

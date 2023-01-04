@@ -29,11 +29,12 @@ import UIKit
     }()
     
     private var isAnimated: Bool?
+    private var flipAnimationQueue = DispatchQueue(label: "filp-animation-queue", qos: .userInteractive)
     ///start animation
     func startAnimation() {
         isAnimated = true
         guard let texts = texts, !texts.isEmpty else { return }
-        DispatchQueue.global().async { [weak self] in
+        flipAnimationQueue.async { [weak self] in
             guard let self = self else { return }
             while self.isAnimated! {
                 self.texts?.forEach { text in

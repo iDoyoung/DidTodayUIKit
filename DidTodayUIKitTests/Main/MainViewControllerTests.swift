@@ -28,6 +28,7 @@ class MainViewControllerTests: XCTestCase {
         var fetchDidsCalled  = false
         var selectRecentlyCalled = false
         var selectMuchTimeCalled = false
+        var showAboutCalled = false
         
         func fetchDids() {
             fetchDidsCalled = true
@@ -46,9 +47,9 @@ class MainViewControllerTests: XCTestCase {
         var showCalendarCalled = false
         var showDoingCalled = false
         
-        var totalPieDids = CurrentValueSubject<MainTotalOfDidsItemViewModel, Never>(MainTotalOfDidsItemViewModel([]))
+        var totalPieDids = CurrentValueSubject<TotalOfDidsItemViewModel, Never>(TotalOfDidsItemViewModel([]))
         
-        var didItemsList = CurrentValueSubject<[MainDidItemsViewModel], Never>([])
+        var didItemsList = CurrentValueSubject<[DidItemViewModel], Never>([])
         var isSelectedRecentlyButton = CurrentValueSubject<Bool, Never>(true)
         var isSelectedMuchTimeButton = CurrentValueSubject<Bool, Never>(true)
         
@@ -63,15 +64,19 @@ class MainViewControllerTests: XCTestCase {
         func showDoing() {
             showDoingCalled = true
         }
+        
+        func showAbout() {
+            showAboutCalled = true
+        }
     }
     
     //MARK: - Tests
-    func test_fetcnDids_shouldCallViewModel_whenViewDidLoad() {
+    func test_fetchDids_shouldCallViewModel_whenViewWillAppear() {
         //given
         let viewModelSpy = MainViewModelSpy()
         sut.viewModel = viewModelSpy
         //when
-        sut.viewDidLoad()
+        sut.viewWillAppear(true)
         //then
         XCTAssert(viewModelSpy.fetchDidsCalled)
     }

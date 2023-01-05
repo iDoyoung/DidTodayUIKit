@@ -21,7 +21,7 @@ class MainViewModelTests: XCTestCase {
         coordinatorSpy = CoordinatorSpy()
         let router = MainRouter(showCalendar: coordinatorSpy.showCalendar(dids:),
                                 showCreateDid: coordinatorSpy.showCreateDid(started:ended:),
-                                showDoing: coordinatorSpy.showDoing)
+                                showDoing: coordinatorSpy.showDoing, showInformation: coordinatorSpy.showInformation)
         sut = MainViewModel(didCoreDataStorage: didsCoreDataStorageSpy, router: router)
         when_fetchDids_shouldCallDidsCoreDataStorageAndGetOutputDidItemsListAndTotalPieDids()
     }
@@ -39,6 +39,7 @@ class MainViewModelTests: XCTestCase {
         var showCalendarCalled = false
         var showCreateDidCalled = false
         var showDoingCalled = false
+        var showInformationCalled = false
         
         func showCalendar(dids: [Did]) {
             showCalendarCalled = true
@@ -50,6 +51,10 @@ class MainViewModelTests: XCTestCase {
         
         func showDoing() {
             showDoingCalled = true
+        }
+        
+        func showInformation() {
+            showInformationCalled = true
         }
     }
     
@@ -87,9 +92,9 @@ class MainViewModelTests: XCTestCase {
         //given
         let expectation = mockDids
             .filter { $0.started.omittedTime() == Date().omittedTime()}
-            .sorted { $0.started < $1.started }
-        let expectationOfDidItemsList = expectation.map { MainDidItemsViewModel($0) }
-        let expectationOfTotalPieDids = MainTotalOfDidsItemViewModel(expectation)
+            .sorted { $0.started > $1.started }
+        let expectationOfDidItemsList = expectation.map { DidItemViewModel($0) }
+        let expectationOfTotalPieDids = TotalOfDidsItemViewModel(expectation)
         didsCoreDataStorageSpy.dids = mockDids
         //when
         sut.fetchDids()
@@ -100,8 +105,8 @@ class MainViewModelTests: XCTestCase {
     }
     
     func test_selectRecently_shouldBeSelectedRecentlyButtonAndNotSelectedMuchTimeButtonWhenIsNotSelectedRecentlyButtonAndSortedByStartedDate() {
-        let expectation = [Seeds.Dids.todayDidMock,
-                           Seeds.Dids.todayDidMock2].map { MainDidItemsViewModel($0) }
+        let expectation = [Seeds.Dids.todayDidMock2,
+                           Seeds.Dids.todayDidMock].map { DidItemViewModel($0) }
         
         //given
         sut.isSelectedRecentlyButton.value = false
@@ -115,7 +120,7 @@ class MainViewModelTests: XCTestCase {
     
      func test_selectMuchTime_shouldBeSelectedRecentlyButtonAndNotSelectedMuchTimeButtonWhenIsNotSelectedRecentlyButtonAndSortedByMuchTime() {
          let expectation = [Seeds.Dids.todayDidMock2,
-                            Seeds.Dids.todayDidMock].map { MainDidItemsViewModel($0) }
+                            Seeds.Dids.todayDidMock].map { DidItemViewModel($0) }
         //given
         sut.isSelectedMuchTimeButton.value = false
         //when
@@ -137,5 +142,15 @@ class MainViewModelTests: XCTestCase {
         sut.showCalendar()
         //then
         XCTAssertTrue(coordinatorSpy.showCalendarCalled)
+    }
+    
+    func test_showDoing() {
+        sut.showDoing()
+        XCTAssert(coordinatorSpy.showDoingCalled)
+    }
+    
+    func test_showAbout() {
+        sut.showAbout()
+        XCTAssert(coordinatorSpy.showInformationCalled)
     }
 }

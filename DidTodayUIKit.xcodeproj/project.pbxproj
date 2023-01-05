@@ -55,6 +55,7 @@
 		7F850CB62965130E0083522A /* UserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F850CB52965130E0083522A /* UserNotificationManager.swift */; };
 		7F850CB829651EE00083522A /* DayIsChangedNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F850CB729651EE00083522A /* DayIsChangedNotification.swift */; };
 		7F850CBB29655C2E0083522A /* DetailDayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F850CBA29655C2E0083522A /* DetailDayViewController.swift */; };
+		7F850CBE296692150083522A /* DidOneRowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F850CBD296692150083522A /* DidOneRowCell.swift */; };
 		7F9C0B9E293DAA8C0094C2A5 /* TimerAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9C0B9D293DAA8C0094C2A5 /* TimerAlert.swift */; };
 		7F9C0BA0293DC1BA0094C2A5 /* Double+ToStringOfTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9C0B9F293DC1BA0094C2A5 /* Double+ToStringOfTimer.swift */; };
 		7FA60AE928D6FB7A0098F3D2 /* MainViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA60AE828D6FB7A0098F3D2 /* MainViewControllerTests.swift */; };
@@ -159,6 +160,7 @@
 		7F850CB52965130E0083522A /* UserNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationManager.swift; sourceTree = "<group>"; };
 		7F850CB729651EE00083522A /* DayIsChangedNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayIsChangedNotification.swift; sourceTree = "<group>"; };
 		7F850CBA29655C2E0083522A /* DetailDayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDayViewController.swift; sourceTree = "<group>"; };
+		7F850CBD296692150083522A /* DidOneRowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidOneRowCell.swift; sourceTree = "<group>"; };
 		7F9C0B9D293DAA8C0094C2A5 /* TimerAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerAlert.swift; sourceTree = "<group>"; };
 		7F9C0B9F293DC1BA0094C2A5 /* Double+ToStringOfTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+ToStringOfTimer.swift"; sourceTree = "<group>"; };
 		7FA60AE828D6FB7A0098F3D2 /* MainViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerTests.swift; sourceTree = "<group>"; };
@@ -358,9 +360,18 @@
 		7F850CB929655C100083522A /* Detail Day */ = {
 			isa = PBXGroup;
 			children = (
+				7F850CBC296691C30083522A /* Cells and Supplementary Views */,
 				7F850CBA29655C2E0083522A /* DetailDayViewController.swift */,
 			);
 			path = "Detail Day";
+			sourceTree = "<group>";
+		};
+		7F850CBC296691C30083522A /* Cells and Supplementary Views */ = {
+			isa = PBXGroup;
+			children = (
+				7F850CBD296692150083522A /* DidOneRowCell.swift */,
+			);
+			path = "Cells and Supplementary Views";
 			sourceTree = "<group>";
 		};
 		7FB3345B2953E36700E9FB88 /* About */ = {
@@ -765,6 +776,7 @@
 				7FC22B6928C9C0E500F83122 /* Did.swift in Sources */,
 				7F133C47290365460099E55C /* CalendarViewController.swift in Sources */,
 				7F850CB829651EE00083522A /* DayIsChangedNotification.swift in Sources */,
+				7F850CBE296692150083522A /* DidOneRowCell.swift in Sources */,
 				7F80EBC728D3245500781DB4 /* MainViewModel.swift in Sources */,
 				7FC22B6C28C9C9E900F83122 /* DidCoreDataStorage.swift in Sources */,
 				7FB6A8D428DD5C04009C61C5 /* ManagedDidItem+CoreDataProperties.swift in Sources */,

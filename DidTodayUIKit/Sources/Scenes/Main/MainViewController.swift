@@ -8,21 +8,12 @@
 import UIKit
 import Combine
 
-final class MainViewController: ParentUIViewController {
-    
-    static let sectionHeaderElementKind = "section-header-element-kind"
-    ///Section for Did collection view in Main view controller
-    private enum Section: Int, CaseIterable {
-        case total, list
-    }
+final class MainViewController: DidListCollectionViewController {
     
     var viewModel: (MainViewModelInput & MainViewModelOutput)?
     private var cancellableBag = Set<AnyCancellable>()
-    private var dataSource: UICollectionViewDiffableDataSource<Section, AnyHashable>?
     
     //MARK: - UI Objects
-    private var didCollectionView: UICollectionView!
-    
     private lazy var startButton: NeumorphismButton = {
         let button = NeumorphismButton(frame: CGRect(x: 0, y: 0, width: 90, height: 90))
         button.addTarget(self, action: #selector(showDoing), for: .touchUpInside)
@@ -119,6 +110,18 @@ final class MainViewController: ParentUIViewController {
             .store(in: &cancellableBag)
     }
     
+    override func bindSortingSupplementaryWithViewModel(supplementary: SortingSupplementaryView) {
+        self.viewModel?.isSelectedRecentlyButton
+            .receive(on: DispatchQueue.main)
+            .sink { supplementary.recentlyButton.isSelected  = $0 }
+            .store(in: &self.cancellableBag)
+        
+        self.viewModel?.isSelectedMuchTimeButton
+            .receive(on: DispatchQueue.main)
+            .sink { supplementary.muchTimeButton.isSelected = $0 }
+            .store(in: &self.cancellableBag)
+    }
+    
     //MARK: - Setup
     private func setupConstraintLayout() {
         startButton.translatesAutoresizingMaskIntoConstraints = false
@@ -150,160 +153,27 @@ final class MainViewController: ParentUIViewController {
     @objc func showDoing() {
         viewModel?.showDoing()
     }
+    
+    @objc override func tapRecentlyButton(_ sender: UIButton) {
+        super.tapRecentlyButton(sender)
+        viewModel?.selectRecently()
+    }
+    
+    @objc override func tapMuchTimeButton(_ sender: UIButton) {
+        super.tapMuchTimeButton(sender)
+        viewModel?.selectMuchTime()
+    }
 }
 
 //MARK: - CollectionView Extentions
 extension MainViewController {
     /// - Tag: Configure
     private func configureCollectionView() {
-        didCollectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createCollectionViewLayout())
-        didCollectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        didCollectionView.backgroundColor = .customBackground
-        didCollectionView.delegate = self
-        view.addSubview(didCollectionView)
-    }
-    
-    private func createCollectionViewLayout() -> UICollectionViewCompositionalLayout {
-        let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
-            guard let sectionKind = Section(rawValue: sectionIndex) else { return nil }
-            let section: NSCollectionLayoutSection
-            
-            switch sectionKind {
-            case .total:
-                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                      heightDimension: .fractionalHeight(1.0))
-                let item = NSCollectionLayoutItem(layoutSize: itemSize)
-                item.contentInsets = NSDirectionalEdgeInsets(top: 0,
-                                                             leading: 10,
-                                                             bottom: 0,
-                                                             trailing: 10)
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                       heightDimension: .absolute(200))
-                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
-                                                               subitems: [item])
-                section = NSCollectionLayoutSection(group: group)
-                section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0)
-            case .list:
-                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                      heightDimension: .fractionalHeight(1.0))
-                let item = NSCollectionLayoutItem(layoutSize: itemSize)
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                       heightDimension: .absolute(60))
-                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
-                                                               subitem: item,
-                                                               count: 2)
-                group.interItemSpacing = .fixed(8)
-                group.contentInsets = NSDirectionalEdgeInsets(top: 4, leading: 12, bottom: 4, trailing: 12)
-                section = NSCollectionLayoutSection(group: group)
-                section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 12, bottom: 10, trailing: 12)
-                ///setup header
-                let sectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                               heightDimension: .absolute(50))
-                let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: sectionHeaderSize,
-                                                                                elementKind: MainViewController.sectionHeaderElementKind,
-                                                                                alignment: .top)
-                section.boundarySupplementaryItems = [sectionHeader]
-            }
-            return section
-        }
-        return layout
-    }
-    
-    private func configureDataSource() {
-        let totalCellRegistration = createTotalDidsCellRegistration()
-        let didListCellRegistration = createDidListCellRegistration()
-        let sortingSupplementaryRegistration = createSortingSupplementaryRegistration()
-        
-        dataSource = UICollectionViewDiffableDataSource<Section, AnyHashable>(collectionView: didCollectionView) { collectionView, indexPath, item in
-            guard let section = Section(rawValue: indexPath.section) else { return UICollectionViewCell() }
-            switch section {
-            case .total:
-                return collectionView.dequeueConfiguredReusableCell(using: totalCellRegistration,
-                                                                    for: indexPath,
-                                                                    item: item as? MainTotalOfDidsItemViewModel)
-            case .list:
-                return collectionView.dequeueConfiguredReusableCell(using: didListCellRegistration,
-                                                                    for: indexPath,
-                                                                    item: item as? MainDidItemsViewModel)
-            }
-        }
-        dataSource?.supplementaryViewProvider = { [weak self] supplementaryView, elementKind, indexPath in
-            return self?.didCollectionView.dequeueConfiguredReusableSupplementary(using: sortingSupplementaryRegistration,
-                                                                                  for: indexPath)
-        }
-        initailSnapshot()
-    }
-    
-    //MARK: - Create Registration
-    private func createTotalDidsCellRegistration() -> UICollectionView.CellRegistration<TotalDidsCell, MainTotalOfDidsItemViewModel> {
-        return UICollectionView.CellRegistration<TotalDidsCell, MainTotalOfDidsItemViewModel> { cell, IndexPath, item in
-            cell.descriptionCountLabel.text = item.descriptionCount
-            cell.descriptionTimeLabel.text = item.descriptionTime
-            cell.setupPiesView(by: item)
-        }
-    }
-    
-    private func createDidListCellRegistration() -> UICollectionView.CellRegistration<DidCell, MainDidItemsViewModel> {
-        return UICollectionView.CellRegistration<DidCell, MainDidItemsViewModel> { cell, indexPath, item in
-            cell.pieView.start = item.startedTimes * 0.25
-            cell.pieView.end = item.finishedTimes * 0.25
-            cell.pieView.color = item.color
-            cell.timeLabel.text = item.times
-            cell.timeLabel.textColor = item.color
-            cell.contentLabel.text = item.content
-        }
-    }
-    
-    private func createSortingSupplementaryRegistration() -> UICollectionView.SupplementaryRegistration<SortingSupplementaryView> {
-        return UICollectionView.SupplementaryRegistration(elementKind: MainViewController.sectionHeaderElementKind) { [weak self] supplementaryView, elementKind, _ in
-            ///setup button action
-            guard let self = self else { return }
-            supplementaryView.recentlyButton.addTarget(self, action: #selector(self.tapRecentlyButton), for: .touchUpInside)
-            supplementaryView.muchTimeButton.addTarget(self, action: #selector(self.tapMuchTimeButton), for: .touchUpInside)
-            
-            //TODO: Binding
-            ///Binding
-            self.viewModel?.isSelectedRecentlyButton
-                .receive(on: DispatchQueue.main)
-                .sink { supplementaryView.recentlyButton.isSelected  = $0 }
-                .store(in: &self.cancellableBag)
-            ///Binding Much Time Button
-            self.viewModel?.isSelectedMuchTimeButton
-                .receive(on: DispatchQueue.main)
-                .sink { supplementaryView.muchTimeButton.isSelected = $0 }
-                .store(in: &self.cancellableBag)
-        }
-    }
-    
-    //MARK: - Apply Snapshot
-    private func initailSnapshot() {
-        let sections = Section.allCases
-        var snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
-        snapshot.appendSections(sections)
-        dataSource?.apply(snapshot)
-        applyDidListSnapshot([])
-        applyTotalDidSnapshot([])
-    }
-    
-    private func applyTotalDidSnapshot(_ items: [MainTotalOfDidsItemViewModel]) {
-        var snapshot = NSDiffableDataSourceSectionSnapshot<AnyHashable>()
-        snapshot.append(items)
-        dataSource?.apply(snapshot, to: .total)
-    }
-    
-    private func applyDidListSnapshot(_ items: [MainDidItemsViewModel]) {
-        var snapshot = NSDiffableDataSourceSectionSnapshot<AnyHashable>()
-        snapshot.append(items)
-        dataSource?.apply(snapshot, to: .list)
-    }
-    
-    //MARK: Button Action in Supplementary View
-    @objc func tapRecentlyButton() {
-        viewModel?.selectRecently()
-    }
-    
-    @objc func tapMuchTimeButton() {
-        viewModel?.selectMuchTime()
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createCollectionViewLayout())
+        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        collectionView.backgroundColor = .customBackground
+        collectionView.delegate = self
+        view.addSubview(collectionView)
     }
 }
 

@@ -7,10 +7,10 @@
 
 import UIKit
 
-struct MainTotalOfDidsItemViewModel: Hashable {
+struct TotalOfDidsItemViewModel: Hashable {
     let descriptionCount: String
     let descriptionTime: String
-    let totalOfPies: [MainPieViewModel]
+    let totalOfPies: [TotalOfDidsPieViewModel]
     
     init(_ dids: [Did]) {
         let countOfDids = dids.count
@@ -20,11 +20,11 @@ struct MainTotalOfDidsItemViewModel: Hashable {
         let spendTimeToString = String(format: "%02d:%02d", totalOfSpentTime/60, totalOfSpentTime%60)
         descriptionCount = (countOfDids == 0 ? "Did nothing" : "Did \(dids.count) things!")
         descriptionTime = "\(spendTimeToString)"
-        totalOfPies = dids.map { MainPieViewModel($0) }
+        totalOfPies = dids.map { TotalOfDidsPieViewModel($0) }
     }
 }
 
-struct MainPieViewModel: Hashable {
+struct TotalOfDidsPieViewModel: Hashable {
     let color: UIColor
     let startedTime: Double
     let finishedTime: Double

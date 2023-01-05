@@ -32,7 +32,7 @@
 		7F133C632907C66A0099E55C /* MainFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F133C622907C66A0099E55C /* MainFlowCoordinator.swift */; };
 		7F133C652907CC5A0099E55C /* SceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F133C642907CC5A0099E55C /* SceneDIContainer.swift */; };
 		7F133CA3290902EC0099E55C /* StoryboardInstantiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F133CA2290902EC0099E55C /* StoryboardInstantiable.swift */; };
-		7F135C402925FF33005156E0 /* MainTotalOfDidsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F135C3F2925FF33005156E0 /* MainTotalOfDidsViewModel.swift */; };
+		7F135C402925FF33005156E0 /* TotalOfDidsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F135C3F2925FF33005156E0 /* TotalOfDidsViewModel.swift */; };
 		7F2C6CBE290A6EB3002963DE /* MainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2C6CBD290A6EB3002963DE /* MainRouter.swift */; };
 		7F397A6828D71E74000F89E2 /* CreateDidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F397A6728D71E74000F89E2 /* CreateDidViewController.swift */; };
 		7F397A7228D83021000F89E2 /* CreateDidViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F397A7128D83021000F89E2 /* CreateDidViewModel.swift */; };
@@ -49,13 +49,14 @@
 		7F71192D290BBC8B001DFE99 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F71192C290BBC8B001DFE99 /* CalendarViewModel.swift */; };
 		7F80EBC728D3245500781DB4 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F80EBC628D3245500781DB4 /* MainViewModel.swift */; };
 		7F80EBC928D334A000781DB4 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F80EBC828D334A000781DB4 /* MainViewModelTests.swift */; };
-		7F80EBCB28D4102500781DB4 /* MainDidItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F80EBCA28D4102500781DB4 /* MainDidItemsViewModel.swift */; };
+		7F80EBCB28D4102500781DB4 /* DidItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F80EBCA28D4102500781DB4 /* DidItemsViewModel.swift */; };
 		7F850C612961AEC80083522A /* ParentUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F850C602961AEC80083522A /* ParentUIViewController.swift */; };
 		7F850CB4296509820083522A /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F850CB3296509820083522A /* AuthorizationManager.swift */; };
 		7F850CB62965130E0083522A /* UserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F850CB52965130E0083522A /* UserNotificationManager.swift */; };
 		7F850CB829651EE00083522A /* DayIsChangedNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F850CB729651EE00083522A /* DayIsChangedNotification.swift */; };
 		7F850CBB29655C2E0083522A /* DetailDayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F850CBA29655C2E0083522A /* DetailDayViewController.swift */; };
 		7F850CBE296692150083522A /* DidOneRowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F850CBD296692150083522A /* DidOneRowCell.swift */; };
+		7F850CC22966B6540083522A /* DidListCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F850CC12966B6540083522A /* DidListCollectionViewController.swift */; };
 		7F9C0B9E293DAA8C0094C2A5 /* TimerAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9C0B9D293DAA8C0094C2A5 /* TimerAlert.swift */; };
 		7F9C0BA0293DC1BA0094C2A5 /* Double+ToStringOfTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9C0B9F293DC1BA0094C2A5 /* Double+ToStringOfTimer.swift */; };
 		7FA60AE928D6FB7A0098F3D2 /* MainViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA60AE828D6FB7A0098F3D2 /* MainViewControllerTests.swift */; };
@@ -138,7 +139,7 @@
 		7F133C622907C66A0099E55C /* MainFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFlowCoordinator.swift; sourceTree = "<group>"; };
 		7F133C642907CC5A0099E55C /* SceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDIContainer.swift; sourceTree = "<group>"; };
 		7F133CA2290902EC0099E55C /* StoryboardInstantiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardInstantiable.swift; sourceTree = "<group>"; };
-		7F135C3F2925FF33005156E0 /* MainTotalOfDidsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTotalOfDidsViewModel.swift; sourceTree = "<group>"; };
+		7F135C3F2925FF33005156E0 /* TotalOfDidsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalOfDidsViewModel.swift; sourceTree = "<group>"; };
 		7F2C6CBD290A6EB3002963DE /* MainRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouter.swift; sourceTree = "<group>"; };
 		7F397A6728D71E74000F89E2 /* CreateDidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDidViewController.swift; sourceTree = "<group>"; };
 		7F397A7128D83021000F89E2 /* CreateDidViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDidViewModel.swift; sourceTree = "<group>"; };
@@ -154,13 +155,14 @@
 		7F71192C290BBC8B001DFE99 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
 		7F80EBC628D3245500781DB4 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		7F80EBC828D334A000781DB4 /* MainViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTests.swift; sourceTree = "<group>"; };
-		7F80EBCA28D4102500781DB4 /* MainDidItemsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDidItemsViewModel.swift; sourceTree = "<group>"; };
+		7F80EBCA28D4102500781DB4 /* DidItemsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidItemsViewModel.swift; sourceTree = "<group>"; };
 		7F850C602961AEC80083522A /* ParentUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentUIViewController.swift; sourceTree = "<group>"; };
 		7F850CB3296509820083522A /* AuthorizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationManager.swift; sourceTree = "<group>"; };
 		7F850CB52965130E0083522A /* UserNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationManager.swift; sourceTree = "<group>"; };
 		7F850CB729651EE00083522A /* DayIsChangedNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayIsChangedNotification.swift; sourceTree = "<group>"; };
 		7F850CBA29655C2E0083522A /* DetailDayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDayViewController.swift; sourceTree = "<group>"; };
 		7F850CBD296692150083522A /* DidOneRowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidOneRowCell.swift; sourceTree = "<group>"; };
+		7F850CC12966B6540083522A /* DidListCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidListCollectionViewController.swift; sourceTree = "<group>"; };
 		7F9C0B9D293DAA8C0094C2A5 /* TimerAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerAlert.swift; sourceTree = "<group>"; };
 		7F9C0B9F293DC1BA0094C2A5 /* Double+ToStringOfTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+ToStringOfTimer.swift"; sourceTree = "<group>"; };
 		7FA60AE828D6FB7A0098F3D2 /* MainViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerTests.swift; sourceTree = "<group>"; };
@@ -351,8 +353,6 @@
 			isa = PBXGroup;
 			children = (
 				7F80EBC628D3245500781DB4 /* MainViewModel.swift */,
-				7F135C3F2925FF33005156E0 /* MainTotalOfDidsViewModel.swift */,
-				7F80EBCA28D4102500781DB4 /* MainDidItemsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -372,6 +372,16 @@
 				7F850CBD296692150083522A /* DidOneRowCell.swift */,
 			);
 			path = "Cells and Supplementary Views";
+			sourceTree = "<group>";
+		};
+		7F850CC32966D1920083522A /* Did List Collection */ = {
+			isa = PBXGroup;
+			children = (
+				7F850CC12966B6540083522A /* DidListCollectionViewController.swift */,
+				7F135C3F2925FF33005156E0 /* TotalOfDidsViewModel.swift */,
+				7F80EBCA28D4102500781DB4 /* DidItemsViewModel.swift */,
+			);
+			path = "Did List Collection";
 			sourceTree = "<group>";
 		};
 		7FB3345B2953E36700E9FB88 /* About */ = {
@@ -470,6 +480,7 @@
 		7FC22B5928C71AEB00F83122 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				7F850CC32966D1920083522A /* Did List Collection */,
 				7FC22B5A28C71AF500F83122 /* Main */,
 				7FC11596293654400056237A /* Doing */,
 				7F397A7028D82FF4000F89E2 /* CreateDid */,
@@ -763,8 +774,9 @@
 				504CE0B9253FDFE9000CC6CF /* ViewModel.swift in Sources */,
 				7F850CB62965130E0083522A /* UserNotificationManager.swift in Sources */,
 				7F55E3FF294C08A0007B2706 /* CreateDidAlert.swift in Sources */,
+				7F850CC22966B6540083522A /* DidListCollectionViewController.swift in Sources */,
 				7FB6A8D628DD89E5009C61C5 /* Date+DifferenceToString.swift in Sources */,
-				7F80EBCB28D4102500781DB4 /* MainDidItemsViewModel.swift in Sources */,
+				7F80EBCB28D4102500781DB4 /* DidItemsViewModel.swift in Sources */,
 				7FEB0064295C242D0073B90C /* UIView+Animate To Hide.swift in Sources */,
 				504CE046253FDFAA000CC6CF /* PreviousMainViewController.swift in Sources */,
 				7FC22BB828CDE19300F83122 /* MainViewController.swift in Sources */,
@@ -795,7 +807,7 @@
 				7F850C612961AEC80083522A /* ParentUIViewController.swift in Sources */,
 				7F71192D290BBC8B001DFE99 /* CalendarViewModel.swift in Sources */,
 				7F55E401294C115A007B2706 /* CreateDidViewText.swift in Sources */,
-				7F135C402925FF33005156E0 /* MainTotalOfDidsViewModel.swift in Sources */,
+				7F135C402925FF33005156E0 /* TotalOfDidsViewModel.swift in Sources */,
 				5054D6C3255A8ABE005E8850 /* Pie.swift in Sources */,
 				7F850CBB29655C2E0083522A /* DetailDayViewController.swift in Sources */,
 				7FC22B6328C88AA500F83122 /* DataModel.xcdatamodeld in Sources */,

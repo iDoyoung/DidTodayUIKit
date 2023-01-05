@@ -18,8 +18,8 @@ protocol MainViewModelInput {
 }
 
 protocol MainViewModelOutput {
-    var totalPieDids: CurrentValueSubject<MainTotalOfDidsItemViewModel, Never> { get }
-    var didItemsList: CurrentValueSubject<[MainDidItemsViewModel], Never> { get }
+    var totalPieDids: CurrentValueSubject<TotalOfDidsItemViewModel, Never> { get }
+    var didItemsList: CurrentValueSubject<[DidItemViewModel], Never> { get }
     var isSelectedRecentlyButton: CurrentValueSubject<Bool, Never> { get }
     var isSelectedMuchTimeButton: CurrentValueSubject<Bool, Never> { get }
     
@@ -42,7 +42,7 @@ final class MainViewModel: MainViewModelProtocol {
             .map {
                 $0
                     .filter { calendar.isDateInToday($0.started) }
-                    .map { MainDidItemsViewModel($0) }
+                    .map { DidItemViewModel($0) }
                     .sorted { $0.startedTimes > $1.startedTimes }
             }
             .sink { [weak self] items in
@@ -52,7 +52,7 @@ final class MainViewModel: MainViewModelProtocol {
         fetchedDids
             .map {
                 let output = $0.filter { calendar.isDateInToday($0.started) }
-                return MainTotalOfDidsItemViewModel(output)
+                return TotalOfDidsItemViewModel(output)
             }
             .sink { [weak self] item in
                 self?.totalPieDids.send(item)
@@ -103,8 +103,8 @@ final class MainViewModel: MainViewModelProtocol {
     private var fetchedDids = CurrentValueSubject<[Did], Never>([])
     var isSelectedRecentlyButton = CurrentValueSubject<Bool, Never>(true)
     var isSelectedMuchTimeButton = CurrentValueSubject<Bool, Never>(false)
-    var totalPieDids = CurrentValueSubject<MainTotalOfDidsItemViewModel, Never>(MainTotalOfDidsItemViewModel([]))
-    var didItemsList = CurrentValueSubject<[MainDidItemsViewModel], Never>([])
+    var totalPieDids = CurrentValueSubject<TotalOfDidsItemViewModel, Never>(TotalOfDidsItemViewModel([]))
+    var didItemsList = CurrentValueSubject<[DidItemViewModel], Never>([])
     
     func showCreateDid() {
         if didItemsList.value.isEmpty {

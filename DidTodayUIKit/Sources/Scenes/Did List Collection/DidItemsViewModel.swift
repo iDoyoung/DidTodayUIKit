@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct MainDidItemsViewModel: Hashable {
+struct DidItemViewModel: Hashable {
     let startedTimes: Double
     let finishedTimes: Double
     let times: String

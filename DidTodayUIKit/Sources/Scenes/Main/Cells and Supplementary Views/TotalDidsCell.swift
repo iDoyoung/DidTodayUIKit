@@ -68,7 +68,7 @@ final class TotalDidsCell: UICollectionViewCell {
                                                  endPoint: CGPoint(x: 1, y: 1))
     }
     
-    func setupPiesView(by item: MainTotalOfDidsItemViewModel) {
+    func setupPiesView(by item: TotalOfDidsItemViewModel) {
         item.totalOfPies.forEach {
             let pieView = PieView()
             pieView.frame = CGRect(origin: CGPoint(x: 0, y: 0),

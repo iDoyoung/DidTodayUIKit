@@ -28,6 +28,8 @@
 		7F0BECFF295171E500C0CF1C /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0BECFE295171E500C0CF1C /* Coordinator.swift */; };
 		7F0C251C29419BAE00304A0D /* CircularLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0C251B29419BAE00304A0D /* CircularLabel.swift */; };
 		7F10CF7A29679E1B00EAADF2 /* DetailDayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F10CF7929679E1B00EAADF2 /* DetailDayViewModel.swift */; };
+		7F10CF7C2967AF7F00EAADF2 /* CalendarFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F10CF7B2967AF7F00EAADF2 /* CalendarFlowCoordinator.swift */; };
+		7F10CF7E2967C3D400EAADF2 /* CalendarRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F10CF7D2967C3D400EAADF2 /* CalendarRouter.swift */; };
 		7F133C47290365460099E55C /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F133C46290365460099E55C /* CalendarViewController.swift */; };
 		7F133C5729063BF00099E55C /* UIColor+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F133C5629063BF00099E55C /* UIColor+Custom.swift */; };
 		7F133C632907C66A0099E55C /* MainFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F133C622907C66A0099E55C /* MainFlowCoordinator.swift */; };
@@ -136,6 +138,8 @@
 		7F0BECFE295171E500C0CF1C /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		7F0C251B29419BAE00304A0D /* CircularLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularLabel.swift; sourceTree = "<group>"; };
 		7F10CF7929679E1B00EAADF2 /* DetailDayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDayViewModel.swift; sourceTree = "<group>"; };
+		7F10CF7B2967AF7F00EAADF2 /* CalendarFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarFlowCoordinator.swift; sourceTree = "<group>"; };
+		7F10CF7D2967C3D400EAADF2 /* CalendarRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarRouter.swift; sourceTree = "<group>"; };
 		7F133C46290365460099E55C /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		7F133C5629063BF00099E55C /* UIColor+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Custom.swift"; sourceTree = "<group>"; };
 		7F133C622907C66A0099E55C /* MainFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFlowCoordinator.swift; sourceTree = "<group>"; };
@@ -262,6 +266,7 @@
 				7F0BECFE295171E500C0CF1C /* Coordinator.swift */,
 				7F133C622907C66A0099E55C /* MainFlowCoordinator.swift */,
 				7F0BECFB2951644B00C0CF1C /* DoingFlowCoordinator.swift */,
+				7F10CF7B2967AF7F00EAADF2 /* CalendarFlowCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -273,6 +278,7 @@
 				7FB6A92128E07BC4009C61C5 /* Calendar */,
 				7F583F2E2912ADF6006735AA /* Cells and Supplementary Views */,
 				7F133C46290365460099E55C /* CalendarViewController.swift */,
+				7F10CF7D2967C3D400EAADF2 /* CalendarRouter.swift */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -807,6 +813,7 @@
 				7F397A7428D86EF1000F89E2 /* Date+ToDouble.swift in Sources */,
 				7F076FC2290FC25500DF4EDC /* Date+OmittedTime.swift in Sources */,
 				7FF770B12955625400A665B5 /* AboutCell.swift in Sources */,
+				7F10CF7E2967C3D400EAADF2 /* CalendarRouter.swift in Sources */,
 				7F61A03C294439A80084A3F6 /* UIView+animateToShake.swift in Sources */,
 				7F850C612961AEC80083522A /* ParentUIViewController.swift in Sources */,
 				7F71192D290BBC8B001DFE99 /* CalendarViewModel.swift in Sources */,
@@ -827,6 +834,7 @@
 				7FEB006029595D120073B90C /* DetailDidSupplementaryView.swift in Sources */,
 				7F133C632907C66A0099E55C /* MainFlowCoordinator.swift in Sources */,
 				7FC115A229386B930056237A /* DoingViewModel.swift in Sources */,
+				7F10CF7C2967AF7F00EAADF2 /* CalendarFlowCoordinator.swift in Sources */,
 				504CE0B4253FDFDF000CC6CF /* PreviousVersionModel.swift in Sources */,
 				7F133CA3290902EC0099E55C /* StoryboardInstantiable.swift in Sources */,
 				7F5A91C828E68CCF006B8406 /* Date+ToString.swift in Sources */,

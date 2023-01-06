@@ -9,7 +9,8 @@ import UIKit
 
 protocol FlowCoordinatorDependenciesProtocol {
     func makeMainViewController(router: MainRouter) -> UIViewController
-    func makeCalendarViewController(dids: [Did]) -> UIViewController
+    func makeCalendarViewController(router: CalendarRouter) -> UIViewController
+    func makeDetailDayViewController(dids: [Did]) -> UIViewController
     func makeCreateDidViewController(startedDate: Date?, endedDate: Date?, fromDoing: Bool) -> UIViewController
     func makeDoingViewController(router: DoingRouter) -> UIViewController
     func makeInformationViewController() -> UIViewController
@@ -32,13 +33,13 @@ final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
     }
     
     //MARK: Calendar VC
-    func makeCalendarViewController(dids: [Did]) -> UIViewController {
-        let viewController = CalendarViewController.create(with: makeCalendarViewModel(by: dids))
+    func makeCalendarViewController(router: CalendarRouter) -> UIViewController {
+        let viewController = CalendarViewController.create(with: makeCalendarViewModel(router: router))
         return viewController
     }
     
-    private func makeCalendarViewModel(by dids: [Did]) -> CalendarViewModelProtocol {
-        let viewModel = CalendarViewModel(dids: dids)
+    private func makeCalendarViewModel(router: CalendarRouter) -> CalendarViewModelProtocol {
+        let viewModel = CalendarViewModel(didCoreDataStorage: didCoreDataStorage, router: router)
         return viewModel
     }
     

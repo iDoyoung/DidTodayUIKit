@@ -21,6 +21,8 @@ protocol CalendarViewModelOutput {
     var itemsOfselectedDay: CurrentValueSubject<[DidsOfDayItemViewModel], Never> { get }
     var descriptionOfSelectedDay: CurrentValueSubject<String?, Never> { get }
     var startedDate: Date? { get }
+    
+    func showDetail()
 }
 
 final class CalendarViewModel: CalendarViewModelProtocol {
@@ -85,4 +87,8 @@ final class CalendarViewModel: CalendarViewModelProtocol {
     var startedDate: Date?
     var descriptionOfSelectedDay = CurrentValueSubject<String?, Never>("Select Day")
     var itemsOfselectedDay = CurrentValueSubject<[DidsOfDayItemViewModel], Never>([])
+    
+    func showDetail() {
+        router?.showDetailDay([])
+    }
 }

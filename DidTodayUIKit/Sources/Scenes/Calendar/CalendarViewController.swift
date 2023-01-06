@@ -143,6 +143,7 @@ extension CalendarViewController {
     }
 
     @objc private func showDetail() {
+        viewModel?.showDetail()
     }
 }
 

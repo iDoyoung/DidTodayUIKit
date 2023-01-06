@@ -31,12 +31,6 @@ final class MainFlowCoordinator: Coordinator {
         navigationController?.pushViewController(viewController, animated: false)
     }
     
-    private func showCalendar(dids: [Did]) {
-        let viewController = UINavigationController(rootViewController: dependencies.makeCalendarViewController(dids: dids))
-        viewController.modalPresentationStyle = .overFullScreen
-        navigationController?.present(viewController, animated: true)
-    }
-    
     private func showCreateDid(startedDate: Date? = nil, endedDate: Date? = nil) {
         let viewController = UINavigationController(rootViewController: dependencies.makeCreateDidViewController(startedDate: startedDate, endedDate: endedDate, fromDoing: false))
         viewController.navigationBar.tintColor = .label
@@ -47,6 +41,16 @@ final class MainFlowCoordinator: Coordinator {
     private func showInformation() {
         let viewController = UINavigationController(rootViewController: dependencies.makeInformationViewController())
         navigationController?.present(viewController, animated: true)
+    }
+    
+    private func showCalendar() {
+        let router = CalendarRouter(showDetailDay: showDetailDay)
+        let viewController = UINavigationController(rootViewController: dependencies.makeCalendarViewController(router: router))
+        viewController.modalPresentationStyle = .overFullScreen
+        navigationController?.present(viewController, animated: true)
+    }
+    
+    private func showDetailDay(seleted: [Did]) {
     }
     
     private func showDoingCoordinator() {

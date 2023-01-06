@@ -23,9 +23,8 @@ final class CalendarFlowCoordinator: Coordinator {
     
     private func showCalendar() {
         let router = CalendarRouter(showDetailDay: showDetailDay)
-        let viewController = UINavigationController(rootViewController: dependencies.makeCalendarViewController(router: router))
-        viewController.modalPresentationStyle = .overFullScreen
-        navigationController?.present(viewController, animated: false)
+        let viewController = dependencies.makeCalendarViewController(router: router)
+        navigationController?.pushViewController(viewController, animated: false)
     }
 
     private func showDetailDay(dids: [Did]) {

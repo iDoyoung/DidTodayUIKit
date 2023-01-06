@@ -281,6 +281,7 @@ extension CalendarViewController {
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] items in
                 guard let self = self else { return }
+                self.showDetailButton.isEnabled = !items.isEmpty
                 self.initialSnapshot(items)
             })
             .store(in: &cancellableBag)

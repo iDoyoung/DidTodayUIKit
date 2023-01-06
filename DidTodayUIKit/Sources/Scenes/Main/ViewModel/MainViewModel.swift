@@ -115,8 +115,7 @@ final class MainViewModel: MainViewModelProtocol {
     }
     
     func showCalendar() {
-        let dids = fetchedDids.value
-        router?.showCalendar(dids)
+        router?.showCalendar()
     }
     
     func showDoing() {

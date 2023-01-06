@@ -24,8 +24,9 @@ final class CalendarViewController: ParentUIViewController {
     //MARK: - UI Objects
     private lazy var calendarView: CalendarView = CalendarView(initialContent: setupCalendarViewContents())
     private var collectionView: UICollectionView!
+    
     private lazy var verticalStactView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [calendarView, collectionView])
+        let stackView = UIStackView(arrangedSubviews: [calendarView, collectionView, bottomView])
         stackView.axis = .vertical
         stackView.backgroundColor = .separator
         stackView.layer.borderColor = UIColor.separator.cgColor
@@ -34,6 +35,23 @@ final class CalendarViewController: ParentUIViewController {
         stackView.layer.masksToBounds = true
         stackView.spacing = 0.5
         return stackView
+    }()
+    
+    private lazy var bottomView: UIView = {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 40))
+        view.backgroundColor = .systemBackground
+        view.addSubview(showDetailButton)
+        return view
+    }()
+    
+    private lazy var showDetailButton: UIButton = {
+        let button = UIButton(type: .system)
+//        button.titleLabel?.font = .preferredFont(forTextStyle: .body)
+        button.setTitle("자세히 보기", for: .normal)
+        button.tintColor = .label
+        button.isSelected = true
+        button.addTarget(self, action: #selector(showDetail), for: .touchUpInside)
+        return button
     }()
     
     //MARK: - Life Cycle
@@ -91,12 +109,19 @@ final class CalendarViewController: ParentUIViewController {
     private func setupLayoutConstraints() {
         verticalStactView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        bottomView.translatesAutoresizingMaskIntoConstraints = false
+        showDetailButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             verticalStactView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
             verticalStactView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
             verticalStactView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
             verticalStactView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-            collectionView.heightAnchor.constraint(equalToConstant: 100)
+            collectionView.heightAnchor.constraint(equalToConstant: 100),
+            bottomView.heightAnchor.constraint(equalToConstant: 100),
+            showDetailButton.leadingAnchor.constraint(greaterThanOrEqualTo: bottomView.leadingAnchor),
+            showDetailButton.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor, constant: -20),
+            showDetailButton.topAnchor.constraint(greaterThanOrEqualTo: bottomView.topAnchor),
+            showDetailButton.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor, constant: -20)
         ])
     }
     
@@ -115,6 +140,9 @@ extension CalendarViewController {
     
     @objc private func close() {
         dismiss(animated: true)
+    }
+
+    @objc private func showDetail() {
     }
 }
 

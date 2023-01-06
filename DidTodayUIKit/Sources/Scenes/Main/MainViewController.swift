@@ -70,6 +70,12 @@ final class MainViewController: DidListCollectionViewController {
         bindViewModel()
     }
     
+    override func configureCollectionView() {
+        super.configureCollectionView()
+        collectionView.backgroundColor = .customBackground
+        collectionView.delegate = self
+    }
+    
     private func setupNavigationBar() {
         /// - Title
         let dateOfToday = Date.todayDateToString()
@@ -162,18 +168,6 @@ final class MainViewController: DidListCollectionViewController {
     @objc override func tapMuchTimeButton(_ sender: UIButton) {
         super.tapMuchTimeButton(sender)
         viewModel?.selectMuchTime()
-    }
-}
-
-//MARK: - CollectionView Extentions
-extension MainViewController {
-    /// - Tag: Configure
-    private func configureCollectionView() {
-        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createCollectionViewLayout())
-        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        collectionView.backgroundColor = .customBackground
-        collectionView.delegate = self
-        view.addSubview(collectionView)
     }
 }
 

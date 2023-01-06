@@ -18,6 +18,12 @@ class DidListCollectionViewController: ParentUIViewController {
     var collectionView: UICollectionView!
     var dataSource: UICollectionViewDiffableDataSource<Section, AnyHashable>?
     
+    func configureCollectionView() {
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createCollectionViewLayout())
+        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(collectionView)
+    }
+    
     final func createCollectionViewLayout() -> UICollectionViewCompositionalLayout {
         let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
             guard let sectionKind = Section(rawValue: sectionIndex) else { return nil }

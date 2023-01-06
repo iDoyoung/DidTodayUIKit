@@ -12,6 +12,7 @@ protocol CalendarViewModelProtocol: CalendarViewModelInput, CalendarViewModelOut
 
 protocol CalendarViewModelInput {
     var selectedDay: DateComponents? { get set }
+    func fetchDids()
 }
 
 protocol CalendarViewModelOutput {

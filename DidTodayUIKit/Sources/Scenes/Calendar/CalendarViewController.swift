@@ -53,6 +53,8 @@ final class CalendarViewController: ParentUIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        /// - Tag: Configure Calendar After Fetch Dids
+        viewModel?.fetchDids()
         configure()
     }
     
@@ -99,7 +101,7 @@ final class CalendarViewController: ParentUIViewController {
     }
     
        private func bindViewModel() {
-           viewModel?.didsOfDayItem
+           viewModel?.itemsOfselectedDay
                .receive(on: DispatchQueue.main)
                .sink { [weak self] items in
                    guard let collectionView = self?.collectionView else { return }
@@ -192,7 +194,7 @@ extension CalendarViewController {
     }
     
     private func scrollToToday() {
-        calendarView.scroll(toMonthContaining: Date(), scrollPosition: .lastFullyVisiblePosition, animated: true)
+        calendarView.scroll(toMonthContaining: Date(), scrollPosition: .lastFullyVisiblePosition, animated: false)
     }
 }
 
@@ -246,7 +248,7 @@ extension CalendarViewController {
             self?.collectionView.dequeueConfiguredReusableSupplementary(using: didsOfSelectedSupplementaryRegistration, for: indexPath)
         }
         ///Binding with View Model
-        viewModel?.didsOfDayItem
+        viewModel?.itemsOfselectedDay
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] items in
                 guard let self = self else { return }

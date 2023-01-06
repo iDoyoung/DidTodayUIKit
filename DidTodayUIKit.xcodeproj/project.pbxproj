@@ -27,6 +27,7 @@
 		7F0BECFC2951644B00C0CF1C /* DoingFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0BECFB2951644B00C0CF1C /* DoingFlowCoordinator.swift */; };
 		7F0BECFF295171E500C0CF1C /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0BECFE295171E500C0CF1C /* Coordinator.swift */; };
 		7F0C251C29419BAE00304A0D /* CircularLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0C251B29419BAE00304A0D /* CircularLabel.swift */; };
+		7F10CF7A29679E1B00EAADF2 /* DetailDayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F10CF7929679E1B00EAADF2 /* DetailDayViewModel.swift */; };
 		7F133C47290365460099E55C /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F133C46290365460099E55C /* CalendarViewController.swift */; };
 		7F133C5729063BF00099E55C /* UIColor+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F133C5629063BF00099E55C /* UIColor+Custom.swift */; };
 		7F133C632907C66A0099E55C /* MainFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F133C622907C66A0099E55C /* MainFlowCoordinator.swift */; };
@@ -134,6 +135,7 @@
 		7F0BECFB2951644B00C0CF1C /* DoingFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoingFlowCoordinator.swift; sourceTree = "<group>"; };
 		7F0BECFE295171E500C0CF1C /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		7F0C251B29419BAE00304A0D /* CircularLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularLabel.swift; sourceTree = "<group>"; };
+		7F10CF7929679E1B00EAADF2 /* DetailDayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDayViewModel.swift; sourceTree = "<group>"; };
 		7F133C46290365460099E55C /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		7F133C5629063BF00099E55C /* UIColor+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Custom.swift"; sourceTree = "<group>"; };
 		7F133C622907C66A0099E55C /* MainFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFlowCoordinator.swift; sourceTree = "<group>"; };
@@ -362,6 +364,7 @@
 			children = (
 				7F850CBC296691C30083522A /* Cells and Supplementary Views */,
 				7F850CBA29655C2E0083522A /* DetailDayViewController.swift */,
+				7F10CF7929679E1B00EAADF2 /* DetailDayViewModel.swift */,
 			);
 			path = "Detail Day";
 			sourceTree = "<group>";
@@ -798,6 +801,7 @@
 				504CE042253FDFAA000CC6CF /* AppDelegate.swift in Sources */,
 				7FB6A92528E07BED009C61C5 /* MonthLabel.swift in Sources */,
 				7FB6A92328E07BE4009C61C5 /* DayLabel.swift in Sources */,
+				7F10CF7A29679E1B00EAADF2 /* DetailDayViewModel.swift in Sources */,
 				7FC115A72939EAF50056237A /* DoingViewController.swift in Sources */,
 				7FB6A8D328DD5C04009C61C5 /* ManagedDidItem+CoreDataClass.swift in Sources */,
 				7F397A7428D86EF1000F89E2 /* Date+ToDouble.swift in Sources */,

@@ -42,6 +42,17 @@ final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
         return viewModel
     }
     
+    //MARK: Detail Day
+    func makeDetailDayViewController(dids: [Did]) -> UIViewController {
+        let viewController = DetailDayViewController.create(with: makeDetailDayViewModel(by: dids))
+        return viewController
+    }
+    
+    private func makeDetailDayViewModel(by dids: [Did]) -> DetailDayViewModelProtocol {
+        let viewModel = DetailDayViewModel(dids: dids)
+        return viewModel
+    }
+    
     //MARK: Create Did VC
     func makeCreateDidViewController(startedDate: Date?, endedDate: Date?, fromDoing: Bool) -> UIViewController {
         let viewController = CreateDidViewController.create(with: makeCreateDidViewModel(startedDate: startedDate, endedDate: endedDate, fromDoing: fromDoing))

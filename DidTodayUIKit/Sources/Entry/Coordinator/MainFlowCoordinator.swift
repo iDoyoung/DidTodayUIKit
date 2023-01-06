@@ -23,7 +23,7 @@ final class MainFlowCoordinator: Coordinator {
     }
     
     private func showMain() {
-        let router = MainRouter(showCalendar: showCalendar,
+        let router = MainRouter(showCalendar: showCalendarCoordinator,
                                 showCreateDid: showCreateDid,
                                 showDoing: showDoingCoordinator,
                                 showInformation: showInformation)
@@ -43,14 +43,12 @@ final class MainFlowCoordinator: Coordinator {
         navigationController?.present(viewController, animated: true)
     }
     
-    private func showCalendar() {
-        let router = CalendarRouter(showDetailDay: showDetailDay)
-        let viewController = UINavigationController(rootViewController: dependencies.makeCalendarViewController(router: router))
+    private func showCalendarCoordinator() {
+        let viewController = UINavigationController()
+        let coordinator = CalendarFlowCoordinator(navigationController: viewController, dependencies: dependencies)
         viewController.modalPresentationStyle = .overFullScreen
         navigationController?.present(viewController, animated: true)
-    }
-    
-    private func showDetailDay(seleted: [Did]) {
+        coordinator.start()
     }
     
     private func showDoingCoordinator() {

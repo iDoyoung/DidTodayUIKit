@@ -265,8 +265,8 @@
 			children = (
 				7F0BECFE295171E500C0CF1C /* Coordinator.swift */,
 				7F133C622907C66A0099E55C /* MainFlowCoordinator.swift */,
-				7F0BECFB2951644B00C0CF1C /* DoingFlowCoordinator.swift */,
 				7F10CF7B2967AF7F00EAADF2 /* CalendarFlowCoordinator.swift */,
+				7F0BECFB2951644B00C0CF1C /* DoingFlowCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";

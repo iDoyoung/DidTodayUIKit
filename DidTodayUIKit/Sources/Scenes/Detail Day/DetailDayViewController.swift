@@ -19,8 +19,18 @@ final class DetailDayViewController: DidListCollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        configure()
+    }
+    
+    private func configure() {
+        setupView()
+        configureCollectionView()
+        configureDataSource()
+    }
+    
+    //MARK: - Setup
+    private func setupView() {
+        view.backgroundColor = .customBackground
     }
 }
 

@@ -46,6 +46,7 @@
 		7F583F2D2910EE90006735AA /* HorizonCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 7F583F2C2910EE90006735AA /* HorizonCalendar */; };
 		7F583F322914B73B006735AA /* DidTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F583F312914B73B006735AA /* DidTitleCell.swift */; };
 		7F583F34291A61D2006735AA /* DidsOfDayItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F583F33291A61D2006735AA /* DidsOfDayItemViewModel.swift */; };
+		7F5A69932968FC7A00062E2B /* DetaiDaylViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A69922968FC7A00062E2B /* DetaiDaylViewModelTests.swift */; };
 		7F5A91C828E68CCF006B8406 /* Date+ToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A91C728E68CCF006B8406 /* Date+ToString.swift */; };
 		7F61A03C294439A80084A3F6 /* UIView+animateToShake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F61A03B294439A80084A3F6 /* UIView+animateToShake.swift */; };
 		7F71192B290B95FB001DFE99 /* UIColor+GradientEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F71192A290B95FB001DFE99 /* UIColor+GradientEffect.swift */; };
@@ -154,6 +155,7 @@
 		7F55E400294C115A007B2706 /* CreateDidViewText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDidViewText.swift; sourceTree = "<group>"; };
 		7F583F312914B73B006735AA /* DidTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidTitleCell.swift; sourceTree = "<group>"; };
 		7F583F33291A61D2006735AA /* DidsOfDayItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidsOfDayItemViewModel.swift; sourceTree = "<group>"; };
+		7F5A69922968FC7A00062E2B /* DetaiDaylViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetaiDaylViewModelTests.swift; sourceTree = "<group>"; };
 		7F5A91C728E68CCF006B8406 /* Date+ToString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+ToString.swift"; sourceTree = "<group>"; };
 		7F61A03B294439A80084A3F6 /* UIView+animateToShake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+animateToShake.swift"; sourceTree = "<group>"; };
 		7F71192A290B95FB001DFE99 /* UIColor+GradientEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+GradientEffect.swift"; sourceTree = "<group>"; };
@@ -318,6 +320,14 @@
 				7FEB005F29595D120073B90C /* DetailDidSupplementaryView.swift */,
 			);
 			path = "Cells and Supplementary Views";
+			sourceTree = "<group>";
+		};
+		7F5A69912968FC5700062E2B /* DetailDay */ = {
+			isa = PBXGroup;
+			children = (
+				7F5A69922968FC7A00062E2B /* DetaiDaylViewModelTests.swift */,
+			);
+			path = DetailDay;
 			sourceTree = "<group>";
 		};
 		7F5A91C628E68CA7006B8406 /* Date+Extensions */ = {
@@ -576,6 +586,7 @@
 		7FC22B7528CB145300F83122 /* DidTodayUIKitTests */ = {
 			isa = PBXGroup;
 			children = (
+				7F5A69912968FC5700062E2B /* DetailDay */,
 				7F397A6428D709D3000F89E2 /* Main */,
 				7FB6A8C928DAF514009C61C5 /* CreateDid */,
 				7FC115A3293875370056237A /* Doing */,
@@ -837,6 +848,7 @@
 				7F80EBC928D334A000781DB4 /* MainViewModelTests.swift in Sources */,
 				7FC22B7D28CB145D00F83122 /* DidCoreDataStorageTests.swift in Sources */,
 				7FB6A8CF28DB00E3009C61C5 /* CreateDidViewControllerTests.swift in Sources */,
+				7F5A69932968FC7A00062E2B /* DetaiDaylViewModelTests.swift in Sources */,
 				7FC22B7F28CB232600F83122 /* Seeds.swift in Sources */,
 				7FC115A5293875510056237A /* DoingViewModelTests.swift in Sources */,
 				7FB6A8CB28DAF529009C61C5 /* CreateDidViewModelTests.swift in Sources */,

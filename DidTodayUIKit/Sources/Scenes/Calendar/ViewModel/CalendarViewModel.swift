@@ -18,7 +18,7 @@ protocol CalendarViewModelInput {
 protocol CalendarViewModelOutput {
     var fetchedDids: CurrentValueSubject<[Did], Never> { get }
     var dateOfDids: CurrentValueSubject<[Date], Never> { get }
-    var itemsOfselectedDay: CurrentValueSubject<[DidsOfDayItemViewModel], Never> { get }
+    var itemsOfDidSelectedDay: CurrentValueSubject<[DidsOfDayItemViewModel], Never> { get }
     var descriptionOfSelectedDay: CurrentValueSubject<String?, Never> { get }
     var startedDate: Date? { get }
     
@@ -50,9 +50,7 @@ final class CalendarViewModel: CalendarViewModelProtocol {
                 
                 let item = theSelf.fetchedDids.value
                     .filter { $0.started.omittedTime() == Calendar.current.date(from: theDay)?.omittedTime() }
-                    .compactMap { DidsOfDayItemViewModel($0) }
-                theSelf.itemsOfselectedDay.send(item)
-                
+                theSelf.didsSelectedDay.send(item)
                 /// - Tag: Setting Description Label
                 if item.isEmpty {
                     theSelf.descriptionOfSelectedDay.send("Select Day")
@@ -62,6 +60,13 @@ final class CalendarViewModel: CalendarViewModelProtocol {
             }
             .store(in: &cancellableBag)
         selectedDay = nil
+        
+        didsSelectedDay
+            .sink { [weak self] output in
+                let items = output.compactMap { DidsOfDayItemViewModel($0) }
+                self?.itemsOfDidSelectedDay.send(items)
+            }
+            .store(in: &cancellableBag)
     }
    
     //MARK: - Input
@@ -86,9 +91,11 @@ final class CalendarViewModel: CalendarViewModelProtocol {
     var dateOfDids = CurrentValueSubject<[Date], Never>([])
     var startedDate: Date?
     var descriptionOfSelectedDay = CurrentValueSubject<String?, Never>("Select Day")
-    var itemsOfselectedDay = CurrentValueSubject<[DidsOfDayItemViewModel], Never>([])
+    private var didsSelectedDay = CurrentValueSubject<[Did], Never>([])
+    var itemsOfDidSelectedDay = CurrentValueSubject<[DidsOfDayItemViewModel], Never>([])
     
     func showDetail() {
-        router?.showDetailDay([])
+        let dids = didsSelectedDay.value
+        router?.showDetailDay(dids)
     }
 }

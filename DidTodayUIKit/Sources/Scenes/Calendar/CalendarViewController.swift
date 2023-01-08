@@ -126,7 +126,7 @@ final class CalendarViewController: ParentUIViewController {
     }
     
        private func bindViewModel() {
-           viewModel?.itemsOfselectedDay
+           viewModel?.itemsOfDidSelectedDay
                .receive(on: DispatchQueue.main)
                .sink { [weak self] items in
                    guard let collectionView = self?.collectionView else { return }
@@ -277,7 +277,7 @@ extension CalendarViewController {
             self?.collectionView.dequeueConfiguredReusableSupplementary(using: didsOfSelectedSupplementaryRegistration, for: indexPath)
         }
         ///Binding with View Model
-        viewModel?.itemsOfselectedDay
+        viewModel?.itemsOfDidSelectedDay
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] items in
                 guard let self = self else { return }

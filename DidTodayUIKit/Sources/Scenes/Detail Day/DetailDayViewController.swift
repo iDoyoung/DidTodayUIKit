@@ -53,6 +53,25 @@ final class DetailDayViewController: DidListCollectionViewController {
     
     override func bindSortingSupplementaryWithViewModel(supplementary: SortingSupplementaryView) {
         super.bindSortingSupplementaryWithViewModel(supplementary: supplementary)
+        self.viewModel?.isSelectedRecentlyButton
+            .receive(on: DispatchQueue.main)
+            .sink { supplementary.recentlyButton.isSelected  = $0 }
+            .store(in: &self.cancellableBag)
+        
+        self.viewModel?.isSelectedMuchTimeButton
+            .receive(on: DispatchQueue.main)
+            .sink { supplementary.muchTimeButton.isSelected = $0 }
+            .store(in: &self.cancellableBag)
+    }
+    
+    @objc override func tapRecentlyButton(_ sender: UIButton) {
+        super.tapRecentlyButton(sender)
+        viewModel?.selectRecently()
+    }
+    
+    @objc override func tapMuchTimeButton(_ sender: UIButton) {
+        super.tapMuchTimeButton(sender)
+        viewModel?.selectMuchTime()
     }
 }
 

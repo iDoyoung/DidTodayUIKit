@@ -78,7 +78,7 @@ final class MainViewController: DidListCollectionViewController {
     
     private func setupNavigationBar() {
         /// - Title
-        let dateOfToday = Date.todayDateToString()
+        let dateOfToday = Date().toString()
         navigationController?.navigationBar.prefersLargeTitles = true
         title = dateOfToday
         /// - Bar Items

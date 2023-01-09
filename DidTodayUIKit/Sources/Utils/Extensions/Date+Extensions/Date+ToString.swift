@@ -8,10 +8,19 @@
 import Foundation
 
 extension Date {
-    static func todayDateToString() -> String {
+    
+    func toString() -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM dd, yyyy"
-        return dateFormatter.string(from: Date())
+        let currentLanguage = Locale.current.languageCode
+        if currentLanguage == "ko" {
+            dateFormatter.dateFormat = "yyyy년 MMM d일"
+        } else if currentLanguage == "en" {
+            dateFormatter.dateFormat = "MMM d, yyyy"
+        } else {
+            //Tag: - for setting more language
+            dateFormatter.dateFormat = "yyyy.MMM.d"
+        }
+        return dateFormatter.string(from: self)
     }
     
     func currentTimeToString() -> String {

@@ -16,6 +16,7 @@ protocol DetailDayViewModelInput {
 }
 
 protocol DetailDayViewModelOutput {
+    var selectedDay: CurrentValueSubject<String?, Never> { get }
     var totalPieDids: CurrentValueSubject<TotalOfDidsItemViewModel, Never> { get }
     var didItemsList: CurrentValueSubject<[DidItemViewModel], Never> { get }
     var isSelectedRecentlyButton: CurrentValueSubject<Bool, Never> { get }
@@ -24,11 +25,12 @@ protocol DetailDayViewModelOutput {
 
 final class DetailDayViewModel: DetailDayViewModelProtocol {
     
-    init(dids: [Did]) {
+    init(selected: Date, dids: [Did]) {
         let totalItems = TotalOfDidsItemViewModel(dids)
         let didItems = dids.map { DidItemViewModel($0) }
         totalPieDids.send(totalItems)
         didItemsList.send(didItems)
+        selectedDay.send(selected.toString())
     }
     
     //MARK: - Input
@@ -57,8 +59,9 @@ final class DetailDayViewModel: DetailDayViewModelProtocol {
     }
     
     //MARK: - Output
-    var isSelectedRecentlyButton = CurrentValueSubject<Bool, Never>(true)
-    var isSelectedMuchTimeButton = CurrentValueSubject<Bool, Never>(false)
+    var selectedDay = CurrentValueSubject<String?, Never>(nil)
     var totalPieDids = CurrentValueSubject<TotalOfDidsItemViewModel, Never>(TotalOfDidsItemViewModel([]))
     var didItemsList = CurrentValueSubject<[DidItemViewModel], Never>([])
+    var isSelectedRecentlyButton = CurrentValueSubject<Bool, Never>(true)
+    var isSelectedMuchTimeButton = CurrentValueSubject<Bool, Never>(false)
 }

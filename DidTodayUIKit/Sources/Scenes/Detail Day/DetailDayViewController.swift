@@ -29,11 +29,19 @@ final class DetailDayViewController: DidListCollectionViewController {
         configureCollectionView()
         configureDataSource()
         bindViewModel()
+        setTitle()
     }
     
     override func configureCollectionView() {
         super.configureCollectionView()
         collectionView.backgroundColor = .customBackground
+    }
+    
+    private func setTitle() {
+        viewModel?.selectedDay.sink { [weak self] output in
+            self?.title = output
+        }
+        .store(in: &cancellableBag)
     }
     
     //MARK: - Binding

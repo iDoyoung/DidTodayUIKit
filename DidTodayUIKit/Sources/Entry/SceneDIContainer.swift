@@ -10,7 +10,7 @@ import UIKit
 protocol FlowCoordinatorDependenciesProtocol {
     func makeMainViewController(router: MainRouter) -> UIViewController
     func makeCalendarViewController(router: CalendarRouter) -> UIViewController
-    func makeDetailDayViewController(dids: [Did]) -> UIViewController
+    func makeDetailDayViewController(selected: Date, dids: [Did]) -> UIViewController
     func makeCreateDidViewController(startedDate: Date?, endedDate: Date?, fromDoing: Bool) -> UIViewController
     func makeDoingViewController(router: DoingRouter) -> UIViewController
     func makeInformationViewController() -> UIViewController
@@ -44,13 +44,13 @@ final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
     }
     
     //MARK: Detail Day
-    func makeDetailDayViewController(dids: [Did]) -> UIViewController {
-        let viewController = DetailDayViewController.create(with: makeDetailDayViewModel(by: dids))
+    func makeDetailDayViewController(selected: Date, dids: [Did]) -> UIViewController {
+        let viewController = DetailDayViewController.create(with: makeDetailDayViewModel(dids: dids, by: selected))
         return viewController
     }
     
-    private func makeDetailDayViewModel(by dids: [Did]) -> DetailDayViewModelProtocol {
-        let viewModel = DetailDayViewModel(dids: dids)
+    private func makeDetailDayViewModel(dids: [Did], by selected: Date) -> DetailDayViewModelProtocol {
+        let viewModel = DetailDayViewModel(selected: selected, dids: dids)
         return viewModel
     }
     

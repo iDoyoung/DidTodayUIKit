@@ -95,7 +95,9 @@ final class CalendarViewModel: CalendarViewModelProtocol {
     var itemsOfDidSelectedDay = CurrentValueSubject<[DidsOfDayItemViewModel], Never>([])
     
     func showDetail() {
+        guard let theSelectedDay = selectedDay,
+              let theSelectedDate = Calendar.current.date(from: theSelectedDay) else { return }
         let dids = didsSelectedDay.value
-        router?.showDetailDay(dids)
+        router?.showDetailDay(theSelectedDate, dids)
     }
 }

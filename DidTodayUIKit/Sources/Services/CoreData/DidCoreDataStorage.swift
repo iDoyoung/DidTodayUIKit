@@ -21,7 +21,6 @@ protocol DidCoreDataStorable {
 }
 
 final class DidCoreDataStorage: DidCoreDataStorable {
-    static var shared = DidCoreDataStorage()
     
     private lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "DataModel")

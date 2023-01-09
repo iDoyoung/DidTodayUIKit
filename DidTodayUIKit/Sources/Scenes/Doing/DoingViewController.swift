@@ -61,6 +61,7 @@ final class DoingViewController: ParentUIViewController, StoryboardInstantiable 
         setupView()
         bindViewModel()
         observeDayIsChanged()
+        requestUserNotificationsAuthorization()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -124,6 +125,21 @@ final class DoingViewController: ParentUIViewController, StoryboardInstantiable 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tapGesture.cancelsTouchesInView = false
         view.addGestureRecognizer(tapGesture)
+    }
+    
+    private func requestUserNotificationsAuthorization() {
+        AuthorizationManager.requestUserNotificationsAuthorization { result in
+            switch result {
+            case .success(let authorizationStatus):
+                #if DEBUG
+                print("Succeeded requesting user notifications authorization \(String(describing: authorizationStatus))")
+                #endif
+            case .failure(let error):
+                #if DEBUG
+                print("Failed requesting user notifications authorization \(String(describing: error))")
+                #endif
+            }
+        }
     }
     
     private func observeDayIsChanged() {

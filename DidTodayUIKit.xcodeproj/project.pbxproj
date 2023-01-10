@@ -12,9 +12,6 @@
 		504CE04B253FDFAE000CC6CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 504CE04A253FDFAE000CC6CF /* Assets.xcassets */; };
 		504CE04E253FDFAE000CC6CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504CE04C253FDFAE000CC6CF /* LaunchScreen.storyboard */; };
 		504CE0B4253FDFDF000CC6CF /* PreviousVersionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504CE0B3253FDFDF000CC6CF /* PreviousVersionModel.swift */; };
-		504CE0B9253FDFE9000CC6CF /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504CE0B8253FDFE9000CC6CF /* ViewModel.swift */; };
-		504CE0C1254143CC000CC6CF /* AllPie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504CE0C0254143CC000CC6CF /* AllPie.swift */; };
-		5054D6C3255A8ABE005E8850 /* Pie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5054D6C2255A8ABE005E8850 /* Pie.swift */; };
 		50A450502564CA8300812F14 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 50A450522564CA8300812F14 /* Localizable.strings */; };
 		50A4505A2564CFD500812F14 /* Localize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A450592564CFD500812F14 /* Localize.swift */; };
 		7F076FC2290FC25500DF4EDC /* Date+OmittedTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F076FC1290FC25500DF4EDC /* Date+OmittedTime.swift */; };
@@ -117,9 +114,6 @@
 		504CE04D253FDFAE000CC6CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		504CE04F253FDFAE000CC6CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		504CE0B3253FDFDF000CC6CF /* PreviousVersionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviousVersionModel.swift; sourceTree = "<group>"; };
-		504CE0B8253FDFE9000CC6CF /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
-		504CE0C0254143CC000CC6CF /* AllPie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPie.swift; sourceTree = "<group>"; };
-		5054D6C2255A8ABE005E8850 /* Pie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pie.swift; sourceTree = "<group>"; };
 		50A450512564CA8300812F14 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		50A450542564CAFB00812F14 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		50A450552564CAFD00812F14 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -409,7 +403,6 @@
 		7FB6A8D028DD526E009C61C5 /* Legacy */ = {
 			isa = PBXGroup;
 			children = (
-				504CE0B8253FDFE9000CC6CF /* ViewModel.swift */,
 			);
 			path = Legacy;
 			sourceTree = "<group>";
@@ -417,21 +410,11 @@
 		7FB6A91F28E079ED009C61C5 /* Custom */ = {
 			isa = PBXGroup;
 			children = (
-				7FB6A92028E079FC009C61C5 /* Lagecy */,
 				7FC580A228D1A201008086FD /* PieView.swift */,
 				7F0B97B6292B793F0071DF98 /* BoardLabel.swift */,
 				7F0B97B8292C58060071DF98 /* NeumorphismButton.swift */,
 			);
 			path = Custom;
-			sourceTree = "<group>";
-		};
-		7FB6A92028E079FC009C61C5 /* Lagecy */ = {
-			isa = PBXGroup;
-			children = (
-				5054D6C2255A8ABE005E8850 /* Pie.swift */,
-				504CE0C0254143CC000CC6CF /* AllPie.swift */,
-			);
-			path = Lagecy;
 			sourceTree = "<group>";
 		};
 		7FB6A92128E07BC4009C61C5 /* Calendar */ = {
@@ -768,11 +751,9 @@
 				7FF770B629569DDA00A665B5 /* AboutItem.swift in Sources */,
 				7F0C251C29419BAE00304A0D /* CircularLabel.swift in Sources */,
 				7FC580A328D1A201008086FD /* PieView.swift in Sources */,
-				504CE0C1254143CC000CC6CF /* AllPie.swift in Sources */,
 				7FC1159E293833250056237A /* TimerManager.swift in Sources */,
 				7F0BECFC2951644B00C0CF1C /* DoingFlowCoordinator.swift in Sources */,
 				7F397A6828D71E74000F89E2 /* CreateDidViewController.swift in Sources */,
-				504CE0B9253FDFE9000CC6CF /* ViewModel.swift in Sources */,
 				7F850CB62965130E0083522A /* UserNotificationManager.swift in Sources */,
 				7F55E3FF294C08A0007B2706 /* CreateDidAlert.swift in Sources */,
 				7F850CC22966B6540083522A /* DidListCollectionViewController.swift in Sources */,
@@ -809,7 +790,6 @@
 				7F71192D290BBC8B001DFE99 /* CalendarViewModel.swift in Sources */,
 				7F55E401294C115A007B2706 /* CreateDidViewText.swift in Sources */,
 				7F135C402925FF33005156E0 /* TotalOfDidsViewModel.swift in Sources */,
-				5054D6C3255A8ABE005E8850 /* Pie.swift in Sources */,
 				7F850CBB29655C2E0083522A /* DetailDayViewController.swift in Sources */,
 				7FC22B6328C88AA500F83122 /* DataModel.xcdatamodeld in Sources */,
 				7F2C6CBE290A6EB3002963DE /* MainRouter.swift in Sources */,

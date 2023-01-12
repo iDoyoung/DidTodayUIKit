@@ -10,9 +10,6 @@ import UIKit
 class PreviousVersionModel {
     static let shared = PreviousVersionModel()
 
-    //MARK: - Users Defaults Data
-    var dids: [Did] = []
-    
     struct Color : Codable {
         var red : CGFloat = 0.0, green: CGFloat = 0.0, blue: CGFloat = 0.0, alpha: CGFloat = 0.0
 
@@ -108,131 +105,20 @@ class PreviousVersionModel {
         }
     }
     
-    func setData(thing: String, start: String, finish: String, colour: UIColor, day: String) {
-        let encoder = JSONEncoder()
-        let newDid = Did(id: dids.count, did: thing, start: start, finish: finish, colour: colour)
-        dids.append(newDid)
-        if let encoded = try? encoder.encode(dids) {
-        defaults.set(encoded, forKey: day)
-        }
+    func loadLastDate(date: String) -> [Did]? {
+        let decoder = JSONDecoder()
+        guard let savedDid = defaults.object(forKey: date) as? Data,
+              let loadedDids = try? decoder.decode([Did].self, from: savedDid) else { return nil}
+        return loadedDids
     }
     
-    func undoPie() {
-        let end = dids.endIndex - 1
-        dids.remove(at: end)
-        if dids.isEmpty {
-            defaults.removeObject(forKey: today)
-        } else {
-            let encoder = JSONEncoder()
-            if let encoded = try? encoder.encode(dids) {
-                defaults.set(encoded, forKey: today)
-            }
-        }
+    func loadLastDate(date: String) -> [OldDid]? {
+        let decoder = JSONDecoder()
+        guard let savedDid = defaults.object(forKey: date) as? Data,
+              let loadedDids = try? decoder.decode([OldDid].self, from: savedDid) else { return nil }
+        return loadedDids
     }
     
-    func loadToday() {
-        dids = [Did]()
-        if let savedDid = defaults.object(forKey: today) as? Data {
-            let decoder = JSONDecoder()
-            if let loadedDids = try? decoder.decode([Did].self, from: savedDid) {
-                dids = loadedDids
-                print("success load data")
-            }
-        }
-    }
-    
-    
-    func loadLastDate(date: String) {
-        dids = [Did]()
-        if let savedDid = defaults.object(forKey: date) as? Data {
-            let decoder = JSONDecoder()
-            if let loadedDids = try? decoder.decode([Did].self, from: savedDid) {
-                dids = loadedDids
-                print("success load data")
-            }
-        }
-    }
-    
-    func updateData(date: String) {
-        if let savedDid = defaults.object(forKey: date) as? Data {
-            let decoder = JSONDecoder()
-            if let loadedDids = try? decoder.decode([OldDid].self, from: savedDid) {
-                var id = 0
-                dids = [Did]()
-                for index in loadedDids {
-                    let newDid = Did(id: id, did: index.did, start: index.start, finish: index.finish, colour: index.colour)
-                    dids.append(newDid)
-                    id += 1
-                }
-            }
-        }
-        let encoder = JSONEncoder()
-        if let encoded = try? encoder.encode(dids) {
-            defaults.set(encoded, forKey: date)
-        }
-    }
-    
-    struct Doing: Codable {
-        private enum CodingKeys: String, CodingKey { case doing, startTime, colour, date }
-        
-        var doing: String
-        var startTime: String
-        var colour: UIColor
-        var date: String
-        
-        init(doing: String, startTime: String, colour: UIColor, date: String) {
-            self.doing = doing
-            self.startTime = startTime
-            self.colour = colour
-            self.date = date
-        }
-        
-        init(from decoder: Decoder) throws {
-            let container = try decoder.container(keyedBy: CodingKeys.self)
-            doing = try container.decode(String.self, forKey: .doing)
-            startTime = try container.decode(String.self, forKey: .startTime)
-            colour = try container.decode(Color.self, forKey: .colour).uiColor
-            date = try container.decode(String.self, forKey: .date)
-        }
-        
-        public func encode(to encoder: Encoder) throws {
-            var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(doing, forKey: .doing)
-            try container.encode(startTime, forKey: .startTime)
-            try container.encode(Color(uiColor: colour), forKey: .colour)
-            try container.encode(date, forKey: .date)
-        }
-    }
-    
-    var startNow: [Doing] = []
-
-    func saveDoing(when: String, what: String, color: UIColor) {
-        let encoder = JSONEncoder()
-        let doingNow = Doing(doing: what, startTime: when, colour: color, date: today)
-        startNow.append(doingNow)
-        if let encoded = try? encoder.encode(startNow) {
-            defaults.set(encoded, forKey: "Doing")
-        }
-    }
-    
-    func loadDoing() {
-        startNow = [Doing]()
-        if let loaded = defaults.object(forKey: "Doing") as? Data {
-            let decorder = JSONDecoder()
-            if let loadDoing = try? decorder.decode([Doing].self, from: loaded) {
-                print(loadDoing)
-                startNow = loadDoing
-            }
-        }
-    }
-    
-    func deleteDoing() {
-        defaults.removeObject(forKey: "Doing")
-        startNow = []
-    }
-    
-    
-
     //MARK: - Date & Time
     let date = Date()
     
@@ -301,11 +187,23 @@ class PreviousVersionModel {
         return minutes
     }
     
+    func formatStringToDate(_ input: String) -> Date? {
+        dateFormatter.dateFormat = "yyyyMMddHH:mm"
+        let date = dateFormatter.date(from: input)
+        return date
+    }
+    
     func dateToString(time: Date) -> String {
         dateFormatter.dateStyle = .none
         dateFormatter.timeStyle = .short
         dateFormatter.dateFormat = "HH:mm"
         let time = dateFormatter.string(from: time)
         return time
+    }
+    
+    deinit {
+        #if DEBUG
+        print("Deinit Previous Version Model")
+        #endif
     }
 }

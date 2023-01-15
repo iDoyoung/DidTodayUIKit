@@ -38,6 +38,7 @@ final class BetaVersionMigrationTests: XCTestCase {
         func create(_ did: DidTodayUIKit.Did, completion: @escaping (DidTodayUIKit.Did, DidTodayUIKit.CoreDataStoreError?) -> Void) {
             created.append(did)
             createCalled = true
+            completion(did, nil)
         }
         
         func fetchDids(completion: @escaping ([DidTodayUIKit.Did], DidTodayUIKit.CoreDataStoreError?) -> Void) {
@@ -56,10 +57,26 @@ final class BetaVersionMigrationTests: XCTestCase {
     //MARK: - Tests
     
     func test_migrate_whenHavePreviousDidDataIfLaunchedBefore() {
-        let expectaion = UserDefaults.standard.object(forKey: PreviousVersionModel().today)
         ///given
+        let expectaion = UserDefaults.standard.object(forKey: PreviousVersionModel().today)
         givePreviousDidDummy()
         sut.launchedBefore = true
+        sut.isMigratedToCoreData = false
+        ///when
+        sut.migrateUserDefaultToCoreData()
+        ///then
+        XCTAssert(self.didCoreDataStorageSpy.createCalled)
+        XCTAssertEqual(self.didCoreDataStorageSpy.created.count, 1)
+        XCTAssertEqual(self.didCoreDataStorageSpy.created[0].content, "Test")
+        XCTAssertNil(expectaion)
+    }
+    
+    func test_migrate_whenHaveOldDidDataIfNotLaunchedBefore() {
+        ///given
+        let expectaion = UserDefaults.standard.object(forKey: PreviousVersionModel().today)
+        givePreviousOldDidDummy()
+        sut.launchedBefore = false
+        sut.isMigratedToCoreData = false
         ///when
         sut.migrateUserDefaultToCoreData()
         ///then
@@ -67,21 +84,6 @@ final class BetaVersionMigrationTests: XCTestCase {
         XCTAssertEqual(didCoreDataStorageSpy.created.count, 1)
         XCTAssertEqual(didCoreDataStorageSpy.created[0].content, "Test")
         XCTAssertNil(expectaion)
-    }
-    
-    func test_migrate_whenHaveOldDidDataIfNotLaunchedBefore() {
-        
-        let expectation = UserDefaults.standard.object(forKey: PreviousVersionModel().today)
-        ///given
-        givePreviousOldDidDummy()
-        sut.launchedBefore = nil
-        ///when
-        sut.migrateUserDefaultToCoreData()
-        ///then
-        XCTAssert(didCoreDataStorageSpy.createCalled)
-        XCTAssertEqual(didCoreDataStorageSpy.created.count, 1)
-        XCTAssertEqual(didCoreDataStorageSpy.created[0].content, "Test")
-        XCTAssertNil(expectation)
     }
     
     func givePreviousDidDummy() {

@@ -69,7 +69,8 @@ final class DoingViewModel: DoingViewModelProtocol {
     ///It is output?. didSet is bad choice?
     var startedDate: Date? {
         didSet {
-            startedTime.send("Started Time: \(startedDate?.currentTimeToString() ?? "00:00")")
+            let text = CustomText.started(time: startedDate?.currentTimeToString() ?? "00:00")
+            startedTime.send(text)
         }
     }
     var endedDate: Date?

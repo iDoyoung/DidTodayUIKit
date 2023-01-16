@@ -5,22 +5,49 @@
   Created by ido on 2020/11/18.
   
 */
-"Start time" = "Start time";
-"End time" = "End time";
-"What you did." = "What you did.";
-"Quick Set" = "Quick Set";
-"Add" = "Add";
-"Edit Daily" = "Edit Daily";
-"Daily did thing" = "Daily did thing";
-"Edit" = "Edit";
-"Cancel" = "Cancel";
-"Delete" = "Delete";
-"I didn't do anything." = "I didn't do anything.";
-"Rest" = "Rest";
-"Have a Meal" = "Have a Meal";
-"Work" = "Work";
-"Eexrcise" = "Eexrcise";
+//MARK: - Main
+"Recently" = "Recently";
+"Much time" = "Much time";
+"Tap to Start" = "Tap to Button";
+"Tap and start anything" = "Tap and start anything";
 
-"Full your daily." = "Full your daily.";
-"Sorry, you can add only 10 daily." = "Sorry, you can add only 10 daily.";
+//MARK: - In Doing
+"Keep going!" = "Keep going!";
+"Couldn't add within 5 minutes" = "Couldn't finish a work within 5 minutes";
+"Started Time: %@" = "Started Time: %@";
+"Day is changed!" = "Day is changed!";
+"Are you working now? If you are not, please cancel or finish a work." = "Are you working now? If you are not, please cancel or finish a work.";
+"Are you sure to cancel?" = "Are you sure to cancel?";
+"Are you sure to finish?" = "Are you sure to finish?";
+
+//MARK: - Create Did
+"Finishing touches" = "Finishing touches";
+"Create Did" = "Create Did";
+
+//MARK: - In Create Did
+"Discard your Creation?" = "Discard your Creation?";
+"Complete your Creation?" = "Complete your Creation?";
+
+"Discard" = "Discard";
+"Create" = "Create";
+
+//MARK: - Calendar
+"Select Day" = "Select Day";
+"Did %d Things" = "Did %d Things";
+"Show detail" = "Show detail";
+
+//MARK: - About
+"About" = "About";
+"Recommend Did" = "Recommend Did";
+"Write a review" = "Write a review";
+"Privacy Policy" = "Privacy Policy";
+
+//MARK: - Total of dids
+"Did nothing" = "Did nothing";
+"Did %d things!" = "Did %d things!";
+
+"Cancel" = "Cancel";
 "OK" = "OK";
+"Done" = "완료";
+
+"You cannot undo." = "You cannot undo.";

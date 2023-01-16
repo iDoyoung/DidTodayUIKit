@@ -19,7 +19,7 @@ protocol InformationViewModelOuput {
 
 final class AboutViewModel: InformationViewModelProtocol {
     let about = AboutDid()
-    let items = [AboutItem(title: "Recommend Did"),
-                 AboutItem(title: "Write a review"),
-                 AboutItem(title: "Privacy Policy")]
+    let items = [AboutItem(title: CustomText.recommendDid),
+                 AboutItem(title: CustomText.writeAReview),
+                 AboutItem(title: CustomText.privacyPolicy)]
 }

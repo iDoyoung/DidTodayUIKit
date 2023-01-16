@@ -13,7 +13,7 @@ final class SortingSupplementaryView: UICollectionReusableView {
     
     let recentlyButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Recently", for: .normal)
+        button.setTitle(CustomText.recently, for: .normal)
         button.tintColor = .label
         button.isSelected = true
         return button
@@ -21,7 +21,7 @@ final class SortingSupplementaryView: UICollectionReusableView {
     
     let muchTimeButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Much time", for: .normal)
+        button.setTitle(CustomText.muchTime, for: .normal)
         button.tintColor = .label
         return button
     }()
@@ -56,9 +56,6 @@ final class SortingSupplementaryView: UICollectionReusableView {
             recentlyButton.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
             muchTimeButton.centerYAnchor.constraint(equalTo: centerYAnchor),
             muchTimeButton.leadingAnchor.constraint(equalTo: recentlyButton.trailingAnchor, constant: 10)
-//            muchTimeButton.trailingAnchor.constraint(greaterThanOrEqualTo: switchButton.layoutMarginsGuide.leadingAnchor),
-//            switchButton.centerYAnchor.constraint(equalTo: centerYAnchor),
-//            switchButton.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor)
         ])
     }
 }

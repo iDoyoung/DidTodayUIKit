@@ -18,8 +18,8 @@ extension DayIsChangedNotification {
     
     func setContent() -> UNMutableNotificationContent {
         let content = UNMutableNotificationContent()
-        content.title = "하루가 지났습니다."
-        content.subtitle = "어떤 행동을 시작하고 아직 진행중인 상태입니다."
+        content.title = CustomText.dayIsChangedNotificationTitle
+        content.subtitle = CustomText.dayIsChangedNotificationSubTitle
         content.sound = UNNotificationSound.default
         return content
     }

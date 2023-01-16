@@ -47,6 +47,7 @@ final class DetailDayViewController: DidListCollectionViewController {
     //MARK: - Binding
     private func bindViewModel() {
         viewModel?.totalPieDids
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] output in
                 self?.applyTotalDidSnapshot([output])
             }

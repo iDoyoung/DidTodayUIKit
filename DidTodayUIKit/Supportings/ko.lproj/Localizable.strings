@@ -5,26 +5,49 @@
   Created by ido on 2020/11/18.
   
 */
-"Start time" = "시작";
-"End time" = "끝";
-"What you did." = "한 일";
-"Quick Set" = "빠른 등록";
-"Add" = "추가";
+//MARK: - Main
+"Recently" = "최신순";
+"Much time" = "오래한순";
+"Tap to start" = "눌러서 시작하기";
+"Tap and start anything" = "눌러서 무엇이든지 시작해보세요";
 
-"Edit" = "편집";
+//MARK: - In Doing
+"Keep going!" = "계속 나아가요!";
+"Couldn't add within 5 minutes" = "5분 이내로는 추가할 수 없어요";
+"Started Time: %@" = "시작시간: %@";
+"Day is changed!" = "하루가 끝났어요!";
+"Are you working now? If you are not, please cancel or finish a work." = "아직도 무언가 진행중인가요? 만약 그렇지 않다면, 작업을 취소 또는 끝내주세요.";
+"Are you sure to cancel?" = "취소할까요?";
+"Are you sure to finish?" = "일을 끝낼까요?";
+
+//MARK: - Create Did
+"Finishing touches" = "마무리 작업";
+"Create Did" = "생성하기";
+
+//MARK: - In Create Did
+"Discard your Creation?" = "생성 내용을 삭제할까요?";
+"Complete your Creation?" = "생성 내용을 완료할까요?";
+
+"Discard" = "삭제";
+"Create" = "생성";
+
+//MARK: - Calendar
+"Select Day" = "날짜를 고르세요";
+"Did %d Things" = "%d개 완료";
+"Show detail" = "자세히 보기";
+
+//MARK: - About
+"About" = "정보";
+"Recommend Did" = "앱 추천하기";
+"Write a review" = "리뷰 작성하기";
+"Privacy Policy" = "개인정보 처리방침";
+
+//MARK: - Total of dids
+"Did nothing" = "아직 아무것도 안했어요";
+"Did %d things!" = "오늘 %d가지 일을 했어요!";
+
 "Cancel" = "취소";
-"Delete" = "삭제";
-
-
-"Full your daily." = "일상이 가득 찼습니다.";
-"Sorry, you can add only 10 daily." = "오직 10개의 일상을 만들 수 있습니다.";
 "OK" = "확인";
-"If you finish, touch screen." = "끝냈다면, 스크린을 터치하세요.";
-"Are you done?" = "끝냈습니까?";
-"Yes" = "예";
-"Start" = "시작하기";
-"You did't fisnish last day." = "지난날, 일을 끝내지 않았습니다.";
-"Do you report finishing at 23:59 on last day?" = "지난 날 23:59에 마친것으로 기록할까요?";
-"OK" = "확인";
-"Check setting time" = "시간을 확인해주세요.";
-"You can't set end time faster than start time." = "종료 시간이 시작 시간보다 빠를 수 없습니다.";
+
+"You cannot undo." = "계속할 경우 되돌릴 수 없어요.";
+

@@ -1,0 +1,15 @@
+
+/* Class = "UILabel"; text = "00:00"; ObjectID = "9Ma-d8-agg"; */
+"9Ma-d8-agg.text" = "00:00";
+
+/* Class = "UIButton"; configuration.title = "Cancel"; ObjectID = "JuF-O4-FFn"; */
+"JuF-O4-FFn.configuration.title" = "취소";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "JuF-O4-FFn"; */
+"JuF-O4-FFn.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Done"; ObjectID = "x4M-7V-xpD"; */
+"x4M-7V-xpD.configuration.title" = "완료";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "x4M-7V-xpD"; */
+"x4M-7V-xpD.normalTitle" = "Button";

@@ -21,6 +21,9 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rHv-or-Rdn" customClass="BoardLabel" customModule="DidTodayUIKit" customModuleProvider="target">
                                 <rect key="frame" x="30" y="192.33333333333334" width="333" height="0.0"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" id="mRX-B3-4eP"/>
+                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="textColor">
                                         <color key="value" systemColor="systemGrayColor"/>
@@ -169,7 +172,7 @@
             <color red="0.9882352941176471" green="1" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="custom.green">
-            <color red="0.0" green="0.47058823529411764" blue="0.22745098039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.72549019607843135" blue="0.41960784313725491" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="secondary.custom.background">
             <color red="0.87058823529411766" green="0.88235294117647056" blue="0.85098039215686272" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

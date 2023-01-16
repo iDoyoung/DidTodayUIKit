@@ -15,11 +15,11 @@ protocol CreateDidAlert {
 extension CreateDidAlert {
     
     func completeToCreateDidAlert() -> UIAlertController {
-        let alert = UIAlertController(title: CreateDidViewText.completeToCreateAlertTitle,
-                                      message: CreateDidViewText.completeToCreateAlertMessage,
+        let alert = UIAlertController(title: CustomText.completeToCreateTitle,
+                                      message: CustomText.completeToCreateMessage,
                                       preferredStyle: .actionSheet)
-        let cancelAction = UIAlertAction(title: CreateDidViewText.cancelActionTitle, style: .cancel)
-        let completeAction = UIAlertAction(title: CreateDidViewText.createActionTitle, style: .default) { _ in
+        let cancelAction = UIAlertAction(title: CustomText.cancel, style: .cancel)
+        let completeAction = UIAlertAction(title: CustomText.create, style: .default) { _ in
             completeToCreateDid()
         }
         alert.addAction(cancelAction)
@@ -28,11 +28,11 @@ extension CreateDidAlert {
     }
     
     func discardToCreateDidAlert() -> UIAlertController {
-        let alert = UIAlertController(title: CreateDidViewText.discardToCreateDidAlertTitle,
-                                      message: CreateDidViewText.discardToCreateDidAlertMessage,
+        let alert = UIAlertController(title: CustomText.discardToCreateDidTitle,
+                                      message: CustomText.discardToCreateDidtMessage,
                                       preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: CreateDidViewText.cancelActionTitle, style: .cancel)
-        let disCardAction = UIAlertAction(title: CreateDidViewText.discardActionTitle, style: .default) { _ in
+        let cancelAction = UIAlertAction(title: CustomText.cancel, style: .cancel)
+        let disCardAction = UIAlertAction(title: CustomText.discard, style: .default) { _ in
             discardToCreateDid()
         }
         alert.addAction(cancelAction)
@@ -42,10 +42,10 @@ extension CreateDidAlert {
     
     //TODO: Understanding Core Data Error
     func errorAlert() -> UIAlertController {
-        let alert = UIAlertController(title: CreateDidViewText.errorAlertTitle,
-                                      message: CreateDidViewText.errorMessage,
+        let alert = UIAlertController(title: CustomText.errorAlertOfCreateTitle,
+                                      message: CustomText.errorMessageOfCreateDid,
                                       preferredStyle: .alert)
-        let okAction = UIAlertAction(title: CreateDidViewText.okActionTitle, style: .default)
+        let okAction = UIAlertAction(title: CustomText.okay, style: .default)
         alert.addAction(okAction)
         return alert
     }

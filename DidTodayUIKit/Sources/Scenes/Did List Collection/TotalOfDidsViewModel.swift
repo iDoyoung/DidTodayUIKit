@@ -13,12 +13,11 @@ struct TotalOfDidsItemViewModel: Hashable {
     let totalOfPies: [TotalOfDidsPieViewModel]
     
     init(_ dids: [Did]) {
-        let countOfDids = dids.count
         let totalOfSpentTime = dids
             .map { Date.differenceToMinutes(from: $0.started, to: $0.finished) }
             .reduce(0) { $0 + $1 }
         let spendTimeToString = String(format: "%02d:%02d", totalOfSpentTime/60, totalOfSpentTime%60)
-        descriptionCount = (countOfDids == 0 ? "Did nothing" : "Did \(dids.count) things!")
+        descriptionCount = CustomText.didThing(count: dids.count)
         descriptionTime = "\(spendTimeToString)"
         totalOfPies = dids.map { TotalOfDidsPieViewModel($0) }
     }

@@ -37,7 +37,7 @@ final class AboutViewController: ParentUITableViewController {
     //MARK: - Setup
     private func setupNavigationBar() {
         navigationController?.navigationBar.tintColor = .label
-        title = "About"
+        title = CustomText.about
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(back))
     }
     

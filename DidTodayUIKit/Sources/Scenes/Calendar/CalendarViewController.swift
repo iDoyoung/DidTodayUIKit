@@ -46,8 +46,7 @@ final class CalendarViewController: ParentUIViewController {
     
     private lazy var showDetailButton: UIButton = {
         let button = UIButton(type: .system)
-//        button.titleLabel?.font = .preferredFont(forTextStyle: .body)
-        button.setTitle("자세히 보기", for: .normal)
+        button.setTitle(CustomText.showDetail, for: .normal)
         button.tintColor = .label
         button.isSelected = true
         button.addTarget(self, action: #selector(showDetail), for: .touchUpInside)

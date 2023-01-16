@@ -103,7 +103,7 @@ final class DoingViewController: ParentUIViewController, StoryboardInstantiable 
     }
     
     private func setupInformationLabel() {
-        informationBoardLabel.texts = ["앱을 닫을 경우 앱이 중지됩니다.", "1분후부터 저장 가능합니다"]
+        informationBoardLabel.texts = [CustomText.firstTipInDoing, CustomText.secondTipInDoing]
         informationBoardLabel.font = .systemFont(ofSize: 18, weight: .bold)
     }
     

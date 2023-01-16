@@ -75,7 +75,7 @@ final class CreateDidViewModel: CreateDidViewModelProtocol {
 
     func setupFromDoing() {
         timePickerEnable.send(false)
-        title.send("Finishing touches")
+        title.send(CustomText.finishingTouches)
     }
     
     func setTitle(_ title: String) {
@@ -118,7 +118,7 @@ final class CreateDidViewModel: CreateDidViewModelProtocol {
     }
     
     //MARK: - Output
-    var title = CurrentValueSubject<String, Never>("Create Did")
+    var title = CurrentValueSubject<String, Never>(CustomText.createDid)
     var titleOfDid = CurrentValueSubject<String?, Never>(nil)
     var titleIsEmpty = CurrentValueSubject<Bool, Never>(true)
     var degreeOfStartedTime = CurrentValueSubject<Double?, Never>(nil)

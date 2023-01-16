@@ -53,9 +53,9 @@ final class CalendarViewModel: CalendarViewModelProtocol {
                 theSelf.didsSelectedDay.send(item)
                 /// - Tag: Setting Description Label
                 if item.isEmpty {
-                    theSelf.descriptionOfSelectedDay.send("Select Day")
+                    theSelf.descriptionOfSelectedDay.send(CustomText.selectDay)
                 } else {
-                    theSelf.descriptionOfSelectedDay.send("Did \(item.count) Things")
+                    theSelf.descriptionOfSelectedDay.send(CustomText.seletedItems(count: item.count))
                 }
             }
             .store(in: &cancellableBag)
@@ -90,7 +90,7 @@ final class CalendarViewModel: CalendarViewModelProtocol {
     var fetchedDids = CurrentValueSubject<[Did], Never>([])
     var dateOfDids = CurrentValueSubject<[Date], Never>([])
     var startedDate: Date?
-    var descriptionOfSelectedDay = CurrentValueSubject<String?, Never>("Select Day")
+    var descriptionOfSelectedDay = CurrentValueSubject<String?, Never>(CustomText.selectDay)
     private var didsSelectedDay = CurrentValueSubject<[Did], Never>([])
     var itemsOfDidSelectedDay = CurrentValueSubject<[DidsOfDayItemViewModel], Never>([])
     

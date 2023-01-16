@@ -24,7 +24,7 @@ final class MainViewController: DidListCollectionViewController {
         let label = BoardLabel()
         label.font = .systemFont(ofSize: 18, weight: .bold)
         label.textColor = .systemGray
-        label.texts = ["아래 버튼을 누르면 시간을 재기 시작해요", "터치하여 무슨 일이던 시작해보세요"]
+        label.texts = [CustomText.firstTipInMain, CustomText.secondTipInMain]
         return label
     }()
     

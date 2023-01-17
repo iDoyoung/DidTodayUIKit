@@ -49,7 +49,7 @@ final class AboutViewModel: AboutViewModelProtocol {
         case .recommend:
             showActivityToRecommend()
         case .review:
-            return
+            openAppStoreToReview()
         case .privacyPolicy:
             return
         }
@@ -60,5 +60,9 @@ final class AboutViewModel: AboutViewModelProtocol {
     
     private func showActivityToRecommend() {
         router?.showActivityToRecommend(["https://apps.apple.com/app/id1549357218"])
+    }
+    
+    private func openAppStoreToReview() {
+        router?.openAppStoreToReview()
     }
 }

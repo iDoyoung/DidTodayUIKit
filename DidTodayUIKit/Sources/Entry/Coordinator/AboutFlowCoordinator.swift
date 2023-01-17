@@ -39,7 +39,10 @@ final class AboutFlowCoordinator: Coordinator {
     }
     
     private func openAppStoreToWriteAReview() {
-        
+        guard let url = URL(string: "https://apps.apple.com/app/id1625220721?action=write-review") else { return }
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url)
+        }
     }
     
     private func showPrivacyPolicy() {

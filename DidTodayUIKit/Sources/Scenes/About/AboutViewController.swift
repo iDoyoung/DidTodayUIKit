@@ -13,11 +13,11 @@ final class AboutViewController: ParentUITableViewController {
         case about, link
     }
     
-    var viewModel: InformationViewModelProtocol?
+    var viewModel: AboutViewModelProtocol?
     private var dataSource: UICollectionViewDiffableDataSource<Section, AnyHashable>?
     
     //MARK: - Life Cycle
-    static func create(with viewModel: InformationViewModelProtocol) -> AboutViewController {
+    static func create(with viewModel: AboutViewModelProtocol) -> AboutViewController {
         let viewController = AboutViewController(style: .insetGrouped)
         viewController.viewModel = viewModel
         return viewController

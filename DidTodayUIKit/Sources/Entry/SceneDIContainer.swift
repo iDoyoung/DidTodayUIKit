@@ -13,7 +13,7 @@ protocol FlowCoordinatorDependenciesProtocol {
     func makeDetailDayViewController(selected: Date, dids: [Did]) -> UIViewController
     func makeCreateDidViewController(startedDate: Date?, endedDate: Date?, fromDoing: Bool) -> UIViewController
     func makeDoingViewController(router: DoingRouter) -> UIViewController
-    func makeInformationViewController() -> UIViewController
+    func makeAboutViewController(router: AboutRouter) -> UIViewController
     func makePrivacyPolicyViewController() -> UIViewController
 }
 
@@ -78,13 +78,13 @@ final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
     }
     
     //MARK: Information VC
-    func makeInformationViewController() -> UIViewController {
-        let viewController = AboutViewController.create(with: makeInformationViewModel())
+    func makeAboutViewController(router: AboutRouter) -> UIViewController {
+        let viewController = AboutViewController.create(with: makeAboutViewModel(router: router))
         return viewController
     }
     
-    private func makeInformationViewModel() -> InformationViewModelProtocol {
-        let viewModel = AboutViewModel()
+    private func makeAboutViewModel(router: AboutRouter) -> AboutViewModelProtocol {
+        let viewModel = AboutViewModel(router: router)
         return viewModel
     }
     

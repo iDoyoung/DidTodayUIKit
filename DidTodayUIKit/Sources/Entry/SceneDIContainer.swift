@@ -14,6 +14,7 @@ protocol FlowCoordinatorDependenciesProtocol {
     func makeCreateDidViewController(startedDate: Date?, endedDate: Date?, fromDoing: Bool) -> UIViewController
     func makeDoingViewController(router: DoingRouter) -> UIViewController
     func makeInformationViewController() -> UIViewController
+    func makePrivacyPolicyViewController() -> UIViewController
 }
 
 final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
@@ -84,6 +85,17 @@ final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
     
     private func makeInformationViewModel() -> InformationViewModelProtocol {
         let viewModel = AboutViewModel()
+        return viewModel
+    }
+    
+    //MARK: Privacy Policy VC
+    func makePrivacyPolicyViewController() -> UIViewController {
+        let viewController = PrivacyPolicyViewController.create(with: makePrivacyPolicyViewModel())
+        return viewController
+    }
+    
+    private func makePrivacyPolicyViewModel() -> PrivacyPolicyViewModel {
+        let viewModel = PrivacyPolicyViewModel()
         return viewModel
     }
 }

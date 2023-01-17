@@ -43,6 +43,11 @@ final class MainFlowCoordinator: Coordinator {
         navigationController?.present(viewController, animated: true)
     }
     
+    private func showPrivacyPolicy() {
+        let viewController = dependencies.makePrivacyPolicyViewController()
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
     private func showCalendarCoordinator() {
         let viewController = UINavigationController()
         let coordinator = CalendarFlowCoordinator(navigationController: viewController, dependencies: dependencies)

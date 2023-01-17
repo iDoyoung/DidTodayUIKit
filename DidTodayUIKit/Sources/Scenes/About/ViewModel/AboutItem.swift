@@ -9,10 +9,10 @@ import Foundation
 
 struct AboutItem {
     let title: String
-    let route: (() -> Void)?
+    let selecting: (() -> Void)?
     
-    init(title: String, route: (() -> Void)? = nil) {
+    init(title: String, action: (() -> Void)? = nil) {
         self.title = title
-        self.route = route
+        selecting = action
     }
 }

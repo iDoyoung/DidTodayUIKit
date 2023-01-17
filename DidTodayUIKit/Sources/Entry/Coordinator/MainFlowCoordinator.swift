@@ -26,7 +26,7 @@ final class MainFlowCoordinator: Coordinator {
         let router = MainRouter(showCalendar: showCalendarCoordinator,
                                 showCreateDid: showCreateDid,
                                 showDoing: showDoingCoordinator,
-                                showInformation: showInformation)
+                                showInformation: showAboutCoordinator)
         let viewController = dependencies.makeMainViewController(router: router)
         navigationController?.pushViewController(viewController, animated: false)
     }
@@ -36,16 +36,6 @@ final class MainFlowCoordinator: Coordinator {
         viewController.navigationBar.tintColor = .label
         viewController.modalPresentationStyle = .fullScreen
         navigationController?.present(viewController, animated: true)
-    }
-    
-    private func showInformation() {
-        let viewController = UINavigationController(rootViewController: dependencies.makeInformationViewController())
-        navigationController?.present(viewController, animated: true)
-    }
-    
-    private func showPrivacyPolicy() {
-        let viewController = dependencies.makePrivacyPolicyViewController()
-        navigationController?.pushViewController(viewController, animated: true)
     }
     
     private func showCalendarCoordinator() {
@@ -60,6 +50,13 @@ final class MainFlowCoordinator: Coordinator {
         let viewController = UINavigationController()
         let coordinator = DoingFlowCoordinator(navigationController: viewController, dependencies: dependencies)
         viewController.modalPresentationStyle = .fullScreen
+        navigationController?.present(viewController, animated: true)
+        coordinator.start()
+    }
+    
+    private func showAboutCoordinator() {
+        let viewController = UINavigationController()
+        let coordinator = AboutFlowCoordinator(navigationController: viewController, dependencies: dependencies)
         navigationController?.present(viewController, animated: true)
         coordinator.start()
     }

@@ -6,20 +6,27 @@
 //
 
 import Foundation
+import UIKit
 
-protocol InformationViewModelProtocol: InformationViewModelInput, InformationViewModelOuput {   }
+protocol AboutViewModelProtocol: AboutViewModelInput, AboutViewModelOuput {   }
 
-protocol InformationViewModelInput {
+protocol AboutViewModelInput {
 }
 
-protocol InformationViewModelOuput {
+protocol AboutViewModelOuput {
     var about: AboutDid { get }
     var items: [AboutItem] { get }
 }
 
-final class AboutViewModel: InformationViewModelProtocol {
+final class AboutViewModel: AboutViewModelProtocol {
+    
+    private var router: AboutRouter?
     let about = AboutDid()
     let items = [AboutItem(title: CustomText.recommendDid),
                  AboutItem(title: CustomText.writeAReview),
                  AboutItem(title: CustomText.privacyPolicy)]
+    
+    init(router: AboutRouter) {
+        self.router = router
+    }
 }

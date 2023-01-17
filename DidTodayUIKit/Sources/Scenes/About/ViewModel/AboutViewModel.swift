@@ -5,28 +5,60 @@
 //  Created by Doyoung on 2022/12/22.
 //
 
-import Foundation
 import UIKit
 
 protocol AboutViewModelProtocol: AboutViewModelInput, AboutViewModelOuput {   }
 
 protocol AboutViewModelInput {
+    func select(_ index: Int)
 }
 
 protocol AboutViewModelOuput {
     var about: AboutDid { get }
-    var items: [AboutItem] { get }
 }
 
 final class AboutViewModel: AboutViewModelProtocol {
     
+    enum Link: Int, CaseIterable {
+        case recommend
+        case review
+        case privacyPolicy
+        
+        var text: String {
+            switch self {
+            case .recommend:
+                return CustomText.recommendDid
+            case .review:
+                return CustomText.writeAReview
+            case .privacyPolicy:
+                return CustomText.privacyPolicy
+            }
+        }
+    }
+    
     private var router: AboutRouter?
-    let about = AboutDid()
-    let items = [AboutItem(title: CustomText.recommendDid),
-                 AboutItem(title: CustomText.writeAReview),
-                 AboutItem(title: CustomText.privacyPolicy)]
     
     init(router: AboutRouter) {
         self.router = router
+    }
+    
+    //MARK: - Input
+    func select(_ index: Int) {
+        guard let list = Link(rawValue: index) else { return }
+        switch list {
+        case .recommend:
+            showActivityToRecommend()
+        case .review:
+            return
+        case .privacyPolicy:
+            return
+        }
+    }
+    
+    //MARK: - Output
+    let about = AboutDid()
+    
+    private func showActivityToRecommend() {
+        router?.showActivityToRecommend(["https://apps.apple.com/app/id1549357218"])
     }
 }

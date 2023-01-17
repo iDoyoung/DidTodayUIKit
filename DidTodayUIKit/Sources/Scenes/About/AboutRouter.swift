@@ -8,7 +8,7 @@
 import Foundation
 
 struct AboutRouter {
-    let showActivityToRecommend:() -> Void
+    let showActivityToRecommend:([String]) -> Void
     let openAppStoreToReview: () -> Void
     let showPrivacyPolicy: () -> Void
 }

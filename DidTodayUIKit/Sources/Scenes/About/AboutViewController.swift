@@ -58,13 +58,12 @@ extension AboutViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let viewModel = viewModel,
-              let sectionKind = Section(rawValue: section) else { return 0 }
+        guard let sectionKind = Section(rawValue: section) else { return 0 }
         switch sectionKind {
         case .about:
             return 1
         case .link:
-            return viewModel.items.count
+            return AboutViewModel.Link.allCases.count
         }
     }
 
@@ -81,7 +80,7 @@ extension AboutViewController {
         case .link:
             let cell = UITableViewCell()
             var contentConfiguration = cell.defaultContentConfiguration()
-            contentConfiguration.text = viewModel.items[indexPath.row].title
+            contentConfiguration.text = AboutViewModel.Link.init(rawValue: indexPath.row)?.text
             cell.contentConfiguration = contentConfiguration
             cell.backgroundColor = .customBackground
             return cell
@@ -92,6 +91,7 @@ extension AboutViewController {
         guard let sectionKind = Section(rawValue: indexPath.section) else { return }
         if sectionKind == .link {
             tableView.deselectRow(at: indexPath, animated: true)
+            viewModel?.select(indexPath.row)
         }
     }
 }

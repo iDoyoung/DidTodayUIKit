@@ -38,6 +38,8 @@
 		7F43BBD12974D9A70084FB78 /* CustomText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F43BBD02974D9A70084FB78 /* CustomText.swift */; };
 		7F43BBD229751F350084FB78 /* Doing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F43BBD429751F350084FB78 /* Doing.storyboard */; };
 		7F43BBD729751F550084FB78 /* CreateDid.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F43BBD929751F550084FB78 /* CreateDid.storyboard */; };
+		7F43BBDE29753FE80084FB78 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F43BBDD29753FE80084FB78 /* PrivacyPolicyViewController.swift */; };
+		7F43BBE0297671F50084FB78 /* PrivacyPolicyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F43BBDF297671F50084FB78 /* PrivacyPolicyViewModel.swift */; };
 		7F4AA14E292471EE004CE62A /* SortingSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4AA14D292471EE004CE62A /* SortingSupplementaryView.swift */; };
 		7F55E3FF294C08A0007B2706 /* CreateDidAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F55E3FE294C08A0007B2706 /* CreateDidAlert.swift */; };
 		7F583F2D2910EE90006735AA /* HorizonCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 7F583F2C2910EE90006735AA /* HorizonCalendar */; };
@@ -146,6 +148,8 @@
 		7F43BBD629751F3A0084FB78 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Doing.strings; sourceTree = "<group>"; };
 		7F43BBD829751F550084FB78 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/CreateDid.storyboard; sourceTree = "<group>"; };
 		7F43BBDB29751F630084FB78 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/CreateDid.strings; sourceTree = "<group>"; };
+		7F43BBDD29753FE80084FB78 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
+		7F43BBDF297671F50084FB78 /* PrivacyPolicyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewModel.swift; sourceTree = "<group>"; };
 		7F4AA14D292471EE004CE62A /* SortingSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingSupplementaryView.swift; sourceTree = "<group>"; };
 		7F55E3FE294C08A0007B2706 /* CreateDidAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDidAlert.swift; sourceTree = "<group>"; };
 		7F583F312914B73B006735AA /* DidTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidTitleCell.swift; sourceTree = "<group>"; };
@@ -296,6 +300,15 @@
 				7F55E3FE294C08A0007B2706 /* CreateDidAlert.swift */,
 			);
 			path = CreateDid;
+			sourceTree = "<group>";
+		};
+		7F43BBDC29753FCC0084FB78 /* PrivacyPolicy */ = {
+			isa = PBXGroup;
+			children = (
+				7F43BBDD29753FE80084FB78 /* PrivacyPolicyViewController.swift */,
+				7F43BBDF297671F50084FB78 /* PrivacyPolicyViewModel.swift */,
+			);
+			path = PrivacyPolicy;
 			sourceTree = "<group>";
 		};
 		7F4AA14A29235C03004CE62A /* Cells and Supplementary Views */ = {
@@ -464,6 +477,7 @@
 		7FC22B5928C71AEB00F83122 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				7FB6A91F28E079ED009C61C5 /* Custom */,
 				7F850CC32966D1920083522A /* Did List Collection */,
 				7FC22B5A28C71AF500F83122 /* Main */,
 				7FC11596293654400056237A /* Doing */,
@@ -471,7 +485,7 @@
 				7F133C45290364300099E55C /* Calendar */,
 				7F850CB929655C100083522A /* Detail Day */,
 				7FB3345B2953E36700E9FB88 /* About */,
-				7FB6A91F28E079ED009C61C5 /* Custom */,
+				7F43BBDC29753FCC0084FB78 /* PrivacyPolicy */,
 				7F850C602961AEC80083522A /* ParentUIViewController.swift */,
 			);
 			path = Scenes;
@@ -739,6 +753,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F397A7228D83021000F89E2 /* CreateDidViewModel.swift in Sources */,
+				7F43BBE0297671F50084FB78 /* PrivacyPolicyViewModel.swift in Sources */,
 				50A4505A2564CFD500812F14 /* Localize.swift in Sources */,
 				7F133C652907CC5A0099E55C /* SceneDIContainer.swift in Sources */,
 				7FB3345F2953E5FC00E9FB88 /* AboutViewModel.swift in Sources */,
@@ -747,6 +762,7 @@
 				7F0B97BB292C7ACA0071DF98 /* UIView+Border.swift in Sources */,
 				7FB6A8DA28DDC2C4009C61C5 /* Date+GetHoursAndMinutes.swift in Sources */,
 				7FF770B429557ED500A665B5 /* AboutDid.swift in Sources */,
+				7F43BBDE29753FE80084FB78 /* PrivacyPolicyViewController.swift in Sources */,
 				7FF48C2D2922085A00387FE7 /* UIView+Corner Radius.swift in Sources */,
 				7FF770B629569DDA00A665B5 /* AboutItem.swift in Sources */,
 				7F0C251C29419BAE00304A0D /* CircularLabel.swift in Sources */,

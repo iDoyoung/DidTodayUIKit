@@ -34,6 +34,12 @@ final class NeumorphismButton: UIControl {
         configure()
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+            borderColor = .systemBackground
+            effectView.borderColor = .systemBackground
+    }
+    
     private func configure() {
         addSubview(effectView)
         setupBackgroundView()
@@ -46,7 +52,7 @@ final class NeumorphismButton: UIControl {
         borderColor = .systemBackground
         shadowOpacity = 0.5
         shadowRadius = 2
-        shadowColor = .label
+        shadowColor = .black
         shadowOffset = CGSize(width: 0, height: 1)
         cornerRadius = frame.height / 2
         layer.masksToBounds = true

@@ -398,6 +398,7 @@
 		7F850CC32966D1920083522A /* Did List Collection */ = {
 			isa = PBXGroup;
 			children = (
+				7F4AA14A29235C03004CE62A /* Cells and Supplementary Views */,
 				7F850CC12966B6540083522A /* DidListCollectionViewController.swift */,
 				7F135C3F2925FF33005156E0 /* TotalOfDidsViewModel.swift */,
 				7F80EBCA28D4102500781DB4 /* DidItemsViewModel.swift */,
@@ -501,7 +502,6 @@
 			isa = PBXGroup;
 			children = (
 				7F850C5F2961A3490083522A /* ViewModel */,
-				7F4AA14A29235C03004CE62A /* Cells and Supplementary Views */,
 				7FC22BB728CDE19300F83122 /* MainViewController.swift */,
 				7F2C6CBD290A6EB3002963DE /* MainRouter.swift */,
 			);

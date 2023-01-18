@@ -91,6 +91,7 @@
 		7FC22BBA28D0547500F83122 /* DidCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22BB928D0547500F83122 /* DidCell.swift */; };
 		7FC580A328D1A201008086FD /* PieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC580A228D1A201008086FD /* PieView.swift */; };
 		7FD2B04C2909161A0048408F /* StoryboardName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD2B04B2909161A0048408F /* StoryboardName.swift */; };
+		7FDC193A2977A26500117963 /* AboutViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDC19392977A26500117963 /* AboutViewModelTests.swift */; };
 		7FE4C06F294852020048F24E /* UIColor+GetRGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE4C06E294852020048F24E /* UIColor+GetRGB.swift */; };
 		7FEB006029595D120073B90C /* DetailDidSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FEB005F29595D120073B90C /* DetailDidSupplementaryView.swift */; };
 		7FEB0064295C242D0073B90C /* UIView+Animate To Hide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FEB0063295C242D0073B90C /* UIView+Animate To Hide.swift */; };
@@ -202,6 +203,7 @@
 		7FC22BB928D0547500F83122 /* DidCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidCell.swift; sourceTree = "<group>"; };
 		7FC580A228D1A201008086FD /* PieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieView.swift; sourceTree = "<group>"; };
 		7FD2B04B2909161A0048408F /* StoryboardName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardName.swift; sourceTree = "<group>"; };
+		7FDC19392977A26500117963 /* AboutViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewModelTests.swift; sourceTree = "<group>"; };
 		7FE4C06E294852020048F24E /* UIColor+GetRGB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+GetRGB.swift"; sourceTree = "<group>"; };
 		7FEB005F29595D120073B90C /* DetailDidSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDidSupplementaryView.swift; sourceTree = "<group>"; };
 		7FEB0063295C242D0073B90C /* UIView+Animate To Hide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Animate To Hide.swift"; sourceTree = "<group>"; };
@@ -587,6 +589,7 @@
 				7FC22B7E28CB232600F83122 /* Seeds.swift */,
 				7FC1159F293835190056237A /* TimerManagerTests.swift */,
 				7F5ABAAC296FB81F002E509E /* BetaVersionMigrationTests.swift */,
+				7FDC19392977A26500117963 /* AboutViewModelTests.swift */,
 			);
 			path = DidTodayUIKitTests;
 			sourceTree = "<group>";
@@ -841,6 +844,7 @@
 				7FC22B7D28CB145D00F83122 /* DidCoreDataStorageTests.swift in Sources */,
 				7FB6A8CF28DB00E3009C61C5 /* CreateDidViewControllerTests.swift in Sources */,
 				7F5A69932968FC7A00062E2B /* DetaiDaylViewModelTests.swift in Sources */,
+				7FDC193A2977A26500117963 /* AboutViewModelTests.swift in Sources */,
 				7FC22B7F28CB232600F83122 /* Seeds.swift in Sources */,
 				7FC115A5293875510056237A /* DoingViewModelTests.swift in Sources */,
 				7FB6A8CB28DAF529009C61C5 /* CreateDidViewModelTests.swift in Sources */,

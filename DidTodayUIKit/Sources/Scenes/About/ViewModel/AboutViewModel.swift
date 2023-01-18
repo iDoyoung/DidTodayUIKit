@@ -51,7 +51,7 @@ final class AboutViewModel: AboutViewModelProtocol {
         case .review:
             openAppStoreToReview()
         case .privacyPolicy:
-            return
+            showPrivacyPolicy()
         }
     }
     
@@ -64,5 +64,9 @@ final class AboutViewModel: AboutViewModelProtocol {
     
     private func openAppStoreToReview() {
         router?.openAppStoreToReview()
+    }
+    
+    private func showPrivacyPolicy() {
+        router?.showPrivacyPolicy()
     }
 }

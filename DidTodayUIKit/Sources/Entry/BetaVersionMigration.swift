@@ -39,8 +39,8 @@ final class BetaVersionMigration {
     private func migratePrevious(completion: @escaping () -> Void) {
         let dateKeys = defaults.dictionaryRepresentation().keys
             .filter { $0.prefix(2) == "20" }
-        let taskGroup = DispatchGroup()
         
+        let taskGroup = DispatchGroup()
         for key in dateKeys {
             if let dids: [PreviousVersionModel.Did] = legacy.loadLastDate(date: key) {
                 dids.forEach {
@@ -58,21 +58,15 @@ final class BetaVersionMigration {
                                                                                                                        blue: blue,
                                                                                                                        alpha: 1))
                     taskGroup.enter()
-                    coreDataStorage.create(output) { did, error in
+                    coreDataStorage.create(output) { [weak self] did, error in
                         assert(error == nil, "Unexpected Error: Appear error when creation in Core Data")
+                        self?.defaults.removeObject(forKey: key)
                         taskGroup.leave()
                     }
                 }
             }
-            taskGroup.notify(queue: .global()) { [weak self] in
-                self?.defaults.removeObject(forKey: key)
-#if DEBUG
-                print("Done")
-#endif
-            }
         }
-        taskGroup.wait()
-        completion()
+        taskGroup.notify(queue: .global()) { completion() }
     }
     
     ///- Tag: Previous Old Did -> Did Of Core Data
@@ -101,20 +95,14 @@ final class BetaVersionMigration {
                                                                                                                    alpha: 1))
                 
                 taskGroup.enter()
-                coreDataStorage.create(output) { did, error in
+                coreDataStorage.create(output) { [weak self] did, error in
                     assert(error == nil, "Unexpected Error: Appear error when creation in Core Data")
+                    self?.defaults.removeObject(forKey: key)
                     taskGroup.leave()
                 }
             }
-            taskGroup.notify(queue: .global()) { [weak self] in
-                self?.defaults.removeObject(forKey: key)
-#if DEBUG
-                print("Done")
-#endif
-            }
         }
-        taskGroup.wait()
-        completion()
+        taskGroup.notify(queue: .global()) { completion() }
     }
     
     deinit {

@@ -38,7 +38,8 @@ final class DoingViewModel: DoingViewModelProtocol {
         ///Observe Count Time
         count
             .sink { [weak self] time in
-                if time == 60 {
+                //TODO: Set time of minimum condition
+                if time == (60*5) {
                     self?.isLessThanTime.send(false)
                 }
                 self?.timesOfTimer.send(time.toTimeWithHoursMinutes())

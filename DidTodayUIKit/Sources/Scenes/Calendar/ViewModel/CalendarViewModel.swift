@@ -100,4 +100,10 @@ final class CalendarViewModel: CalendarViewModelProtocol {
         let dids = didsSelectedDay.value
         router?.showDetailDay(theSelectedDate, dids)
     }
+    
+    deinit {
+        #if DEBUG
+        print("Deinit Calendar View Model")
+        #endif
+    }
 }

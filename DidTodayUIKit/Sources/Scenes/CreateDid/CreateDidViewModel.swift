@@ -144,4 +144,10 @@ final class CreateDidViewModel: CreateDidViewModelProtocol {
             return Date()
         }
     }
+    
+    deinit {
+        #if DEBUG
+        print("Deinit Create Did View Model")
+        #endif
+    }
 }

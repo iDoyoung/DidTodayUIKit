@@ -69,4 +69,10 @@ final class AboutViewModel: AboutViewModelProtocol {
     private func showPrivacyPolicy() {
         router?.showPrivacyPolicy()
     }
+    
+    deinit {
+        #if DEBUG
+        print("Deinit About View Model")
+        #endif
+    }
 }

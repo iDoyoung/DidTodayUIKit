@@ -87,4 +87,10 @@ final class DoingViewModel: DoingViewModelProtocol {
             router?.showCreateDid(startedDate, endedDate)
         }
     }
+    
+    deinit {
+        #if DEBUG
+        print("Deinit Doing View Model")
+        #endif
+    }
 }

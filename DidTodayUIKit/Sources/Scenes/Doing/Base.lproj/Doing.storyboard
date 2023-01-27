@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -21,9 +21,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rHv-or-Rdn" customClass="BoardLabel" customModule="DidTodayUIKit" customModuleProvider="target">
                                 <rect key="frame" x="30" y="192.33333333333334" width="333" height="0.0"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" id="mRX-B3-4eP"/>
-                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="textColor">
                                         <color key="value" systemColor="systemGrayColor"/>
@@ -148,6 +145,7 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="TqH-Yv-nOY" secondAttribute="trailing" constant="100" id="W4q-ii-ySZ"/>
                             <constraint firstItem="Sgx-bt-Ji8" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="iYX-2G-z2j"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="rHv-or-Rdn" secondAttribute="trailing" constant="30" id="nPD-77-iup"/>
+                            <constraint firstItem="rHv-or-Rdn" firstAttribute="top" relation="greaterThanOrEqual" secondItem="vDu-zF-Fre" secondAttribute="top" id="o62-R9-JXm"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="TqH-Yv-nOY" secondAttribute="bottom" constant="20" id="xof-rg-JXs"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="centerY" secondItem="9Ma-d8-agg" secondAttribute="bottom" id="yZd-X5-oc9"/>
                         </constraints>

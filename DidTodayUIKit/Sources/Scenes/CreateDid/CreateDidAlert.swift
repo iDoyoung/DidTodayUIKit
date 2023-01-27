@@ -29,7 +29,7 @@ extension CreateDidAlert {
     
     func discardToCreateDidAlert() -> UIAlertController {
         let alert = UIAlertController(title: CustomText.discardToCreateDidTitle,
-                                      message: CustomText.discardToCreateDidtMessage,
+                                      message: CustomText.discardToCreateDidMessage,
                                       preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: CustomText.cancel, style: .cancel)
         let disCardAction = UIAlertAction(title: CustomText.discard, style: .default) { _ in

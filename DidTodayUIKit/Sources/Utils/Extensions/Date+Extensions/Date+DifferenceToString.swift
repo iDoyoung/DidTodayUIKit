@@ -8,7 +8,7 @@
 import Foundation
 
 extension Date {
-    static func differeneceToString(from start: Date, to end: Date) -> String {
+    static func differenceToString(from start: Date, to end: Date) -> String {
         let difference = Calendar.current.dateComponents([.hour, .minute], from: start, to: end)
         let hours = difference.hour
         let minutes = difference.minute

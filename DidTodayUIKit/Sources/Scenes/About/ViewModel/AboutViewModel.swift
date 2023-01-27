@@ -7,13 +7,13 @@
 
 import UIKit
 
-protocol AboutViewModelProtocol: AboutViewModelInput, AboutViewModelOuput {   }
+protocol AboutViewModelProtocol: AboutViewModelInput, AboutViewModelOutput {   }
 
 protocol AboutViewModelInput {
     func select(_ index: Int)
 }
 
-protocol AboutViewModelOuput {
+protocol AboutViewModelOutput {
     var about: AboutDid { get }
 }
 

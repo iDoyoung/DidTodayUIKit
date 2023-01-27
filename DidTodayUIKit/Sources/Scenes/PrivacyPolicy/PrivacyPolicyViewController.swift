@@ -41,7 +41,7 @@ final class PrivacyPolicyViewController: ParentUIViewController {
     }
     
     func loadWebContents() {
-        guard let urlRequest = viewModel?.urlReqeust else { return }
+        guard let urlRequest = viewModel?.urlRequest else { return }
         webView.load(urlRequest)
     }
     

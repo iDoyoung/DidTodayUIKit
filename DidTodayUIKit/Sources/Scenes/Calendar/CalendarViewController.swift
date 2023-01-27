@@ -25,7 +25,7 @@ final class CalendarViewController: ParentUIViewController {
     private lazy var calendarView: CalendarView = CalendarView(initialContent: setupCalendarViewContents())
     private var collectionView: UICollectionView!
     
-    private lazy var verticalStactView: UIStackView = {
+    private lazy var verticalStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [calendarView, collectionView, bottomView])
         stackView.axis = .vertical
         stackView.backgroundColor = .separator
@@ -102,19 +102,19 @@ final class CalendarViewController: ParentUIViewController {
     }
     
     private func configureStackView() {
-        view.addSubview(verticalStactView)
+        view.addSubview(verticalStackView)
     }
         
     private func setupLayoutConstraints() {
-        verticalStactView.translatesAutoresizingMaskIntoConstraints = false
+        verticalStackView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         bottomView.translatesAutoresizingMaskIntoConstraints = false
         showDetailButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            verticalStactView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
-            verticalStactView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-            verticalStactView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
-            verticalStactView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+            verticalStackView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
+            verticalStackView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            verticalStackView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
+            verticalStackView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
             collectionView.heightAnchor.constraint(equalToConstant: 100),
             bottomView.heightAnchor.constraint(equalToConstant: 100),
             showDetailButton.leadingAnchor.constraint(greaterThanOrEqualTo: bottomView.leadingAnchor),

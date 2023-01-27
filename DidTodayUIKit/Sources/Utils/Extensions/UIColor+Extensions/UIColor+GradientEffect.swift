@@ -8,11 +8,11 @@
 import UIKit
 
 extension UIColor {
-    static func gradientEffect(colors: [UIColor], frame: CGRect, stratPoint: CGPoint, endPoint: CGPoint) -> UIColor? {
+    static func gradientEffect(colors: [UIColor], frame: CGRect, startPoint: CGPoint, endPoint: CGPoint) -> UIColor? {
         let layer = CAGradientLayer()
         layer.getGradientLayer(colors: colors,
                                frame: frame,
-                               startPoint: stratPoint,
+                               startPoint: startPoint,
                                endPoint: endPoint)
         UIGraphicsBeginImageContext(layer.bounds.size)
         guard let context = UIGraphicsGetCurrentContext() else {

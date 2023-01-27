@@ -85,7 +85,7 @@ final class DoingViewController: ParentUIViewController, StoryboardInstantiable 
     private func setupView() {
         view.backgroundColor = UIColor.gradientEffect(colors: [.customBackground, .secondaryCustomBackground],
                                                       frame: view.bounds,
-                                                      stratPoint: CGPoint(x: 0.5, y: 0),
+                                                      startPoint: CGPoint(x: 0.5, y: 0),
                                                       endPoint: CGPoint(x: 0.5, y: 1.3))
         setupTimerView()
         setupTimerLabel()

@@ -12,7 +12,7 @@ protocol PrivacyPolicyViewModelProtocol: PrivacyPolicyViewModelOutput { }
 protocol PrivacyPolicyViewModelInput { }
 
 protocol PrivacyPolicyViewModelOutput {
-    var urlReqeust: URLRequest? { get }
+    var urlRequest: URLRequest? { get }
 }
 
 final class PrivacyPolicyViewModel: PrivacyPolicyViewModelProtocol {
@@ -27,7 +27,7 @@ final class PrivacyPolicyViewModel: PrivacyPolicyViewModelProtocol {
         return URL(string: output) ?? nil
     }
     
-    var urlReqeust: URLRequest? {
+    var urlRequest: URLRequest? {
         guard let url = privacyPolicyURL else { return nil }
         return URLRequest(url: url)
     }

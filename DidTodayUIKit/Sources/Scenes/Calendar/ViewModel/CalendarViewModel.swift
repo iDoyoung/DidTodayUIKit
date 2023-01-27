@@ -55,7 +55,7 @@ final class CalendarViewModel: CalendarViewModelProtocol {
                 if item.isEmpty {
                     theSelf.descriptionOfSelectedDay.send(CustomText.selectDay)
                 } else {
-                    theSelf.descriptionOfSelectedDay.send(CustomText.seletedItems(count: item.count))
+                    theSelf.descriptionOfSelectedDay.send(CustomText.selectedItems(count: item.count))
                 }
             }
             .store(in: &cancellableBag)

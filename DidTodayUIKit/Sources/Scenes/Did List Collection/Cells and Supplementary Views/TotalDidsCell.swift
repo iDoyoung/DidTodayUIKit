@@ -64,7 +64,7 @@ final class TotalDidsCell: UICollectionViewCell {
         borderColor = .separator
         backgroundColor = UIColor.gradientEffect(colors: [.customBackground, .secondaryCustomBackground],
                                                  frame: bounds,
-                                                 stratPoint: CGPoint(x: 0, y: 0),
+                                                 startPoint: CGPoint(x: 0, y: 0),
                                                  endPoint: CGPoint(x: 1, y: 1))
     }
     

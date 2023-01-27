@@ -46,7 +46,7 @@ enum CustomText {
     ///In Create Did Alert
     static let discardToCreateDidTitle = "Discard your Creation?".localized
     ///In Create Did Alert
-    static let discardToCreateDidtMessage = "You cannot undo.".localized
+    static let discardToCreateDidMessage = "You cannot undo.".localized
     ///In Create Did Alert
     static let errorAlertOfCreateTitle = ""
     ///In Create Did Alert
@@ -63,7 +63,7 @@ enum CustomText {
     ///In Calendar
     static let selectDay = "Select Day".localized
     ///In Calendar
-    static func seletedItems(count: Int) -> String {
+    static func selectedItems(count: Int) -> String {
         return String(format: "Did %d Things".localized, count)
     }
     ///In Calendar

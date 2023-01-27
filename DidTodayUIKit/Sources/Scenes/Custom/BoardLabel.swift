@@ -7,27 +7,10 @@
 
 import UIKit
 
-@IBDesignable final class BoardLabel: UIView {
+@IBDesignable final class BoardLabel: UILabel {
     
     @IBInspectable var texts: [String]?
    
-    @IBInspectable var font: UIFont {
-        get { label.font }
-        set { label.font = newValue }
-    }
-    
-    @IBInspectable var textColor: UIColor {
-        get { label.textColor }
-        set { label.textColor = newValue }
-    }
-    
-    private let label: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        label.numberOfLines = 2
-        return label
-    }()
-    
     private var isAnimated: Bool?
     private var flipAnimationQueue = DispatchQueue(label: "filp-animation-queue", qos: .userInteractive)
     ///start animation
@@ -54,8 +37,8 @@ import UIKit
     
     private func animatToLabelChange(to text: String) {
         DispatchQueue.main.async { [weak self] in
-            self?.label.flipAnimation()
-            self?.label.text = text
+            self?.flipAnimation()
+            self?.text = text
         }
     }
     
@@ -70,19 +53,8 @@ import UIKit
     }
     
     private func configure() {
-        addSubview(label)
-        layer.masksToBounds = true
-        setupConstraintsLayout()
-    }
-    
-    private func setupConstraintsLayout() {
-        label.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: topAnchor),
-            label.leadingAnchor.constraint(equalTo: leadingAnchor),
-            label.bottomAnchor.constraint(equalTo: bottomAnchor),
-            label.trailingAnchor.constraint(equalTo: trailingAnchor)
-        ])
+        textAlignment = .center
+        numberOfLines = 0
     }
 }
 

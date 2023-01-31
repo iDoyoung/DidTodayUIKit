@@ -12,13 +12,12 @@ protocol DoingViewModelProtocol: DoingViewModelInput, DoingViewModelOutput {   }
 
 protocol DoingViewModelInput {
     func startDoing()
-    func stopDoing()
+    func endDoing()
 }
 
 protocol DoingViewModelOutput {
     var startedTime: PassthroughSubject<String, Never> { get }
     var timesOfTimer: CurrentValueSubject<String, Never> { get }
-    var titleIsEmpty: CurrentValueSubject<Bool, Never> { get }
     var isLessThanTime: CurrentValueSubject<Bool, Never> { get }
     
     func showCreateDid()
@@ -26,20 +25,17 @@ protocol DoingViewModelOutput {
 
 final class DoingViewModel: DoingViewModelProtocol {
     
-    private var timerManager: TimerManagerProtocol?
     private var router: DoingRouter?
     private var cancellableBag = Set<AnyCancellable>()
     private var count = CurrentValueSubject<Double, Never>(0)
     
-    init(timerManager: TimerManagerProtocol, router: DoingRouter) {
-        self.timerManager = timerManager
+    init(router: DoingRouter) {
         self.router = router
-        timerManager.configureTimer(handler: countSeconds)
         ///Observe Count Time
         count
             .sink { [weak self] time in
                 //TODO: Set time of minimum condition
-                if time == (60*5) {
+                if self?.isLessThanTime.value == true, time >= (60*5) {
                     self?.isLessThanTime.send(false)
                 }
                 self?.timesOfTimer.send(time.toTimeWithHoursMinutes())
@@ -53,17 +49,27 @@ final class DoingViewModel: DoingViewModelProtocol {
     
     //MARK: Input
     func startDoing() {
-        startedDate = Date()
-        timerManager?.startTimer()
+        if let startedDate = UserDefaults.standard.object(forKey: "start-time-of-doing") as? Date {
+            self.startedDate = startedDate
+            self.count.send(startedDate.distance(to: Date()))
+        } else {
+            startedDate = Date()
+            UserDefaults.standard.set(startedDate, forKey: "start-time-of-doing")
+        }
+        startTimer()
     }
-    
-    func stopDoing() {
-        timerManager?.stopTimer()
-    }
-    
+   
     func endDoing() {
-        timerManager?.stopTimer()
+        UserDefaults.standard.removeObject(forKey: "start-time-of-doing")
         endedDate = Date()
+    }
+    
+    func startTimer() {
+        let timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
+            guard let count = self?.count else { return }
+            count.send(count.value + 1)
+        }
+        timer.fire()
     }
     
     //MARK: Output
@@ -78,7 +84,6 @@ final class DoingViewModel: DoingViewModelProtocol {
     
     var startedTime = PassthroughSubject<String, Never>()
     var timesOfTimer = CurrentValueSubject<String, Never>("00:00")
-    var titleIsEmpty =  CurrentValueSubject<Bool, Never>(true)
     var isLessThanTime = CurrentValueSubject<Bool, Never>(true)
 
     func showCreateDid() {

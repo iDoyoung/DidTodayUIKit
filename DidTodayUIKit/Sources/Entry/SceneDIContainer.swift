@@ -73,7 +73,7 @@ final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
     }
     
     private func makeDoingViewModel(router: DoingRouter) -> DoingViewModelProtocol {
-        let viewModel = DoingViewModel(timerManager: TimerManager(), router: router)
+        let viewModel = DoingViewModel(router: router)
         return viewModel
     }
     

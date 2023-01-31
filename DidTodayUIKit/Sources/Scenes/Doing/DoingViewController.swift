@@ -38,11 +38,12 @@ final class DoingViewController: ParentUIViewController, StoryboardInstantiable 
     }
     
     @IBAction func done(_ sender: UIButton) {
-        guard let viewModel = viewModel else { return }
+        guard let viewModel else { return }
         if viewModel.isLessThanTime.value {
             occurFeedback()
             timerLabel.animateToShake()
         } else {
+            viewModel.endDoing()
             present(doneTimerAlert(), animated: true)
         }
     }
@@ -72,7 +73,6 @@ final class DoingViewController: ParentUIViewController, StoryboardInstantiable 
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        viewModel?.stopDoing()
         informationBoardLabel.stopAnimation()
     }
     
@@ -163,6 +163,7 @@ final class DoingViewController: ParentUIViewController, StoryboardInstantiable 
 extension DoingViewController: TimerAlert {
     
     func cancelTimer() {
+        viewModel?.endDoing()
         dismiss(animated: true)
     }
     

@@ -49,6 +49,14 @@ final class TotalDidsCell: UICollectionViewCell {
         configure()
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        backgroundColor = UIColor.gradientEffect(colors: [.customBackground, .secondaryCustomBackground],
+                                                 frame: bounds,
+                                                 startPoint: CGPoint(x: 0, y: 0),
+                                                 endPoint: CGPoint(x: 1, y: 1))
+    }
+    
     private func configure() {
         setupContentView()
         addSubview(piesView)

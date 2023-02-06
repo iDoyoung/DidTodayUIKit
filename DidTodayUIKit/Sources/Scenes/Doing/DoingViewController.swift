@@ -77,6 +77,11 @@ final class DoingViewController: ParentUIViewController, StoryboardInstantiable 
         informationBoardLabel.stopAnimation()
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        setupBackground()
+    }
+    
     static func create(with viewModel: DoingViewModelProtocol) -> DoingViewController {
         let viewController = DoingViewController.instantiateViewController(storyboardName: "Doing")
         viewController.viewModel = viewModel
@@ -84,10 +89,7 @@ final class DoingViewController: ParentUIViewController, StoryboardInstantiable 
     }
     
     private func setupView() {
-        view.backgroundColor = UIColor.gradientEffect(colors: [.customBackground, .secondaryCustomBackground],
-                                                      frame: view.bounds,
-                                                      startPoint: CGPoint(x: 0.5, y: 0),
-                                                      endPoint: CGPoint(x: 0.5, y: 1.3))
+        setupBackground()
         setupTimerView()
         setupTimerLabel()
         setupInformationLabel()
@@ -106,6 +108,13 @@ final class DoingViewController: ParentUIViewController, StoryboardInstantiable 
     private func setupInformationLabel() {
         informationBoardLabel.texts = [CustomText.firstTipInDoing, CustomText.secondTipInDoing]
         informationBoardLabel.font = .systemFont(ofSize: 18, weight: .bold)
+    }
+    
+    private func setupBackground() {
+        view.backgroundColor = UIColor.gradientEffect(colors: [.customBackground, .secondaryCustomBackground],
+                                                      frame: view.bounds,
+                                                      startPoint: CGPoint(x: 0.5, y: 0),
+                                                      endPoint: CGPoint(x: 0.5, y: 1.3))
     }
     
     private func bindViewModel() {

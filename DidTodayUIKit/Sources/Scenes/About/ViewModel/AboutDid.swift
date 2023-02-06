@@ -12,7 +12,7 @@ struct AboutDid {
     let title: String?
     let version: String?
     
-    init(image: UIImage? = UIImage(named: ""), title: String? = "Did", version: String? = getAppVersion()) {
+    init(image: UIImage? = UIImage(named: "AppIcon"), title: String? = "Did", version: String? = getAppVersion()) {
         self.image = image
         self.title = title
         self.version = version

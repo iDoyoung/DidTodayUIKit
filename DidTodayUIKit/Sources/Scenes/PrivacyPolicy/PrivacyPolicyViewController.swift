@@ -19,6 +19,13 @@ final class PrivacyPolicyViewController: ParentUIViewController {
         return activityIndicator
     }()
     
+    lazy var navigationRightBarButtonItem: UIBarButtonItem = {
+        let imageconfiguration = UIImage.SymbolConfiguration(weight: .bold)
+        let image = UIImage(systemName: "xmark", withConfiguration: imageconfiguration)
+        let barButtonItem = UIBarButtonItem(image: image, style: .done, target: self, action: #selector(closeView))
+        return barButtonItem
+    }()
+    
     //MARK: - Life Cycle
     static func create(with viewModel: PrivacyPolicyViewModelProtocol) -> PrivacyPolicyViewController {
         let viewController = PrivacyPolicyViewController()
@@ -29,7 +36,6 @@ final class PrivacyPolicyViewController: ParentUIViewController {
     override func loadView() {
         let webConfiguration = WKWebViewConfiguration()
         webView = WKWebView(frame: .zero, configuration: webConfiguration)
-        webView = WKWebView()
         webView.navigationDelegate = self
         view = webView
     }
@@ -37,6 +43,7 @@ final class PrivacyPolicyViewController: ParentUIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(activityIndicator)
+        setupNavigationBar()
         loadWebContents()
     }
     
@@ -45,7 +52,13 @@ final class PrivacyPolicyViewController: ParentUIViewController {
         webView.load(urlRequest)
     }
     
-    private func setupLayoutConstraint() {
+    private func setupNavigationBar() {
+        navigationController?.navigationBar.backgroundColor = .systemBackground
+        navigationItem.rightBarButtonItem = navigationRightBarButtonItem
+    }
+    
+    @objc private func closeView() {
+        dismiss(animated: true)
     }
 }
 

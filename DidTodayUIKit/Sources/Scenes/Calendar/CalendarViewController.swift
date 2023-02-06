@@ -303,8 +303,8 @@ extension CalendarViewController {
     private func createDidTitleCellRegistration() -> UICollectionView.CellRegistration<DidTitleCell, DidsOfDayItemViewModel> {
         return UICollectionView.CellRegistration { cell, indexPath, itemIdentifier in
             cell.sizeToFit()
-            cell.borderWidth = 1
-            cell.borderColor = .systemGray
+            cell.borderWidth = 2
+            cell.borderColor = .separator
             cell.titleLabel.text = itemIdentifier.title
             cell.titleLabel.textColor = itemIdentifier.color.isDark() ? .white : .black
             cell.backgroundColor = itemIdentifier.color

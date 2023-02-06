@@ -67,6 +67,7 @@
 		7F9C0B9E293DAA8C0094C2A5 /* TimerAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9C0B9D293DAA8C0094C2A5 /* TimerAlert.swift */; };
 		7F9C0BA0293DC1BA0094C2A5 /* Double+ToStringOfTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9C0B9F293DC1BA0094C2A5 /* Double+ToStringOfTimer.swift */; };
 		7FA60AE928D6FB7A0098F3D2 /* MainViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA60AE828D6FB7A0098F3D2 /* MainViewControllerTests.swift */; };
+		7FAD0FFC2990C4B2009E452E /* UIColor+IsDark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAD0FFB2990C4B2009E452E /* UIColor+IsDark.swift */; };
 		7FB3345D2953E58000E9FB88 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB3345C2953E58000E9FB88 /* AboutViewController.swift */; };
 		7FB3345F2953E5FC00E9FB88 /* AboutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB3345E2953E5FC00E9FB88 /* AboutViewModel.swift */; };
 		7FB6A8CB28DAF529009C61C5 /* CreateDidViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6A8CA28DAF529009C61C5 /* CreateDidViewModelTests.swift */; };
@@ -178,6 +179,7 @@
 		7F9C0B9D293DAA8C0094C2A5 /* TimerAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerAlert.swift; sourceTree = "<group>"; };
 		7F9C0B9F293DC1BA0094C2A5 /* Double+ToStringOfTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+ToStringOfTimer.swift"; sourceTree = "<group>"; };
 		7FA60AE828D6FB7A0098F3D2 /* MainViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerTests.swift; sourceTree = "<group>"; };
+		7FAD0FFB2990C4B2009E452E /* UIColor+IsDark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+IsDark.swift"; sourceTree = "<group>"; };
 		7FB3345C2953E58000E9FB88 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		7FB3345E2953E5FC00E9FB88 /* AboutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewModel.swift; sourceTree = "<group>"; };
 		7FB6A8CA28DAF529009C61C5 /* CreateDidViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDidViewModelTests.swift; sourceTree = "<group>"; };
@@ -609,6 +611,7 @@
 				7F133C5629063BF00099E55C /* UIColor+Custom.swift */,
 				7F71192A290B95FB001DFE99 /* UIColor+GradientEffect.swift */,
 				7FE4C06E294852020048F24E /* UIColor+GetRGB.swift */,
+				7FAD0FFB2990C4B2009E452E /* UIColor+IsDark.swift */,
 			);
 			path = "UIColor+Extensions";
 			sourceTree = "<group>";
@@ -799,6 +802,7 @@
 				7F583F34291A61D2006735AA /* DidsOfDayItemViewModel.swift in Sources */,
 				7F850CB4296509820083522A /* AuthorizationManager.swift in Sources */,
 				7FC22BBA28D0547500F83122 /* DidCell.swift in Sources */,
+				7FAD0FFC2990C4B2009E452E /* UIColor+IsDark.swift in Sources */,
 				504CE042253FDFAA000CC6CF /* AppDelegate.swift in Sources */,
 				7FB6A92528E07BED009C61C5 /* MonthLabel.swift in Sources */,
 				7FB6A92328E07BE4009C61C5 /* DayLabel.swift in Sources */,

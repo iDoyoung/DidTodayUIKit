@@ -11,7 +11,6 @@ final class DidTitleCell: UICollectionViewCell {
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .systemGray
         label.font = .preferredFont(forTextStyle: .callout)
         label.textAlignment = .center
         return label

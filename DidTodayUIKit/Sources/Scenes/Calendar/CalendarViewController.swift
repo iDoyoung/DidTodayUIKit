@@ -306,6 +306,7 @@ extension CalendarViewController {
             cell.borderWidth = 1
             cell.borderColor = .systemGray
             cell.titleLabel.text = itemIdentifier.title
+            cell.titleLabel.textColor = itemIdentifier.color.isDark() ? .white : .black
             cell.backgroundColor = itemIdentifier.color
         }
     }

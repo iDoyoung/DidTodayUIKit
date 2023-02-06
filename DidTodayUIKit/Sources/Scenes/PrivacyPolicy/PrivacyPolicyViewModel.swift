@@ -31,4 +31,10 @@ final class PrivacyPolicyViewModel: PrivacyPolicyViewModelProtocol {
         guard let url = privacyPolicyURL else { return nil }
         return URLRequest(url: url)
     }
+    
+    deinit {
+        #if DEBUG
+        print("Deinit Privacy Policy View Model")
+        #endif
+    }
 }

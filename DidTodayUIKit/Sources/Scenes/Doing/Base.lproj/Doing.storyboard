@@ -165,6 +165,9 @@
             <point key="canvasLocation" x="135.1145038167939" y="3.5211267605633805"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="rHv-or-Rdn"/>
+    </designables>
     <resources>
         <namedColor name="custom.background">
             <color red="0.9882352941176471" green="1" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -80,6 +80,7 @@ final class DoingViewController: ParentUIViewController, StoryboardInstantiable 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         setupBackground()
+        timerShadowEffectView.borderColor = .systemBackground
     }
     
     static func create(with viewModel: DoingViewModelProtocol) -> DoingViewController {

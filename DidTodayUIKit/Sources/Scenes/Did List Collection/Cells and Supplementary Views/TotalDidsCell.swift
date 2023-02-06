@@ -27,6 +27,7 @@ final class TotalDidsCell: UICollectionViewCell {
         label.sizeToFit()
         label.font = .preferredFont(forTextStyle: .title2)
         label.textColor = .customGreen
+        label.numberOfLines = 0
         return label
     }()
     

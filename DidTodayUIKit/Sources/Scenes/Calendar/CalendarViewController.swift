@@ -123,16 +123,6 @@ final class CalendarViewController: ParentUIViewController {
             showDetailButton.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor, constant: -20)
         ])
     }
-    
-       private func bindViewModel() {
-           viewModel?.itemsOfDidSelectedDay
-               .receive(on: DispatchQueue.main)
-               .sink { [weak self] items in
-                   guard let collectionView = self?.collectionView else { return }
-                   items.isEmpty ? collectionView.hideWithAnimation() : collectionView.showWithAnimation()
-               }
-               .store(in: &cancellableBag)
-    }
 }
 
 extension CalendarViewController {
@@ -237,10 +227,10 @@ extension CalendarViewController {
     }
     
     private func createCollectionViewLayout() -> UICollectionViewLayout {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(10),
+        let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(32),
                                               heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(0),
+        let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(32),
                                                heightDimension: .absolute(34))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
                                                        subitems: [item])
@@ -302,7 +292,6 @@ extension CalendarViewController {
     
     private func createDidTitleCellRegistration() -> UICollectionView.CellRegistration<DidTitleCell, DidsOfDayItemViewModel> {
         return UICollectionView.CellRegistration { cell, indexPath, itemIdentifier in
-            cell.sizeToFit()
             cell.borderWidth = 2
             cell.borderColor = .separator
             cell.titleLabel.text = itemIdentifier.title

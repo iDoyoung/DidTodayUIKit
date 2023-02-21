@@ -18,7 +18,7 @@ final class DidTitleCell: UICollectionViewCell {
     
     private func configure() {
         cornerRadius = 15
-        addSubview(titleLabel)
+        contentView.addSubview(titleLabel)
         setupLayoutConstraint()
     }
  
@@ -35,10 +35,10 @@ final class DidTitleCell: UICollectionViewCell {
     private func setupLayoutConstraint() {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: topAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
 }

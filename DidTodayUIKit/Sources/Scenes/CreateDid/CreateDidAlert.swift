@@ -16,7 +16,7 @@ extension CreateDidAlert {
     
     func completeToCreateDidAlert() -> UIAlertController {
         let alert = UIAlertController(title: CustomText.completeToCreateTitle,
-                                      message: CustomText.completeToCreateMessage,
+                                      message: nil,
                                       preferredStyle: .actionSheet)
         let cancelAction = UIAlertAction(title: CustomText.cancel, style: .cancel)
         let completeAction = UIAlertAction(title: CustomText.create, style: .default) { _ in

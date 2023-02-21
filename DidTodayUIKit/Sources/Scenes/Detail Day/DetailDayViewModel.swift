@@ -27,7 +27,9 @@ final class DetailDayViewModel: DetailDayViewModelProtocol {
     
     init(selected: Date, dids: [Did]) {
         let totalItems = TotalOfDidsItemViewModel(dids)
-        let didItems = dids.map { DidItemViewModel($0) }
+        let didItems = dids
+            .sorted { $0.started > $1.started }
+            .map { DidItemViewModel($0) }
         totalPieDids.send(totalItems)
         didItemsList.send(didItems)
         selectedDay.send(selected.toString())

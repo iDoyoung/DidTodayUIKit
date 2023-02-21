@@ -79,7 +79,6 @@
 		7FB6A8DA28DDC2C4009C61C5 /* Date+GetHoursAndMinutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6A8D928DDC2C4009C61C5 /* Date+GetHoursAndMinutes.swift */; };
 		7FB6A92328E07BE4009C61C5 /* DayLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6A92228E07BE4009C61C5 /* DayLabel.swift */; };
 		7FB6A92528E07BED009C61C5 /* MonthLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6A92428E07BED009C61C5 /* MonthLabel.swift */; };
-		7FC115A0293835190056237A /* TimerManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC1159F293835190056237A /* TimerManagerTests.swift */; };
 		7FC115A229386B930056237A /* DoingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC115A129386B930056237A /* DoingViewModel.swift */; };
 		7FC115A5293875510056237A /* DoingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC115A4293875510056237A /* DoingViewModelTests.swift */; };
 		7FC115A72939EAF50056237A /* DoingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC115A62939EAF50056237A /* DoingViewController.swift */; };
@@ -191,7 +190,6 @@
 		7FB6A8D928DDC2C4009C61C5 /* Date+GetHoursAndMinutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+GetHoursAndMinutes.swift"; sourceTree = "<group>"; };
 		7FB6A92228E07BE4009C61C5 /* DayLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayLabel.swift; sourceTree = "<group>"; };
 		7FB6A92428E07BED009C61C5 /* MonthLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthLabel.swift; sourceTree = "<group>"; };
-		7FC1159F293835190056237A /* TimerManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManagerTests.swift; sourceTree = "<group>"; };
 		7FC115A129386B930056237A /* DoingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoingViewModel.swift; sourceTree = "<group>"; };
 		7FC115A4293875510056237A /* DoingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoingViewModelTests.swift; sourceTree = "<group>"; };
 		7FC115A62939EAF50056237A /* DoingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoingViewController.swift; sourceTree = "<group>"; };
@@ -589,7 +587,6 @@
 				7FC115A3293875370056237A /* Doing */,
 				7FC22B6E28CB137E00F83122 /* DidCoreDataStorageTests.swift */,
 				7FC22B7E28CB232600F83122 /* Seeds.swift */,
-				7FC1159F293835190056237A /* TimerManagerTests.swift */,
 				7F5ABAAC296FB81F002E509E /* BetaVersionMigrationTests.swift */,
 				7FDC19392977A26500117963 /* AboutViewModelTests.swift */,
 			);
@@ -854,7 +851,6 @@
 				7FB6A8CB28DAF529009C61C5 /* CreateDidViewModelTests.swift in Sources */,
 				7F5ABAAD296FB81F002E509E /* BetaVersionMigrationTests.swift in Sources */,
 				7FA60AE928D6FB7A0098F3D2 /* MainViewControllerTests.swift in Sources */,
-				7FC115A0293835190056237A /* TimerManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

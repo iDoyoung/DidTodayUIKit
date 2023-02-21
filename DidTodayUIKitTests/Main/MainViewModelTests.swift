@@ -19,9 +19,10 @@ class MainViewModelTests: XCTestCase {
         try super.setUpWithError()
         didsCoreDataStorageSpy = DidsCoreDataStorageSpy()
         coordinatorSpy = CoordinatorSpy()
-        let router = MainRouter(showCalendar: coordinatorSpy.showCalendar(dids:),
+        let router = MainRouter(showCalendar: coordinatorSpy.showCalendar,
                                 showCreateDid: coordinatorSpy.showCreateDid(started:ended:),
-                                showDoing: coordinatorSpy.showDoing, showInformation: coordinatorSpy.showInformation)
+                                showDoing: coordinatorSpy.showDoing,
+                                showInformation: coordinatorSpy.showInformation)
         sut = MainViewModel(didCoreDataStorage: didsCoreDataStorageSpy, router: router)
         when_fetchDids_shouldCallDidsCoreDataStorageAndGetOutputDidItemsListAndTotalPieDids()
     }
@@ -41,7 +42,7 @@ class MainViewModelTests: XCTestCase {
         var showDoingCalled = false
         var showInformationCalled = false
         
-        func showCalendar(dids: [Did]) {
+        func showCalendar() {
             showCalendarCalled = true
         }
         

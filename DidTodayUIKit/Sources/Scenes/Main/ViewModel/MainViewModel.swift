@@ -29,10 +29,21 @@ protocol MainViewModelOutput {
 
 final class MainViewModel: MainViewModelProtocol {
     
+    //MARK: - Properties
+    
+    //MARK: Components
     private var didCoreDataStorage: DidCoreDataStorable?
     private var router: MainRouter?
     private var cancellableBag = Set<AnyCancellable>()
     
+    //MARK: - Output, data store
+    private var fetchedDids = CurrentValueSubject<[Did], Never>([])
+    var isSelectedRecentlyButton = CurrentValueSubject<Bool, Never>(true)
+    var isSelectedMuchTimeButton = CurrentValueSubject<Bool, Never>(false)
+    var totalPieDids = CurrentValueSubject<TotalOfDidsItemViewModel, Never>(TotalOfDidsItemViewModel([]))
+    var didItemsList = CurrentValueSubject<[DidItemViewModel], Never>([])
+    
+    //MARK: - Method
     init(didCoreDataStorage: DidCoreDataStorable, router: MainRouter) {
         self.didCoreDataStorage = didCoreDataStorage
         self.router = router
@@ -74,6 +85,7 @@ final class MainViewModel: MainViewModelProtocol {
         }
     }
     
+    //MARK: View event methods
     func selectRecently() {
         if !isSelectedRecentlyButton.value {
             isSelectedRecentlyButton.value = true
@@ -89,7 +101,7 @@ final class MainViewModel: MainViewModelProtocol {
             sortByMuchTime()
         }
     }
-    
+
     private func sortByRecently() {
         didItemsList.value.sort { $0.startedTimes > $1.startedTimes }
     }
@@ -98,13 +110,7 @@ final class MainViewModel: MainViewModelProtocol {
         didItemsList.value.sort { ($0.finishedTimes - $0.startedTimes) > ($1.finishedTimes - $1.startedTimes) }
     }
     
-    //MARK: - Output
-    private var fetchedDids = CurrentValueSubject<[Did], Never>([])
-    var isSelectedRecentlyButton = CurrentValueSubject<Bool, Never>(true)
-    var isSelectedMuchTimeButton = CurrentValueSubject<Bool, Never>(false)
-    var totalPieDids = CurrentValueSubject<TotalOfDidsItemViewModel, Never>(TotalOfDidsItemViewModel([]))
-    var didItemsList = CurrentValueSubject<[DidItemViewModel], Never>([])
-    
+    //MARK: - Output, Flow method
     func showCreateDid() {
         if didItemsList.value.isEmpty {
             router?.showCreateDid(nil, nil)

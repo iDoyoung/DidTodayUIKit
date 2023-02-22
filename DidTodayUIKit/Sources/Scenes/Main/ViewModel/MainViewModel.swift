@@ -15,6 +15,9 @@ protocol MainViewModelInput {
     func selectRecently()
     func selectMuchTime()
     func showAbout()
+    func showDoing()
+    func showCreateDid()
+    func showCalendar()
 }
 
 protocol MainViewModelOutput {
@@ -22,10 +25,6 @@ protocol MainViewModelOutput {
     var didItemsList: CurrentValueSubject<[DidItemViewModel], Never> { get }
     var isSelectedRecentlyButton: CurrentValueSubject<Bool, Never> { get }
     var isSelectedMuchTimeButton: CurrentValueSubject<Bool, Never> { get }
-    
-    func showDoing()
-    func showCreateDid()
-    func showCalendar()
 }
 
 final class MainViewModel: MainViewModelProtocol {

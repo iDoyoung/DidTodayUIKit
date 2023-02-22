@@ -19,6 +19,7 @@ protocol AboutViewModelOutput {
 
 final class AboutViewModel: AboutViewModelProtocol {
     
+    ///Link to move new page
     enum Link: Int, CaseIterable {
         case recommend
         case review
@@ -36,13 +37,19 @@ final class AboutViewModel: AboutViewModelProtocol {
         }
     }
     
+    //MARK: - Properties
+    
+    //MARK: - Output
+    let about = AboutDid()
+    
     private var router: AboutRouter?
     
+    //MARK: - Methods
     init(router: AboutRouter) {
         self.router = router
     }
     
-    //MARK: - Input
+    //MARK: Input
     func select(_ index: Int) {
         guard let list = Link(rawValue: index) else { return }
         switch list {
@@ -54,9 +61,6 @@ final class AboutViewModel: AboutViewModelProtocol {
             showPrivacyPolicy()
         }
     }
-    
-    //MARK: - Output
-    let about = AboutDid()
     
     private func showActivityToRecommend() {
         router?.showActivityToRecommend(["https://apps.apple.com/app/id1549357218"])

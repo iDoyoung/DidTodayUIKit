@@ -10,11 +10,13 @@ import Combine
 
 final class CreateDidViewController: ParentUIViewController, StoryboardInstantiable {
     
+    //MARK: - Properties
     var viewModel: (CreateDidViewModelInput & CreateDidViewModelOutput)?
     private var cancellableBag = Set<AnyCancellable>()
     
     private var feedbackGenerator: UIFeedbackGenerator?
     
+    //Interface Builder
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var pieView: PieView!
     @IBOutlet weak var titleTextField: UITextField!
@@ -22,6 +24,9 @@ final class CreateDidViewController: ParentUIViewController, StoryboardInstantia
     @IBOutlet weak var endedTimePicker: UIDatePicker!
     @IBOutlet weak var addButton: UIButton!
     
+    //MARK: - Methods
+    
+    //MARK: Interface Builder
     @IBAction func showColorPicker(_ sender: UIButton) {
         let colorPickerViewController = UIColorPickerViewController()
         colorPickerViewController.supportsAlpha = false
@@ -68,7 +73,7 @@ final class CreateDidViewController: ParentUIViewController, StoryboardInstantia
         feedbackGenerator = nil
     }
    
-    //MARK: - Life cycle
+    //MARK: Life cycle
     static func create(with viewModel: CreateDidViewModelProtocol) -> CreateDidViewController {
         let viewController = CreateDidViewController.instantiateViewController(storyboardName: StoryboardName.createDid)
         viewController.viewModel = viewModel
@@ -82,7 +87,7 @@ final class CreateDidViewController: ParentUIViewController, StoryboardInstantia
         bindViewModel()
     }
     
-    //MARK: - Setup
+    //MARK: Setup
     private func setupUIObjects() {
         titleTextField.delegate = self
         setupNavigationBar()
@@ -178,6 +183,7 @@ final class CreateDidViewController: ParentUIViewController, StoryboardInstantia
     }
 }
 
+//MARK: - Scroll View
 extension UIScrollView {
     func scrollToBottom() {
         let bottomOffset = CGPoint(x: 0, y: contentSize.height - bounds.size.height + contentInset.bottom)
@@ -187,12 +193,14 @@ extension UIScrollView {
     }
 }
 
+//MARK: - Color Picker
 extension CreateDidViewController: UIColorPickerViewControllerDelegate {
     func colorPickerViewController(_ viewController: UIColorPickerViewController, didSelect color: UIColor, continuously: Bool) {
         viewModel?.setColorOfPie(color)
     }
 }
 
+//MARK: - Text Field
 extension CreateDidViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         scrollView.scrollsToTop = true
@@ -213,6 +221,7 @@ extension CreateDidViewController: UITextFieldDelegate {
     }
 }
 
+//MARK: - Alert
 extension CreateDidViewController: CreateDidAlert {
     
     func completeToCreateDid() {

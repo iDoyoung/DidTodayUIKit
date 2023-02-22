@@ -27,10 +27,21 @@ protocol CalendarViewModelOutput {
 
 final class CalendarViewModel: CalendarViewModelProtocol {
     
+    //MARK: - Properties
     private var didCoreDataStorage: DidCoreDataStorable?
     private var router: CalendarRouter?
     private var cancellableBag = Set<AnyCancellable>()
     
+    //MARK: Output
+    var fetchedDids = CurrentValueSubject<[Did], Never>([])
+    var dateOfDids = CurrentValueSubject<[Date], Never>([])
+    var startedDate: Date?
+    var itemsOfDidSelectedDay = CurrentValueSubject<[DidsOfDayItemViewModel], Never>([])
+    var descriptionOfSelectedDay = CurrentValueSubject<String?, Never>(CustomText.selectDay)
+    
+    private var didsSelectedDay = CurrentValueSubject<[Did], Never>([])
+        
+    //MARK: - Methods
     init(didCoreDataStorage: DidCoreDataStorable, router: CalendarRouter) {
         self.didCoreDataStorage = didCoreDataStorage
         self.router = router
@@ -45,17 +56,16 @@ final class CalendarViewModel: CalendarViewModelProtocol {
         
         $selectedDay
             .sink { [weak self] day in
-                guard let theDay = day ,
-                      let theSelf = self else { return }
-                
-                let item = theSelf.fetchedDids.value
-                    .filter { $0.started.omittedTime() == Calendar.current.date(from: theDay)?.omittedTime() }
-                theSelf.didsSelectedDay.send(item)
+                guard let day,
+                      let self else { return }
+                let item = self.fetchedDids.value
+                    .filter { $0.started.omittedTime() == Calendar.current.date(from: day)?.omittedTime() }
+                self.didsSelectedDay.send(item)
                 /// - Tag: Setting Description Label
                 if item.isEmpty {
-                    theSelf.descriptionOfSelectedDay.send(CustomText.selectDay)
+                    self.descriptionOfSelectedDay.send(CustomText.selectDay)
                 } else {
-                    theSelf.descriptionOfSelectedDay.send(CustomText.selectedItems(count: item.count))
+                    self.descriptionOfSelectedDay.send(CustomText.selectedItems(count: item.count))
                 }
             }
             .store(in: &cancellableBag)
@@ -86,13 +96,6 @@ final class CalendarViewModel: CalendarViewModelProtocol {
         }
     }
     
-    //MARK: - Output
-    var fetchedDids = CurrentValueSubject<[Did], Never>([])
-    var dateOfDids = CurrentValueSubject<[Date], Never>([])
-    var startedDate: Date?
-    var descriptionOfSelectedDay = CurrentValueSubject<String?, Never>(CustomText.selectDay)
-    private var didsSelectedDay = CurrentValueSubject<[Did], Never>([])
-    var itemsOfDidSelectedDay = CurrentValueSubject<[DidsOfDayItemViewModel], Never>([])
     
     func showDetail() {
         guard let theSelectedDay = selectedDay,

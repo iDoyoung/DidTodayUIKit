@@ -25,6 +25,17 @@ protocol DetailDayViewModelOutput {
 
 final class DetailDayViewModel: DetailDayViewModelProtocol {
     
+    //MARK: - Properties
+    
+    //MARK: Output
+    var selectedDay = CurrentValueSubject<String?, Never>(nil)
+    var totalPieDids = CurrentValueSubject<TotalOfDidsItemViewModel, Never>(TotalOfDidsItemViewModel([]))
+    var didItemsList = CurrentValueSubject<[DidItemViewModel], Never>([])
+    var isSelectedRecentlyButton = CurrentValueSubject<Bool, Never>(true)
+    var isSelectedMuchTimeButton = CurrentValueSubject<Bool, Never>(false)
+    
+    //MARK: - Methods
+    
     init(selected: Date, dids: [Did]) {
         let totalItems = TotalOfDidsItemViewModel(dids)
         let didItems = dids
@@ -35,7 +46,7 @@ final class DetailDayViewModel: DetailDayViewModelProtocol {
         selectedDay.send(selected.toString())
     }
     
-    //MARK: - Input
+    //MARK: Input
     func selectRecently() {
         if !isSelectedRecentlyButton.value {
             isSelectedRecentlyButton.send(true)
@@ -52,6 +63,7 @@ final class DetailDayViewModel: DetailDayViewModelProtocol {
         }
     }
     
+    //MARK: Private
     private func sortByRecently() {
         didItemsList.value.sort { $0.startedTimes > $1.startedTimes }
     }
@@ -59,11 +71,4 @@ final class DetailDayViewModel: DetailDayViewModelProtocol {
     private func sortByMuchTime() {
         didItemsList.value.sort { ($0.finishedTimes - $0.startedTimes) > ($1.finishedTimes - $1.startedTimes) }
     }
-    
-    //MARK: - Output
-    var selectedDay = CurrentValueSubject<String?, Never>(nil)
-    var totalPieDids = CurrentValueSubject<TotalOfDidsItemViewModel, Never>(TotalOfDidsItemViewModel([]))
-    var didItemsList = CurrentValueSubject<[DidItemViewModel], Never>([])
-    var isSelectedRecentlyButton = CurrentValueSubject<Bool, Never>(true)
-    var isSelectedMuchTimeButton = CurrentValueSubject<Bool, Never>(false)
 }

@@ -16,6 +16,7 @@ enum CreateDidError: Error {
 protocol CreateDidViewModelProtocol: CreateDidViewModelInput, CreateDidViewModelOutput {    }
 
 protocol CreateDidViewModelInput {
+    //MARK: - Input(Property vs Method)
     var startedTime: CurrentValueSubject<Date?, Never> { get }
     var endedTime: CurrentValueSubject<Date?, Never> { get }
     
@@ -42,8 +43,28 @@ protocol CreateDidViewModelOutput {
 
 final class CreateDidViewModel: CreateDidViewModelProtocol {
     
+    //MARK: - Properties
+    
+    //MARK: Components
     var didCoreDataStorage: DidCoreDataStorable?
     private var cancellableBag = Set<AnyCancellable>()
+    
+    //MARK: - Input
+    var startedTime = CurrentValueSubject<Date?, Never>(nil)
+    var endedTime = CurrentValueSubject<Date?, Never>(Date())
+    
+    //MARK: - Output
+    var title = CurrentValueSubject<String, Never>(CustomText.createDid)
+    var titleOfDid = CurrentValueSubject<String?, Never>(nil)
+    var titleIsEmpty = CurrentValueSubject<Bool, Never>(true)
+    var degreeOfStartedTime = CurrentValueSubject<Double?, Never>(nil)
+    var degreeOfEndedTime = CurrentValueSubject<Double?, Never>(nil)
+    var colorOfPie = CurrentValueSubject<UIColor, Never>(.customGreen)
+    var isCompleted = CurrentValueSubject<Bool, Never>(false)
+    var error = CurrentValueSubject<CoreDataStoreError?, Never>(nil)
+    var timePickerEnable = CurrentValueSubject<Bool, Never>(true)
+    
+    //MARK: - Methods
     
     init(didCoreDataStorage: DidCoreDataStorable, startedDate: Date?, endedDate: Date?, fromDoing: Bool) {
         self.didCoreDataStorage = didCoreDataStorage
@@ -69,10 +90,7 @@ final class CreateDidViewModel: CreateDidViewModelProtocol {
         if fromDoing { setupFromDoing() }
     }
     
-    //MARK: - Input(Property vs Method)
-    var startedTime = CurrentValueSubject<Date?, Never>(nil)
-    var endedTime = CurrentValueSubject<Date?, Never>(Date())
-
+    //MARK: - Input
     func setupFromDoing() {
         timePickerEnable.send(false)
         title.send(CustomText.finishingTouches)
@@ -118,16 +136,6 @@ final class CreateDidViewModel: CreateDidViewModelProtocol {
     }
     
     //MARK: - Output
-    var title = CurrentValueSubject<String, Never>(CustomText.createDid)
-    var titleOfDid = CurrentValueSubject<String?, Never>(nil)
-    var titleIsEmpty = CurrentValueSubject<Bool, Never>(true)
-    var degreeOfStartedTime = CurrentValueSubject<Double?, Never>(nil)
-    var degreeOfEndedTime = CurrentValueSubject<Double?, Never>(nil)
-    var colorOfPie = CurrentValueSubject<UIColor, Never>(.customGreen)
-    var isCompleted = CurrentValueSubject<Bool, Never>(false)
-    var error = CurrentValueSubject<CoreDataStoreError?, Never>(nil)
-    var timePickerEnable = CurrentValueSubject<Bool, Never>(true)
-    
     func initialStartedTime() -> Date {
         let startOfDay = Calendar.current.startOfDay(for: Date())
         if let startedTime = startedTime.value {

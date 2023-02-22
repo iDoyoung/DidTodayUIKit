@@ -11,17 +11,21 @@ import HorizonCalendar
 
 final class CalendarViewController: ParentUIViewController {
     
-    static let sectionHeaderElementKind = "layout-header-element-kind"
-    
+    ///Section of lise of dids collection view
     private enum Section: Int, CaseIterable {
         case didsOfSelected
     }
+    //MARK: - Properties
     
+    //MARK: Static
+    static let sectionHeaderElementKind = "layout-header-element-kind"
+    
+    //MARK: Components
     var viewModel: CalendarViewModelProtocol?
     private var cancellableBag = Set<AnyCancellable>()
     private var dataSource: UICollectionViewDiffableDataSource<Section, DidsOfDayItemViewModel>?
     
-    //MARK: - UI Objects
+    //MARK: UI Properties
     private lazy var calendarView: CalendarView = CalendarView(initialContent: setupCalendarViewContents())
     private var collectionView: UICollectionView!
     
@@ -53,7 +57,8 @@ final class CalendarViewController: ParentUIViewController {
         return button
     }()
     
-    //MARK: - Life Cycle
+    //MARK: - Methods
+    //MARK: Life Cycle
     static func create(with viewModel: CalendarViewModelProtocol) -> CalendarViewController {
         let viewController = CalendarViewController()
         viewController.viewModel = viewModel
@@ -75,7 +80,7 @@ final class CalendarViewController: ParentUIViewController {
         configure()
     }
     
-    //MARK: - Configure UI
+    //MARK: Configure & Setup
     private func configure() {
         setupView()
         setupNavigationBar()
@@ -125,6 +130,7 @@ final class CalendarViewController: ParentUIViewController {
     }
 }
 
+//MARK: Actions
 extension CalendarViewController {
     
     @objc private func close() {
@@ -216,9 +222,9 @@ extension CalendarViewController {
     }
 }
 
-//MARK: - Configure Collection View
+//MARK: - Collection View
 extension CalendarViewController {
-    
+     
     private func configureCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createCollectionViewLayout())
         collectionView.backgroundColor = .systemBackground
@@ -276,7 +282,7 @@ extension CalendarViewController {
             .store(in: &cancellableBag)
     }
     
-    //MARK: - Create Registration
+    //MARK: Create Registration
     private func createDidsOfSelectedSupplementaryRegistration() -> UICollectionView.SupplementaryRegistration<DetailDidSupplementaryView> {
         UICollectionView.SupplementaryRegistration(elementKind: CalendarViewController.sectionHeaderElementKind) { [weak self] supplementaryView, elementKind, indexPath in
             guard let self = self,

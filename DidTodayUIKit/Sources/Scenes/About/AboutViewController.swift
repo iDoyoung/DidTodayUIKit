@@ -9,6 +9,7 @@ import UIKit
 
 final class AboutViewController: ParentUITableViewController {
     
+    ///Section of About collection view
     private enum Section: Int, CaseIterable {
         case about, link
     }

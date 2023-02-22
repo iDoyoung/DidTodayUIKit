@@ -10,10 +10,14 @@ import Combine
 
 final class DetailDayViewController: DidListCollectionViewController {
 
+    
+    //MARK: - Properties
+    //MARK: Components
     var viewModel: DetailDayViewModelProtocol?
     private var cancellableBag = Set<AnyCancellable>()
     
-    //MARK: - Life Cycle
+    //MARK: - Methods
+    //MARK: Life cycle
     static func create(with viewModel: DetailDayViewModelProtocol) -> DetailDayViewController {
         let viewController = DetailDayViewController()
         viewController.viewModel = viewModel
@@ -25,6 +29,7 @@ final class DetailDayViewController: DidListCollectionViewController {
         configure()
     }
     
+    //MARK: Configure & Setup
     private func configure() {
         configureCollectionView()
         configureDataSource()
@@ -44,7 +49,6 @@ final class DetailDayViewController: DidListCollectionViewController {
         .store(in: &cancellableBag)
     }
     
-    //MARK: - Binding
     private func bindViewModel() {
         viewModel?.totalPieDids
             .receive(on: DispatchQueue.main)
@@ -73,6 +77,7 @@ final class DetailDayViewController: DidListCollectionViewController {
             .store(in: &self.cancellableBag)
     }
     
+    //MARK: Actions
     @objc override func tapRecentlyButton(_ sender: UIButton) {
         super.tapRecentlyButton(sender)
         viewModel?.selectRecently()

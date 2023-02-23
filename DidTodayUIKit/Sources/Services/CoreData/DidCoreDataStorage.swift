@@ -15,6 +15,7 @@ enum CoreDataStoreError: Error {
 
 protocol DidCoreDataStorable {
     func create(_ did: Did, completion: @escaping (Did, CoreDataStoreError?) -> Void)
+    @discardableResult func create(_ did: Did) async throws -> Did
     func fetchDids() async throws -> [Did]
     func update(_ did: Did, completion: @escaping (Did, CoreDataStoreError?) -> Void)
     func delete(_ did: Did, completion: @escaping (Did, CoreDataStoreError?) -> Void)
@@ -42,6 +43,23 @@ final class DidCoreDataStorage: DidCoreDataStorable {
                     completion(did, nil)
                 } catch let error {
                     completion(did, CoreDataStoreError.saveError(error))
+                }
+            }
+        }
+    }
+    
+    func create(_ did: Did) async throws -> Did {
+        return try await withCheckedThrowingContinuation { continuation in
+            persistentContainer.performBackgroundTask { context in
+                let managedDid = ManagedDidItem(context: context)
+                managedDid.fromDidItem(did)
+                if context.hasChanges {
+                    do {
+                        try context.save()
+                        continuation.resume(returning: did)
+                    } catch let error {
+                        continuation.resume(throwing: CoreDataStoreError.saveError(error))
+                    }
                 }
             }
         }
@@ -83,6 +101,7 @@ final class DidCoreDataStorage: DidCoreDataStorable {
             }
         }
     }
+    
     func delete(_ did: Did, completion: @escaping (Did, CoreDataStoreError?) -> Void) {
         persistentContainer.performBackgroundTask { context in
             do {

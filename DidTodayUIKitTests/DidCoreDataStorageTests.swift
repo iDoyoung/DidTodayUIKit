@@ -18,8 +18,8 @@ class DidCoreDataStorageTests: XCTestCase {
         try super.setUpWithError()
         deleteAllDids()
         sut = DidCoreDataStorage()
-        fetchMockDids()
     }
+    
     override func tearDownWithError() throws {
         sut = nil
         try super.tearDownWithError()
@@ -39,36 +39,11 @@ class DidCoreDataStorageTests: XCTestCase {
         }
         XCTAssertNil(fetchedMockDids)
     }
-    func fetchMockDids() {
-        let promise = expectation(description: "Should Fetch did mocks")
-        sut.fetchDids { [weak self] dids, error in
-            if error == nil {
-                self?.fetchedMockDids = dids
-                promise.fulfill()
-            } else {
-                XCTFail("Error: \(String(describing: error))")
-            }
-        }
-        wait(for: [promise], timeout: 1)
-    }
-    
+   
     //MARK: - Tests
-    func test_create_shouldCotainAddedMock_whenFetched() {
-        //given
+    func test_create_shouldEqualMockWithCreation() async throws {
         let mock = Seeds.Dids.newYearParty
-        let promise = expectation(description: "")
-        sut.create(mock) { did, error in
-            if error == nil {
-                promise.fulfill()
-            } else {
-                XCTFail("Error: \(String(describing: error))")
-            }
-        }
-        wait(for: [promise], timeout: 1)
-        //when
-        fetchMockDids()
-        //then
-        guard let fetchedMockDids = fetchedMockDids else { return }
-        XCTAssert(fetchedMockDids.contains(mock))
+        let creation = try await sut.create(mock)
+        XCTAssertEqual(mock, creation)
     }
 }

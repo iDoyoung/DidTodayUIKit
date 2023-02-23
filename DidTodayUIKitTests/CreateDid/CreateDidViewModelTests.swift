@@ -30,6 +30,7 @@ class CreateDidViewModelTests: XCTestCase {
     }
     
     final class DidCoreDataStorageSpy: DidCoreDataStorable {
+       
         var error: CoreDataStoreError?
         
         var createDidCalled = false
@@ -37,11 +38,16 @@ class CreateDidViewModelTests: XCTestCase {
         var updateDidCalled = false
         var deleteDidCalled = false
         
-        func create(_ did: Did, completion: @escaping (Did, CoreDataStoreError?) -> Void) {
+        func create(_ did: DidTodayUIKit.Did) async throws -> DidTodayUIKit.Did {
             createDidCalled = true
-            completion(did, error)
+            guard let error else { return Seeds.Dids.newYearParty }
+            throw error
         }
         
+        func fetchDids() async throws -> [DidTodayUIKit.Did] {
+            return []
+        }
+       
         func fetchDids(completion: @escaping ([Did], CoreDataStoreError?) -> Void) {
             fetchDidsCalled = true
         }
@@ -124,7 +130,7 @@ class CreateDidViewModelTests: XCTestCase {
     }
     
     ///Test Create
-    func test_createShouldBeCompletedCallCoreDataStorage_whenInputAllAndErrorIsNil() {
+    func test_createShouldBeCompletedCallCoreDataStorage_whenInputAllAndErrorIsNil() async {
         sut = CreateDidViewModel(didCoreDataStorage: didCoreDataStorageSpy, startedDate: nil, endedDate: nil, fromDoing: false)
         ///given
         let text = "Title"
@@ -138,13 +144,13 @@ class CreateDidViewModelTests: XCTestCase {
         sut.endedTime.send(noon)
         
         ///when
-        sut.createDid()
+        await sut.createDid()
         ///then
         XCTAssert(sut.isCompleted.value)
         XCTAssert(didCoreDataStorageSpy.createDidCalled)
     }
     
-    func test_createShouldNotBeCompletedAndNotCallCoreDataStorage_whenTitleOuputIsNil() {
+    func test_createShouldNotBeCompletedAndNotCallCoreDataStorage_whenTitleOuputIsNil() async {
         sut = CreateDidViewModel(didCoreDataStorage: didCoreDataStorageSpy, startedDate: nil, endedDate: nil, fromDoing: false)
         ///given
         let themeColor = UIColor.themeGreen
@@ -156,13 +162,13 @@ class CreateDidViewModelTests: XCTestCase {
         sut.endedTime.send(noon)
         
         ///when
-        sut.createDid()
+        await sut.createDid()
         ///then
         XCTAssertFalse(sut.isCompleted.value)
         XCTAssertFalse(didCoreDataStorageSpy.createDidCalled)
     }
     
-    func test_createShouldBeCompletedAndCallCoreDataStorage_whenDontSetColor() {
+    func test_createShouldBeCompletedAndCallCoreDataStorage_whenDontSetColor() async {
         sut = CreateDidViewModel(didCoreDataStorage: didCoreDataStorageSpy, startedDate: nil, endedDate: nil, fromDoing: false)
         ///given
         let text = "Title"
@@ -174,13 +180,13 @@ class CreateDidViewModelTests: XCTestCase {
         sut.endedTime.send(noon)
         
         ///when
-        sut.createDid()
+        await sut.createDid()
         ///then
         XCTAssert(sut.isCompleted.value)
         XCTAssert(didCoreDataStorageSpy.createDidCalled)
     }
     
-    func test_createShouldNotBeCompletedAndNotCallCoreDataStorage_whenEndedTimeOutputIsNil() {
+    func test_createShouldNotBeCompletedAndNotCallCoreDataStorage_whenEndedTimeOutputIsNil() async {
         sut = CreateDidViewModel(didCoreDataStorage: didCoreDataStorageSpy, startedDate: nil, endedDate: nil, fromDoing: false)
         ///given
         let text = "Title"///
@@ -190,13 +196,13 @@ class CreateDidViewModelTests: XCTestCase {
         sut.endedTime.send(noon)
         
         ///when
-        sut.createDid()
+        await sut.createDid()
         ///then
         XCTAssertFalse(sut.isCompleted.value)
         XCTAssertFalse(didCoreDataStorageSpy.createDidCalled)
     }
     
-    func test_createShouldNotBeCompletedAndNotCallCoreDataStorage_whenStartedTimeOutputIsNil() {
+    func test_createShouldNotBeCompletedAndNotCallCoreDataStorage_whenStartedTimeOutputIsNil() async {
         sut = CreateDidViewModel(didCoreDataStorage: didCoreDataStorageSpy, startedDate: nil, endedDate: nil, fromDoing: false)
         ///given
         let text = "Title"
@@ -206,14 +212,14 @@ class CreateDidViewModelTests: XCTestCase {
         sut.startedTime.send(midnight)
         
         ///when
-        sut.createDid()
+        await sut.createDid()
         ///then
         XCTAssertFalse(sut.isCompleted.value)
         XCTAssertFalse(didCoreDataStorageSpy.createDidCalled)
     }
     
     
-    func test_create_shouldBeNotCompletedAndCallCoreDataStorageAndOutputOfErrorIsNotNil_whenReceiveCoreDataError() {
+    func test_create_shouldBeNotCompletedAndCallCoreDataStorageAndOutputOfErrorIsNotNil_whenReceiveCoreDataError() async {
         sut = CreateDidViewModel(didCoreDataStorage: didCoreDataStorageSpy, startedDate: nil, endedDate: nil, fromDoing: false)
         ///given
         let saveError = CoreDataStoreError.saveError(ErrorMock.someError)
@@ -227,10 +233,10 @@ class CreateDidViewModelTests: XCTestCase {
         sut.endedTime.send(noon)
         
         ///when
-        sut.createDid()
+        await sut.createDid()
         ///then
         XCTAssertFalse(sut.isCompleted.value)
         XCTAssert(didCoreDataStorageSpy.createDidCalled)
-        XCTAssertNotNil(sut.error.value)
+        XCTAssertNotNil(sut.creatingError.value)
     }
 }

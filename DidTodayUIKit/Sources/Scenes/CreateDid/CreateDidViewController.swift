@@ -156,7 +156,7 @@ final class CreateDidViewController: ParentUIViewController, StoryboardInstantia
             }
             .store(in: &cancellableBag)
         
-        viewModel?.error
+        viewModel?.creatingError
             .receive(on: DispatchQueue.main)
             .sink { [weak self] output in
                 guard let self = self else { return }
@@ -225,7 +225,9 @@ extension CreateDidViewController: UITextFieldDelegate {
 extension CreateDidViewController: CreateDidAlert {
     
     func completeToCreateDid() {
-        viewModel?.createDid()
+        Task {
+            await viewModel?.createDid()
+        }
     }
     
     func discardToCreateDid() {

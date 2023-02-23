@@ -23,7 +23,7 @@ protocol CreateDidViewModelInput {
     func setupFromDoing()
     func setTitle(_ title: String)
     func setColorOfPie(_ color: UIColor)
-    func createDid()
+    func createDid() async
 }
 
 protocol CreateDidViewModelOutput {
@@ -34,7 +34,7 @@ protocol CreateDidViewModelOutput {
     var degreeOfStartedTime: CurrentValueSubject<Double?, Never> { get }
     var degreeOfEndedTime: CurrentValueSubject<Double?, Never> { get }
     var isCompleted: CurrentValueSubject<Bool, Never> { get }
-    var error: CurrentValueSubject<CoreDataStoreError?, Never> { get }
+    var creatingError: CurrentValueSubject<CoreDataStoreError?, Never> { get }
     var timePickerEnable: CurrentValueSubject<Bool, Never> { get }
     
     func initialStartedTime() -> Date
@@ -61,7 +61,7 @@ final class CreateDidViewModel: CreateDidViewModelProtocol {
     var degreeOfEndedTime = CurrentValueSubject<Double?, Never>(nil)
     var colorOfPie = CurrentValueSubject<UIColor, Never>(.customGreen)
     var isCompleted = CurrentValueSubject<Bool, Never>(false)
-    var error = CurrentValueSubject<CoreDataStoreError?, Never>(nil)
+    var creatingError = CurrentValueSubject<CoreDataStoreError?, Never>(nil)
     var timePickerEnable = CurrentValueSubject<Bool, Never>(true)
     
     //MARK: - Methods
@@ -109,7 +109,7 @@ final class CreateDidViewModel: CreateDidViewModelProtocol {
         colorOfPie.send(color)
     }
     
-    func createDid() {
+    func createDid() async {
         guard let startedTime = startedTime.value,
               let endedTime = endedTime.value,
               let title = titleOfDid.value else {
@@ -126,11 +126,20 @@ final class CreateDidViewModel: CreateDidViewModelProtocol {
                       finished: endedTime,
                       content: title,
                       color: color)
+        do {
+            try await didCoreDataStorage?.create(did)
+            isCompleted.send(true)
+        } catch let error {
+            if let coreDataError = error as? CoreDataStoreError {
+                creatingError.send(coreDataError)
+            }
+        }
+        
         didCoreDataStorage?.create(did) { [weak self] did, error in
             if error == nil {
                 self?.isCompleted.send(true)
             } else {
-                self?.error.send(error)
+                self?.creatingError.send(error)
             }
         }
     }

@@ -134,14 +134,6 @@ final class CreateDidViewModel: CreateDidViewModelProtocol {
                 creatingError.send(coreDataError)
             }
         }
-        
-        didCoreDataStorage?.create(did) { [weak self] did, error in
-            if error == nil {
-                self?.isCompleted.send(true)
-            } else {
-                self?.creatingError.send(error)
-            }
-        }
     }
     
     //MARK: - Output

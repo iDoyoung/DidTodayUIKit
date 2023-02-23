@@ -72,16 +72,10 @@ final class MainViewModel: MainViewModelProtocol {
     
     //MARK: - Input
     func fetchDids() {
-        didCoreDataStorage?.fetchDids { [weak self] dids, error in
-            guard let self = self else { return }
-            if error == nil {
-                self.fetchedDids.send(dids)
-            } else {
-                //TODO: Alert 사용해서 Core Data Fetch 실패를 알려야 하나
-                #if DEBUG
-                print("Error: \(String(describing: error))")
-                #endif
-            }
+        Task {
+            guard let fetched = try await didCoreDataStorage?.fetchDids() else { return }
+            fetchedDids.send(fetched)
+            //TODO: Alert 사용해서 Core Data Fetch 실패를 알려야 하나
         }
     }
     

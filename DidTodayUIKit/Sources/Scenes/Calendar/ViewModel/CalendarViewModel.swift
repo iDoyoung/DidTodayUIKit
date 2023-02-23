@@ -83,16 +83,10 @@ final class CalendarViewModel: CalendarViewModelProtocol {
     @Published var selectedDay: DateComponents?
     
     func fetchDids() {
-        didCoreDataStorage?.fetchDids { [weak self] dids, error in
-            guard let theSelf = self else { return }
-            if error == nil {
-                theSelf.fetchedDids.send(dids)
-            } else {
-                //TODO: Alert 사용해서 Core Data Fetch 실패를 알려야 하나
-                #if DEBUG
-                print("Error: \(String(describing: error))")
-                #endif
-            }
+        Task {
+            guard let fetched = try await didCoreDataStorage?.fetchDids() else { return }
+            fetchedDids.send(fetched)
+            //TODO: Alert 사용해서 Core Data Fetch 실패를 알려야 하나
         }
     }
     

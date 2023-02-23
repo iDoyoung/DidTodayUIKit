@@ -15,7 +15,7 @@ enum CoreDataStoreError: Error {
 
 protocol DidCoreDataStorable {
     func create(_ did: Did, completion: @escaping (Did, CoreDataStoreError?) -> Void)
-    func fetchDids(completion: @escaping ([Did], CoreDataStoreError?) -> Void)
+    func fetchDids() async throws -> [Did]
     func update(_ did: Did, completion: @escaping (Did, CoreDataStoreError?) -> Void)
     func delete(_ did: Did, completion: @escaping (Did, CoreDataStoreError?) -> Void)
 }
@@ -46,18 +46,22 @@ final class DidCoreDataStorage: DidCoreDataStorable {
             }
         }
     }
-    func fetchDids(completion: @escaping ([Did], CoreDataStoreError?) -> Void) {
-        persistentContainer.performBackgroundTask { context in
-            do {
-                let request = ManagedDidItem.fetchRequest()
-                let result = try context.fetch(request)
-                let fetched = result.map { $0.toDidItem() }
-                completion(fetched, nil)
-            } catch let error {
-                completion([], CoreDataStoreError.saveError(error))
+    
+    func fetchDids() async throws -> [Did] {
+        return try await withCheckedThrowingContinuation { continuation in
+            persistentContainer.performBackgroundTask { context in
+                do {
+                    let request = ManagedDidItem.fetchRequest()
+                    let result = try context.fetch(request)
+                    let fetched = result.map { $0.toDidItem() }
+                    continuation.resume(returning: fetched)
+                } catch let error {
+                    continuation.resume(throwing: CoreDataStoreError.readError(error))
+                }
             }
         }
     }
+    
     func update(_ did: Did, completion: @escaping (Did, CoreDataStoreError?) -> Void) {
         persistentContainer.performBackgroundTask { context in
             do {

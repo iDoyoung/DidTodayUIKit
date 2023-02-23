@@ -53,6 +53,7 @@
 		7F5ABAAB296F97FA002E509E /* BetaVersionMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5ABAAA296F97FA002E509E /* BetaVersionMigration.swift */; };
 		7F5ABAAD296FB81F002E509E /* BetaVersionMigrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5ABAAC296FB81F002E509E /* BetaVersionMigrationTests.swift */; };
 		7F61A03C294439A80084A3F6 /* UIView+animateToShake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F61A03B294439A80084A3F6 /* UIView+animateToShake.swift */; };
+		7F6EF3AF29A744AE002B5970 /* CalendarViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EF3AE29A744AE002B5970 /* CalendarViewModelTests.swift */; };
 		7F71192B290B95FB001DFE99 /* UIColor+GradientEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F71192A290B95FB001DFE99 /* UIColor+GradientEffect.swift */; };
 		7F71192D290BBC8B001DFE99 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F71192C290BBC8B001DFE99 /* CalendarViewModel.swift */; };
 		7F80EBC728D3245500781DB4 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F80EBC628D3245500781DB4 /* MainViewModel.swift */; };
@@ -164,6 +165,7 @@
 		7F5ABAAA296F97FA002E509E /* BetaVersionMigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetaVersionMigration.swift; sourceTree = "<group>"; };
 		7F5ABAAC296FB81F002E509E /* BetaVersionMigrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetaVersionMigrationTests.swift; sourceTree = "<group>"; };
 		7F61A03B294439A80084A3F6 /* UIView+animateToShake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+animateToShake.swift"; sourceTree = "<group>"; };
+		7F6EF3AE29A744AE002B5970 /* CalendarViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModelTests.swift; sourceTree = "<group>"; };
 		7F71192A290B95FB001DFE99 /* UIColor+GradientEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+GradientEffect.swift"; sourceTree = "<group>"; };
 		7F71192C290BBC8B001DFE99 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
 		7F80EBC628D3245500781DB4 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
@@ -589,6 +591,7 @@
 				7FC22B7E28CB232600F83122 /* Seeds.swift */,
 				7F5ABAAC296FB81F002E509E /* BetaVersionMigrationTests.swift */,
 				7FDC19392977A26500117963 /* AboutViewModelTests.swift */,
+				7F6EF3AE29A744AE002B5970 /* CalendarViewModelTests.swift */,
 			);
 			path = DidTodayUIKitTests;
 			sourceTree = "<group>";
@@ -846,6 +849,7 @@
 				7FB6A8CF28DB00E3009C61C5 /* CreateDidViewControllerTests.swift in Sources */,
 				7F5A69932968FC7A00062E2B /* DetaiDaylViewModelTests.swift in Sources */,
 				7FDC193A2977A26500117963 /* AboutViewModelTests.swift in Sources */,
+				7F6EF3AF29A744AE002B5970 /* CalendarViewModelTests.swift in Sources */,
 				7FC22B7F28CB232600F83122 /* Seeds.swift in Sources */,
 				7FC115A5293875510056237A /* DoingViewModelTests.swift in Sources */,
 				7FB6A8CB28DAF529009C61C5 /* CreateDidViewModelTests.swift in Sources */,

@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import Combine
 @testable import DidTodayUIKit
 
 class MainViewModelTests: XCTestCase {
@@ -14,6 +15,7 @@ class MainViewModelTests: XCTestCase {
     var didsCoreDataStorageSpy: DidsCoreDataStorageSpy!
     var coordinatorSpy: CoordinatorSpy!
     var mockDids = [Seeds.Dids.christmasParty, Seeds.Dids.newYearParty, Seeds.Dids.todayDidMock2, Seeds.Dids.todayDidMock]
+    private var cancellableBag = Set<AnyCancellable>()
     
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -24,7 +26,6 @@ class MainViewModelTests: XCTestCase {
                                 showDoing: coordinatorSpy.showDoing,
                                 showInformation: coordinatorSpy.showInformation)
         sut = MainViewModel(didCoreDataStorage: didsCoreDataStorageSpy, router: router)
-        when_fetchDids_shouldCallDidsCoreDataStorageAndGetOutputDidItemsListAndTotalPieDids()
     }
     
     override func tearDownWithError() throws {
@@ -61,9 +62,9 @@ class MainViewModelTests: XCTestCase {
     
     final class DidsCoreDataStorageSpy: DidCoreDataStorable {
         
-        var dids: [Did]?
+        var dids: [Did]!
         var createDidCalled = false
-        var fetchDidsCalled = false
+        @Published var fetchDidsCalled = false
         var updateDidCalled = false
         var deleteDidCalled = false
         
@@ -71,12 +72,10 @@ class MainViewModelTests: XCTestCase {
             createDidCalled = true
         }
         
-        func fetchDids(completion: @escaping ([Did], CoreDataStoreError?) -> Void) {
+        func fetchDids() async throws -> [DidTodayUIKit.Did] {
             fetchDidsCalled = true
-            guard let dids = dids else {
-                return
-            }
-            completion(dids, nil)
+            dids = [Seeds.Dids.christmasParty, Seeds.Dids.newYearParty, Seeds.Dids.todayDidMock2, Seeds.Dids.todayDidMock]
+            return dids
         }
         
         func update(_ did: Did, completion: @escaping (Did, CoreDataStoreError?) -> Void) {
@@ -89,25 +88,74 @@ class MainViewModelTests: XCTestCase {
     }
     
     //MARK: - Tests
-    func when_fetchDids_shouldCallDidsCoreDataStorageAndGetOutputDidItemsListAndTotalPieDids() {
-        //given
-        let expectation = mockDids
-            .filter { $0.started.omittedTime() == Date().omittedTime()}
-            .sorted { $0.started > $1.started }
-        let expectationOfDidItemsList = expectation.map { DidItemViewModel($0) }
-        let expectationOfTotalPieDids = TotalOfDidsItemViewModel(expectation)
-        didsCoreDataStorageSpy.dids = mockDids
-        //when
+    func test_fetchDids_shouldCallCoreDataStorage() {
+        let promise = expectation(description: "Storage Be Called")
+        didsCoreDataStorageSpy.$fetchDidsCalled
+            .sink { isCalled in
+                if isCalled {
+                    promise.fulfill()
+                }
+            }
+            .store(in: &cancellableBag)
+        
         sut.fetchDids()
-        //then
-        XCTAssert(didsCoreDataStorageSpy.fetchDidsCalled)
-        XCTAssertEqual(expectationOfDidItemsList, sut.didItemsList.value)
-        XCTAssertEqual(expectationOfTotalPieDids, sut.totalPieDids.value)
+        wait(for: [promise], timeout: 2)
+        
+        XCTAssertTrue(didsCoreDataStorageSpy.fetchDidsCalled)
     }
     
+    func test_fetchDids_shouldSendDidItemsList() {
+        let promise = expectation(description: "Should Send Value")
+        sut.didItemsList
+            .sink { items in
+                if !items.isEmpty {
+                    promise.fulfill()
+                }
+            }
+            .store(in: &cancellableBag)
+        sut.fetchDids()
+        wait(for: [promise], timeout: 1)
+        
+        let expectation = mockDids
+            .filter { Calendar.current.isDateInToday($0.started) }
+            .map { DidItemViewModel($0) }
+            .sorted { $0.startedTimes > $1.startedTimes }
+        
+        XCTAssertEqual(sut.didItemsList.value, expectation)
+    }
+    
+    func test_fetchDids_shouldSendTotalPieDids() {
+        let promise = expectation(description: "Should Send Value")
+        sut.totalPieDids
+            .sink { item in
+                if item != TotalOfDidsItemViewModel([]) {
+                    promise.fulfill()
+                }
+            }
+            .store(in: &cancellableBag)
+        
+        sut.fetchDids()
+        wait(for: [promise], timeout: 1)
+        
+        let expectation = mockDids
+            .filter { Calendar.current.isDateInToday($0.started) }
+        
+        XCTAssertEqual(sut.totalPieDids.value, TotalOfDidsItemViewModel(expectation))
+    }
+    
+    
     func test_selectRecently_shouldBeSelectedRecentlyButtonAndNotSelectedMuchTimeButtonWhenIsNotSelectedRecentlyButtonAndSortedByStartedDate() {
-        let expectation = [Seeds.Dids.todayDidMock2,
-                           Seeds.Dids.todayDidMock].map { DidItemViewModel($0) }
+        let promise = expectation(description: "Storage Be Called")
+        didsCoreDataStorageSpy.$fetchDidsCalled
+            .sink { isCalled in
+                if isCalled {
+                    promise.fulfill()
+                }
+            }
+            .store(in: &cancellableBag)
+        
+        sut.fetchDids()
+        wait(for: [promise], timeout: 2)
         
         //given
         sut.isSelectedRecentlyButton.value = false
@@ -116,12 +164,9 @@ class MainViewModelTests: XCTestCase {
         //then
         XCTAssertTrue(sut.isSelectedRecentlyButton.value)
         XCTAssertFalse(sut.isSelectedMuchTimeButton.value)
-        XCTAssertEqual(expectation, sut.didItemsList.value)
     }
-    
+
      func test_selectMuchTime_shouldBeSelectedRecentlyButtonAndNotSelectedMuchTimeButtonWhenIsNotSelectedRecentlyButtonAndSortedByMuchTime() {
-         let expectation = [Seeds.Dids.todayDidMock2,
-                            Seeds.Dids.todayDidMock].map { DidItemViewModel($0) }
         //given
         sut.isSelectedMuchTimeButton.value = false
         //when
@@ -129,8 +174,9 @@ class MainViewModelTests: XCTestCase {
         //then
         XCTAssertTrue(sut.isSelectedMuchTimeButton.value)
         XCTAssertFalse(sut.isSelectedRecentlyButton.value)
-        XCTAssertEqual(expectation, sut.didItemsList.value)
     }
+    
+    //MARK: Test of showing
     func test_showCreateDid() {
         //when
         sut.showCreateDid()

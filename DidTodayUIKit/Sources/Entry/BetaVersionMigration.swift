@@ -43,21 +43,20 @@ final class BetaVersionMigration {
             .filter { $0.prefix(2) == "20" }
         
         for key in dateKeys {
-            if let dids: [PreviousVersionModel.Did] = legacy.loadLastDate(date: key) {
-                for did in dids {
-                    guard let startedDate = legacy.formatStringToDate(key + did.start),
-                          let finsihedDate = legacy.formatStringToDate(key + did.finish) else { return }
-                    
-                    let output = Did(started: startedDate,
-                                     finished: finsihedDate,
-                                     content: did.did,
-                                     color: Did.PieColor(red: Float(did.colour.getRedOfRGB()),
-                                                         green: Float(did.colour.getGreenOfRGB()),
-                                                         blue: Float(did.colour.getBlueRGB()),
-                                                         alpha: 1))
-                    try await coreDataStorage.create(output)
-                    defaults.removeObject(forKey: key)
-                }
+            guard let dids: [PreviousVersionModel.Did] = legacy.loadLastDate(date: key) else { return }
+            for did in dids {
+                guard let startedDate = legacy.formatStringToDate(key + did.start),
+                      let finsihedDate = legacy.formatStringToDate(key + did.finish) else { return }
+                
+                let output = Did(started: startedDate,
+                                 finished: finsihedDate,
+                                 content: did.did,
+                                 color: Did.PieColor(red: Float(did.colour.getRedOfRGB()),
+                                                     green: Float(did.colour.getGreenOfRGB()),
+                                                     blue: Float(did.colour.getBlueRGB()),
+                                                     alpha: 1))
+                try await coreDataStorage.create(output)
+                defaults.removeObject(forKey: key)
             }
         }
     }

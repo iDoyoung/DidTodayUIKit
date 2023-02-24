@@ -16,22 +16,26 @@ final class BetaVersionMigration {
     var isMigratedToCoreData = UserDefaults.standard.bool(forKey: "migration-to-core-data-first")
     
     func migrateUserDefaultToCoreData() async throws {
-        if !isMigratedToCoreData {
-            if launchedBefore == true {
-#if DEBUG
-                print("Second updating")
-#endif
-                try await migratePrevious()
-                defaults.removeObject(forKey: "launchedBefore")
-                defaults.set(true, forKey: "migration-to-core-data-first")
-            } else {
-#if DEBUG
-                print("First launching, Or Never updated before")
-#endif
-                try await migrateOld()
-                defaults.set(true, forKey: "migration-to-core-data-first")
-            }
+        guard !isMigratedToCoreData else {
+            #if DEBUG
+            print("Is not first launch after updated version 2")
+            #endif
+            return
         }
+        
+        if launchedBefore {
+            #if DEBUG
+            print("Second updating")
+            #endif
+            try await migratePrevious()
+            defaults.removeObject(forKey: "launchedBefore")
+        } else {
+            #if DEBUG
+            print("First launching, Or Never updated before")
+            #endif
+            try await migrateOld()
+        }
+        defaults.set(true, forKey: "migration-to-core-data-first")
     }
     
     private func migratePrevious() async throws {
@@ -41,19 +45,16 @@ final class BetaVersionMigration {
         for key in dateKeys {
             if let dids: [PreviousVersionModel.Did] = legacy.loadLastDate(date: key) {
                 for did in dids {
-                    let startedDateString = key + did.start
-                    let finishedDateString = key + did.finish
+                    guard let startedDate = legacy.formatStringToDate(key + did.start),
+                          let finsihedDate = legacy.formatStringToDate(key + did.finish) else { return }
                     
-                    guard let startedDate = legacy.formatStringToDate(startedDateString),
-                          let finsihedDate = legacy.formatStringToDate(finishedDateString) else { return }
-                    let title = did.did
-                    let red = Float(did.colour.getRedOfRGB())
-                    let green = Float(did.colour.getGreenOfRGB())
-                    let blue = Float(did.colour.getBlueRGB())
-                    let output = Did(started: startedDate, finished: finsihedDate, content: title, color: Did.PieColor(red: red,
-                                                                                                                       green: green,
-                                                                                                                       blue: blue,
-                                                                                                                       alpha: 1))
+                    let output = Did(started: startedDate,
+                                     finished: finsihedDate,
+                                     content: did.did,
+                                     color: Did.PieColor(red: Float(did.colour.getRedOfRGB()),
+                                                         green: Float(did.colour.getGreenOfRGB()),
+                                                         blue: Float(did.colour.getBlueRGB()),
+                                                         alpha: 1))
                     try await coreDataStorage.create(output)
                     defaults.removeObject(forKey: key)
                 }
@@ -70,29 +71,22 @@ final class BetaVersionMigration {
             guard let dids: [PreviousVersionModel.OldDid] = legacy.loadLastDate(date: key) else { return }
             
             for did in dids {
-                let startedDateString = key + did.start
-                let finishedDateString = key + did.finish
+                guard let startedDate = legacy.formatStringToDate(key + did.start),
+                      let finsihedDate = legacy.formatStringToDate(key + did.finish) else { return }
                 
-                guard let startedDate = legacy.formatStringToDate(startedDateString),
-                      let finsihedDate = legacy.formatStringToDate(finishedDateString) else { return }
-                let title = did.did
-                let red = Float(did.colour.getRedOfRGB())
-                let green = Float(did.colour.getGreenOfRGB())
-                let blue = Float(did.colour.getBlueRGB())
-                let output = Did(started: startedDate, finished: finsihedDate, content: title, color: Did.PieColor(red: red,
-                                                                                                                   green: green,
-                                                                                                                   blue: blue,
-                                                                                                                   alpha: 1))
+                let output = Did(started: startedDate,
+                                 finished: finsihedDate,
+                                 content: did.did,
+                                 color: Did.PieColor(red: Float(did.colour.getRedOfRGB()),
+                                                     green: Float(did.colour.getGreenOfRGB()),
+                                                     blue: Float(did.colour.getBlueRGB()),
+                                                     alpha: 1))
                 try await coreDataStorage.create(output)
                 defaults.removeObject(forKey: key)
             }
         }
     }
-    
-    private func migrate() {
-        
-    }
-    
+   
     deinit {
 #if DEBUG
         print("Success update")

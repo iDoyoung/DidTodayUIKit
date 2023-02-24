@@ -12,7 +12,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         var migration: BetaVersionMigration? = BetaVersionMigration()
-        migration?.migrateUserDefaultToCoreData()
+        Task {
+            try await migration?.migrateUserDefaultToCoreData()
+        }
         migration = nil
         return true
     }

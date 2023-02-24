@@ -15,94 +15,82 @@ final class BetaVersionMigration {
     var launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
     var isMigratedToCoreData = UserDefaults.standard.bool(forKey: "migration-to-core-data-first")
     
-    func migrateUserDefaultToCoreData() {
+    func migrateUserDefaultToCoreData() async throws {
         if !isMigratedToCoreData {
             if launchedBefore == true {
 #if DEBUG
                 print("Second updating")
 #endif
-                migratePrevious { [weak self] in
-                    self?.defaults.removeObject(forKey: "launchedBefore")
-                    self?.defaults.set(true, forKey: "migration-to-core-data-first")
-                }
+                try await migratePrevious()
+                defaults.removeObject(forKey: "launchedBefore")
+                defaults.set(true, forKey: "migration-to-core-data-first")
             } else {
 #if DEBUG
                 print("First launching, Or Never updated before")
 #endif
-                migrateOld { [weak self] in
-                    self?.defaults.set(true, forKey: "migration-to-core-data-first")
-                }
+                try await migrateOld()
+                defaults.set(true, forKey: "migration-to-core-data-first")
             }
         }
     }
     
-    private func migratePrevious(completion: @escaping () -> Void) {
+    private func migratePrevious() async throws {
         let dateKeys = defaults.dictionaryRepresentation().keys
             .filter { $0.prefix(2) == "20" }
         
-        let taskGroup = DispatchGroup()
         for key in dateKeys {
             if let dids: [PreviousVersionModel.Did] = legacy.loadLastDate(date: key) {
-                dids.forEach {
-                    let startedDateString = key + $0.start
-                    let finishedDateString = key + $0.finish
+                for did in dids {
+                    let startedDateString = key + did.start
+                    let finishedDateString = key + did.finish
                     
                     guard let startedDate = legacy.formatStringToDate(startedDateString),
                           let finsihedDate = legacy.formatStringToDate(finishedDateString) else { return }
-                    let title = $0.did
-                    let red = Float($0.colour.getRedOfRGB())
-                    let green = Float($0.colour.getGreenOfRGB())
-                    let blue = Float($0.colour.getBlueRGB())
+                    let title = did.did
+                    let red = Float(did.colour.getRedOfRGB())
+                    let green = Float(did.colour.getGreenOfRGB())
+                    let blue = Float(did.colour.getBlueRGB())
                     let output = Did(started: startedDate, finished: finsihedDate, content: title, color: Did.PieColor(red: red,
                                                                                                                        green: green,
                                                                                                                        blue: blue,
                                                                                                                        alpha: 1))
-                    taskGroup.enter()
-                    coreDataStorage.create(output) { [weak self] did, error in
-                        assert(error == nil, "Unexpected Error: Appear error when creation in Core Data")
-                        self?.defaults.removeObject(forKey: key)
-                        taskGroup.leave()
-                    }
+                    try await coreDataStorage.create(output)
+                    defaults.removeObject(forKey: key)
                 }
             }
         }
-        taskGroup.notify(queue: .global()) { completion() }
     }
     
     ///- Tag: Previous Old Did -> Did Of Core Data
-    private func migrateOld(completion: @escaping () -> Void) {
-        let dateKeys = defaults.dictionaryRepresentation().keys.filter({
-            $0.prefix(2) == "20"
-        })
-        let taskGroup = DispatchGroup()
+    private func migrateOld() async throws {
+        let dateKeys = defaults.dictionaryRepresentation().keys
+            .filter { $0.prefix(2) == "20" }
         
         for key in dateKeys {
             guard let dids: [PreviousVersionModel.OldDid] = legacy.loadLastDate(date: key) else { return }
             
-            dids.forEach {
-                let startedDateString = key + $0.start
-                let finishedDateString = key + $0.finish
+            for did in dids {
+                let startedDateString = key + did.start
+                let finishedDateString = key + did.finish
                 
                 guard let startedDate = legacy.formatStringToDate(startedDateString),
                       let finsihedDate = legacy.formatStringToDate(finishedDateString) else { return }
-                let title = $0.did
-                let red = Float($0.colour.getRedOfRGB())
-                let green = Float($0.colour.getGreenOfRGB())
-                let blue = Float($0.colour.getBlueRGB())
+                let title = did.did
+                let red = Float(did.colour.getRedOfRGB())
+                let green = Float(did.colour.getGreenOfRGB())
+                let blue = Float(did.colour.getBlueRGB())
                 let output = Did(started: startedDate, finished: finsihedDate, content: title, color: Did.PieColor(red: red,
                                                                                                                    green: green,
                                                                                                                    blue: blue,
                                                                                                                    alpha: 1))
-                
-                taskGroup.enter()
-                coreDataStorage.create(output) { [weak self] did, error in
-                    assert(error == nil, "Unexpected Error: Appear error when creation in Core Data")
-                    self?.defaults.removeObject(forKey: key)
-                    taskGroup.leave()
-                }
+                try await coreDataStorage.create(output)
+                defaults.removeObject(forKey: key)
             }
         }
-        taskGroup.notify(queue: .global()) { completion() }
+    }
+    
+    private func migrate() {
+        
     }
     
     deinit {

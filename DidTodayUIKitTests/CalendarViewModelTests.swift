@@ -40,10 +40,11 @@ final class CalendarViewModelTests: XCTestCase {
         var updateDidCalled = false
         var deleteDidCalled = false
         
-        func create(_ did: Did, completion: @escaping (Did, CoreDataStoreError?) -> Void) {
+        func create(_ did: DidTodayUIKit.Did) async throws -> DidTodayUIKit.Did {
             createDidCalled = true
+            return Seeds.Dids.newYearParty
         }
-        
+       
         func fetchDids() async throws -> [DidTodayUIKit.Did] {
             fetchDidsCalled = true
             dids = [Seeds.Dids.christmasParty, Seeds.Dids.newYearParty, Seeds.Dids.todayDidMock2, Seeds.Dids.todayDidMock]

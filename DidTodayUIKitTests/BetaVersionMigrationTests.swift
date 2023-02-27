@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import Combine
 @testable import DidTodayUIKit
 
 final class BetaVersionMigrationTests: XCTestCase {
@@ -13,6 +14,7 @@ final class BetaVersionMigrationTests: XCTestCase {
     //MARK: - System Under Tests
     var sut: BetaVersionMigration!
     var didCoreDataStorageSpy = DidCoreDataStorageSpy()
+    private var cancellableBag = Set<AnyCancellable>()
     
     override func setUpWithError() throws {
         sut = BetaVersionMigration()
@@ -30,14 +32,14 @@ final class BetaVersionMigrationTests: XCTestCase {
         
         var created = [Did]()
         
-        var createCalled = false
+        @Published var createCalled = false
         var fetchDidsCalled = false
         var updateCalled = false
         var deleteCalled = false
         
         func create(_ did: DidTodayUIKit.Did) async throws -> DidTodayUIKit.Did {
-            createCalled = true
             created.append(did)
+            createCalled = true
             return did
         }
         
@@ -60,34 +62,52 @@ final class BetaVersionMigrationTests: XCTestCase {
     
     //MARK: - Tests
     
-    func test_migrate_whenHavePreviousDidDataIfLaunchedBefore() async throws {
+    func test_migrate_whenHavePreviousDidDataIfLaunchedBefore() {
         ///given
-        let expectaion = UserDefaults.standard.object(forKey: PreviousVersionModel().today)
         givePreviousDidDummy()
+        let promise = expectation(description: "Should Call Core Data")
         sut.launchedBefore = true
         sut.isMigratedToCoreData = false
+        
+        didCoreDataStorageSpy.$createCalled
+            .sink { isCalled in
+                if isCalled {
+                    promise.fulfill()
+                }
+            }
+            .store(in: &cancellableBag)
         ///when
-        try await sut.migrateUserDefaultToCoreData()
+        sut.migrateUserDefaultToCoreData()
+        wait(for: [promise], timeout: 2)
         ///then
-        XCTAssert(self.didCoreDataStorageSpy.createCalled)
+        XCTAssert(didCoreDataStorageSpy.createCalled)
         XCTAssertEqual(self.didCoreDataStorageSpy.created.count, 1)
         XCTAssertEqual(self.didCoreDataStorageSpy.created[0].content, "Test")
-        XCTAssertNil(expectaion)
+        XCTAssertNil(UserDefaults.standard.object(forKey: PreviousVersionModel().today))
     }
     
-    func test_migrate_whenHaveOldDidDataIfNotLaunchedBefore() async throws {
+    func test_migrate_whenHaveOldDidDataIfNotLaunchedBefore() {
         ///given
-        let expectaion = UserDefaults.standard.object(forKey: PreviousVersionModel().today)
         givePreviousOldDidDummy()
+        let promise = expectation(description: "Should Call Core Data")
         sut.launchedBefore = false
         sut.isMigratedToCoreData = false
+        
+        didCoreDataStorageSpy.$createCalled
+            .sink { isCalled in
+                if isCalled {
+                    promise.fulfill()
+                }
+            }
+            .store(in: &cancellableBag)
         ///when
-        try await sut.migrateUserDefaultToCoreData()
+        sut.migrateUserDefaultToCoreData()
+        wait(for: [promise], timeout: 2)
         ///then
         XCTAssert(didCoreDataStorageSpy.createCalled)
         XCTAssertEqual(didCoreDataStorageSpy.created.count, 1)
-        //XCTAssertEqual(didCoreDataStorageSpy.created[0].content, "Test")
-        XCTAssertNil(expectaion)
+        XCTAssertEqual(didCoreDataStorageSpy.created[0].content, "Test")
+        XCTAssertNil(UserDefaults.standard.object(forKey: PreviousVersionModel().today))
     }
     
     func givePreviousDidDummy() {

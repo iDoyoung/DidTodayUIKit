@@ -14,6 +14,7 @@ protocol MainViewModelInput {
     func fetchDids()
     func selectRecently()
     func selectMuchTime()
+    func removeRecorded()
 }
 
 protocol MainViewModelOutput {
@@ -80,6 +81,10 @@ final class MainViewModel: MainViewModelProtocol {
             fetchedDids.send(fetched)
             //TODO: Alert 사용해서 Core Data Fetch 실패를 알려야 하나
         }
+    }
+    
+    func removeRecorded() {
+        UserDefaults.standard.removeObject(forKey: "start-time-of-doing")
     }
     
     //MARK: View event methods

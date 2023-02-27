@@ -9,6 +9,7 @@ import XCTest
 @testable import DidTodayUIKit
 
 class DetaiDaylViewModelTests: XCTestCase {
+    
     //MARK: - System Under Test
     var sut: DetailDayViewModel!
     
@@ -22,15 +23,25 @@ class DetaiDaylViewModelTests: XCTestCase {
     }
     
     //MARK: - Tests
-    func test_initalize() {
-        ///given: List of Did Dummy
+    func test_initalize_shouldGetTotalPiesDids() {
+        ///given
         let didsMock = [Seeds.Dids.todayDidMock, Seeds.Dids.todayDidMock2]
         let expectationOfTotalItems = TotalOfDidsItemViewModel(didsMock)
-        let expectationOfDidItems = didsMock.map { DidItemViewModel($0) }
-        ///when: init
-        sut = DetailDayViewModel(dids: didsMock)
-        ///then: Total Pie Dids & Did Items List
-        XCTAssertEqual(expectationOfDidItems, sut.didItemsList.value)
+        ///when
+        sut = DetailDayViewModel(selected: Date(), dids: didsMock)
+        ///then
         XCTAssertEqual(expectationOfTotalItems, sut.totalPieDids.value)
+    }
+    
+    func test_initalize_shouldGetItemsList() {
+        ///given
+        let didsMock = [Seeds.Dids.todayDidMock, Seeds.Dids.todayDidMock2]
+        let expectationOfDidItems = didsMock
+            .map { DidItemViewModel($0) }
+            .sorted { $0.startedTimes > $1.startedTimes }
+        ///when
+        sut = DetailDayViewModel(selected: Date(), dids: didsMock)
+        ///then
+        XCTAssertEqual(expectationOfDidItems, sut.didItemsList.value)
     }
 }

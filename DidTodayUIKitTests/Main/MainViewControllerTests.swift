@@ -29,6 +29,7 @@ class MainViewControllerTests: XCTestCase {
         var selectRecentlyCalled = false
         var selectMuchTimeCalled = false
         var showAboutCalled = false
+        var removeRecordedCalled = false
         
         func fetchDids() {
             fetchDidsCalled = true
@@ -42,7 +43,11 @@ class MainViewControllerTests: XCTestCase {
             selectMuchTimeCalled = true
         }
         
+        func removeRecorded() {
+            removeRecordedCalled = true
+        }
         ///Output
+        var hasRecordedBeforeClose: Just<Date?> = Just(nil)
         var showCreateDidCalled = false
         var showCalendarCalled = false
         var showDoingCalled = false
@@ -79,5 +84,15 @@ class MainViewControllerTests: XCTestCase {
         sut.viewWillAppear(true)
         //then
         XCTAssert(viewModelSpy.fetchDidsCalled)
+    }
+    
+    func test_okayAboutMainAlert_shouldCallViewModel() {
+        //given
+        let viewModelSpy = MainViewModelSpy()
+        sut.viewModel = viewModelSpy
+        //when
+        sut.okay()
+        //then
+        XCTAssert(viewModelSpy.removeRecordedCalled)
     }
 }

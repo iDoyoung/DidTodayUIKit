@@ -39,6 +39,7 @@ final class MainViewController: DidListCollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
+        validateRecordingBeforeClose()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -100,6 +101,17 @@ final class MainViewController: DidListCollectionViewController {
     }
     
     //MARK: - Binding
+    func validateRecordingBeforeClose() {
+        viewModel?.hasRecordedBeforeClose
+            .sink { [weak self] output in
+                guard let self,
+                      output != nil else { return }
+                let alert = self.recordedBeforeAlert()
+                self.present(alert, animated: true)
+            }
+            .store(in: &cancellableBag)
+    }
+    
     private func bindViewModel() {
         guard let viewModel = viewModel else { return }
         viewModel.totalPieDids
@@ -168,6 +180,13 @@ final class MainViewController: DidListCollectionViewController {
     @objc override func tapMuchTimeButton(_ sender: UIButton) {
         super.tapMuchTimeButton(sender)
         viewModel?.selectMuchTime()
+    }
+}
+
+extension MainViewController: MainAlert {
+    
+    func okay() {
+        viewModel?.removeRecorded()
     }
 }
 

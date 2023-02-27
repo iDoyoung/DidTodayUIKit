@@ -13,6 +13,7 @@ class CreateDidViewControllerTests: XCTestCase {
     //MARK: - System Under Tests
     var sut: CreateDidViewController!
     var viewModelSpy: CreateDidViewModelSpy!
+    private var cancellableBag = Set<AnyCancellable>()
     
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -36,7 +37,7 @@ class CreateDidViewControllerTests: XCTestCase {
         //MARK: - Input
         var setTitleCalled = false
         var setColorOfPieCalled = false
-        var createCalled = false
+        @Published var createCalled = false
         var setupFromDoingCalled = false
         
         var startedTime = CurrentValueSubject<Date?, Never>(nil)
@@ -65,7 +66,7 @@ class CreateDidViewControllerTests: XCTestCase {
         var degreeOfStartedTime = CurrentValueSubject<Double?, Never>(nil)
         var degreeOfEndedTime = CurrentValueSubject<Double?, Never>(nil)
         var isCompleted = CurrentValueSubject<Bool, Never>(false)
-        var error = CurrentValueSubject<DidTodayUIKit.CoreDataStoreError?, Never>(nil)
+        var creatingError = CurrentValueSubject<DidTodayUIKit.CoreDataStoreError?, Never>(nil)
         
         func initialStartedTime() -> Date {
             return Calendar.current.startOfDay(for: Date())
@@ -78,8 +79,17 @@ class CreateDidViewControllerTests: XCTestCase {
     
     //MARK: - Tests
     func test_createDid_shouldCallViewModel() {
+        let promise = expectation(description: "Should Call View Model To Create")
+        viewModelSpy.$createCalled
+            .sink { isCalled in
+                if isCalled {
+                    promise.fulfill()
+                }
+            }
+            .store(in: &cancellableBag)
         //when
         sut.completeToCreateDid()
+        wait(for: [promise], timeout: 2)
         //then
         XCTAssert(viewModelSpy.createCalled)
     }

@@ -68,8 +68,8 @@ class MainViewModelTests: XCTestCase {
         var updateDidCalled = false
         var deleteDidCalled = false
         
-        func create(_ did: Did, completion: @escaping (Did, CoreDataStoreError?) -> Void) {
-            createDidCalled = true
+        func create(_ did: DidTodayUIKit.Did) async throws -> DidTodayUIKit.Did {
+            return Seeds.Dids.newYearParty
         }
         
         func fetchDids() async throws -> [DidTodayUIKit.Did] {
@@ -175,6 +175,7 @@ class MainViewModelTests: XCTestCase {
         XCTAssertTrue(sut.isSelectedMuchTimeButton.value)
         XCTAssertFalse(sut.isSelectedRecentlyButton.value)
     }
+    //MARK: - Should I Test Remove Recorded about User Defaults?
     
     //MARK: Test of showing
     func test_showCreateDid() {

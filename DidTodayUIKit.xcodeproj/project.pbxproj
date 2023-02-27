@@ -93,6 +93,7 @@
 		7FC580A328D1A201008086FD /* PieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC580A228D1A201008086FD /* PieView.swift */; };
 		7FD2B04C2909161A0048408F /* StoryboardName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD2B04B2909161A0048408F /* StoryboardName.swift */; };
 		7FDC193A2977A26500117963 /* AboutViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDC19392977A26500117963 /* AboutViewModelTests.swift */; };
+		7FDD406B29AC782100C1B656 /* MainAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDD406A29AC782100C1B656 /* MainAlert.swift */; };
 		7FE4C06F294852020048F24E /* UIColor+GetRGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE4C06E294852020048F24E /* UIColor+GetRGB.swift */; };
 		7FEB006029595D120073B90C /* DetailDidSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FEB005F29595D120073B90C /* DetailDidSupplementaryView.swift */; };
 		7FEB0064295C242D0073B90C /* UIView+Animate To Hide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FEB0063295C242D0073B90C /* UIView+Animate To Hide.swift */; };
@@ -206,6 +207,7 @@
 		7FC580A228D1A201008086FD /* PieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieView.swift; sourceTree = "<group>"; };
 		7FD2B04B2909161A0048408F /* StoryboardName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardName.swift; sourceTree = "<group>"; };
 		7FDC19392977A26500117963 /* AboutViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewModelTests.swift; sourceTree = "<group>"; };
+		7FDD406A29AC782100C1B656 /* MainAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAlert.swift; sourceTree = "<group>"; };
 		7FE4C06E294852020048F24E /* UIColor+GetRGB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+GetRGB.swift"; sourceTree = "<group>"; };
 		7FEB005F29595D120073B90C /* DetailDidSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDidSupplementaryView.swift; sourceTree = "<group>"; };
 		7FEB0063295C242D0073B90C /* UIView+Animate To Hide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Animate To Hide.swift"; sourceTree = "<group>"; };
@@ -507,6 +509,7 @@
 				7F850C5F2961A3490083522A /* ViewModel */,
 				7FC22BB728CDE19300F83122 /* MainViewController.swift */,
 				7F2C6CBD290A6EB3002963DE /* MainRouter.swift */,
+				7FDD406A29AC782100C1B656 /* MainAlert.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -836,6 +839,7 @@
 				504CE0B4253FDFDF000CC6CF /* PreviousVersionModel.swift in Sources */,
 				7F133CA3290902EC0099E55C /* StoryboardInstantiable.swift in Sources */,
 				7F5A91C828E68CCF006B8406 /* Date+ToString.swift in Sources */,
+				7FDD406B29AC782100C1B656 /* MainAlert.swift in Sources */,
 				7FB3345D2953E58000E9FB88 /* AboutViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

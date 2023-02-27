@@ -14,17 +14,19 @@ protocol MainViewModelInput {
     func fetchDids()
     func selectRecently()
     func selectMuchTime()
-    func showAbout()
-    func showDoing()
-    func showCreateDid()
-    func showCalendar()
 }
 
 protocol MainViewModelOutput {
+    var hasRecordedBeforeClose: Just<Date?> { get }
     var totalPieDids: CurrentValueSubject<TotalOfDidsItemViewModel, Never> { get }
     var didItemsList: CurrentValueSubject<[DidItemViewModel], Never> { get }
     var isSelectedRecentlyButton: CurrentValueSubject<Bool, Never> { get }
     var isSelectedMuchTimeButton: CurrentValueSubject<Bool, Never> { get }
+    
+    func showAbout()
+    func showDoing()
+    func showCreateDid()
+    func showCalendar()
 }
 
 final class MainViewModel: MainViewModelProtocol {
@@ -36,8 +38,9 @@ final class MainViewModel: MainViewModelProtocol {
     private var router: MainRouter?
     private var cancellableBag = Set<AnyCancellable>()
     
-    //MARK: - Output, data store
+    //MARK: Output, data store
     private var fetchedDids = CurrentValueSubject<[Did], Never>([])
+    var hasRecordedBeforeClose = Just(UserDefaults.standard.object(forKey: "start-time-of-doing") as? Date)
     var isSelectedRecentlyButton = CurrentValueSubject<Bool, Never>(true)
     var isSelectedMuchTimeButton = CurrentValueSubject<Bool, Never>(false)
     var totalPieDids = CurrentValueSubject<TotalOfDidsItemViewModel, Never>(TotalOfDidsItemViewModel([]))

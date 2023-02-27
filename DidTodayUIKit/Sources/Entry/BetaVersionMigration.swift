@@ -15,29 +15,26 @@ final class BetaVersionMigration {
     var launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
     var isMigratedToCoreData = UserDefaults.standard.bool(forKey: "migration-to-core-data-first")
     
-    func migrateUserDefaultToCoreData() async throws {
-        guard !isMigratedToCoreData else {
-            #if DEBUG
-            print("Is not first launch after updated version 2")
-            #endif
-            return
+    func migrateUserDefaultToCoreData() {
+        Task {
+            guard !isMigratedToCoreData else {
+                #if DEBUG
+                print("Is not first launch after updated version 2")
+                #endif
+                return
+            }
+            
+            if launchedBefore {
+                try await migratePrevious()
+                defaults.removeObject(forKey: "launchedBefore")
+            } else {
+                try await migrateOld()
+            }
+            defaults.set(true, forKey: "migration-to-core-data-first")
         }
-        
-        if launchedBefore {
-            #if DEBUG
-            print("Second updating")
-            #endif
-            try await migratePrevious()
-            defaults.removeObject(forKey: "launchedBefore")
-        } else {
-            #if DEBUG
-            print("First launching, Or Never updated before")
-            #endif
-            try await migrateOld()
-        }
-        defaults.set(true, forKey: "migration-to-core-data-first")
     }
     
+    ///0.1Version's Did Model -> Did Of Core Data
     private func migratePrevious() async throws {
         let dateKeys = defaults.dictionaryRepresentation().keys
             .filter { $0.prefix(2) == "20" }
@@ -56,12 +53,12 @@ final class BetaVersionMigration {
                                                      blue: Float(did.colour.getBlueRGB()),
                                                      alpha: 1))
                 try await coreDataStorage.create(output)
-                defaults.removeObject(forKey: key)
             }
+            defaults.removeObject(forKey: key)
         }
     }
     
-    ///- Tag: Previous Old Did -> Did Of Core Data
+    ///0.0Version's Did Model -> Did Of Core Data
     private func migrateOld() async throws {
         let dateKeys = defaults.dictionaryRepresentation().keys
             .filter { $0.prefix(2) == "20" }
@@ -81,8 +78,8 @@ final class BetaVersionMigration {
                                                      blue: Float(did.colour.getBlueRGB()),
                                                      alpha: 1))
                 try await coreDataStorage.create(output)
-                defaults.removeObject(forKey: key)
             }
+            defaults.removeObject(forKey: key)
         }
     }
    

@@ -20,7 +20,7 @@ final class PrivacyPolicyViewModel: PrivacyPolicyViewModelProtocol {
     var privacyPolicyURL: URL? {
         let output: String
         if Locale.current.languageCode == "ko" {
-            output = "https://hyper-stealer-69c.notion.site/5515e1e37eb848d8812b876b45b3a0d9"
+            output = "https://hyper-stealer-69c.notion.site/44258efae17b4acb996c1d2744b20b3a"
         } else {
             output =  "https://hyper-stealer-69c.notion.site/Privacy-Policy-3ad36f3d669b4aa297a403b0f7a1ae28"
         }

@@ -16,6 +16,7 @@ final class BetaVersionMigration {
     var isMigratedToCoreData = UserDefaults.standard.bool(forKey: "migration-to-core-data-first")
     
     func migrateUserDefaultToCoreData() {
+        defaults.removeObject(forKey: "Doing")
         Task {
             guard !isMigratedToCoreData else {
                 #if DEBUG

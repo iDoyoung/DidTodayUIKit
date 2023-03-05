@@ -69,6 +69,8 @@
 		7F9C0BA0293DC1BA0094C2A5 /* Double+ToStringOfTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9C0B9F293DC1BA0094C2A5 /* Double+ToStringOfTimer.swift */; };
 		7FA3118F29B3324800A4C5DE /* FetchDidUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA3118E29B3324800A4C5DE /* FetchDidUseCase.swift */; };
 		7FA3119129B4211100A4C5DE /* FetchDidUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA3119029B4211100A4C5DE /* FetchDidUseCaseTests.swift */; };
+		7FA3119329B43A1500A4C5DE /* CreateDidUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA3119229B43A1500A4C5DE /* CreateDidUseCase.swift */; };
+		7FA3119529B43C2700A4C5DE /* CreateDidUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA3119429B43C2700A4C5DE /* CreateDidUseCaseTests.swift */; };
 		7FA60AE928D6FB7A0098F3D2 /* MainViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA60AE828D6FB7A0098F3D2 /* MainViewControllerTests.swift */; };
 		7FAD0FFC2990C4B2009E452E /* UIColor+IsDark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAD0FFB2990C4B2009E452E /* UIColor+IsDark.swift */; };
 		7FB3345D2953E58000E9FB88 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB3345C2953E58000E9FB88 /* AboutViewController.swift */; };
@@ -184,6 +186,8 @@
 		7F9C0B9F293DC1BA0094C2A5 /* Double+ToStringOfTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+ToStringOfTimer.swift"; sourceTree = "<group>"; };
 		7FA3118E29B3324800A4C5DE /* FetchDidUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDidUseCase.swift; sourceTree = "<group>"; };
 		7FA3119029B4211100A4C5DE /* FetchDidUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDidUseCaseTests.swift; sourceTree = "<group>"; };
+		7FA3119229B43A1500A4C5DE /* CreateDidUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDidUseCase.swift; sourceTree = "<group>"; };
+		7FA3119429B43C2700A4C5DE /* CreateDidUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDidUseCaseTests.swift; sourceTree = "<group>"; };
 		7FA60AE828D6FB7A0098F3D2 /* MainViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerTests.swift; sourceTree = "<group>"; };
 		7FAD0FFB2990C4B2009E452E /* UIColor+IsDark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+IsDark.swift"; sourceTree = "<group>"; };
 		7FB3345C2953E58000E9FB88 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
@@ -419,6 +423,7 @@
 			isa = PBXGroup;
 			children = (
 				7FA3118E29B3324800A4C5DE /* FetchDidUseCase.swift */,
+				7FA3119229B43A1500A4C5DE /* CreateDidUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -609,6 +614,7 @@
 				7FDC19392977A26500117963 /* AboutViewModelTests.swift */,
 				7F6EF3AE29A744AE002B5970 /* CalendarViewModelTests.swift */,
 				7FA3119029B4211100A4C5DE /* FetchDidUseCaseTests.swift */,
+				7FA3119429B43C2700A4C5DE /* CreateDidUseCaseTests.swift */,
 			);
 			path = DidTodayUIKitTests;
 			sourceTree = "<group>";
@@ -797,6 +803,7 @@
 				7F397A6828D71E74000F89E2 /* CreateDidViewController.swift in Sources */,
 				7F850CB62965130E0083522A /* UserNotificationManager.swift in Sources */,
 				7F55E3FF294C08A0007B2706 /* CreateDidAlert.swift in Sources */,
+				7FA3119329B43A1500A4C5DE /* CreateDidUseCase.swift in Sources */,
 				7F850CC22966B6540083522A /* DidListCollectionViewController.swift in Sources */,
 				7FB6A8D628DD89E5009C61C5 /* Date+DifferenceToString.swift in Sources */,
 				7F80EBCB28D4102500781DB4 /* DidItemsViewModel.swift in Sources */,
@@ -874,6 +881,7 @@
 				7FC115A5293875510056237A /* DoingViewModelTests.swift in Sources */,
 				7FB6A8CB28DAF529009C61C5 /* CreateDidViewModelTests.swift in Sources */,
 				7F5ABAAD296FB81F002E509E /* BetaVersionMigrationTests.swift in Sources */,
+				7FA3119529B43C2700A4C5DE /* CreateDidUseCaseTests.swift in Sources */,
 				7FA60AE928D6FB7A0098F3D2 /* MainViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -428,6 +428,44 @@
 			path = UseCases;
 			sourceTree = "<group>";
 		};
+		7FA3119629B4450700A4C5DE /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				7FA3119029B4211100A4C5DE /* FetchDidUseCaseTests.swift */,
+				7FA3119429B43C2700A4C5DE /* CreateDidUseCaseTests.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		7FA3119729B4454500A4C5DE /* About */ = {
+			isa = PBXGroup;
+			children = (
+				7FDC19392977A26500117963 /* AboutViewModelTests.swift */,
+			);
+			path = About;
+			sourceTree = "<group>";
+		};
+		7FA3119829B4454F00A4C5DE /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				7F6EF3AE29A744AE002B5970 /* CalendarViewModelTests.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		7FA3119929B4456900A4C5DE /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				7F397A6428D709D3000F89E2 /* Main */,
+				7FB6A8C928DAF514009C61C5 /* CreateDid */,
+				7FC115A3293875370056237A /* Doing */,
+				7FA3119829B4454F00A4C5DE /* Calendar */,
+				7F5A69912968FC5700062E2B /* DetailDay */,
+				7FA3119729B4454500A4C5DE /* About */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
 		7FB3345B2953E36700E9FB88 /* About */ = {
 			isa = PBXGroup;
 			children = (
@@ -604,17 +642,11 @@
 		7FC22B7528CB145300F83122 /* DidTodayUIKitTests */ = {
 			isa = PBXGroup;
 			children = (
-				7F5A69912968FC5700062E2B /* DetailDay */,
-				7F397A6428D709D3000F89E2 /* Main */,
-				7FB6A8C928DAF514009C61C5 /* CreateDid */,
-				7FC115A3293875370056237A /* Doing */,
+				7FA3119629B4450700A4C5DE /* UseCases */,
+				7FA3119929B4456900A4C5DE /* Scenes */,
 				7FC22B6E28CB137E00F83122 /* DidCoreDataStorageTests.swift */,
-				7FC22B7E28CB232600F83122 /* Seeds.swift */,
 				7F5ABAAC296FB81F002E509E /* BetaVersionMigrationTests.swift */,
-				7FDC19392977A26500117963 /* AboutViewModelTests.swift */,
-				7F6EF3AE29A744AE002B5970 /* CalendarViewModelTests.swift */,
-				7FA3119029B4211100A4C5DE /* FetchDidUseCaseTests.swift */,
-				7FA3119429B43C2700A4C5DE /* CreateDidUseCaseTests.swift */,
+				7FC22B7E28CB232600F83122 /* Seeds.swift */,
 			);
 			path = DidTodayUIKitTests;
 			sourceTree = "<group>";

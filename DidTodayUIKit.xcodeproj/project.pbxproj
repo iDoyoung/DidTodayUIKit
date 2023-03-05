@@ -67,6 +67,8 @@
 		7F850CC22966B6540083522A /* DidListCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F850CC12966B6540083522A /* DidListCollectionViewController.swift */; };
 		7F9C0B9E293DAA8C0094C2A5 /* TimerAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9C0B9D293DAA8C0094C2A5 /* TimerAlert.swift */; };
 		7F9C0BA0293DC1BA0094C2A5 /* Double+ToStringOfTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9C0B9F293DC1BA0094C2A5 /* Double+ToStringOfTimer.swift */; };
+		7FA3118F29B3324800A4C5DE /* FetchDidUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA3118E29B3324800A4C5DE /* FetchDidUseCase.swift */; };
+		7FA3119129B4211100A4C5DE /* FetchDidUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA3119029B4211100A4C5DE /* FetchDidUseCaseTests.swift */; };
 		7FA60AE928D6FB7A0098F3D2 /* MainViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA60AE828D6FB7A0098F3D2 /* MainViewControllerTests.swift */; };
 		7FAD0FFC2990C4B2009E452E /* UIColor+IsDark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAD0FFB2990C4B2009E452E /* UIColor+IsDark.swift */; };
 		7FB3345D2953E58000E9FB88 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB3345C2953E58000E9FB88 /* AboutViewController.swift */; };
@@ -180,6 +182,8 @@
 		7F850CC12966B6540083522A /* DidListCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidListCollectionViewController.swift; sourceTree = "<group>"; };
 		7F9C0B9D293DAA8C0094C2A5 /* TimerAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerAlert.swift; sourceTree = "<group>"; };
 		7F9C0B9F293DC1BA0094C2A5 /* Double+ToStringOfTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+ToStringOfTimer.swift"; sourceTree = "<group>"; };
+		7FA3118E29B3324800A4C5DE /* FetchDidUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDidUseCase.swift; sourceTree = "<group>"; };
+		7FA3119029B4211100A4C5DE /* FetchDidUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDidUseCaseTests.swift; sourceTree = "<group>"; };
 		7FA60AE828D6FB7A0098F3D2 /* MainViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerTests.swift; sourceTree = "<group>"; };
 		7FAD0FFB2990C4B2009E452E /* UIColor+IsDark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+IsDark.swift"; sourceTree = "<group>"; };
 		7FB3345C2953E58000E9FB88 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
@@ -411,6 +415,14 @@
 			path = "Did List Collection";
 			sourceTree = "<group>";
 		};
+		7FA3118D29B3322F00A4C5DE /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				7FA3118E29B3324800A4C5DE /* FetchDidUseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
 		7FB3345B2953E36700E9FB88 /* About */ = {
 			isa = PBXGroup;
 			children = (
@@ -475,6 +487,7 @@
 		7FC22B5828C71AE400F83122 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				7FA3118D29B3322F00A4C5DE /* UseCases */,
 				7F850CB3296509820083522A /* AuthorizationManager.swift */,
 				7F850CB52965130E0083522A /* UserNotificationManager.swift */,
 				7FC22B6028C88A3A00F83122 /* Services */,
@@ -595,6 +608,7 @@
 				7F5ABAAC296FB81F002E509E /* BetaVersionMigrationTests.swift */,
 				7FDC19392977A26500117963 /* AboutViewModelTests.swift */,
 				7F6EF3AE29A744AE002B5970 /* CalendarViewModelTests.swift */,
+				7FA3119029B4211100A4C5DE /* FetchDidUseCaseTests.swift */,
 			);
 			path = DidTodayUIKitTests;
 			sourceTree = "<group>";
@@ -807,6 +821,7 @@
 				7FC22BBA28D0547500F83122 /* DidCell.swift in Sources */,
 				7FAD0FFC2990C4B2009E452E /* UIColor+IsDark.swift in Sources */,
 				504CE042253FDFAA000CC6CF /* AppDelegate.swift in Sources */,
+				7FA3118F29B3324800A4C5DE /* FetchDidUseCase.swift in Sources */,
 				7FB6A92528E07BED009C61C5 /* MonthLabel.swift in Sources */,
 				7FB6A92328E07BE4009C61C5 /* DayLabel.swift in Sources */,
 				7F43BBE22976799F0084FB78 /* AboutFlowCoordinator.swift in Sources */,
@@ -849,6 +864,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F80EBC928D334A000781DB4 /* MainViewModelTests.swift in Sources */,
+				7FA3119129B4211100A4C5DE /* FetchDidUseCaseTests.swift in Sources */,
 				7FC22B7D28CB145D00F83122 /* DidCoreDataStorageTests.swift in Sources */,
 				7FB6A8CF28DB00E3009C61C5 /* CreateDidViewControllerTests.swift in Sources */,
 				7F5A69932968FC7A00062E2B /* DetaiDaylViewModelTests.swift in Sources */,

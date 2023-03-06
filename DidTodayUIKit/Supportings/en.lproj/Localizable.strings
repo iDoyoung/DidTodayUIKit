@@ -8,12 +8,15 @@
 //MARK: - Main
 "Recently" = "Recently";
 "Much time" = "Much time";
-"Tap to Start" = "Tap to Button";
+"Tap to Start" = "Tap to Start";
 "Tap and start anything" = "Tap and start anything";
+//MARK: Alert
+"Deleted record" = "Deleted record";
+"Opps! You close app when recording, so deleted this record" = "Opps! You close app when recording, so deleted this record";
 
-//MARK: - In Doing
+//MARK: - Doing
 "Keep going!" = "Keep going!";
-"Couldn't add within 5 minutes" = "Couldn't finish a work within 5 minutes";
+"Couldn't finish a work within 5 minutes" = "Couldn't finish a work within 5 minutes";
 "Started Time: %@" = "Started Time: %@";
 "Day is changed!" = "Day is changed!";
 "Are you working now? If you are not, please cancel or finish a work." = "Are you working now? If you are not, please cancel or finish a work.";
@@ -23,8 +26,6 @@
 //MARK: - Create Did
 "Finishing touches" = "Finishing touches";
 "Create Did" = "Create Did";
-
-//MARK: - In Create Did
 "Discard your Creation?" = "Discard your Creation?";
 "Complete your Creation?" = "Complete your Creation?";
 
@@ -48,6 +49,5 @@
 
 "Cancel" = "Cancel";
 "OK" = "OK";
-"Done" = "완료";
 
 "You cannot undo." = "You cannot undo.";

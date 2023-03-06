@@ -10,6 +10,9 @@
 "Much time" = "오래한순";
 "Tap to start" = "눌러서 시작하기";
 "Tap and start anything" = "눌러서 무엇이든지 시작해보세요";
+//MARK: Alert
+"Deleted record" = "기록 삭제";
+"Opps! You close app when recording, so deleted this record" = "이런! 기록 중에 앱을 닫으셨어요. 기록 중, 앱을 종료하면 기록 중이었던 것이 삭제돼요.";
 
 //MARK: - In Doing
 "Keep going!" = "계속 나아가요!";

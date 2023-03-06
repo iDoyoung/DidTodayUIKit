@@ -20,7 +20,7 @@ enum CustomText {
     
     //MARK: - For Doing
     static let firstTipInDoing = "Keep going!".localized
-    static let secondTipInDoing = "Couldn't add within 5 minutes".localized
+    static let secondTipInDoing = "Couldn't finish a work within 5 minutes".localized
     static func started(time: String) -> String {
         return String(format: "Started Time: %@".localized, time)
     }
@@ -32,10 +32,11 @@ enum CustomText {
     static let doneTimerTitle = "Are you sure to finish?".localized
     static let cancelTimerMessage = "You cannot undo.".localized
     static let doneTimerMessage = "You cannot undo.".localized
+    
+    //MARK: - For Create Did
     static let finishingTouches = "Finishing touches".localized
     static let createDid = "Create Did".localized
     
-    //MARK: - For Create Did
     //MARK: Alert
     static let discardToCreateDidTitle = "Discard your Creation?".localized
     static let discardToCreateDidMessage = "You cannot undo.".localized

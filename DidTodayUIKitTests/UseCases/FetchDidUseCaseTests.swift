@@ -45,11 +45,11 @@ final class FetchDidUseCaseTests: XCTestCase {
             return did
         }
         
-        func fetchDids() async throws -> [DidTodayUIKit.Did] {
+        func fetchDids(with filtering: Date?) async throws -> [DidTodayUIKit.Did] {
             fetchDidsCalled = true
             return mockDids
         }
-       
+        
         func update(_ did: DidTodayUIKit.Did, completion: @escaping (DidTodayUIKit.Did, DidTodayUIKit.CoreDataStoreError?) -> Void) {
             updateCalled = true
         }
@@ -60,9 +60,14 @@ final class FetchDidUseCaseTests: XCTestCase {
     }
     
     //MARK: - Tests
-    func test_loadAll_shouldCallStorageAndGetDids() async throws {
+    func test_execute_shouldCallStorageAndGetDids() async throws {
         let loaded = try await sut.execute()
         XCTAssertTrue(loaded.count == 2)
+        XCTAssertTrue(didCoreDataStorageSpy.fetchDidsCalled)
+    }
+    
+    func test_executeFilteredByToday() async throws {
+        let _ = try await sut.executeFilteredByToday()
         XCTAssertTrue(didCoreDataStorageSpy.fetchDidsCalled)
     }
 }

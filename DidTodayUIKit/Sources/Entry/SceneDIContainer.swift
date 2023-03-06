@@ -22,6 +22,15 @@ final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
     //MARK: Core Data Storage
     let didCoreDataStorage = DidCoreDataStorage()
     
+    //MARK: Use Case
+    private func makeFetchDidUseCase() -> FetchDidUseCase {
+        return DefaultFetchDidUseCase(storage: didCoreDataStorage)
+    }
+    
+    private func makeCreateDidUseCase() -> CreateDidUseCase {
+        return DefaultCreateDidUseCase(storage: didCoreDataStorage)
+    }
+    
     //MARK: Main VC
     func makeMainViewController(router: MainRouter) -> UIViewController {
         let viewController = MainViewController.create(with: makeMainViewModel(router: router))
@@ -29,7 +38,7 @@ final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
     }
     
     private func makeMainViewModel(router: MainRouter) -> MainViewModelProtocol {
-        let viewModel = MainViewModel(didCoreDataStorage: didCoreDataStorage, router: router)
+        let viewModel = MainViewModel(fetchDidUseCase: makeFetchDidUseCase(), router: router)
         return viewModel
     }
     
@@ -40,7 +49,7 @@ final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
     }
     
     private func makeCalendarViewModel(router: CalendarRouter) -> CalendarViewModelProtocol {
-        let viewModel = CalendarViewModel(didCoreDataStorage: didCoreDataStorage, router: router)
+        let viewModel = CalendarViewModel(fetchDidUseCase: makeFetchDidUseCase(), router: router)
         return viewModel
     }
     

@@ -28,7 +28,7 @@ protocol CalendarViewModelOutput {
 final class CalendarViewModel: CalendarViewModelProtocol {
     
     //MARK: - Properties
-    private var didCoreDataStorage: DidCoreDataStorable?
+    private var fetchDidUseCase: FetchDidUseCase?
     private var router: CalendarRouter?
     private var cancellableBag = Set<AnyCancellable>()
     
@@ -42,8 +42,8 @@ final class CalendarViewModel: CalendarViewModelProtocol {
     private var didsSelectedDay = CurrentValueSubject<[Did], Never>([])
         
     //MARK: - Methods
-    init(didCoreDataStorage: DidCoreDataStorable, router: CalendarRouter) {
-        self.didCoreDataStorage = didCoreDataStorage
+    init(fetchDidUseCase: FetchDidUseCase, router: CalendarRouter) {
+        self.fetchDidUseCase = fetchDidUseCase
         self.router = router
         
         fetchedDids
@@ -84,7 +84,7 @@ final class CalendarViewModel: CalendarViewModelProtocol {
     
     func fetchDids() {
         Task {
-            guard let fetched = try await didCoreDataStorage?.fetchDids() else { return }
+            guard let fetched = try await fetchDidUseCase?.execute() else { return }
             fetchedDids.send(fetched)
             //TODO: Alert 사용해서 Core Data Fetch 실패를 알려야 하나
         }

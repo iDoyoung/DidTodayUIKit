@@ -35,7 +35,7 @@ final class MainViewModel: MainViewModelProtocol {
     //MARK: - Properties
     
     //MARK: Components
-    private var didCoreDataStorage: DidCoreDataStorable?
+    private var fetchDidUseCase: FetchDidUseCase?
     private var router: MainRouter?
     private var cancellableBag = Set<AnyCancellable>()
     
@@ -48,8 +48,8 @@ final class MainViewModel: MainViewModelProtocol {
     var didItemsList = CurrentValueSubject<[DidItemViewModel], Never>([])
     
     //MARK: - Method
-    init(didCoreDataStorage: DidCoreDataStorable, router: MainRouter) {
-        self.didCoreDataStorage = didCoreDataStorage
+    init(fetchDidUseCase: FetchDidUseCase, router: MainRouter) {
+        self.fetchDidUseCase = fetchDidUseCase
         self.router = router
         let calendar = Calendar.current
         fetchedDids
@@ -77,7 +77,7 @@ final class MainViewModel: MainViewModelProtocol {
     //MARK: - Input
     func fetchDids() {
         Task {
-            guard let fetched = try await didCoreDataStorage?.fetchDids() else { return }
+            guard let fetched = try await fetchDidUseCase?.execute() else { return }
             fetchedDids.send(fetched)
             //TODO: Alert 사용해서 Core Data Fetch 실패를 알려야 하나
         }

@@ -12,7 +12,6 @@ import Combine
 final class CalendarViewModelTests: XCTestCase {
 
     var sut: CalendarViewModel!
-    var didsCoreDataStorageSpy: DidsCoreDataStorageSpy!
     var coordinatorSpy: CoordinatorSpy!
     var mockDids = [Seeds.Dids.christmasParty, Seeds.Dids.newYearParty, Seeds.Dids.todayDidMock2, Seeds.Dids.todayDidMock]
     
@@ -20,43 +19,29 @@ final class CalendarViewModelTests: XCTestCase {
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        didsCoreDataStorageSpy = DidsCoreDataStorageSpy()
+        fetchDidUseCaseSpy = FetchDidUseCaseSpy()
         coordinatorSpy = CoordinatorSpy()
         let router = CalendarRouter(showDetailDay: coordinatorSpy.showDetail(date:dids:))
-        sut = CalendarViewModel(didCoreDataStorage: didsCoreDataStorageSpy, router: router)
+        sut = CalendarViewModel(fetchDidUseCase: fetchDidUseCaseSpy, router: router)
     }
 
     override func tearDownWithError() throws {
         sut = nil
+        fetchDidUseCaseSpy = nil
+        coordinatorSpy = nil
         try super.tearDownWithError()
     }
     
     //MARK: - Test Doubles
-    final class DidsCoreDataStorageSpy: DidCoreDataStorable {
+    var fetchDidUseCaseSpy: FetchDidUseCaseSpy!
+    
+    final class FetchDidUseCaseSpy: FetchDidUseCase {
         
-        var dids: [Did]!
-        var createDidCalled = false
-        @Published var fetchDidsCalled = false
-        var updateDidCalled = false
-        var deleteDidCalled = false
+        @Published var isExecuted = false
         
-        func create(_ did: DidTodayUIKit.Did) async throws -> DidTodayUIKit.Did {
-            createDidCalled = true
-            return Seeds.Dids.newYearParty
-        }
-       
-        func fetchDids() async throws -> [DidTodayUIKit.Did] {
-            fetchDidsCalled = true
-            dids = [Seeds.Dids.christmasParty, Seeds.Dids.newYearParty, Seeds.Dids.todayDidMock2, Seeds.Dids.todayDidMock]
-            return dids
-        }
-        
-        func update(_ did: Did, completion: @escaping (Did, CoreDataStoreError?) -> Void) {
-            updateDidCalled = true
-        }
-        
-        func delete(_ did: Did, completion: @escaping (Did, CoreDataStoreError?) -> Void) {
-            deleteDidCalled = true
+        func execute() async throws -> [DidTodayUIKit.Did] {
+            isExecuted = true
+            return [Seeds.Dids.christmasParty, Seeds.Dids.newYearParty, Seeds.Dids.todayDidMock2, Seeds.Dids.todayDidMock]
         }
     }
     
@@ -72,7 +57,7 @@ final class CalendarViewModelTests: XCTestCase {
     //MARK: - Tests
     func test_fetchDids_shouldCallStorage() {
         let promise = expectation(description: "Storage Be Called")
-        didsCoreDataStorageSpy.$fetchDidsCalled
+        fetchDidUseCaseSpy.$isExecuted
             .sink { isCalled in
                 if isCalled {
                     promise.fulfill()
@@ -83,7 +68,7 @@ final class CalendarViewModelTests: XCTestCase {
         sut.fetchDids()
         wait(for: [promise], timeout: 2)
         
-        XCTAssertTrue(didsCoreDataStorageSpy.fetchDidsCalled)
+        XCTAssertTrue(fetchDidUseCaseSpy.isExecuted)
     }
     
     func test_fetchDids_shouldSendDateOfDidsWhenHaveDidsAndStartedDataHasValue() {

@@ -96,6 +96,7 @@ final class CreateDidViewController: ParentUIViewController, StoryboardInstantia
     }
    
     private func setupNavigationBar() {
+        navigationController?.navigationBar.tintColor = .label
         let imageConfiguration = UIImage.SymbolConfiguration(pointSize: 20, weight: .black, scale: .default)
         let xmarkImage = UIImage(systemName: "xmark", withConfiguration: imageConfiguration)
         let rightBarButton = UIBarButtonItem(image: xmarkImage, style: .plain, target: self, action: #selector(closeView))

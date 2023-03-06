@@ -15,7 +15,7 @@ enum CoreDataStoreError: Error {
 
 protocol DidCoreDataStorable {
     @discardableResult func create(_ did: Did) async throws -> Did
-    func fetchDids() async throws -> [Did]
+    func fetchDids(with filtering: Date?) async throws -> [Did]
     func update(_ did: Did, completion: @escaping (Did, CoreDataStoreError?) -> Void)
     func delete(_ did: Did, completion: @escaping (Did, CoreDataStoreError?) -> Void)
 }
@@ -49,11 +49,17 @@ final class DidCoreDataStorage: DidCoreDataStorable {
         }
     }
     
-    func fetchDids() async throws -> [Did] {
+    func fetchDids(with filtering: Date?) async throws -> [Did] {
         return try await withCheckedThrowingContinuation { continuation in
             persistentContainer.performBackgroundTask { context in
                 do {
                     let request = ManagedDidItem.fetchRequest()
+                    if let filtering {
+                        let calendar = Calendar.current
+                        let startDate = calendar.startOfDay(for: filtering)
+                        let endDate = calendar.date(byAdding: .day, value: 1, to: startDate)!
+                        request.predicate = NSPredicate(format: "finished>=%@ AND finished<=%@", startDate as NSDate, endDate as NSDate)
+                    }
                     let result = try context.fetch(request)
                     let fetched = result.map { $0.toDidItem() }
                     continuation.resume(returning: fetched)

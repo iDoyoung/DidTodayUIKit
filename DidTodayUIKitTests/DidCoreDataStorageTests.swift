@@ -25,6 +25,7 @@ class DidCoreDataStorageTests: XCTestCase {
         try super.tearDownWithError()
     }
     
+    
     func deleteAllDids() {
         fetchedMockDids?.forEach {
             let promise = expectation(description: "Should Delete Mock")
@@ -40,10 +41,41 @@ class DidCoreDataStorageTests: XCTestCase {
         XCTAssertNil(fetchedMockDids)
     }
    
+    //MARK: - Test Doubles
+    let newYearMock = Seeds.Dids.newYearParty
+    let todayMock = Seeds.Dids.todayDidMock
+    
     //MARK: - Tests
     func test_create_shouldEqualMockWithCreation() async throws {
         let mock = Seeds.Dids.newYearParty
         let creation = try await sut.create(mock)
         XCTAssertEqual(mock, creation)
+    }
+    
+    func test_fetchAll() async throws {
+        ///given
+        try await createMockData()
+        ///when
+        let result = try await sut.fetchDids(with: nil)
+        ///then
+        XCTAssertTrue(result.contains(newYearMock))
+        XCTAssertTrue(result.contains(todayMock))
+    }
+    
+    func test_fetchToday() async throws {
+        ///given
+        try await createMockData()
+        ///when
+        let result = try await sut.fetchDids(with: Date())
+        ///then
+        XCTAssertFalse(result.contains(newYearMock))
+        XCTAssertTrue(result.contains(todayMock))
+    }
+    
+    func createMockData() async throws {
+        fetchedMockDids?.append(newYearMock)
+        fetchedMockDids?.append(todayMock)
+        _ = try await sut.create(newYearMock)
+        _ = try await sut.create(todayMock)
     }
 }

@@ -41,7 +41,7 @@ final class CreateDidUseCaseTests: XCTestCase {
             return did
         }
         
-        func fetchDids() async throws -> [DidTodayUIKit.Did] {
+        func fetchDids(with filtering: Date?) async throws -> [DidTodayUIKit.Did]  {
             fetchDidsCalled = true
             return []
         }

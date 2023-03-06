@@ -43,6 +43,10 @@ final class CalendarViewModelTests: XCTestCase {
             isExecuted = true
             return [Seeds.Dids.christmasParty, Seeds.Dids.newYearParty, Seeds.Dids.todayDidMock2, Seeds.Dids.todayDidMock]
         }
+        
+        func executeFilteredByToday() async throws -> [DidTodayUIKit.Did] {
+            return []
+        }
     }
     
     class CoordinatorSpy {

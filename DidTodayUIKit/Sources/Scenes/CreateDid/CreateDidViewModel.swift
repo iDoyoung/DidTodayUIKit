@@ -46,7 +46,7 @@ final class CreateDidViewModel: CreateDidViewModelProtocol {
     //MARK: - Properties
     
     //MARK: Components
-    var didCoreDataStorage: DidCoreDataStorable?
+    var createDidUseCase: CreateDidUseCase?
     private var cancellableBag = Set<AnyCancellable>()
     
     //MARK: - Input
@@ -66,8 +66,8 @@ final class CreateDidViewModel: CreateDidViewModelProtocol {
     
     //MARK: - Methods
     
-    init(didCoreDataStorage: DidCoreDataStorable, startedDate: Date?, endedDate: Date?, fromDoing: Bool) {
-        self.didCoreDataStorage = didCoreDataStorage
+    init(createDidUseCase: CreateDidUseCase, startedDate: Date?, endedDate: Date?, fromDoing: Bool) {
+        self.createDidUseCase = createDidUseCase
         
         startedTime
             .compactMap { $0?.timesCalculateToMinutes() }
@@ -127,7 +127,7 @@ final class CreateDidViewModel: CreateDidViewModelProtocol {
                       content: title,
                       color: color)
         do {
-            try await didCoreDataStorage?.create(did)
+            try await createDidUseCase?.execute(did)
             isCompleted.send(true)
         } catch let error {
             if let coreDataError = error as? CoreDataStoreError {

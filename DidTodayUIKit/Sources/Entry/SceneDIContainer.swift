@@ -71,7 +71,7 @@ final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
     }
     
     private func makeCreateDidViewModel(startedDate: Date?, endedDate: Date?, fromDoing: Bool) -> CreateDidViewModelProtocol {
-        let viewModel = CreateDidViewModel(didCoreDataStorage: didCoreDataStorage, startedDate: startedDate, endedDate: endedDate, fromDoing: fromDoing)
+        let viewModel = CreateDidViewModel(createDidUseCase: makeCreateDidUseCase(), startedDate: startedDate, endedDate: endedDate, fromDoing: fromDoing)
         return viewModel
     }
     

@@ -8,7 +8,7 @@
 import Foundation
 
 protocol CreateDidUseCase {
-    func execute(_ did: Did) async throws -> Did 
+    @discardableResult func execute(_ did: Did) async throws -> Did
 }
 
 final class DefaultCreateDidUseCase: CreateDidUseCase {
@@ -19,7 +19,7 @@ final class DefaultCreateDidUseCase: CreateDidUseCase {
         self.storage = storage
     }
     
-    @discardableResult func execute(_ did: Did) async throws -> Did {
+    func execute(_ did: Did) async throws -> Did {
         try await storage.create(did)
     }
 }

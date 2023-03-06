@@ -60,7 +60,6 @@ final class DoingViewModel: DoingViewModelProtocol {
     }
    
     func endDoing() {
-        UserDefaults.standard.removeObject(forKey: "start-time-of-doing")
         endedDate = Date()
     }
     

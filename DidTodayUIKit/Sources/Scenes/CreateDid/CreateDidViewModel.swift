@@ -128,6 +128,7 @@ final class CreateDidViewModel: CreateDidViewModelProtocol {
                       color: color)
         do {
             try await createDidUseCase?.execute(did)
+            UserDefaults.standard.removeObject(forKey: "start-time-of-doing")
             isCompleted.send(true)
         } catch let error {
             if let coreDataError = error as? CoreDataStoreError {

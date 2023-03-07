@@ -127,14 +127,13 @@ fastlane/test_output
 iOSInjectionProject/
 
 ### Xcode ###
-
-## Xcode 8 and earlier
-
 ### Xcode Patch ###
 *.xcodeproj/*
 !*.xcodeproj/project.pbxproj
 !*.xcodeproj/xcshareddata/
 !*.xcworkspace/contents.xcworkspacedata
+# for xcode cloud
+!*.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
 /*.gcno
 **/xcshareddata/WorkspaceSettings.xcsettings
 

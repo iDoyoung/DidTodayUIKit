@@ -21,6 +21,7 @@ protocol DoingViewModelOutput {
     var isLessThanTime: CurrentValueSubject<Bool, Never> { get }
     
     func showCreateDid()
+    func cancel()
 }
 
 final class DoingViewModel: DoingViewModelProtocol {
@@ -90,6 +91,10 @@ final class DoingViewModel: DoingViewModelProtocol {
         if startedDate != nil, endedDate != nil {
             router?.showCreateDid(startedDate, endedDate)
         }
+    }
+    
+    func cancel() {
+        UserDefaults.standard.removeObject(forKey: "start-time-of-doing")
     }
     
     deinit {

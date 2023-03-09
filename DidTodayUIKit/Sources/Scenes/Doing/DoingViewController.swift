@@ -44,7 +44,7 @@ final class DoingViewController: ParentUIViewController, StoryboardInstantiable 
             timerLabel.animateToShake()
         } else {
             viewModel.endDoing()
-            present(doneTimerAlert(), animated: true)
+            viewModel.showCreateDid()
         }
     }
     
@@ -181,12 +181,8 @@ final class DoingViewController: ParentUIViewController, StoryboardInstantiable 
 extension DoingViewController: TimerAlert {
     
     func cancelTimer() {
-        viewModel?.endDoing()
+        viewModel?.cancel()
         dismiss(animated: true)
-    }
-    
-    func doneTimer() {
-        viewModel?.showCreateDid()
     }
 }
 

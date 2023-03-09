@@ -65,6 +65,10 @@
 		7F850CB829651EE00083522A /* DayIsChangedNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F850CB729651EE00083522A /* DayIsChangedNotification.swift */; };
 		7F850CBB29655C2E0083522A /* DetailDayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F850CBA29655C2E0083522A /* DetailDayViewController.swift */; };
 		7F850CC22966B6540083522A /* DidListCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F850CC12966B6540083522A /* DidListCollectionViewController.swift */; };
+		7F9B3FB729B9F01900C8A3D0 /* FlexLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 7F9B3FB629B9F01900C8A3D0 /* FlexLayout */; };
+		7F9B3FBA29B9F06700C8A3D0 /* PinLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 7F9B3FB929B9F06700C8A3D0 /* PinLayout */; };
+		7F9B3FC029B9F47600C8A3D0 /* FlexLayoutYoga in Frameworks */ = {isa = PBXBuildFile; productRef = 7F9B3FBF29B9F47600C8A3D0 /* FlexLayoutYoga */; };
+		7F9B3FC229B9F47600C8A3D0 /* FlexLayoutYogaKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7F9B3FC129B9F47600C8A3D0 /* FlexLayoutYogaKit */; };
 		7F9C0B9E293DAA8C0094C2A5 /* TimerAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9C0B9D293DAA8C0094C2A5 /* TimerAlert.swift */; };
 		7F9C0BA0293DC1BA0094C2A5 /* Double+ToStringOfTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9C0B9F293DC1BA0094C2A5 /* Double+ToStringOfTimer.swift */; };
 		7FA3118F29B3324800A4C5DE /* FetchDidUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA3118E29B3324800A4C5DE /* FetchDidUseCase.swift */; };
@@ -232,7 +236,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F9B3FBA29B9F06700C8A3D0 /* PinLayout in Frameworks */,
+				7F9B3FC229B9F47600C8A3D0 /* FlexLayoutYogaKit in Frameworks */,
 				7F583F2D2910EE90006735AA /* HorizonCalendar in Frameworks */,
+				7F9B3FB729B9F01900C8A3D0 /* FlexLayout in Frameworks */,
+				7F9B3FC029B9F47600C8A3D0 /* FlexLayoutYoga in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -725,6 +733,10 @@
 			name = DidTodayUIKit;
 			packageProductDependencies = (
 				7F583F2C2910EE90006735AA /* HorizonCalendar */,
+				7F9B3FB629B9F01900C8A3D0 /* FlexLayout */,
+				7F9B3FB929B9F06700C8A3D0 /* PinLayout */,
+				7F9B3FBF29B9F47600C8A3D0 /* FlexLayoutYoga */,
+				7F9B3FC129B9F47600C8A3D0 /* FlexLayoutYogaKit */,
 			);
 			productName = DidTodayUIKit;
 			productReference = 504CE03E253FDFAA000CC6CF /* DidTodayUIKit.app */;
@@ -778,6 +790,8 @@
 			mainGroup = 504CE035253FDFA9000CC6CF;
 			packageReferences = (
 				7F583F2B2910EE90006735AA /* XCRemoteSwiftPackageReference "HorizonCalendar" */,
+				7F9B3FB529B9F01900C8A3D0 /* XCRemoteSwiftPackageReference "FlexLayout" */,
+				7F9B3FB829B9F06700C8A3D0 /* XCRemoteSwiftPackageReference "PinLayout" */,
 			);
 			productRefGroup = 504CE03F253FDFAA000CC6CF /* Products */;
 			projectDirPath = "";
@@ -1093,6 +1107,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3XVAQ6DRC4;
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "FLEXLAYOUT_SWIFT_PACKAGE=1";
 				INFOPLIST_FILE = DidTodayUIKit/Supportings/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1113,6 +1128,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3XVAQ6DRC4;
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "FLEXLAYOUT_SWIFT_PACKAGE=1";
 				INFOPLIST_FILE = DidTodayUIKit/Supportings/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1207,6 +1223,22 @@
 				kind = branch;
 			};
 		};
+		7F9B3FB529B9F01900C8A3D0 /* XCRemoteSwiftPackageReference "FlexLayout" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/layoutBox/FlexLayout";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		7F9B3FB829B9F06700C8A3D0 /* XCRemoteSwiftPackageReference "PinLayout" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/layoutBox/PinLayout";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1214,6 +1246,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7F583F2B2910EE90006735AA /* XCRemoteSwiftPackageReference "HorizonCalendar" */;
 			productName = HorizonCalendar;
+		};
+		7F9B3FB629B9F01900C8A3D0 /* FlexLayout */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7F9B3FB529B9F01900C8A3D0 /* XCRemoteSwiftPackageReference "FlexLayout" */;
+			productName = FlexLayout;
+		};
+		7F9B3FB929B9F06700C8A3D0 /* PinLayout */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7F9B3FB829B9F06700C8A3D0 /* XCRemoteSwiftPackageReference "PinLayout" */;
+			productName = PinLayout;
+		};
+		7F9B3FBF29B9F47600C8A3D0 /* FlexLayoutYoga */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7F9B3FB529B9F01900C8A3D0 /* XCRemoteSwiftPackageReference "FlexLayout" */;
+			productName = FlexLayoutYoga;
+		};
+		7F9B3FC129B9F47600C8A3D0 /* FlexLayoutYogaKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7F9B3FB529B9F01900C8A3D0 /* XCRemoteSwiftPackageReference "FlexLayout" */;
+			productName = FlexLayoutYogaKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 

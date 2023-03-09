@@ -51,11 +51,10 @@ final class MainViewModel: MainViewModelProtocol {
     init(fetchDidUseCase: FetchDidUseCase, router: MainRouter) {
         self.fetchDidUseCase = fetchDidUseCase
         self.router = router
-        let calendar = Calendar.current
+        
         fetchedDids
             .map {
                 $0
-                    .filter { calendar.isDateInToday($0.started) }
                     .map { DidItemViewModel($0) }
                     .sorted { $0.startedTimes > $1.startedTimes }
             }
@@ -65,8 +64,7 @@ final class MainViewModel: MainViewModelProtocol {
             .store(in: &cancellableBag)
         fetchedDids
             .map {
-                let output = $0.filter { calendar.isDateInToday($0.started) }
-                return TotalOfDidsItemViewModel(output)
+                TotalOfDidsItemViewModel($0)
             }
             .sink { [weak self] item in
                 self?.totalPieDids.send(item)
@@ -77,7 +75,7 @@ final class MainViewModel: MainViewModelProtocol {
     //MARK: - Input
     func fetchDids() {
         Task {
-            guard let fetched = try await fetchDidUseCase?.execute() else { return }
+            guard let fetched = try await fetchDidUseCase?.executeFilteredByToday() else { return }
             fetchedDids.send(fetched)
             //TODO: Alert 사용해서 Core Data Fetch 실패를 알려야 하나
         }

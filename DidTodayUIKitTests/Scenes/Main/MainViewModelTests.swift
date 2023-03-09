@@ -64,9 +64,11 @@ class MainViewModelTests: XCTestCase {
     final class FetchDidUseCaseSpy: FetchDidUseCase {
         
         @Published var isExecuted = false
+        @Published var isExecutedFilteredToday = false
         
         func executeFilteredByToday() async throws -> [DidTodayUIKit.Did] {
-            return []
+            isExecutedFilteredToday = true
+            return [Seeds.Dids.todayDidMock2, Seeds.Dids.todayDidMock]
         }
         
         func execute() async throws -> [DidTodayUIKit.Did] {
@@ -78,7 +80,7 @@ class MainViewModelTests: XCTestCase {
     //MARK: - Tests
     func test_fetchDids_shouldCallCoreDataStorage() {
         let promise = expectation(description: "Storage Be Called")
-        fetchDidUseCaseSpy.$isExecuted
+        fetchDidUseCaseSpy.$isExecutedFilteredToday
             .sink { isCalled in
                 if isCalled {
                     promise.fulfill()
@@ -88,7 +90,7 @@ class MainViewModelTests: XCTestCase {
         
         sut.fetchDids()
         wait(for: [promise], timeout: 2)
-        XCTAssertTrue(fetchDidUseCaseSpy.isExecuted)
+        XCTAssertTrue(fetchDidUseCaseSpy.isExecutedFilteredToday)
     }
     
     func test_fetchDids_shouldSendDidItemsList() {
@@ -130,10 +132,9 @@ class MainViewModelTests: XCTestCase {
         XCTAssertEqual(sut.totalPieDids.value, TotalOfDidsItemViewModel(expectation))
     }
     
-    
     func test_selectRecently_shouldBeSelectedRecentlyButtonAndNotSelectedMuchTimeButtonWhenIsNotSelectedRecentlyButtonAndSortedByStartedDate() {
         let promise = expectation(description: "Storage Be Called")
-        fetchDidUseCaseSpy.$isExecuted
+        fetchDidUseCaseSpy.$isExecutedFilteredToday
             .sink { isCalled in
                 if isCalled {
                     promise.fulfill()

@@ -53,6 +53,8 @@
 		7F5ABAAB296F97FA002E509E /* BetaVersionMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5ABAAA296F97FA002E509E /* BetaVersionMigration.swift */; };
 		7F5ABAAD296FB81F002E509E /* BetaVersionMigrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5ABAAC296FB81F002E509E /* BetaVersionMigrationTests.swift */; };
 		7F61A03C294439A80084A3F6 /* UIView+animateToShake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F61A03B294439A80084A3F6 /* UIView+animateToShake.swift */; };
+		7F666DB229BACC6100D32E29 /* UIViewPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F666DB129BACC6100D32E29 /* UIViewPreview.swift */; };
+		7F666DB529BAD01400D32E29 /* DidDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F666DB429BAD01400D32E29 /* DidDetails.swift */; };
 		7F6EF3AF29A744AE002B5970 /* CalendarViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EF3AE29A744AE002B5970 /* CalendarViewModelTests.swift */; };
 		7F71192B290B95FB001DFE99 /* UIColor+GradientEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F71192A290B95FB001DFE99 /* UIColor+GradientEffect.swift */; };
 		7F71192D290BBC8B001DFE99 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F71192C290BBC8B001DFE99 /* CalendarViewModel.swift */; };
@@ -174,6 +176,8 @@
 		7F5ABAAA296F97FA002E509E /* BetaVersionMigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetaVersionMigration.swift; sourceTree = "<group>"; };
 		7F5ABAAC296FB81F002E509E /* BetaVersionMigrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetaVersionMigrationTests.swift; sourceTree = "<group>"; };
 		7F61A03B294439A80084A3F6 /* UIView+animateToShake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+animateToShake.swift"; sourceTree = "<group>"; };
+		7F666DB129BACC6100D32E29 /* UIViewPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewPreview.swift; sourceTree = "<group>"; };
+		7F666DB429BAD01400D32E29 /* DidDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidDetails.swift; sourceTree = "<group>"; };
 		7F6EF3AE29A744AE002B5970 /* CalendarViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModelTests.swift; sourceTree = "<group>"; };
 		7F71192A290B95FB001DFE99 /* UIColor+GradientEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+GradientEffect.swift"; sourceTree = "<group>"; };
 		7F71192C290BBC8B001DFE99 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
@@ -399,6 +403,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		7F666DB329BAD00100D32E29 /* DidDetails */ = {
+			isa = PBXGroup;
+			children = (
+				7F666DB429BAD01400D32E29 /* DidDetails.swift */,
+			);
+			path = DidDetails;
+			sourceTree = "<group>";
+		};
 		7F850C5F2961A3490083522A /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -553,6 +565,7 @@
 		7FC22B5928C71AEB00F83122 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				7F666DB329BAD00100D32E29 /* DidDetails */,
 				7FB6A91F28E079ED009C61C5 /* Custom */,
 				7F850CC32966D1920083522A /* Did List Collection */,
 				7FC22B5A28C71AF500F83122 /* Main */,
@@ -581,6 +594,7 @@
 		7FC22B5B28C71B1700F83122 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				7F666DB129BACC6100D32E29 /* UIViewPreview.swift */,
 				7F133CA2290902EC0099E55C /* StoryboardInstantiable.swift */,
 				50A450592564CFD500812F14 /* Localize.swift */,
 				7F61A03A294438E10084A3F6 /* Extensions */,
@@ -855,6 +869,7 @@
 				7F80EBCB28D4102500781DB4 /* DidItemsViewModel.swift in Sources */,
 				7F43BBD12974D9A70084FB78 /* CustomText.swift in Sources */,
 				7FEB0064295C242D0073B90C /* UIView+Animate To Hide.swift in Sources */,
+				7F666DB229BACC6100D32E29 /* UIViewPreview.swift in Sources */,
 				7FC22BB828CDE19300F83122 /* MainViewController.swift in Sources */,
 				7F0B97B9292C58060071DF98 /* NeumorphismButton.swift in Sources */,
 				7FD2B04C2909161A0048408F /* StoryboardName.swift in Sources */,
@@ -904,6 +919,7 @@
 				7F133C632907C66A0099E55C /* MainFlowCoordinator.swift in Sources */,
 				7FC115A229386B930056237A /* DoingViewModel.swift in Sources */,
 				7F10CF7C2967AF7F00EAADF2 /* CalendarFlowCoordinator.swift in Sources */,
+				7F666DB529BAD01400D32E29 /* DidDetails.swift in Sources */,
 				504CE0B4253FDFDF000CC6CF /* PreviousVersionModel.swift in Sources */,
 				7F133CA3290902EC0099E55C /* StoryboardInstantiable.swift in Sources */,
 				7F5A91C828E68CCF006B8406 /* Date+ToString.swift in Sources */,

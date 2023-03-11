@@ -13,7 +13,12 @@ final class DidDetailsView: UIView {
     
     private let rootFlexContainer = UIView()
     
-    ///기록한 날짜
+    let effectView: UIVisualEffectView = {
+        let effect = UIBlurEffect(style: .systemMaterial)
+        let effectView = UIVisualEffectView(effect: effect)
+        return effectView
+    }()
+    
     let dateLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .title3)
@@ -42,8 +47,8 @@ final class DidDetailsView: UIView {
     
     init() {
         super.init(frame: .zero)
-        
-        addSubview(rootFlexContainer)
+        addSubview(effectView)
+        effectView.contentView.addSubview(rootFlexContainer)
         rootFlexContainer.flex
             .direction(.column)
             .justifyContent(.end)
@@ -89,6 +94,7 @@ final class DidDetailsView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        effectView.pin.all()
         rootFlexContainer.pin.all(self.pin.safeArea)
         rootFlexContainer.flex.layout(mode: .adjustHeight)
     }

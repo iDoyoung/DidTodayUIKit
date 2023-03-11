@@ -16,14 +16,15 @@ final class DidDetailsView: UIView {
     ///기록한 날짜
     let dateLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: .title1)
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
         return label
     }()
     
-    let titleLabel: UITextField = {
-        let textField = UITextField()
-        textField.font = UIFont.preferredFont(forTextStyle: .title1)
-        return textField
+    let titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
+        label.numberOfLines = 0
+        return label
     }()
     
     let didTimeLabel: UILabel = {
@@ -35,65 +36,46 @@ final class DidDetailsView: UIView {
     let timeRangeLabel: UILabel = {
         let label = UILabel()
         label.textColor = .customGreen
-        label.font = UIFont.preferredFont(forTextStyle: .title1)
+        label.font = UIFont.preferredFont(forTextStyle: .title2)
         return label
     }()
     
     init() {
         super.init(frame: .zero)
-        let backgroundColor = UIColor.gradientEffect(colors: [.customBackground, .secondaryCustomBackground],
-                                                     frame: bounds,
-                                                     startPoint: CGPoint(x: 0, y: 0),
-                                                     endPoint: CGPoint(x: 1, y: 1)) ?? .customBackground
         
         addSubview(rootFlexContainer)
         rootFlexContainer.flex
             .direction(.column)
+            .justifyContent(.end)
             .define { flex in
                 flex.addItem()
-                    .backgroundColor(.systemGreen)
+                    .padding(10)
                     .marginBottom(8)
-                    .paddingHorizontal(10)
-                    .height(60)
                     .cornerRadius(10)
-                    .backgroundColor(backgroundColor)
-                    .border(1, .separator)
                     .justifyContent(.center)
                     .define { flex in
                         flex.addItem(dateLabel)
                     }
                 
                 flex.addItem()
-                    .marginBottom(8)
-                    .paddingHorizontal(10)
-                    .height(60)
+                    .padding(10)
                     .cornerRadius(10)
-                    .backgroundColor(backgroundColor)
-                    .border(1, .separator)
                     .justifyContent(.center)
                     .define { flex in
                         flex.addItem(titleLabel)
                     }
                 
                 flex.addItem()
-                    .marginBottom(8)
                     .paddingHorizontal(10)
-                    .height(60)
                     .cornerRadius(10)
-                    .backgroundColor(backgroundColor)
-                    .border(1, .separator)
                     .justifyContent(.center)
                     .define { flex in
                         flex.addItem(didTimeLabel)
                     }
                 
                 flex.addItem()
-                    .marginBottom(8)
                     .paddingHorizontal(10)
-                    .height(60)
                     .cornerRadius(10)
-                    .backgroundColor(backgroundColor)
-                    .border(1, .separator)
                     .justifyContent(.center)
                     .define { flex in
                         flex.addItem(timeRangeLabel)
@@ -108,7 +90,7 @@ final class DidDetailsView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         rootFlexContainer.pin.all(self.pin.safeArea)
-        rootFlexContainer.flex.layout()
+        rootFlexContainer.flex.layout(mode: .adjustHeight)
     }
 }
 

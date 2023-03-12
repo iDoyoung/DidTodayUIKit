@@ -9,6 +9,7 @@ import UIKit
 
 protocol FlowCoordinatorDependenciesProtocol {
     func makeMainViewController(router: MainRouter) -> UIViewController
+    func makeDidDetailsViewController(_ did: Did) -> UIViewController
     func makeCalendarViewController(router: CalendarRouter) -> UIViewController
     func makeDetailDayViewController(selected: Date, dids: [Did]) -> UIViewController
     func makeCreateDidViewController(startedDate: Date?, endedDate: Date?, fromDoing: Bool) -> UIViewController
@@ -39,6 +40,17 @@ final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
     
     private func makeMainViewModel(router: MainRouter) -> MainViewModelProtocol {
         let viewModel = MainViewModel(fetchDidUseCase: makeFetchDidUseCase(), router: router)
+        return viewModel
+    }
+    
+    //MARK: Did Details
+    func makeDidDetailsViewController(_ did: Did) -> UIViewController {
+        let viewController = DidDetailsViewController.create(with: makeDidDetailsViewModel(did))
+        return viewController
+    }
+    
+    private func makeDidDetailsViewModel(_ did: Did) -> DidDetailsViewModelProtocol {
+        let viewModel = DidDetailsViewModel(did)
         return viewModel
     }
     

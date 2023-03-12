@@ -15,6 +15,7 @@ protocol MainViewModelInput {
     func selectRecently()
     func selectMuchTime()
     func removeRecorded()
+    func didSelectItem(at index: Int)
 }
 
 protocol MainViewModelOutput {
@@ -117,6 +118,10 @@ final class MainViewModel: MainViewModelProtocol {
         } else if let theLastOfDids = fetchedDids.value.last {
             router?.showCreateDid(theLastOfDids.finished, nil)
         }
+    }
+    
+    func didSelectItem(at index: Int) {
+        router?.showDidDetails(fetchedDids.value[index])
     }
     
     func showCalendar() {

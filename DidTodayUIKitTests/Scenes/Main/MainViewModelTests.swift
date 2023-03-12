@@ -40,14 +40,14 @@ class MainViewModelTests: XCTestCase {
     
     class CoordinatorSpy {
         
-        var showDidDetails = false
+        var showDidDetailsCalled = false
         var showCalendarCalled = false
         var showCreateDidCalled = false
         var showDoingCalled = false
         var showInformationCalled = false
         
         func showDidDetails(_ did: Did) {
-            showDidDetails = true
+            showDidDetailsCalled = true
         }
         
         func showCalendar() {
@@ -84,6 +84,24 @@ class MainViewModelTests: XCTestCase {
     }
     
     //MARK: - Tests
+    func test_didSelectItem_() {
+        let promise = expectation(description: "Should Send Value")
+        sut.totalPieDids
+            .sink { item in
+                if item != TotalOfDidsItemViewModel([]) {
+                    promise.fulfill()
+                }
+            }
+            .store(in: &cancellableBag)
+        
+        sut.fetchDids()
+        wait(for: [promise], timeout: 1)
+        ///when
+        sut.didSelectItem(at: 0)
+        ///then
+        XCTAssertTrue(coordinatorSpy.showDidDetailsCalled)
+    }
+    
     func test_fetchDids_shouldCallCoreDataStorage() {
         let promise = expectation(description: "Storage Be Called")
         fetchDidUseCaseSpy.$isExecutedFilteredToday

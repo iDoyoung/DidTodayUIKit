@@ -192,6 +192,12 @@ extension MainViewController: MainAlert {
 
 extension MainViewController: UICollectionViewDelegate {
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.section == Section.list.rawValue {
+            viewModel?.didSelectItem(at: indexPath.item)
+        }
+    }
+    
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         informationLabel.alpha = 0
         startButton.isHidden = true

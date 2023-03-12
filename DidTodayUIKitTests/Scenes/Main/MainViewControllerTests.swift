@@ -46,6 +46,11 @@ class MainViewControllerTests: XCTestCase {
         func removeRecorded() {
             removeRecordedCalled = true
         }
+        
+        func didSelectItem(at index: Int) {
+            
+        }
+        
         ///Output
         var hasRecordedBeforeClose: Just<Date?> = Just(nil)
         var showCreateDidCalled = false

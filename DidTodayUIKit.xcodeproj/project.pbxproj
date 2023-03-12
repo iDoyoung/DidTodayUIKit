@@ -57,6 +57,7 @@
 		7F666DB529BAD01400D32E29 /* DidDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F666DB429BAD01400D32E29 /* DidDetailsView.swift */; };
 		7F6C337929BC83330019D80B /* DidDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6C337829BC83330019D80B /* DidDetailsViewController.swift */; };
 		7F6C337B29BC926A0019D80B /* DidDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6C337A29BC926A0019D80B /* DidDetailsViewModel.swift */; };
+		7F6C337E29BC97E10019D80B /* DidDetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6C337D29BC97E10019D80B /* DidDetailsViewModelTests.swift */; };
 		7F6EF3AF29A744AE002B5970 /* CalendarViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EF3AE29A744AE002B5970 /* CalendarViewModelTests.swift */; };
 		7F71192B290B95FB001DFE99 /* UIColor+GradientEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F71192A290B95FB001DFE99 /* UIColor+GradientEffect.swift */; };
 		7F71192D290BBC8B001DFE99 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F71192C290BBC8B001DFE99 /* CalendarViewModel.swift */; };
@@ -182,6 +183,7 @@
 		7F666DB429BAD01400D32E29 /* DidDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidDetailsView.swift; sourceTree = "<group>"; };
 		7F6C337829BC83330019D80B /* DidDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidDetailsViewController.swift; sourceTree = "<group>"; };
 		7F6C337A29BC926A0019D80B /* DidDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidDetailsViewModel.swift; sourceTree = "<group>"; };
+		7F6C337D29BC97E10019D80B /* DidDetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidDetailsViewModelTests.swift; sourceTree = "<group>"; };
 		7F6EF3AE29A744AE002B5970 /* CalendarViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModelTests.swift; sourceTree = "<group>"; };
 		7F71192A290B95FB001DFE99 /* UIColor+GradientEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+GradientEffect.swift"; sourceTree = "<group>"; };
 		7F71192C290BBC8B001DFE99 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
@@ -417,6 +419,14 @@
 			path = DidDetails;
 			sourceTree = "<group>";
 		};
+		7F6C337C29BC979B0019D80B /* DidDetails */ = {
+			isa = PBXGroup;
+			children = (
+				7F6C337D29BC97E10019D80B /* DidDetailsViewModelTests.swift */,
+			);
+			path = DidDetails;
+			sourceTree = "<group>";
+		};
 		7F850C5F2961A3490083522A /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -487,6 +497,7 @@
 				7FC115A3293875370056237A /* Doing */,
 				7FA3119829B4454F00A4C5DE /* Calendar */,
 				7F5A69912968FC5700062E2B /* DetailDay */,
+				7F6C337C29BC979B0019D80B /* DidDetails */,
 				7FA3119729B4454500A4C5DE /* About */,
 			);
 			path = Scenes;
@@ -949,6 +960,7 @@
 				7F6EF3AF29A744AE002B5970 /* CalendarViewModelTests.swift in Sources */,
 				7FC22B7F28CB232600F83122 /* Seeds.swift in Sources */,
 				7FC115A5293875510056237A /* DoingViewModelTests.swift in Sources */,
+				7F6C337E29BC97E10019D80B /* DidDetailsViewModelTests.swift in Sources */,
 				7FB6A8CB28DAF529009C61C5 /* CreateDidViewModelTests.swift in Sources */,
 				7F5ABAAD296FB81F002E509E /* BetaVersionMigrationTests.swift in Sources */,
 				7FA3119529B43C2700A4C5DE /* CreateDidUseCaseTests.swift in Sources */,

@@ -7,9 +7,17 @@
 
 import UIKit
 
-class DidDetailsViewController: UIViewController {
+final class DidDetailsViewController: UIViewController {
 
-    let didDetailView = DidDetailsView()
+    private let didDetailView = DidDetailsView()
+    var viewModel: DidDetailsViewModelProtocol?
+    
+    //MARK: - Life Cycle
+    static func create(with viewModel: DidDetailsViewModelProtocol) -> DidDetailsViewController {
+        let viewController = DidDetailsViewController()
+        viewController.viewModel = viewModel
+        return viewController
+    }
     
     override func loadView() {
         view = didDetailView

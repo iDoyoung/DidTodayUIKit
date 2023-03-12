@@ -23,7 +23,8 @@ class MainViewModelTests: XCTestCase {
         let router = MainRouter(showCalendar: coordinatorSpy.showCalendar,
                                 showCreateDid: coordinatorSpy.showCreateDid(started:ended:),
                                 showDoing: coordinatorSpy.showDoing,
-                                showInformation: coordinatorSpy.showInformation)
+                                showInformation: coordinatorSpy.showInformation,
+                                showDidDetails: coordinatorSpy.showDidDetails)
         sut = MainViewModel(fetchDidUseCase: fetchDidUseCaseSpy, router: router)
     }
     
@@ -39,10 +40,15 @@ class MainViewModelTests: XCTestCase {
     
     class CoordinatorSpy {
         
+        var showDidDetails = false
         var showCalendarCalled = false
         var showCreateDidCalled = false
         var showDoingCalled = false
         var showInformationCalled = false
+        
+        func showDidDetails(_ did: Did) {
+            showDidDetails = true
+        }
         
         func showCalendar() {
             showCalendarCalled = true

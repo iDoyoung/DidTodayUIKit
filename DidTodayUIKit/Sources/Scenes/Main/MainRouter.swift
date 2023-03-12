@@ -12,4 +12,5 @@ struct MainRouter {
     let showCreateDid: (Date?, Date?) -> Void
     let showDoing: () -> Void
     let showInformation: () -> Void
+    let showDidDetails: (Did) -> Void
 }

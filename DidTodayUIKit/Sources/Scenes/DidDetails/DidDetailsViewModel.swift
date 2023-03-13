@@ -10,7 +10,9 @@ import Combine
 
 protocol DidDetailsViewModelProtocol: DidDetailsViewModelInput, DidDetailsViewModelOutput { }
 
-protocol DidDetailsViewModelInput { }
+protocol DidDetailsViewModelInput {
+    func delete() async throws
+}
 
 protocol DidDetailsViewModelOutput {
     var date: Just<String> { get }
@@ -22,15 +24,20 @@ protocol DidDetailsViewModelOutput {
 
 final class DidDetailsViewModel: DidDetailsViewModelProtocol {
 
+    //MARK: - Properties
+    
+    var deleteDidUseCase: DeleteDidUseCase?
+    private var selectedDid: Did?
     //MARK: Output
     var date: Just<String>
     var title: Just<String>
     var didTime: Just<String>
     var timeRange: Just<String>
-    ///Setted Color by user to display pie's color
+    ///Seted Color by user to display pie's color
     var color: Just<UIColor>
     
     init(_ did: Did) {
+        selectedDid = did
         let startDate = did.started.toString()
         let startedTime = did.started.currentTimeToString()
         let finishedTime = did.finished.currentTimeToString()
@@ -47,5 +54,11 @@ final class DidDetailsViewModel: DidDetailsViewModelProtocol {
         didTime = Just("\(components.hour ?? 0) HOURS \(components.minute ?? 0) MINUTES")
         timeRange = Just("\(startedTime) - \(finishedTime)")
         color = Just(UIColor(red: red, green: green, blue: blude, alpha: alpha))
+    }
+    
+    //MARK: - Method
+    func delete() async throws {
+        guard let selectedDid else { return }
+        try await deleteDidUseCase?.execute(with: selectedDid)
     }
 }

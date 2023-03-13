@@ -15,13 +15,40 @@ final class DidDetailsViewModelTests: XCTestCase {
     
     override func setUpWithError() throws {
         try super.setUpWithError()
+        deleteUseCaseSpy = DeleteDidUseCaseSpy()
     }
     
     override func tearDownWithError() throws {
         sut = nil
+        deleteUseCaseSpy = nil
         try super.tearDownWithError()
     }
     
+    //MARK: - Test Doubles
+    var deleteUseCaseSpy: DeleteDidUseCaseSpy!
+    
+    final class DeleteDidUseCaseSpy: DeleteDidUseCase {
+        var isExecuted = false
+        
+        func execute(with did: DidTodayUIKit.Did) async throws -> DidTodayUIKit.Did {
+            isExecuted = true
+            return did
+        }
+    }
+    
+    //MARK: - Tests
+    //MARK: Input
+    func test_delete_shouldCallUseCase() async throws {
+        ///given
+        sut = DidDetailsViewModel(Seeds.Dids.christmasParty)
+        sut.deleteDidUseCase = deleteUseCaseSpy
+        ///when
+        try await sut.delete()
+        ///then
+        XCTAssertTrue(deleteUseCaseSpy.isExecuted)
+    }
+    
+    //MARK: Output
     func test_initailize_shouldBeGetOutputOfDate() {
         let promise = expectation(description: "Get output of Date")
         ///given

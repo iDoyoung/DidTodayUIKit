@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import Combine
 
 final class DidDetailsViewController: UIViewController {
-
-    private let didDetailView = DidDetailsView()
+    
     var viewModel: DidDetailsViewModelProtocol?
+    private var cancellableBag = Set<AnyCancellable>()
+    private let didDetailView = DidDetailsView()
     
     //MARK: - Life Cycle
     static func create(with viewModel: DidDetailsViewModelProtocol) -> DidDetailsViewController {
@@ -25,5 +27,32 @@ final class DidDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bindViewModel()
+    }
+    
+    func bindViewModel() {
+        viewModel?.date
+            .sink { date in
+                self.didDetailView.dateLabel.text = date
+            }
+            .store(in: &cancellableBag)
+        
+        viewModel?.title
+            .sink { title in
+                self.didDetailView.titleLabel.text = title
+            }
+            .store(in: &cancellableBag)
+        
+        viewModel?.didTime
+            .sink { didTime in
+                self.didDetailView.didTimeLabel.text = didTime
+            }
+            .store(in: &cancellableBag)
+        
+        viewModel?.timeRange
+            .sink { timeRange in
+                self.didDetailView.timeRangeLabel.text = timeRange
+            }
+            .store(in: &cancellableBag)
     }
 }

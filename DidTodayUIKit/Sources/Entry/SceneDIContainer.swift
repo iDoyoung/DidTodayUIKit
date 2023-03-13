@@ -32,6 +32,10 @@ final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
         return DefaultCreateDidUseCase(storage: didCoreDataStorage)
     }
     
+    private func makeDeleteDidUseCase() -> DeleteDidUseCase {
+        return DefaultDeleteDidUseCase(storage: didCoreDataStorage)
+    }
+    
     //MARK: Main VC
     func makeMainViewController(router: MainRouter) -> UIViewController {
         let viewController = MainViewController.create(with: makeMainViewModel(router: router))
@@ -51,6 +55,7 @@ final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
     
     private func makeDidDetailsViewModel(_ did: Did) -> DidDetailsViewModelProtocol {
         let viewModel = DidDetailsViewModel(did)
+        viewModel.deleteDidUseCase = makeDeleteDidUseCase()
         return viewModel
     }
     

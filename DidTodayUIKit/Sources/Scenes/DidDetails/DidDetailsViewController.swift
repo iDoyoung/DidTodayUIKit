@@ -28,9 +28,18 @@ final class DidDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bindViewModel()
+        setupNavigationBar()
     }
     
-    func bindViewModel() {
+    private func setupNavigationBar() {
+        let imageConfiguration = UIImage.SymbolConfiguration(weight: .bold)
+        let image = UIImage(systemName: "trash")?.withConfiguration(imageConfiguration)
+        let deleteItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(deleteDid))
+        deleteItem.tintColor = .systemRed
+        navigationItem.rightBarButtonItem = deleteItem
+    }
+    
+    private func bindViewModel() {
         viewModel?.date
             .sink { date in
                 self.didDetailView.dateLabel.text = date
@@ -60,5 +69,8 @@ final class DidDetailsViewController: UIViewController {
                 self.didDetailView.color = color
             }
             .store(in: &cancellableBag)
+    }
+    
+    @objc func deleteDid() {
     }
 }

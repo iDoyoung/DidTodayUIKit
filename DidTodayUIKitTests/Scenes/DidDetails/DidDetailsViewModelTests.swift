@@ -58,7 +58,7 @@ final class DidDetailsViewModelTests: XCTestCase {
         sut = DidDetailsViewModel(mockDid)
         ///then
         let _ = sut.didTime.sink { result in
-            XCTAssertEqual(result, "Did 0: 0")
+            XCTAssertEqual(result, "0 HOURS 0 MINUTES")
             promise.fulfill()
         }
         wait(for: [promise], timeout: 1)

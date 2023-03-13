@@ -35,7 +35,7 @@ final class DidDetailsViewModel: DidDetailsViewModelProtocol {
         let startedTime = did.started.currentTimeToString()
         let finishedTime = did.finished.currentTimeToString()
         ///date components of  difference between started and finished.
-        let components = Calendar.current.dateComponents([.hour, .minute], from: did.finished, to: did.started)
+        let components = Calendar.current.dateComponents([.hour, .minute], from: did.started, to: did.finished)
         ///RGB Color
         let red = CGFloat(did.pieColor.red)
         let green = CGFloat(did.pieColor.green)
@@ -44,7 +44,7 @@ final class DidDetailsViewModel: DidDetailsViewModelProtocol {
         ///Output
         date = Just(startDate)
         title = Just(did.content)
-        didTime = Just("Did \(components.hour ?? 0): \(components.minute ?? 0)")
+        didTime = Just("\(components.hour ?? 0) HOURS \(components.minute ?? 0) MINUTES")
         timeRange = Just("\(startedTime) - \(finishedTime)")
         color = Just(UIColor(red: red, green: green, blue: blude, alpha: alpha))
     }

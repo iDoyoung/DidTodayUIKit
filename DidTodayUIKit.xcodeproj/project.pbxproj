@@ -58,6 +58,8 @@
 		7F6C337929BC83330019D80B /* DidDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6C337829BC83330019D80B /* DidDetailsViewController.swift */; };
 		7F6C337B29BC926A0019D80B /* DidDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6C337A29BC926A0019D80B /* DidDetailsViewModel.swift */; };
 		7F6C337E29BC97E10019D80B /* DidDetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6C337D29BC97E10019D80B /* DidDetailsViewModelTests.swift */; };
+		7F6C338029BF2B650019D80B /* DeleteDidUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6C337F29BF2B650019D80B /* DeleteDidUseCase.swift */; };
+		7F6C338229BF2CE10019D80B /* DeleteUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6C338129BF2CE10019D80B /* DeleteUseCaseTests.swift */; };
 		7F6EF3AF29A744AE002B5970 /* CalendarViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EF3AE29A744AE002B5970 /* CalendarViewModelTests.swift */; };
 		7F71192B290B95FB001DFE99 /* UIColor+GradientEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F71192A290B95FB001DFE99 /* UIColor+GradientEffect.swift */; };
 		7F71192D290BBC8B001DFE99 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F71192C290BBC8B001DFE99 /* CalendarViewModel.swift */; };
@@ -184,6 +186,8 @@
 		7F6C337829BC83330019D80B /* DidDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidDetailsViewController.swift; sourceTree = "<group>"; };
 		7F6C337A29BC926A0019D80B /* DidDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidDetailsViewModel.swift; sourceTree = "<group>"; };
 		7F6C337D29BC97E10019D80B /* DidDetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidDetailsViewModelTests.swift; sourceTree = "<group>"; };
+		7F6C337F29BF2B650019D80B /* DeleteDidUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteDidUseCase.swift; sourceTree = "<group>"; };
+		7F6C338129BF2CE10019D80B /* DeleteUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUseCaseTests.swift; sourceTree = "<group>"; };
 		7F6EF3AE29A744AE002B5970 /* CalendarViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModelTests.swift; sourceTree = "<group>"; };
 		7F71192A290B95FB001DFE99 /* UIColor+GradientEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+GradientEffect.swift"; sourceTree = "<group>"; };
 		7F71192C290BBC8B001DFE99 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
@@ -460,6 +464,7 @@
 			children = (
 				7FA3118E29B3324800A4C5DE /* FetchDidUseCase.swift */,
 				7FA3119229B43A1500A4C5DE /* CreateDidUseCase.swift */,
+				7F6C337F29BF2B650019D80B /* DeleteDidUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -469,6 +474,7 @@
 			children = (
 				7FA3119029B4211100A4C5DE /* FetchDidUseCaseTests.swift */,
 				7FA3119429B43C2700A4C5DE /* CreateDidUseCaseTests.swift */,
+				7F6C338129BF2CE10019D80B /* DeleteUseCaseTests.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -883,6 +889,7 @@
 				7F55E3FF294C08A0007B2706 /* CreateDidAlert.swift in Sources */,
 				7FA3119329B43A1500A4C5DE /* CreateDidUseCase.swift in Sources */,
 				7F850CC22966B6540083522A /* DidListCollectionViewController.swift in Sources */,
+				7F6C338029BF2B650019D80B /* DeleteDidUseCase.swift in Sources */,
 				7FB6A8D628DD89E5009C61C5 /* Date+DifferenceToString.swift in Sources */,
 				7F80EBCB28D4102500781DB4 /* DidItemsViewModel.swift in Sources */,
 				7F43BBD12974D9A70084FB78 /* CustomText.swift in Sources */,
@@ -963,6 +970,7 @@
 				7F6C337E29BC97E10019D80B /* DidDetailsViewModelTests.swift in Sources */,
 				7FB6A8CB28DAF529009C61C5 /* CreateDidViewModelTests.swift in Sources */,
 				7F5ABAAD296FB81F002E509E /* BetaVersionMigrationTests.swift in Sources */,
+				7F6C338229BF2CE10019D80B /* DeleteUseCaseTests.swift in Sources */,
 				7FA3119529B43C2700A4C5DE /* CreateDidUseCaseTests.swift in Sources */,
 				7FA60AE928D6FB7A0098F3D2 /* MainViewControllerTests.swift in Sources */,
 			);

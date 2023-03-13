@@ -77,4 +77,18 @@ final class DidDetailsViewModelTests: XCTestCase {
         }
         wait(for: [promise], timeout: 1)
     }
+    
+    func test_initailize_shouldBeGetOutputOfColor() {
+        let promise = expectation(description: "Get output of Color")
+        ///given
+        let mockDid = Seeds.Dids.christmasParty
+        ///when
+        sut = DidDetailsViewModel(mockDid)
+        ///then
+        let _ = sut.color.sink { result in
+            XCTAssertEqual(result, UIColor(red: 0, green: 0, blue: 0, alpha: 0))
+            promise.fulfill()
+        }
+        wait(for: [promise], timeout: 1)
+    }
 }

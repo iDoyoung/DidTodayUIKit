@@ -40,10 +40,20 @@ final class DidDetailsView: UIView {
     
     let timeRangeLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .customGreen
         label.font = UIFont.preferredFont(forTextStyle: .title2)
         return label
     }()
+    
+    var color: UIColor? {
+        didSet {
+            guard let color else { return }
+            backgroundColor =  .gradientEffect(colors: [.customBackground, color],
+                                               frame: UIScreen.main.bounds,
+                                               startPoint: CGPoint(x: 0.5, y: 0),
+                                               endPoint: CGPoint(x: 0.5, y: 1.3))
+            didTimeLabel.textColor = color
+        }
+    }
     
     init() {
         super.init(frame: .zero)

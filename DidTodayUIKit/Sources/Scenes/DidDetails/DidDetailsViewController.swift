@@ -54,5 +54,11 @@ final class DidDetailsViewController: UIViewController {
                 self.didDetailView.timeRangeLabel.text = timeRange
             }
             .store(in: &cancellableBag)
+        
+        viewModel?.color
+            .sink { color in
+                self.didDetailView.color = color
+            }
+            .store(in: &cancellableBag)
     }
 }

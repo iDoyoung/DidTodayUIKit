@@ -60,6 +60,7 @@
 		7F6C337E29BC97E10019D80B /* DidDetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6C337D29BC97E10019D80B /* DidDetailsViewModelTests.swift */; };
 		7F6C338029BF2B650019D80B /* DeleteDidUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6C337F29BF2B650019D80B /* DeleteDidUseCase.swift */; };
 		7F6C338229BF2CE10019D80B /* DeleteUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6C338129BF2CE10019D80B /* DeleteUseCaseTests.swift */; };
+		7F6C338429BF48080019D80B /* DeleteDidAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6C338329BF48080019D80B /* DeleteDidAlert.swift */; };
 		7F6EF3AF29A744AE002B5970 /* CalendarViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EF3AE29A744AE002B5970 /* CalendarViewModelTests.swift */; };
 		7F71192B290B95FB001DFE99 /* UIColor+GradientEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F71192A290B95FB001DFE99 /* UIColor+GradientEffect.swift */; };
 		7F71192D290BBC8B001DFE99 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F71192C290BBC8B001DFE99 /* CalendarViewModel.swift */; };
@@ -188,6 +189,7 @@
 		7F6C337D29BC97E10019D80B /* DidDetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidDetailsViewModelTests.swift; sourceTree = "<group>"; };
 		7F6C337F29BF2B650019D80B /* DeleteDidUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteDidUseCase.swift; sourceTree = "<group>"; };
 		7F6C338129BF2CE10019D80B /* DeleteUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUseCaseTests.swift; sourceTree = "<group>"; };
+		7F6C338329BF48080019D80B /* DeleteDidAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteDidAlert.swift; sourceTree = "<group>"; };
 		7F6EF3AE29A744AE002B5970 /* CalendarViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModelTests.swift; sourceTree = "<group>"; };
 		7F71192A290B95FB001DFE99 /* UIColor+GradientEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+GradientEffect.swift"; sourceTree = "<group>"; };
 		7F71192C290BBC8B001DFE99 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
@@ -419,6 +421,7 @@
 				7F666DB429BAD01400D32E29 /* DidDetailsView.swift */,
 				7F6C337829BC83330019D80B /* DidDetailsViewController.swift */,
 				7F6C337A29BC926A0019D80B /* DidDetailsViewModel.swift */,
+				7F6C338329BF48080019D80B /* DeleteDidAlert.swift */,
 			);
 			path = DidDetails;
 			sourceTree = "<group>";
@@ -936,6 +939,7 @@
 				7F71192B290B95FB001DFE99 /* UIColor+GradientEffect.swift in Sources */,
 				7F4AA14E292471EE004CE62A /* SortingSupplementaryView.swift in Sources */,
 				7F133C5729063BF00099E55C /* UIColor+Custom.swift in Sources */,
+				7F6C338429BF48080019D80B /* DeleteDidAlert.swift in Sources */,
 				504CE044253FDFAA000CC6CF /* SceneDelegate.swift in Sources */,
 				7F0BECF82950776C00C0CF1C /* DoingRouter.swift in Sources */,
 				7FB6A8D828DD9B13009C61C5 /* TotalDidsCell.swift in Sources */,

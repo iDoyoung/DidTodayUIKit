@@ -31,7 +31,7 @@ final class FetchDidUseCaseTests: XCTestCase {
    ]
     
     final class DidCoreDataStorageSpy: DidCoreDataStorable {
-    
+        
         var created = [Did]()
         
         var createCalled = false
@@ -54,8 +54,9 @@ final class FetchDidUseCaseTests: XCTestCase {
             updateCalled = true
         }
         
-        func delete(_ did: DidTodayUIKit.Did, completion: @escaping (DidTodayUIKit.Did, DidTodayUIKit.CoreDataStoreError?) -> Void) {
+        func delete(_ did: DidTodayUIKit.Did) async throws -> DidTodayUIKit.Did {
             deleteCalled = true
+            return did
         }
     }
     

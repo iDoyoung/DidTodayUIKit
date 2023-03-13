@@ -54,9 +54,10 @@ final class BetaVersionMigrationTests: XCTestCase {
         func update(_ did: DidTodayUIKit.Did, completion: @escaping (DidTodayUIKit.Did, DidTodayUIKit.CoreDataStoreError?) -> Void) {
             updateCalled = true
         }
-        
-        func delete(_ did: DidTodayUIKit.Did, completion: @escaping (DidTodayUIKit.Did, DidTodayUIKit.CoreDataStoreError?) -> Void) {
+       
+        func delete(_ did: DidTodayUIKit.Did) async throws -> DidTodayUIKit.Did {
             deleteCalled = true
+            return did
         }
     }
     

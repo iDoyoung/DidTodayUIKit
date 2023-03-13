@@ -50,8 +50,9 @@ final class CreateDidUseCaseTests: XCTestCase {
             updateCalled = true
         }
         
-        func delete(_ did: DidTodayUIKit.Did, completion: @escaping (DidTodayUIKit.Did, DidTodayUIKit.CoreDataStoreError?) -> Void) {
+        func delete(_ did: DidTodayUIKit.Did) async throws -> DidTodayUIKit.Did {
             deleteCalled = true
+            return did
         }
     }
     

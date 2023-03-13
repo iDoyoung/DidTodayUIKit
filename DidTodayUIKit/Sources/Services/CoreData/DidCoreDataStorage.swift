@@ -17,7 +17,7 @@ protocol DidCoreDataStorable {
     @discardableResult func create(_ did: Did) async throws -> Did
     func fetchDids(with filtering: Date?) async throws -> [Did]
     func update(_ did: Did, completion: @escaping (Did, CoreDataStoreError?) -> Void)
-    func delete(_ did: Did, completion: @escaping (Did, CoreDataStoreError?) -> Void)
+    @discardableResult func delete(_ did: Did) async throws -> Did
 }
 
 final class DidCoreDataStorage: DidCoreDataStorable {
@@ -32,7 +32,7 @@ final class DidCoreDataStorage: DidCoreDataStorable {
         return container
     }()
     
-    func create(_ did: Did) async throws -> Did {
+    @discardableResult func create(_ did: Did) async throws -> Did {
         return try await withCheckedThrowingContinuation { continuation in
             persistentContainer.performBackgroundTask { context in
                 let managedDid = ManagedDidItem(context: context)
@@ -92,22 +92,25 @@ final class DidCoreDataStorage: DidCoreDataStorable {
         }
     }
     
-    func delete(_ did: Did, completion: @escaping (Did, CoreDataStoreError?) -> Void) {
-        persistentContainer.performBackgroundTask { context in
-            do {
-                let request = ManagedDidItem.fetchRequest()
-                request.predicate = NSPredicate(format: "identifier==%@", did.id as CVarArg)
-                let result = try context.fetch(request)
-                if let managedDid = result.first {
-                    context.delete(managedDid)
-                    do {
-                        try context.save()
-                    } catch let error {
-                        completion(did, CoreDataStoreError.deleteError(error))
+    @discardableResult func delete(_ did: Did) async throws -> Did {
+        return try await withCheckedThrowingContinuation { continuation in
+            persistentContainer.performBackgroundTask { context in
+                do {
+                    let request = ManagedDidItem.fetchRequest()
+                    request.predicate = NSPredicate(format: "identifier==%@", did.id as CVarArg)
+                    let result = try context.fetch(request)
+                    if let managedDid = result.first {
+                        context.delete(managedDid)
+                        do {
+                            try context.save()
+                            continuation.resume(returning: did)
+                        } catch let error {
+                            continuation.resume(throwing: CoreDataStoreError.deleteError(error))
+                        }
                     }
+                } catch let error {
+                    continuation.resume(throwing: CoreDataStoreError.readError(error))
                 }
-            } catch let error {
-                completion(did, CoreDataStoreError.readError(error))
             }
         }
     }

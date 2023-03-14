@@ -81,6 +81,10 @@ class MainViewModelTests: XCTestCase {
             isExecuted = true
             return [Seeds.Dids.christmasParty, Seeds.Dids.newYearParty, Seeds.Dids.todayDidMock2, Seeds.Dids.todayDidMock]
         }
+        
+        func executeFiltered(by date: Date) async throws -> [DidTodayUIKit.Did] {
+            return []
+        }
     }
     
     //MARK: - Tests

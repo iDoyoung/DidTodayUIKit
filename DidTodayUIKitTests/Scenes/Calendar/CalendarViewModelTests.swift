@@ -44,6 +44,10 @@ final class CalendarViewModelTests: XCTestCase {
             return [Seeds.Dids.christmasParty, Seeds.Dids.newYearParty, Seeds.Dids.todayDidMock2, Seeds.Dids.todayDidMock]
         }
         
+        func executeFiltered(by date: Date) async throws -> [DidTodayUIKit.Did] {
+            return []
+        }
+        
         func executeFilteredByToday() async throws -> [DidTodayUIKit.Did] {
             return []
         }

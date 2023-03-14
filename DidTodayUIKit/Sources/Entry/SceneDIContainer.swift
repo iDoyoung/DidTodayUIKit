@@ -78,6 +78,7 @@ final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
     
     private func makeDetailDayViewModel(dids: [Did], by selected: Date) -> DetailDayViewModelProtocol {
         let viewModel = DetailDayViewModel(selected: selected, dids: dids)
+        viewModel.fetchDidUseCase = makeFetchDidUseCase()
         return viewModel
     }
     

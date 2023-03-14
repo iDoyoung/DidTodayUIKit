@@ -10,6 +10,7 @@ import Foundation
 protocol FetchDidUseCase {
     func execute() async throws -> [Did]
     func executeFilteredByToday() async throws -> [Did]
+    func executeFiltered(by date: Date) async throws -> [Did]
 }
 
 final class DefaultFetchDidUseCase: FetchDidUseCase {
@@ -26,5 +27,9 @@ final class DefaultFetchDidUseCase: FetchDidUseCase {
     
     func executeFilteredByToday() async throws -> [Did] {
         try await storage.fetchDids(with: Date())
+    }
+    
+    func executeFiltered(by date: Date) async throws -> [Did] {
+        try await storage.fetchDids(with: date)
     }
 }

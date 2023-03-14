@@ -107,8 +107,9 @@ final class MainViewModel: MainViewModelProtocol {
     func showCreateDid() {
         if didItemsList.value.isEmpty {
             router?.showCreateDid(nil, nil)
-        } else if let theLastOfDids = fetchedDids.value.last {
-            router?.showCreateDid(theLastOfDids.finished, nil)
+        } else {
+            let recenlyFinishedDid = fetchedDids.value.max { $0.finished < $1.finished }
+            router?.showCreateDid(recenlyFinishedDid?.finished, nil)
         }
     }
     

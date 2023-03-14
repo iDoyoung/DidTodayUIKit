@@ -59,13 +59,6 @@ final class MainViewModel: MainViewModelProtocol {
                 self?.didItemsList.send(output)
             }
             .store(in: &cancellableBag)
-        
-        fetchedDids
-            .map { TotalOfDidsItemViewModel($0) }
-            .sink { [weak self] item in
-                self?.totalPieDids.send(item)
-            }
-            .store(in: &cancellableBag)
     }
     
     //MARK: - Input
@@ -73,6 +66,7 @@ final class MainViewModel: MainViewModelProtocol {
         Task {
             guard let fetched = try await fetchDidUseCase?.executeFilteredByToday() else { return }
             fetchedDids.send(fetched.sorted { $0.started > $1.started})
+            totalPieDids.send(TotalOfDidsItemViewModel(fetchedDids.value))
             //TODO: Alert 사용해서 Core Data Fetch 실패를 알려야 하나
         }
     }

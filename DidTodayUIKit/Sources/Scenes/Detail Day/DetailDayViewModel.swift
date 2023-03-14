@@ -27,6 +27,8 @@ final class DetailDayViewModel: DetailDayViewModelProtocol {
     
     //MARK: - Properties
     
+    var router: DetailDayRouter?
+    
     //MARK: Output
     var selectedDay = CurrentValueSubject<String?, Never>(nil)
     var totalPieDids = CurrentValueSubject<TotalOfDidsItemViewModel, Never>(TotalOfDidsItemViewModel([]))

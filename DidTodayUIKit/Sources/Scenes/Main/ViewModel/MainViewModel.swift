@@ -54,19 +54,14 @@ final class MainViewModel: MainViewModelProtocol {
         self.router = router
         
         fetchedDids
-            .map {
-                $0
-                    .map { DidItemViewModel($0) }
-                    .sorted { $0.startedTimes > $1.startedTimes }
-            }
             .sink { [weak self] items in
-                self?.didItemsList.send(items)
+                let output = items.map { DidItemViewModel($0) }
+                self?.didItemsList.send(output)
             }
             .store(in: &cancellableBag)
+        
         fetchedDids
-            .map {
-                TotalOfDidsItemViewModel($0)
-            }
+            .map { TotalOfDidsItemViewModel($0) }
             .sink { [weak self] item in
                 self?.totalPieDids.send(item)
             }
@@ -77,7 +72,7 @@ final class MainViewModel: MainViewModelProtocol {
     func fetchDids() {
         Task {
             guard let fetched = try await fetchDidUseCase?.executeFilteredByToday() else { return }
-            fetchedDids.send(fetched)
+            fetchedDids.send(fetched.sorted { $0.started > $1.started})
             //TODO: Alert 사용해서 Core Data Fetch 실패를 알려야 하나
         }
     }
@@ -104,11 +99,14 @@ final class MainViewModel: MainViewModelProtocol {
     }
 
     private func sortByRecently() {
-        didItemsList.value.sort { $0.startedTimes > $1.startedTimes }
+        let sorted = fetchedDids.value.sorted { $0.started > $1.started }
+        fetchedDids.send(sorted)
     }
     
     private func sortByMuchTime() {
         didItemsList.value.sort { ($0.finishedTimes - $0.startedTimes) > ($1.finishedTimes - $1.startedTimes) }
+        let sorted = fetchedDids.value.sorted { Date.differenceToMinutes(from: $0.started, to: $0.finished) > Date.differenceToMinutes(from: $1.started, to: $1.finished) }
+        fetchedDids.send(sorted)
     }
     
     //MARK: - Output, Flow method

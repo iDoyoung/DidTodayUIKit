@@ -72,5 +72,16 @@ final class DidDetailsViewController: UIViewController {
     }
     
     @objc func deleteDid() {
+        present(deleteAlert(), animated: true)
+    }
+}
+
+extension DidDetailsViewController: DeleteDidAlert {
+    
+    func deleteHandler() {
+        Task {
+            try await viewModel?.delete()
+            navigationController?.popViewController(animated: true)
+        }
     }
 }

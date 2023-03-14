@@ -11,6 +11,7 @@ import Combine
 protocol DetailDayViewModelProtocol: DetailDayViewModelInput, DetailDayViewModelOutput {  }
 
 protocol DetailDayViewModelInput {
+    func fetchDids()
     func selectRecently()
     func selectMuchTime()
 }
@@ -28,7 +29,11 @@ final class DetailDayViewModel: DetailDayViewModelProtocol {
     //MARK: - Properties
     
     var router: DetailDayRouter?
+    var fetchDidUseCase: FetchDidUseCase?
+    private var cancellableBag = Set<AnyCancellable>()
     
+    private var fetchedDids = CurrentValueSubject<[Did], Never>([])
+    private var selectedDate: Date
     //MARK: Output
     var selectedDay = CurrentValueSubject<String?, Never>(nil)
     var totalPieDids = CurrentValueSubject<TotalOfDidsItemViewModel, Never>(TotalOfDidsItemViewModel([]))
@@ -38,17 +43,32 @@ final class DetailDayViewModel: DetailDayViewModelProtocol {
     
     //MARK: - Methods
     
-    init(selected: Date, dids: [Did]) {
-        let totalItems = TotalOfDidsItemViewModel(dids)
-        let didItems = dids
-            .sorted { $0.started > $1.started }
-            .map { DidItemViewModel($0) }
-        totalPieDids.send(totalItems)
-        didItemsList.send(didItems)
+    init(selected: Date) {
+        selectedDate = selected
+        fetchedDids
+            .sink { [weak self] items in
+                let output = items.map { DidItemViewModel($0) }
+                self?.didItemsList.send(output)
+            }
+            .store(in: &cancellableBag)
+        
         selectedDay.send(selected.toString())
     }
     
     //MARK: Input
+    func fetchDids() {
+        Task {
+            guard let fetched = try await fetchDidUseCase?.executeFiltered(by: selectedDate) else { return }
+            if isSelectedMuchTimeButton.value {
+                fetchedDids.send(fetched.sorted { Date.differenceToMinutes(from: $0.started, to: $0.finished) > Date.differenceToMinutes(from: $1.started, to: $1.finished) })
+            } else {
+                fetchedDids.send(fetched.sorted { $0.started > $1.started})
+            }
+            totalPieDids.send(TotalOfDidsItemViewModel(fetchedDids.value))
+            //TODO: Alert 사용해서 Core Data Fetch 실패를 알려야 하나
+        }
+    }
+    
     func selectRecently() {
         if !isSelectedRecentlyButton.value {
             isSelectedRecentlyButton.send(true)
@@ -67,10 +87,14 @@ final class DetailDayViewModel: DetailDayViewModelProtocol {
     
     //MARK: Private
     private func sortByRecently() {
-        didItemsList.value.sort { $0.startedTimes > $1.startedTimes }
+        let sorted = fetchedDids.value.sorted { $0.started > $1.started }
+        fetchedDids.send(sorted)
     }
     
     private func sortByMuchTime() {
-        didItemsList.value.sort { ($0.finishedTimes - $0.startedTimes) > ($1.finishedTimes - $1.startedTimes) }
+        let sorted = fetchedDids.value.sorted {
+            Date.differenceToMinutes(from: $0.started, to: $0.finished) > Date.differenceToMinutes(from: $1.started, to: $1.finished)
+        }
+        fetchedDids.send(sorted)
     }
 }

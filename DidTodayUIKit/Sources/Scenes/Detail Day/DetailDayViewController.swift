@@ -29,6 +29,11 @@ final class DetailDayViewController: DidListCollectionViewController {
         configure()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel?.fetchDids()
+    }
+    
     //MARK: Configure & Setup
     private func configure() {
         configureCollectionView()
@@ -58,6 +63,7 @@ final class DetailDayViewController: DidListCollectionViewController {
             .store(in: &cancellableBag)
         ///Bind Collection View with Did Item List
         viewModel?.didItemsList
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] output in
                 self?.applyDidListSnapshot(output)
             }

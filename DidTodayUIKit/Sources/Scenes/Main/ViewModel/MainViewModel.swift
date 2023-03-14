@@ -65,7 +65,11 @@ final class MainViewModel: MainViewModelProtocol {
     func fetchDids() {
         Task {
             guard let fetched = try await fetchDidUseCase?.executeFilteredByToday() else { return }
-            fetchedDids.send(fetched.sorted { $0.started > $1.started})
+            if isSelectedMuchTimeButton.value {
+                fetchedDids.send(fetched.sorted { Date.differenceToMinutes(from: $0.started, to: $0.finished) > Date.differenceToMinutes(from: $1.started, to: $1.finished) })
+            } else {
+                fetchedDids.send(fetched.sorted { $0.started > $1.started})
+            }
             totalPieDids.send(TotalOfDidsItemViewModel(fetchedDids.value))
             //TODO: Alert 사용해서 Core Data Fetch 실패를 알려야 하나
         }
@@ -98,8 +102,9 @@ final class MainViewModel: MainViewModelProtocol {
     }
     
     private func sortByMuchTime() {
-        didItemsList.value.sort { ($0.finishedTimes - $0.startedTimes) > ($1.finishedTimes - $1.startedTimes) }
-        let sorted = fetchedDids.value.sorted { Date.differenceToMinutes(from: $0.started, to: $0.finished) > Date.differenceToMinutes(from: $1.started, to: $1.finished) }
+        let sorted = fetchedDids.value.sorted {
+            Date.differenceToMinutes(from: $0.started, to: $0.finished) > Date.differenceToMinutes(from: $1.started, to: $1.finished)
+        }
         fetchedDids.send(sorted)
     }
     

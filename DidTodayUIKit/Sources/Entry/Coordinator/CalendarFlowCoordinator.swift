@@ -28,7 +28,13 @@ final class CalendarFlowCoordinator: Coordinator {
     }
 
     private func showDetailDay(selected: Date, with dids: [Did]) {
-        let viewController = dependencies.makeDetailDayViewController(selected: selected)
+        let router = DetailDayRouter(showDidDetails: showDidDetails)
+        let viewController = dependencies.makeDetailDayViewController(selected: selected, router: router)
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func showDidDetails(_ did: Did) {
+        let viewController = dependencies.makeDidDetailsViewController(did)
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

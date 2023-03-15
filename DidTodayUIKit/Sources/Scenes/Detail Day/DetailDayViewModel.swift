@@ -14,6 +14,7 @@ protocol DetailDayViewModelInput {
     func fetchDids()
     func selectRecently()
     func selectMuchTime()
+    func didSelectItem(at index: Int)
 }
 
 protocol DetailDayViewModelOutput {
@@ -83,6 +84,10 @@ final class DetailDayViewModel: DetailDayViewModelProtocol {
             isSelectedRecentlyButton.send(false)
             sortByMuchTime()
         }
+    }
+    
+    func didSelectItem(at index: Int) {
+        router?.showDidDetails(fetchedDids.value[index])
     }
     
     //MARK: Private

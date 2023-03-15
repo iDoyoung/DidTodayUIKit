@@ -45,6 +45,7 @@ final class DetailDayViewController: DidListCollectionViewController {
     override func configureCollectionView() {
         super.configureCollectionView()
         collectionView.backgroundColor = .customBackground
+        collectionView.delegate = self
     }
     
     private func setTitle() {
@@ -95,3 +96,12 @@ final class DetailDayViewController: DidListCollectionViewController {
     }
 }
 
+extension DetailDayViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if indexPath.section == Section.list.rawValue {
+            viewModel?.didSelectItem(at: indexPath.item)
+        }
+    }
+}

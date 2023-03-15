@@ -68,6 +68,15 @@ enum CustomText {
         return count == 0 ? "Did nothing".localized : String(format:"Did %d things!".localized, count)
     }
     
+    //MARK: - Did Details
+    static func timesRange(started: Int, finished: Int) -> String {
+        return String(format: "%d HOURS %d MINUTES".localized, started, finished)
+    }
+    //Alert
+    static let deleteAlertTitle = "Delete your Did?".localized
+    static let deleteAlertMessage = "This Did will be deleted. This action cannot be undone.".localized
+    static let deleteDid = "Delete Did".localized
+    
     //MARK: - For Global
     static let cancel = "Cancel".localized
     static let okay = "OK".localized

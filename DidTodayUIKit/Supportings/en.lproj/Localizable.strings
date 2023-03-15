@@ -37,6 +37,13 @@
 "Did %d Things" = "Did %d Things";
 "Show detail" = "Show detail";
 
+//MARK: - Did Details
+"%d HOURS %d MINUTES" = "%d HOURS %d MINUTES";
+//Alert
+"Delete your Did?" = "Delete your Did?";
+"This Did will be deleted. This action cannot be undone." = "This Did will be deleted. This action cannot be undone.";
+"Delete Did" = "Delete Did";
+
 //MARK: - About
 "About" = "About";
 "Recommend Did" = "Recommend Did";

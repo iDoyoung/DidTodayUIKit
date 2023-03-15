@@ -51,7 +51,9 @@ final class DidDetailsViewModel: DidDetailsViewModelProtocol {
         ///Output
         date = Just(startDate)
         title = Just(did.content)
-        didTime = Just("\(components.hour ?? 0) HOURS \(components.minute ?? 0) MINUTES")
+        assert(components.hour != nil, "Hours should not be nil")
+        assert(components.minute != nil, "Minutes should not be nil")
+        didTime = Just(CustomText.timesRange(started: components.hour ?? 0, finished: components.minute ?? 0))
         timeRange = Just("\(startedTime) - \(finishedTime)")
         color = Just(UIColor(red: red, green: green, blue: blude, alpha: alpha))
     }

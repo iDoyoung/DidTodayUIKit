@@ -26,8 +26,6 @@
 //MARK: - Create Did
 "Finishing touches" = "마무리 작업";
 "Create Did" = "생성하기";
-
-//MARK: - In Create Did
 "Discard your Creation?" = "생성 내용을 삭제할까요?";
 "Complete your Creation?" = "생성 내용을 완료할까요?";
 
@@ -39,6 +37,13 @@
 "Did %d Things" = "%d개 완료";
 "Show detail" = "자세히 보기";
 
+//MARK: - Did Details
+"%d HOURS %d MINUTES" = "%d시간 %d분";
+//Alert
+"Delete your Did?" = "이 기록을 삭제하시겠습니까?";
+"This Did will be deleted. This action cannot be undone." = "삭제하면 다시 되돌릴 수 없어요.";
+"Delete Did" = "삭제하기";
+
 //MARK: - About
 "About" = "정보";
 "Recommend Did" = "앱 추천하기";
@@ -47,7 +52,7 @@
 
 //MARK: - Total of dids
 "Did nothing" = "아직 아무것도 안했어요";
-"Did %d things!" = "오늘 %d가지 일을 했어요!";
+"Did %d things!" = "%d가지 일을 했어요!";
 
 "Cancel" = "취소";
 "OK" = "확인";

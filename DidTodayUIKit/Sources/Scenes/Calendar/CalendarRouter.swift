@@ -8,5 +8,5 @@
 import Foundation
 
 struct CalendarRouter {
-    let showDetailDay: (Date, [Did]) -> Void
+    let showDetailDay: (Date) -> Void
 }

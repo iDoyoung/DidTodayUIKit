@@ -34,7 +34,9 @@ final class CalendarViewModel: CalendarViewModelProtocol {
     
     //MARK: Output
     var fetchedDids = CurrentValueSubject<[Did], Never>([])
+    ///Didplay mark of date of did something in Calendar
     var dateOfDids = CurrentValueSubject<[Date], Never>([])
+    ///Set started date of Calendar
     var startedDate: Date?
     var itemsOfDidSelectedDay = CurrentValueSubject<[DidsOfDayItemViewModel], Never>([])
     var descriptionOfSelectedDay = CurrentValueSubject<String?, Never>(CustomText.selectDay)
@@ -62,14 +64,10 @@ final class CalendarViewModel: CalendarViewModelProtocol {
                     .filter { $0.started.omittedTime() == Calendar.current.date(from: day)?.omittedTime() }
                 self.didsSelectedDay.send(item)
                 /// - Tag: Setting Description Label
-                if item.isEmpty {
-                    self.descriptionOfSelectedDay.send(CustomText.selectDay)
-                } else {
-                    self.descriptionOfSelectedDay.send(CustomText.selectedItems(count: item.count))
-                }
+                let description = item.isEmpty ? CustomText.selectDay: CustomText.selectedItems(count: item.count)
+                self.descriptionOfSelectedDay.send(description)
             }
             .store(in: &cancellableBag)
-        selectedDay = nil
         
         didsSelectedDay
             .sink { [weak self] output in
@@ -94,8 +92,7 @@ final class CalendarViewModel: CalendarViewModelProtocol {
     func showDetail() {
         guard let theSelectedDay = selectedDay,
               let theSelectedDate = Calendar.current.date(from: theSelectedDay) else { return }
-        let dids = didsSelectedDay.value
-        router?.showDetailDay(theSelectedDate, dids)
+        router?.showDetailDay(theSelectedDate)
     }
     
     deinit {

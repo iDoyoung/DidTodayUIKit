@@ -21,7 +21,7 @@ final class CalendarViewModelTests: XCTestCase {
         try super.setUpWithError()
         fetchDidUseCaseSpy = FetchDidUseCaseSpy()
         coordinatorSpy = CoordinatorSpy()
-        let router = CalendarRouter(showDetailDay: coordinatorSpy.showDetail(date:dids:))
+        let router = CalendarRouter(showDetailDay: coordinatorSpy.showDetail(date:))
         sut = CalendarViewModel(fetchDidUseCase: fetchDidUseCaseSpy, router: router)
     }
 
@@ -57,7 +57,7 @@ final class CalendarViewModelTests: XCTestCase {
         
         var showDetailCalled = false
         
-        func showDetail(date: Date, dids: [Did]) {
+        func showDetail(date: Date) {
             showDetailCalled = true
         }
     }

@@ -76,8 +76,13 @@ final class CalendarViewController: ParentUIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         /// - Tag: Configure Calendar After Fetch Dids
-        viewModel?.fetchDids()
+        bindViewModel()
         configure()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel?.fetchDids()
     }
     
     //MARK: Configure & Setup
@@ -127,6 +132,19 @@ final class CalendarViewController: ParentUIViewController {
             showDetailButton.topAnchor.constraint(greaterThanOrEqualTo: bottomView.topAnchor),
             showDetailButton.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor, constant: -20)
         ])
+    }
+    
+    //MARK: Binding
+    ///Binding with View Model
+    func bindViewModel() {
+        viewModel?.displayedItemsOfDidSelectedDay
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] items in
+                guard let self = self else { return }
+                self.showDetailButton.isEnabled = !items.isEmpty
+                self.initialSnapshot(items)
+            }
+            .store(in: &cancellableBag)
     }
 }
 
@@ -271,15 +289,6 @@ extension CalendarViewController {
         dataSource?.supplementaryViewProvider = { [weak self] supplementaryView, elementKind, indexPath in
             self?.collectionView.dequeueConfiguredReusableSupplementary(using: didsOfSelectedSupplementaryRegistration, for: indexPath)
         }
-        ///Binding with View Model
-        viewModel?.itemsOfDidSelectedDay
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] items in
-                guard let self = self else { return }
-                self.showDetailButton.isEnabled = !items.isEmpty
-                self.initialSnapshot(items)
-            })
-            .store(in: &cancellableBag)
     }
     
     //MARK: Create Registration

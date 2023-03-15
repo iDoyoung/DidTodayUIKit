@@ -18,7 +18,7 @@ protocol CalendarViewModelInput {
 protocol CalendarViewModelOutput {
     var fetchedDids: CurrentValueSubject<[Did], Never> { get }
     var dateOfDids: CurrentValueSubject<[Date], Never> { get }
-    var itemsOfDidSelectedDay: CurrentValueSubject<[DidsOfDayItemViewModel], Never> { get }
+    var displayedItemsOfDidSelectedDay: CurrentValueSubject<[DidsOfDayItemViewModel], Never> { get }
     var descriptionOfSelectedDay: CurrentValueSubject<String?, Never> { get }
     var startedDate: Date? { get }
     
@@ -38,21 +38,28 @@ final class CalendarViewModel: CalendarViewModelProtocol {
     var dateOfDids = CurrentValueSubject<[Date], Never>([])
     ///Set started date of Calendar
     var startedDate: Date?
-    var itemsOfDidSelectedDay = CurrentValueSubject<[DidsOfDayItemViewModel], Never>([])
+    var displayedItemsOfDidSelectedDay = CurrentValueSubject<[DidsOfDayItemViewModel], Never>([])
     var descriptionOfSelectedDay = CurrentValueSubject<String?, Never>(CustomText.selectDay)
-    
-    private var didsSelectedDay = CurrentValueSubject<[Did], Never>([])
         
     //MARK: - Methods
     init(fetchDidUseCase: FetchDidUseCase, router: CalendarRouter) {
         self.fetchDidUseCase = fetchDidUseCase
         self.router = router
         
+        //TODO: Refactoring, Details Did에서 돌아왔을 경우 고려해서 리펙토링
         fetchedDids
             .sink { [weak self] dids in
+                guard let self else { return }
                 let dates = dids.map { $0.started.omittedTime() }
-                self?.startedDate = dates.first ?? Date()
-                self?.dateOfDids.send(dates)
+                self.startedDate = dates.first ?? Date()
+                self.dateOfDids.send(dates)
+                
+                if let selectedDay = self.selectedDay {
+                    let item = self.fetchedDids.value
+                        .filter { $0.started.omittedTime() == Calendar.current.date(from: selectedDay)?.omittedTime() }
+                        .compactMap { DidsOfDayItemViewModel($0) }
+                    self.displayedItemsOfDidSelectedDay.send(item)
+                }
             }
             .store(in: &cancellableBag)
         
@@ -62,17 +69,11 @@ final class CalendarViewModel: CalendarViewModelProtocol {
                       let self else { return }
                 let item = self.fetchedDids.value
                     .filter { $0.started.omittedTime() == Calendar.current.date(from: day)?.omittedTime() }
-                self.didsSelectedDay.send(item)
+                    .compactMap { DidsOfDayItemViewModel($0) }
                 /// - Tag: Setting Description Label
                 let description = item.isEmpty ? CustomText.selectDay: CustomText.selectedItems(count: item.count)
+                self.displayedItemsOfDidSelectedDay.send(item)
                 self.descriptionOfSelectedDay.send(description)
-            }
-            .store(in: &cancellableBag)
-        
-        didsSelectedDay
-            .sink { [weak self] output in
-                let items = output.compactMap { DidsOfDayItemViewModel($0) }
-                self?.itemsOfDidSelectedDay.send(items)
             }
             .store(in: &cancellableBag)
     }

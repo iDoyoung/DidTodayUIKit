@@ -15,11 +15,11 @@ protocol DidDetailsViewModelInput {
 }
 
 protocol DidDetailsViewModelOutput {
-    var date: Just<String> { get }
-    var title: Just<String> { get }
-    var didTime: Just<String> { get }
-    var timeRange: Just<String> { get }
-    var color: Just<UIColor> { get }
+    var date: Just<String?> { get }
+    var title: Just<String?> { get }
+    var didTime: Just<String?> { get }
+    var timeRange: Just<String?> { get }
+    var color: Just<UIColor?> { get }
 }
 
 final class DidDetailsViewModel: DidDetailsViewModelProtocol {
@@ -29,12 +29,12 @@ final class DidDetailsViewModel: DidDetailsViewModelProtocol {
     var deleteDidUseCase: DeleteDidUseCase?
     private var selectedDid: Did?
     //MARK: Output
-    var date: Just<String>
-    var title: Just<String>
-    var didTime: Just<String>
-    var timeRange: Just<String>
+    var date: Just<String?>
+    var title: Just<String?>
+    var didTime: Just<String?>
+    var timeRange: Just<String?>
     ///Seted Color by user to display pie's color
-    var color: Just<UIColor>
+    var color: Just<UIColor?>
     
     init(_ did: Did) {
         selectedDid = did

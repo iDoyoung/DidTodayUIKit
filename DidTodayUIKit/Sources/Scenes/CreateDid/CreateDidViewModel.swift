@@ -27,7 +27,7 @@ protocol CreateDidViewModelInput {
 }
 
 protocol CreateDidViewModelOutput {
-    var title: CurrentValueSubject<String, Never> { get }
+    var title: CurrentValueSubject<String?, Never> { get }
     var titleOfDid: CurrentValueSubject<String?, Never> { get }
     var titleIsEmpty: CurrentValueSubject<Bool, Never> { get }
     var colorOfPie: CurrentValueSubject<UIColor, Never> { get }
@@ -54,7 +54,7 @@ final class CreateDidViewModel: CreateDidViewModelProtocol {
     var endedTime = CurrentValueSubject<Date?, Never>(Date())
     
     //MARK: - Output
-    var title = CurrentValueSubject<String, Never>(CustomText.createDid)
+    var title = CurrentValueSubject<String?, Never>(CustomText.createDid)
     var titleOfDid = CurrentValueSubject<String?, Never>(nil)
     var titleIsEmpty = CurrentValueSubject<Bool, Never>(true)
     var degreeOfStartedTime = CurrentValueSubject<Double?, Never>(nil)

@@ -41,33 +41,23 @@ final class DidDetailsViewController: UIViewController {
     
     private func bindViewModel() {
         viewModel?.date
-            .sink { date in
-                self.didDetailView.dateLabel.text = date
-            }
+            .assign(to: \.text, on: didDetailView.dateLabel)
             .store(in: &cancellableBag)
         
         viewModel?.title
-            .sink { title in
-                self.didDetailView.titleLabel.text = title
-            }
+            .assign(to: \.text, on: didDetailView.titleLabel)
             .store(in: &cancellableBag)
         
         viewModel?.didTime
-            .sink { didTime in
-                self.didDetailView.didTimeLabel.text = didTime
-            }
+            .assign(to: \.text, on: didDetailView.didTimeLabel)
             .store(in: &cancellableBag)
         
         viewModel?.timeRange
-            .sink { timeRange in
-                self.didDetailView.timeRangeLabel.text = timeRange
-            }
+            .assign(to: \.text, on: didDetailView.timeRangeLabel)
             .store(in: &cancellableBag)
         
         viewModel?.color
-            .sink { color in
-                self.didDetailView.color = color
-            }
+            .assign(to: \.color, on: didDetailView)
             .store(in: &cancellableBag)
     }
     

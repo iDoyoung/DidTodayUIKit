@@ -117,35 +117,25 @@ final class CreateDidViewController: ParentUIViewController, StoryboardInstantia
     
     private func bindViewModel() {
         viewModel?.title
-            .sink { [weak self] output in
-                self?.title = output
-            }
+            .assign(to: \.title, on: self)
             .store(in: &cancellableBag)
+        
         viewModel?.timePickerEnable
-            .sink { [weak self] output in
-                self?.startedTimePicker.isEnabled = output
-                self?.endedTimePicker.isEnabled = output
-            }
+            .assign(to: \.isEnabled, on: startedTimePicker)
             .store(in: &cancellableBag)
         
         viewModel?.degreeOfStartedTime
-            .sink { [weak self] output in
-                guard let output = output else { return }
-                self?.pieView.start = output
-            }
+            .replaceNil(with: 0)
+            .assign(to: \.start, on: pieView)
             .store(in: &cancellableBag)
-        
+
         viewModel?.degreeOfEndedTime
-            .sink { [weak self] output in
-                guard let output = output else { return }
-                self?.pieView.end = output
-            }
+            .replaceNil(with: 0)
+            .assign(to: \.end, on: pieView)
             .store(in: &cancellableBag)
         
         viewModel?.colorOfPie
-            .sink { [weak self] output in
-                self?.pieView.color = output
-            }
+            .assign(to: \.color, on: pieView)
             .store(in: &cancellableBag)
         
         viewModel?.isCompleted

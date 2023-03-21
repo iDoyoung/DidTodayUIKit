@@ -16,8 +16,8 @@ protocol DoingViewModelInput {
 }
 
 protocol DoingViewModelOutput {
-    var startedTime: PassthroughSubject<String, Never> { get }
-    var timesOfTimer: CurrentValueSubject<String, Never> { get }
+    var startedTime: PassthroughSubject<String?, Never> { get }
+    var timesOfTimer: CurrentValueSubject<String?, Never> { get }
     var isLessThanTime: CurrentValueSubject<Bool, Never> { get }
     
     func showCreateDid()
@@ -82,8 +82,8 @@ final class DoingViewModel: DoingViewModelProtocol {
     }
     var endedDate: Date?
     
-    var startedTime = PassthroughSubject<String, Never>()
-    var timesOfTimer = CurrentValueSubject<String, Never>("00:00")
+    var startedTime = PassthroughSubject<String?, Never>()
+    var timesOfTimer = CurrentValueSubject<String?, Never>("00:00")
     var isLessThanTime = CurrentValueSubject<Bool, Never>(true)
 
     func showCreateDid() {

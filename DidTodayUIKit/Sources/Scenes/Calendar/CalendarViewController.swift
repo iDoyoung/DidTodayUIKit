@@ -298,9 +298,7 @@ extension CalendarViewController {
                   let viewModel = self.viewModel else { return }
             ///Binding with ViewModel
             viewModel.descriptionOfSelectedDay
-                .sink {
-                    supplementaryView.descriptionCountLabel.text = $0
-                }
+                .assign(to: \.text, on: supplementaryView.descriptionCountLabel)
                 .store(in: &self.cancellableBag)
         }
     }

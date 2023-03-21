@@ -122,13 +122,11 @@ final class DoingViewController: ParentUIViewController, StoryboardInstantiable 
         ///Bind With Timer Label
         viewModel?.timesOfTimer
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] output in self?.timerLabel.text = output }
+            .assign(to: \.text, on: timerLabel)
             .store(in: &cancellableBag)
         ///Bind StartedTime
         viewModel?.startedTime
-            .sink { [weak self] output in
-                self?.startedTimeLabel.text = output
-            }
+            .assign(to: \.text, on: startedTimeLabel)
             .store(in: &cancellableBag)
     }
     

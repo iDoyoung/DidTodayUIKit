@@ -31,7 +31,7 @@ class CreateDidViewControllerTests: XCTestCase {
     //MARK: - Test Doubles
     class CreateDidViewModelSpy: CreateDidViewModelProtocol {
                
-        var title = CurrentValueSubject<String, Never>("")
+        var title = CurrentValueSubject<String?, Never>("")
         var timePickerEnable = CurrentValueSubject<Bool, Never>(false)
         
         //MARK: - Input

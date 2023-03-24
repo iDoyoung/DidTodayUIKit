@@ -60,7 +60,7 @@ final class DoingViewController: ParentUIViewController, StoryboardInstantiable 
         createDismissKeyboardTapGesture()
         setupView()
         bindViewModel()
-        observeApplicationWillEnterForeground()
+        viewModel?.observeWillEnterForeground()
         viewModel?.observeDidEnterBackground()
         observeDayIsChanged()
         requestUserNotificationsAuthorization()
@@ -149,13 +149,6 @@ final class DoingViewController: ParentUIViewController, StoryboardInstantiable 
                 #endif
             }
         }
-    }
-    
-    private func observeApplicationWillEnterForeground() {
-            NotificationCenter.default
-                .publisher(for: UIApplication.willEnterForegroundNotification)
-                .sink() { [weak self] _ in self?.viewModel?.startDoing() }
-                .store(in: &cancellableBag)
     }
     
     private func observeDayIsChanged() {

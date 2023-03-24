@@ -15,6 +15,7 @@ protocol DoingViewModelInput {
     func showCreateDid()
     func cancelRecording()
     func observeDidEnterBackground()
+    func observeWillEnterForeground()
 }
 
 protocol DoingViewModelOutput {
@@ -93,6 +94,15 @@ final class DoingViewModel: DoingViewModelProtocol {
         NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)
             .sink() { [weak self] _ in
                 self?.timerPublisher.upstream.connect().cancel()
+            }
+            .store(in: &cancellableBag)
+    }
+    
+    func observeWillEnterForeground() {
+        NotificationCenter.default
+            .publisher(for: UIApplication.willEnterForegroundNotification)
+            .sink() { [weak self] _ in
+                self?.startDoing()
             }
             .store(in: &cancellableBag)
     }

@@ -86,9 +86,9 @@ final class DoingViewModel: DoingViewModelProtocol {
 
     func showCreateDid() {
         endDoing()
-//        if startedDate != nil, endedDate != nil {
-//            router?.showCreateDid(startedDate, endedDate)
-//        }
+        startedDate
+            .sink { self.router?.showCreateDid($0, self.endedDate) }
+            .store(in: &cancellableBag)
     }
     
     func cancel() {

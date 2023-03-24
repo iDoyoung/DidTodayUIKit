@@ -12,7 +12,6 @@ protocol DoingViewModelProtocol: DoingViewModelInput, DoingViewModelOutput {   }
 
 protocol DoingViewModelInput {
     func startDoing()
-    func endDoing()
 }
 
 protocol DoingViewModelOutput {
@@ -56,10 +55,6 @@ final class DoingViewModel: DoingViewModelProtocol {
             .store(in: &cancellableBag)
     }
    
-    func endDoing() {
-        endedDate = Date()
-    }
-    
     func startTimer(_ date: Date) {
         Timer.publish(every: 1, on: .main, in: .default)
             .autoconnect()
@@ -79,15 +74,13 @@ final class DoingViewModel: DoingViewModelProtocol {
         .replaceNil(with: Date())
         .eraseToAnyPublisher()
     
-    var endedDate: Date?
     var startedTime = PassthroughSubject<String?, Never>()
     var timesOfTimer = CurrentValueSubject<String?, Never>("00:00")
     var isLessThanTime = CurrentValueSubject<Bool, Never>(true)
 
     func showCreateDid() {
-        endDoing()
         startedDate
-            .sink { self.router?.showCreateDid($0, self.endedDate) }
+            .sink { self.router?.showCreateDid($0, Date()) }
             .store(in: &cancellableBag)
     }
     

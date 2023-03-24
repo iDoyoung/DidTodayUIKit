@@ -43,7 +43,6 @@ final class DoingViewController: ParentUIViewController, StoryboardInstantiable 
             occurFeedback()
             timerLabel.animateToShake()
         } else {
-            viewModel.endDoing()
             viewModel.showCreateDid()
         }
     }

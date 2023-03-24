@@ -46,11 +46,11 @@ final class DoingViewModel: DoingViewModelProtocol {
     //MARK: Input
     func startDoing() {
         startedDate
-            .sink {
-                self.count.send($0.distance(to: Date()))
-                self.startTimer($0)
-                let text = CustomText.started(time: $0.currentTimeToString() )
-                self.startedTime.send(text)
+            .sink { [weak self] date in
+                self?.count.send(date.distance(to: Date()))
+                self?.startTimer(date)
+                let text = CustomText.started(time: date.currentTimeToString() )
+                self?.startedTime.send(text)
             }
             .store(in: &cancellableBag)
     }
@@ -60,11 +60,11 @@ final class DoingViewModel: DoingViewModelProtocol {
             .autoconnect()
             .map { $0.timeIntervalSince(date) }
             .map { Double($0) }
-            .sink {
+            .sink { [weak self] count in
                 #if DEBUG
-                print($0)
+                print(count)
                 #endif
-                self.count.send($0)
+                self?.count.send(count)
             }
             .store(in: &cancellableBag)
     }
@@ -80,7 +80,9 @@ final class DoingViewModel: DoingViewModelProtocol {
 
     func showCreateDid() {
         startedDate
-            .sink { self.router?.showCreateDid($0, Date()) }
+            .sink { [weak self] startedDate in
+                self?.router?.showCreateDid(startedDate, Date())
+            }
             .store(in: &cancellableBag)
     }
     

@@ -46,24 +46,24 @@ final class DoingViewModel: DoingViewModelProtocol {
 
     //MARK: Input
     func startDoing() {
-        if let startedDate = UserDefaults.standard.object(forKey: "start-time-of-doing") as? Date {
-            self.startedDate = startedDate
-            self.count.send(startedDate.distance(to: Date()))
-        } else {
-            startedDate = Date()
-            UserDefaults.standard.set(startedDate, forKey: "start-time-of-doing")
-        }
-        startTimer()
+        startedDate
+            .sink {
+                self.count.send($0.distance(to: Date()))
+                self.startTimer($0)
+                let text = CustomText.started(time: $0.currentTimeToString() )
+                self.startedTime.send(text)
+            }
+            .store(in: &cancellableBag)
     }
    
     func endDoing() {
         endedDate = Date()
     }
     
-    func startTimer() {
+    func startTimer(_ date: Date) {
         Timer.publish(every: 1, on: .main, in: .default)
             .autoconnect()
-            .map { $0.timeIntervalSince(self.startedDate ?? Date()) }
+            .map { $0.timeIntervalSince(date) }
             .map { Double($0) }
             .sink {
                 #if DEBUG
@@ -75,24 +75,20 @@ final class DoingViewModel: DoingViewModelProtocol {
     }
     
     //MARK: Output
-    ///It is output?. didSet is bad choice?
-    var startedDate: Date? {
-        didSet {
-            let text = CustomText.started(time: startedDate?.currentTimeToString() ?? "00:00")
-            startedTime.send(text)
-        }
-    }
-    var endedDate: Date?
+    var startedDate = Just(UserDefaults.standard.object(forKey: "start-time-of-doing") as? Date)
+        .replaceNil(with: Date())
+        .eraseToAnyPublisher()
     
+    var endedDate: Date?
     var startedTime = PassthroughSubject<String?, Never>()
     var timesOfTimer = CurrentValueSubject<String?, Never>("00:00")
     var isLessThanTime = CurrentValueSubject<Bool, Never>(true)
 
     func showCreateDid() {
         endDoing()
-        if startedDate != nil, endedDate != nil {
-            router?.showCreateDid(startedDate, endedDate)
-        }
+//        if startedDate != nil, endedDate != nil {
+//            router?.showCreateDid(startedDate, endedDate)
+//        }
     }
     
     func cancel() {

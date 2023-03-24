@@ -28,17 +28,14 @@ final class DoingViewModel: DoingViewModelProtocol {
     
     //MARK: - Properties
     
-    private var router: DoingRouter?
+    private let router: DoingRouter?
     private var cancellableBag = Set<AnyCancellable>()
     private var count = CurrentValueSubject<Double, Never>(0)
-    private var timerPublisher = Timer.publish(every: 1, on: .main, in: .default)
-        .autoconnect()
+    ///User Default에 저장하기 위한 프로퍼티
+    private var startedDate: AnyPublisher<Date, Never>
+    private var timerPublisher = Timer.publish(every: 1, on: .main, in: .default).autoconnect()
     
     //MARK: Output
-    var startedDate = Just(UserDefaults.standard.object(forKey: "start-time-of-doing") as? Date)
-        .replaceNil(with: Date())
-        .eraseToAnyPublisher()
-    
     var startedTime = PassthroughSubject<String?, Never>()
     var timesOfTimer = CurrentValueSubject<String?, Never>("00:00")
     var isLessThanTime = CurrentValueSubject<Bool, Never>(true)
@@ -47,6 +44,10 @@ final class DoingViewModel: DoingViewModelProtocol {
     
     init(router: DoingRouter) {
         self.router = router
+        startedDate = Just(UserDefaults.standard.object(forKey: "start-time-of-doing") as? Date)
+            .replaceNil(with: Date())
+            .eraseToAnyPublisher()
+        
         ///Observe Count Time
         count
             .sink { [weak self] time in

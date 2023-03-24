@@ -5,7 +5,7 @@
 //  Created by Doyoung on 2022/12/01.
 //
 
-import Foundation
+import UIKit
 import Combine
 
 protocol DoingViewModelProtocol: DoingViewModelInput, DoingViewModelOutput {   }
@@ -13,7 +13,8 @@ protocol DoingViewModelProtocol: DoingViewModelInput, DoingViewModelOutput {   }
 protocol DoingViewModelInput {
     func startDoing()
     func showCreateDid()
-    func cancel()
+    func cancelRecording()
+    func observeDidEnterBackground()
 }
 
 protocol DoingViewModelOutput {
@@ -29,7 +30,9 @@ final class DoingViewModel: DoingViewModelProtocol {
     private var router: DoingRouter?
     private var cancellableBag = Set<AnyCancellable>()
     private var count = CurrentValueSubject<Double, Never>(0)
-
+    private var timerPublisher = Timer.publish(every: 1, on: .main, in: .default)
+        .autoconnect()
+    
     //MARK: Output
     var startedDate = Just(UserDefaults.standard.object(forKey: "start-time-of-doing") as? Date)
         .replaceNil(with: Date())
@@ -82,13 +85,20 @@ final class DoingViewModel: DoingViewModelProtocol {
             .store(in: &cancellableBag)
     }
     
-    func cancel() {
+    func cancelRecording() {
         UserDefaults.standard.removeObject(forKey: "start-time-of-doing")
     }
     
+    func observeDidEnterBackground() {
+        NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)
+            .sink() { [weak self] _ in
+                self?.timerPublisher.upstream.connect().cancel()
+            }
+            .store(in: &cancellableBag)
+    }
+    
     private func startTimer(_ date: Date) {
-        Timer.publish(every: 1, on: .main, in: .default)
-            .autoconnect()
+        timerPublisher
             .map { $0.timeIntervalSince(date) }
             .map { Double($0) }
             .sink { [weak self] count in

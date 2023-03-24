@@ -61,6 +61,7 @@ final class DoingViewController: ParentUIViewController, StoryboardInstantiable 
         setupView()
         bindViewModel()
         observeApplicationWillEnterForeground()
+        viewModel?.observeDidEnterBackground()
         observeDayIsChanged()
         requestUserNotificationsAuthorization()
     }
@@ -178,7 +179,7 @@ final class DoingViewController: ParentUIViewController, StoryboardInstantiable 
 extension DoingViewController: TimerAlert {
     
     func cancelTimer() {
-        viewModel?.cancel()
+        viewModel?.cancelRecording()
         dismiss(animated: true)
     }
 }

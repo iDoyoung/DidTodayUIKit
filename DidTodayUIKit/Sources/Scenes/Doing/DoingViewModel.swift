@@ -12,22 +12,34 @@ protocol DoingViewModelProtocol: DoingViewModelInput, DoingViewModelOutput {   }
 
 protocol DoingViewModelInput {
     func startDoing()
+    func showCreateDid()
+    func cancel()
 }
 
 protocol DoingViewModelOutput {
     var startedTime: PassthroughSubject<String?, Never> { get }
     var timesOfTimer: CurrentValueSubject<String?, Never> { get }
     var isLessThanTime: CurrentValueSubject<Bool, Never> { get }
-    
-    func showCreateDid()
-    func cancel()
 }
 
 final class DoingViewModel: DoingViewModelProtocol {
     
+    //MARK: - Properties
+    
     private var router: DoingRouter?
     private var cancellableBag = Set<AnyCancellable>()
     private var count = CurrentValueSubject<Double, Never>(0)
+
+    //MARK: Output
+    var startedDate = Just(UserDefaults.standard.object(forKey: "start-time-of-doing") as? Date)
+        .replaceNil(with: Date())
+        .eraseToAnyPublisher()
+    
+    var startedTime = PassthroughSubject<String?, Never>()
+    var timesOfTimer = CurrentValueSubject<String?, Never>("00:00")
+    var isLessThanTime = CurrentValueSubject<Bool, Never>(true)
+
+    //MARK: - Method
     
     init(router: DoingRouter) {
         self.router = router
@@ -43,6 +55,12 @@ final class DoingViewModel: DoingViewModelProtocol {
             .store(in: &cancellableBag)
     }
 
+    deinit {
+        #if DEBUG
+        print("Deinit Doing View Model")
+        #endif
+    }
+    
     //MARK: Input
     func startDoing() {
         startedDate
@@ -55,29 +73,7 @@ final class DoingViewModel: DoingViewModelProtocol {
             .store(in: &cancellableBag)
     }
    
-    func startTimer(_ date: Date) {
-        Timer.publish(every: 1, on: .main, in: .default)
-            .autoconnect()
-            .map { $0.timeIntervalSince(date) }
-            .map { Double($0) }
-            .sink { [weak self] count in
-                #if DEBUG
-                print(count)
-                #endif
-                self?.count.send(count)
-            }
-            .store(in: &cancellableBag)
-    }
     
-    //MARK: Output
-    var startedDate = Just(UserDefaults.standard.object(forKey: "start-time-of-doing") as? Date)
-        .replaceNil(with: Date())
-        .eraseToAnyPublisher()
-    
-    var startedTime = PassthroughSubject<String?, Never>()
-    var timesOfTimer = CurrentValueSubject<String?, Never>("00:00")
-    var isLessThanTime = CurrentValueSubject<Bool, Never>(true)
-
     func showCreateDid() {
         startedDate
             .sink { [weak self] startedDate in
@@ -90,9 +86,17 @@ final class DoingViewModel: DoingViewModelProtocol {
         UserDefaults.standard.removeObject(forKey: "start-time-of-doing")
     }
     
-    deinit {
-        #if DEBUG
-        print("Deinit Doing View Model")
-        #endif
+    private func startTimer(_ date: Date) {
+        Timer.publish(every: 1, on: .main, in: .default)
+            .autoconnect()
+            .map { $0.timeIntervalSince(date) }
+            .map { Double($0) }
+            .sink { [weak self] count in
+                #if DEBUG
+                print(count)
+                #endif
+                self?.count.send(count)
+            }
+            .store(in: &cancellableBag)
     }
 }

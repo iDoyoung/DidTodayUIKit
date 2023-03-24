@@ -44,10 +44,6 @@ final class DoingViewModel: DoingViewModelProtocol {
             .store(in: &cancellableBag)
     }
 
-    private func countSeconds() {
-        count.value += 1
-    }
-    
     //MARK: Input
     func startDoing() {
         if let startedDate = UserDefaults.standard.object(forKey: "start-time-of-doing") as? Date {
@@ -65,11 +61,17 @@ final class DoingViewModel: DoingViewModelProtocol {
     }
     
     func startTimer() {
-        let timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
-            guard let count = self?.count else { return }
-            count.send(count.value + 1)
-        }
-        timer.fire()
+        Timer.publish(every: 1, on: .main, in: .default)
+            .autoconnect()
+            .map { $0.timeIntervalSince(self.startedDate ?? Date()) }
+            .map { Double($0) }
+            .sink {
+                #if DEBUG
+                print($0)
+                #endif
+                self.count.send($0)
+            }
+            .store(in: &cancellableBag)
     }
     
     //MARK: Output

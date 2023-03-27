@@ -11,15 +11,20 @@ import Combine
 protocol DoingViewModelProtocol: DoingViewModelInput, DoingViewModelOutput {   }
 
 protocol DoingViewModelInput {
-    func startDoing()
+    func updateCountWithStartedDate()
+    func countTime()
+    func viewDisappear()
     func showCreateDid()
+    
+    func setStartedTimeText()
+    ///현재 기록 중인 데이터를 취소
     func cancelRecording()
     func observeDidEnterBackground()
     func observeWillEnterForeground()
 }
 
 protocol DoingViewModelOutput {
-    var startedTime: PassthroughSubject<String?, Never> { get }
+    var startedTimeText: PassthroughSubject<String?, Never> { get }
     var timesOfTimer: CurrentValueSubject<String?, Never> { get }
     var isLessThanTime: CurrentValueSubject<Bool, Never> { get }
 }
@@ -36,7 +41,7 @@ final class DoingViewModel: DoingViewModelProtocol {
     private var timerPublisher = Timer.publish(every: 1, on: .main, in: .default).autoconnect()
     
     //MARK: Output
-    var startedTime = PassthroughSubject<String?, Never>()
+    var startedTimeText = PassthroughSubject<String?, Never>()
     var timesOfTimer = CurrentValueSubject<String?, Never>("00:00")
     var isLessThanTime = CurrentValueSubject<Bool, Never>(true)
 
@@ -67,18 +72,18 @@ final class DoingViewModel: DoingViewModelProtocol {
     }
     
     //MARK: Input
-    func startDoing() {
+    func updateCountWithStartedDate() {
         startedDate
-            .sink { [weak self] date in
-                self?.count.send(date.distance(to: Date()))
-                self?.startTimer(date)
-                let text = CustomText.started(time: date.currentTimeToString() )
-                self?.startedTime.send(text)
-            }
+            .sink { [weak self] date in self?.count.send(date.distance(to: Date())) }
             .store(in: &cancellableBag)
     }
-   
     
+    func countTime() {
+        startedDate
+            .sink { [weak self] date in self?.executeTimer(from: date) }
+            .store(in: &cancellableBag)
+    }
+  
     func showCreateDid() {
         startedDate
             .sink { [weak self] startedDate in
@@ -91,10 +96,14 @@ final class DoingViewModel: DoingViewModelProtocol {
         UserDefaults.standard.removeObject(forKey: "start-time-of-doing")
     }
     
+    func viewDisappear() {
+        timerPublisher.upstream.connect().cancel()
+    }
+    
     func observeDidEnterBackground() {
         NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)
             .sink() { [weak self] _ in
-                self?.timerPublisher.upstream.connect().cancel()
+                self?.viewDisappear()
             }
             .store(in: &cancellableBag)
     }
@@ -103,12 +112,19 @@ final class DoingViewModel: DoingViewModelProtocol {
         NotificationCenter.default
             .publisher(for: UIApplication.willEnterForegroundNotification)
             .sink() { [weak self] _ in
-                self?.startDoing()
+                self?.countTime()
             }
             .store(in: &cancellableBag)
     }
     
-    private func startTimer(_ date: Date) {
+    func setStartedTimeText() {
+        startedDate
+            .map { CustomText.started(time: $0.currentTimeToString()) }
+            .sink { [weak self] text in self?.startedTimeText.send(text) }
+            .store(in: &cancellableBag)
+    }
+    
+    private func executeTimer(from date: Date) {
         timerPublisher
             .map { $0.timeIntervalSince(date) }
             .map { Double($0) }

@@ -68,12 +68,13 @@ final class DoingViewController: ParentUIViewController, StoryboardInstantiable 
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        viewModel?.startDoing()
+        viewModel?.countTime()
         informationBoardLabel.startAnimation()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        viewModel?.viewDisappear()
         informationBoardLabel.stopAnimation()
     }
     
@@ -125,7 +126,7 @@ final class DoingViewController: ParentUIViewController, StoryboardInstantiable 
             .assign(to: \.text, on: timerLabel)
             .store(in: &cancellableBag)
         ///Bind StartedTime
-        viewModel?.startedTime
+        viewModel?.startedTimeText
             .assign(to: \.text, on: startedTimeLabel)
             .store(in: &cancellableBag)
     }

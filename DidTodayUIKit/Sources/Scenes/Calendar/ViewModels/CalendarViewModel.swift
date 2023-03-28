@@ -32,6 +32,9 @@ final class CalendarViewModel: CalendarViewModelProtocol {
     private var router: CalendarRouter?
     private var cancellableBag = Set<AnyCancellable>()
     
+    //MARK: Input
+    @Published var selectedDay: DateComponents?
+    
     //MARK: Output
     var fetchedDids = CurrentValueSubject<[Did], Never>([])
     ///Didplay mark of date of did something in Calendar
@@ -50,13 +53,13 @@ final class CalendarViewModel: CalendarViewModelProtocol {
         fetchedDids
             .sink { [weak self] dids in
                 guard let self else { return }
-                let dates = dids.map { $0.started.omittedTime() }
+                let dates = dids.map { $0.finished.omittedTime() }
                 self.startedDate = dates.first ?? Date()
                 self.dateOfDids.send(dates)
                 
                 if let selectedDay = self.selectedDay {
                     let item = self.fetchedDids.value
-                        .filter { $0.started.omittedTime() == Calendar.current.date(from: selectedDay)?.omittedTime() }
+                        .filter { $0.finished.omittedTime() == Calendar.current.date(from: selectedDay)?.omittedTime() }
                         .compactMap { DidsOfDayItemViewModel($0) }
                     self.displayedItemsOfDidSelectedDay.send(item)
                 }
@@ -68,7 +71,7 @@ final class CalendarViewModel: CalendarViewModelProtocol {
                 guard let day,
                       let self else { return }
                 let item = self.fetchedDids.value
-                    .filter { $0.started.omittedTime() == Calendar.current.date(from: day)?.omittedTime() }
+                    .filter { $0.finished.omittedTime() == Calendar.current.date(from: day)?.omittedTime() }
                     .compactMap { DidsOfDayItemViewModel($0) }
                 /// - Tag: Setting Description Label
                 let description = item.isEmpty ? CustomText.selectDay: CustomText.selectedItems(count: item.count)
@@ -77,10 +80,14 @@ final class CalendarViewModel: CalendarViewModelProtocol {
             }
             .store(in: &cancellableBag)
     }
-   
-    //MARK: - Input
-    @Published var selectedDay: DateComponents?
     
+    deinit {
+        #if DEBUG
+        print("Deinit Calendar View Model")
+        #endif
+    }
+    
+    //MARK: - Input
     func fetchDids() {
         Task {
             guard let fetched = try await fetchDidUseCase?.execute() else { return }
@@ -94,11 +101,5 @@ final class CalendarViewModel: CalendarViewModelProtocol {
         guard let theSelectedDay = selectedDay,
               let theSelectedDate = Calendar.current.date(from: theSelectedDay) else { return }
         router?.showDetailDay(theSelectedDate)
-    }
-    
-    deinit {
-        #if DEBUG
-        print("Deinit Calendar View Model")
-        #endif
     }
 }

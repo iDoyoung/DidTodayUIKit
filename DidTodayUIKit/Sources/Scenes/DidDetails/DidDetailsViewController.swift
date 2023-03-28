@@ -40,19 +40,22 @@ final class DidDetailsViewController: UIViewController {
     }
     
     private func bindViewModel() {
-        viewModel?.title
+        guard let viewModel else { return }
+        viewModel.title
             .assign(to: \.text, on: didDetailView.titleLabel)
             .store(in: &cancellableBag)
         
-        viewModel?.didTime
+        viewModel.didTime
             .assign(to: \.text, on: didDetailView.didTimeLabel)
             .store(in: &cancellableBag)
         
-        viewModel?.timeRange
+        viewModel.startedTime
+            .zip(viewModel.finishedTime) { started, finished in
+                "\(started ?? "") - \(finished ?? "")"
+            }
             .assign(to: \.text, on: didDetailView.timeRangeLabel)
             .store(in: &cancellableBag)
-        
-        viewModel?.color
+        viewModel.color
             .assign(to: \.color, on: didDetailView)
             .store(in: &cancellableBag)
     }

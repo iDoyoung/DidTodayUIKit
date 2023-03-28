@@ -18,7 +18,8 @@ protocol DidDetailsViewModelOutput {
     var date: Just<String?> { get }
     var title: Just<String?> { get }
     var didTime: Just<String?> { get }
-    var timeRange: Just<String?> { get }
+    var startedTime: Just<String?> { get }
+    var finishedTime: Just<String?> { get }
     var color: Just<UIColor?> { get }
 }
 
@@ -32,14 +33,19 @@ final class DidDetailsViewModel: DidDetailsViewModelProtocol {
     var date: Just<String?>
     var title: Just<String?>
     var didTime: Just<String?>
-    var timeRange: Just<String?>
+    var startedTime: Just<String?>
+    var finishedTime: Just<String?>
     ///Seted Color by user to display pie's color
     var color: Just<UIColor?>
     
     init(_ did: Did) {
         selectedDid = did
         let startDate = did.started.toString()
-        let startedTime = did.started.currentTimeToString()
+        let endedDate = did.finished.toString()
+        var startedTime = did.started.currentTimeToString()
+        if startDate != endedDate {
+            startedTime = "(\(startDate)) " + startedTime
+        }
         let finishedTime = did.finished.currentTimeToString()
         ///date components of  difference between started and finished.
         let components = Calendar.current.dateComponents([.hour, .minute], from: did.started, to: did.finished)
@@ -54,7 +60,8 @@ final class DidDetailsViewModel: DidDetailsViewModelProtocol {
         assert(components.hour != nil, "Hours should not be nil")
         assert(components.minute != nil, "Minutes should not be nil")
         didTime = Just(CustomText.timesRange(started: components.hour ?? 0, finished: components.minute ?? 0))
-        timeRange = Just("\(startedTime) - \(finishedTime)")
+        self.startedTime = Just(startedTime)
+        self.finishedTime = Just(finishedTime)
         color = Just(UIColor(red: red, green: green, blue: blude, alpha: alpha))
     }
     

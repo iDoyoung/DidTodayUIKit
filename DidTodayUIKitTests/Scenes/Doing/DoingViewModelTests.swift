@@ -48,22 +48,36 @@ final class DoingViewModelTests: XCTestCase {
     
     //MARK: Tests
     
-    func test_updateCountWithStartedDate() {
+    func test_updateCountWithStartedDate_givenCurrentDate() {
+        // given
+        let current = Date()
+        sut.startedDate = current
         // when
         sut.updateCountWithStartedDate()
+        
         // then
-        XCTAssertEqual(sut.cancellablesBag.count, 1, "Unexpected number of cancellables")
-        if UserDefaults.standard.object(forKey: "start-time-of-doing") == nil {
-            XCTAssertEqual(sut.timesOfTimer.value, "00:00")
-        }
+        XCTAssertEqual(sut.timesOfTimer.value, "00:00")
+    }
+    
+    func test_updateCountWithStartedDate_givenSomeDate() {
+        // given
+        sut.startedDate = Calendar.current.date(byAdding: .hour, value: -1, to: Date())!
+        
+        // when
+        sut.updateCountWithStartedDate()
+        
+        // then
+        XCTAssertEqual(sut.timesOfTimer.value, "01:00")
     }
     
     ///Timer Publisher Should Attach a subscriber
     func test_countTime() {
         // given
         sut.cancellablesBag.removeAll()
+        
         // when
         sut.countTime()
+        
         // then
         XCTAssertEqual(sut.cancellablesBag.count, 1, "Unexpected number of cancellables")
     }
@@ -71,8 +85,10 @@ final class DoingViewModelTests: XCTestCase {
     func test_observeDidEnterBackground() {
         //given
         sut.cancellablesBag.removeAll()
+        
         // when
         sut.observeDidEnterBackground()
+        
         // then
         XCTAssertEqual(sut.cancellablesBag.count, 1, "Unexpected number of cancellables")
     }
@@ -80,6 +96,7 @@ final class DoingViewModelTests: XCTestCase {
     func test_observeWillEnterForeground() {
         //given
         sut.cancellablesBag.removeAll()
+        
         // when
         sut.observeWillEnterForeground()
         

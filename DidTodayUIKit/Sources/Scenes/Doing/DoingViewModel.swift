@@ -32,7 +32,7 @@ final class DoingViewModel: DoingViewModelProtocol {
     //MARK: - Properties
     
     private let router: DoingRouter?
-    private var cancellableBag = Set<AnyCancellable>()
+    var cancellablesBag = Set<AnyCancellable>()
     private var count = CurrentValueSubject<Double, Never>(0)
     private var startedDate: Date = {
         if let saved = UserDefaults.standard.object(forKey: "start-time-of-doing") as? Date {
@@ -69,8 +69,7 @@ final class DoingViewModel: DoingViewModelProtocol {
                 }
                 self?.timesOfTimer.send(time.toTimeWithHoursMinutes())
             }
-            .store(in: &cancellableBag)
-        
+            .store(in: &cancellablesBag)
     }
 
     deinit {
@@ -105,7 +104,7 @@ final class DoingViewModel: DoingViewModelProtocol {
             .sink() { [weak self] _ in
                 self?.viewDisappear()
             }
-            .store(in: &cancellableBag)
+            .store(in: &cancellablesBag)
     }
     
     func observeWillEnterForeground() {
@@ -114,7 +113,7 @@ final class DoingViewModel: DoingViewModelProtocol {
             .sink() { [weak self] _ in
                 self?.countTime()
             }
-            .store(in: &cancellableBag)
+            .store(in: &cancellablesBag)
     }
     
     private func executeTimer(from date: Date) {
@@ -127,6 +126,6 @@ final class DoingViewModel: DoingViewModelProtocol {
                 #endif
                 self?.count.send(count)
             }
-            .store(in: &cancellableBag)
+            .store(in: &cancellablesBag)
     }
 }

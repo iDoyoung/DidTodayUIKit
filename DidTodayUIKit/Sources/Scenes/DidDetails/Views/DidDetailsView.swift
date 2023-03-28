@@ -28,12 +28,14 @@ final class DidDetailsView: UIView {
     
     let didTimeLabel: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 0
         label.font = UIFont.preferredFont(forTextStyle: .title1)
         return label
     }()
     
     let timeRangeLabel: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 0
         label.font = UIFont.preferredFont(forTextStyle: .title2)
         return label
     }()
@@ -58,14 +60,6 @@ final class DidDetailsView: UIView {
             .justifyContent(.end)
             .define { flex in
                 flex.addItem()
-                    .padding(10)
-                    .cornerRadius(10)
-                    .justifyContent(.center)
-                    .define { flex in
-                        flex.addItem(titleLabel)
-                    }
-                
-                flex.addItem()
                     .paddingHorizontal(10)
                     .cornerRadius(10)
                     .justifyContent(.center)
@@ -79,6 +73,14 @@ final class DidDetailsView: UIView {
                     .justifyContent(.center)
                     .define { flex in
                         flex.addItem(timeRangeLabel)
+                    }
+                
+                  flex.addItem()
+                    .padding(10)
+                    .cornerRadius(10)
+                    .justifyContent(.center)
+                    .define { flex in
+                        flex.addItem(titleLabel)
                     }
             }
     }

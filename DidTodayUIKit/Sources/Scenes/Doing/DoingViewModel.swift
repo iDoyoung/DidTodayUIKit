@@ -15,8 +15,6 @@ protocol DoingViewModelInput {
     func countTime()
     func viewDisappear()
     func showCreateDid()
-    
-    func setStartedTimeText()
     ///현재 기록 중인 데이터를 취소
     func cancelRecording()
     func observeDidEnterBackground()
@@ -24,7 +22,7 @@ protocol DoingViewModelInput {
 }
 
 protocol DoingViewModelOutput {
-    var startedTimeText: PassthroughSubject<String?, Never> { get }
+    var startedTimeText: AnyPublisher<String?, Never> { get }
     var timesOfTimer: CurrentValueSubject<String?, Never> { get }
     var isLessThanTime: CurrentValueSubject<Bool, Never> { get }
 }
@@ -36,12 +34,21 @@ final class DoingViewModel: DoingViewModelProtocol {
     private let router: DoingRouter?
     private var cancellableBag = Set<AnyCancellable>()
     private var count = CurrentValueSubject<Double, Never>(0)
-    ///User Default에 저장하기 위한 프로퍼티
-    private var startedDate: AnyPublisher<Date, Never>
+    private var startedDate: Date = {
+        if let saved = UserDefaults.standard.object(forKey: "start-time-of-doing") as? Date {
+            return saved
+        } else {
+            let current = Date()
+            UserDefaults.standard.set(current, forKey: "start-time-of-doing")
+            return current
+        }
+    }()
+    
     private var timerPublisher = Timer.publish(every: 1, on: .main, in: .default).autoconnect()
     
     //MARK: Output
-    var startedTimeText = PassthroughSubject<String?, Never>()
+    var startedTimeText: AnyPublisher<String?, Never>
+    
     var timesOfTimer = CurrentValueSubject<String?, Never>("00:00")
     var isLessThanTime = CurrentValueSubject<Bool, Never>(true)
 
@@ -49,8 +56,8 @@ final class DoingViewModel: DoingViewModelProtocol {
     
     init(router: DoingRouter) {
         self.router = router
-        startedDate = Just(UserDefaults.standard.object(forKey: "start-time-of-doing") as? Date)
-            .replaceNil(with: Date())
+        startedTimeText = Just(startedDate)
+            .map { CustomText.started(time: $0.currentTimeToString()) }
             .eraseToAnyPublisher()
         
         ///Observe Count Time
@@ -63,6 +70,7 @@ final class DoingViewModel: DoingViewModelProtocol {
                 self?.timesOfTimer.send(time.toTimeWithHoursMinutes())
             }
             .store(in: &cancellableBag)
+        
     }
 
     deinit {
@@ -73,23 +81,15 @@ final class DoingViewModel: DoingViewModelProtocol {
     
     //MARK: Input
     func updateCountWithStartedDate() {
-        startedDate
-            .sink { [weak self] date in self?.count.send(date.distance(to: Date())) }
-            .store(in: &cancellableBag)
+        count.send(startedDate.distance(to: Date()))
     }
     
     func countTime() {
-        startedDate
-            .sink { [weak self] date in self?.executeTimer(from: date) }
-            .store(in: &cancellableBag)
+        executeTimer(from: Date())
     }
   
     func showCreateDid() {
-        startedDate
-            .sink { [weak self] startedDate in
-                self?.router?.showCreateDid(startedDate, Date())
-            }
-            .store(in: &cancellableBag)
+        router?.showCreateDid(startedDate, Date())
     }
     
     func cancelRecording() {
@@ -114,13 +114,6 @@ final class DoingViewModel: DoingViewModelProtocol {
             .sink() { [weak self] _ in
                 self?.countTime()
             }
-            .store(in: &cancellableBag)
-    }
-    
-    func setStartedTimeText() {
-        startedDate
-            .map { CustomText.started(time: $0.currentTimeToString()) }
-            .sink { [weak self] text in self?.startedTimeText.send(text) }
             .store(in: &cancellableBag)
     }
     

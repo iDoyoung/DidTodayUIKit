@@ -316,13 +316,88 @@
 		7F133C45290364300099E55C /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
-				7FF770B7295888AA00A665B5 /* ViewModel */,
-				7FB6A92128E07BC4009C61C5 /* Calendar */,
-				7F583F2E2912ADF6006735AA /* Cells and Supplementary Views */,
+				7F1CAEC629D2A909004E20E8 /* Views */,
+				7FF770B7295888AA00A665B5 /* ViewModels */,
 				7F133C46290365460099E55C /* CalendarViewController.swift */,
 				7F10CF7D2967C3D400EAADF2 /* CalendarRouter.swift */,
 			);
 			path = Calendar;
+			sourceTree = "<group>";
+		};
+		7F1CAEBF29D2A798004E20E8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7F0C251B29419BAE00304A0D /* CircularLabel.swift */,
+				7F43BBD429751F350084FB78 /* Doing.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7F1CAEC029D2A7BE004E20E8 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				7FC115A129386B930056237A /* DoingViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		7F1CAEC129D2A87B004E20E8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7F666DB429BAD01400D32E29 /* DidDetailsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7F1CAEC229D2A897004E20E8 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				7F6C337A29BC926A0019D80B /* DidDetailsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		7F1CAEC329D2A8B8004E20E8 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				7F80EBCA28D4102500781DB4 /* DidItemsViewModel.swift */,
+				7F135C3F2925FF33005156E0 /* TotalOfDidsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		7F1CAEC429D2A8D8004E20E8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7F43BBD929751F550084FB78 /* CreateDid.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7F1CAEC529D2A8DE004E20E8 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				7F397A7128D83021000F89E2 /* CreateDidViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		7F1CAEC629D2A909004E20E8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7FB6A92128E07BC4009C61C5 /* Calendar */,
+				7F583F2E2912ADF6006735AA /* Cells and Supplementary Views */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7F1CAEC729D2A9AC004E20E8 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				7F850CB3296509820083522A /* AuthorizationManager.swift */,
+				7F850CB52965130E0083522A /* UserNotificationManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		7F397A6428D709D3000F89E2 /* Main */ = {
@@ -337,9 +412,9 @@
 		7F397A7028D82FF4000F89E2 /* CreateDid */ = {
 			isa = PBXGroup;
 			children = (
-				7F43BBD929751F550084FB78 /* CreateDid.storyboard */,
+				7F1CAEC429D2A8D8004E20E8 /* Views */,
+				7F1CAEC529D2A8DE004E20E8 /* ViewModels */,
 				7F397A6728D71E74000F89E2 /* CreateDidViewController.swift */,
-				7F397A7128D83021000F89E2 /* CreateDidViewModel.swift */,
 				7F55E3FE294C08A0007B2706 /* CreateDidAlert.swift */,
 			);
 			path = CreateDid;
@@ -420,9 +495,9 @@
 		7F666DB329BAD00100D32E29 /* DidDetails */ = {
 			isa = PBXGroup;
 			children = (
-				7F666DB429BAD01400D32E29 /* DidDetailsView.swift */,
+				7F1CAEC229D2A897004E20E8 /* ViewModels */,
+				7F1CAEC129D2A87B004E20E8 /* Views */,
 				7F6C337829BC83330019D80B /* DidDetailsViewController.swift */,
-				7F6C337A29BC926A0019D80B /* DidDetailsViewModel.swift */,
 				7F6C338329BF48080019D80B /* DeleteDidAlert.swift */,
 			);
 			path = DidDetails;
@@ -457,10 +532,9 @@
 		7F850CC32966D1920083522A /* Did List Collection */ = {
 			isa = PBXGroup;
 			children = (
+				7F1CAEC329D2A8B8004E20E8 /* ViewModels */,
 				7F4AA14A29235C03004CE62A /* Cells and Supplementary Views */,
 				7F850CC12966B6540083522A /* DidListCollectionViewController.swift */,
-				7F135C3F2925FF33005156E0 /* TotalOfDidsViewModel.swift */,
-				7F80EBCA28D4102500781DB4 /* DidItemsViewModel.swift */,
 			);
 			path = "Did List Collection";
 			sourceTree = "<group>";
@@ -518,9 +592,9 @@
 		7FB3345B2953E36700E9FB88 /* About */ = {
 			isa = PBXGroup;
 			children = (
-				7FB3345C2953E58000E9FB88 /* AboutViewController.swift */,
-				7FF770B229557EA800A665B5 /* ViewModel */,
 				7FF770AF2955621300A665B5 /* Cells */,
+				7FF770B229557EA800A665B5 /* ViewModels */,
+				7FB3345C2953E58000E9FB88 /* AboutViewController.swift */,
 				7F43BBE329767D340084FB78 /* AboutRouter.swift */,
 			);
 			path = About;
@@ -557,10 +631,9 @@
 		7FC11596293654400056237A /* Doing */ = {
 			isa = PBXGroup;
 			children = (
-				7F43BBD429751F350084FB78 /* Doing.storyboard */,
-				7F0C251B29419BAE00304A0D /* CircularLabel.swift */,
+				7F1CAEBF29D2A798004E20E8 /* Views */,
+				7F1CAEC029D2A7BE004E20E8 /* ViewModels */,
 				7FC115A62939EAF50056237A /* DoingViewController.swift */,
-				7FC115A129386B930056237A /* DoingViewModel.swift */,
 				7F9C0B9D293DAA8C0094C2A5 /* TimerAlert.swift */,
 				7F0BECF72950776C00C0CF1C /* DoingRouter.swift */,
 				7F850CB729651EE00083522A /* DayIsChangedNotification.swift */,
@@ -580,8 +653,6 @@
 			isa = PBXGroup;
 			children = (
 				7FA3118D29B3322F00A4C5DE /* UseCases */,
-				7F850CB3296509820083522A /* AuthorizationManager.swift */,
-				7F850CB52965130E0083522A /* UserNotificationManager.swift */,
 				7FC22B6028C88A3A00F83122 /* Services */,
 				7FC22B5C28C7224000F83122 /* Entry */,
 				7FC22B5D28C76C9A00F83122 /* Models */,
@@ -594,17 +665,17 @@
 		7FC22B5928C71AEB00F83122 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				7F850C602961AEC80083522A /* ParentUIViewController.swift */,
+				7FC22B5A28C71AF500F83122 /* Main */,
 				7F666DB329BAD00100D32E29 /* DidDetails */,
 				7FB6A91F28E079ED009C61C5 /* Custom */,
-				7F850CC32966D1920083522A /* Did List Collection */,
-				7FC22B5A28C71AF500F83122 /* Main */,
 				7FC11596293654400056237A /* Doing */,
 				7F397A7028D82FF4000F89E2 /* CreateDid */,
 				7F133C45290364300099E55C /* Calendar */,
 				7F850CB929655C100083522A /* Detail Day */,
 				7FB3345B2953E36700E9FB88 /* About */,
 				7F43BBDC29753FCC0084FB78 /* PrivacyPolicy */,
-				7F850C602961AEC80083522A /* ParentUIViewController.swift */,
+				7F850CC32966D1920083522A /* Did List Collection */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -623,11 +694,12 @@
 		7FC22B5B28C71B1700F83122 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				7FD2B04A2909158A0048408F /* Namespaces */,
+				7F61A03A294438E10084A3F6 /* Extensions */,
+				7F1CAEC729D2A9AC004E20E8 /* Managers */,
 				7F666DB129BACC6100D32E29 /* UIViewPreview.swift */,
 				7F133CA2290902EC0099E55C /* StoryboardInstantiable.swift */,
 				50A450592564CFD500812F14 /* Localize.swift */,
-				7F61A03A294438E10084A3F6 /* Extensions */,
-				7FD2B04A2909158A0048408F /* Namespaces */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -730,22 +802,22 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		7FF770B229557EA800A665B5 /* ViewModel */ = {
+		7FF770B229557EA800A665B5 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
 				7FB3345E2953E5FC00E9FB88 /* AboutViewModel.swift */,
 				7FF770B329557ED500A665B5 /* AboutDid.swift */,
 			);
-			path = ViewModel;
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		7FF770B7295888AA00A665B5 /* ViewModel */ = {
+		7FF770B7295888AA00A665B5 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
 				7F71192C290BBC8B001DFE99 /* CalendarViewModel.swift */,
 				7F583F33291A61D2006735AA /* DidsOfDayItemViewModel.swift */,
 			);
-			path = ViewModel;
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		DAB2CA619C78ADD98AADD0EB /* Frameworks */ = {

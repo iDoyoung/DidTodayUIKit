@@ -34,15 +34,8 @@ final class DoingViewModel: DoingViewModelProtocol {
     private let router: DoingRouter?
     var cancellablesBag = Set<AnyCancellable>()
     private var count = CurrentValueSubject<Double, Never>(0)
-    private var startedDate: Date = {
-        if let saved = UserDefaults.standard.object(forKey: "start-time-of-doing") as? Date {
-            return saved
-        } else {
-            let current = Date()
-            UserDefaults.standard.set(current, forKey: "start-time-of-doing")
-            return current
-        }
-    }()
+    ///테스트를 위해 Internal
+    var startedDate: Date
     
     private var timerPublisher = Timer.publish(every: 1, on: .main, in: .default).autoconnect()
     
@@ -56,11 +49,21 @@ final class DoingViewModel: DoingViewModelProtocol {
     
     init(router: DoingRouter) {
         self.router = router
+        
+        // Set up Started Date
+        if let saved = UserDefaults.standard.object(forKey: "start-time-of-doing") as? Date {
+            startedDate = saved
+        } else {
+            let current = Date()
+            UserDefaults.standard.set(current, forKey: "start-time-of-doing")
+            startedDate = current
+        }
+        
         startedTimeText = Just(startedDate)
             .map { CustomText.started(time: $0.currentTimeToString()) }
             .eraseToAnyPublisher()
         
-        ///Observe Count Time
+        //Observe Count Time
         count
             .sink { [weak self] time in
                 //TODO: Set time of minimum condition
@@ -84,7 +87,7 @@ final class DoingViewModel: DoingViewModelProtocol {
     }
     
     func countTime() {
-        executeTimer(from: Date())
+        executeTimer(from: startedDate)
     }
   
     func showCreateDid() {

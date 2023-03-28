@@ -40,10 +40,6 @@ final class DidDetailsViewController: UIViewController {
     }
     
     private func bindViewModel() {
-        viewModel?.date
-            .assign(to: \.text, on: didDetailView.dateLabel)
-            .store(in: &cancellableBag)
-        
         viewModel?.title
             .assign(to: \.text, on: didDetailView.titleLabel)
             .store(in: &cancellableBag)

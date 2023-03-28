@@ -18,13 +18,7 @@ final class DidDetailsView: UIView {
         let effectView = UIVisualEffectView(effect: effect)
         return effectView
     }()
-    
-    let dateLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: .title3)
-        return label
-    }()
-    
+   
     let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
@@ -63,15 +57,6 @@ final class DidDetailsView: UIView {
             .direction(.column)
             .justifyContent(.end)
             .define { flex in
-                flex.addItem()
-                    .padding(10)
-                    .marginBottom(8)
-                    .cornerRadius(10)
-                    .justifyContent(.center)
-                    .define { flex in
-                        flex.addItem(dateLabel)
-                    }
-                
                 flex.addItem()
                     .padding(10)
                     .cornerRadius(10)
@@ -116,7 +101,6 @@ struct DidDetailsPreview: PreviewProvider {
     static var previews: some View {
         UIViewPreview {
             let view = DidDetailsView()
-            view.dateLabel.text = Date().toString()
             view.titleLabel.text = "It is Title, It is Title, It is Title"
             view.didTimeLabel.text = "Did 05:00"
             view.timeRangeLabel.text = "07:00 - 12:00"

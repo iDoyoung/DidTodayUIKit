@@ -129,15 +129,15 @@ final class MainViewController: DidListCollectionViewController {
     }
     
     override func bindSortingSupplementaryWithViewModel(supplementary: SortingSupplementaryView) {
-        self.viewModel?.isSelectedRecentlyButton
+        viewModel?.isSelectedRecentlyButton
             .receive(on: DispatchQueue.main)
-            .sink { supplementary.recentlyButton.isSelected  = $0 }
-            .store(in: &self.cancellableBag)
+            .assign(to: \.isSelected, on: supplementary.recentlyButton)
+            .store(in: &cancellableBag)
         
-        self.viewModel?.isSelectedMuchTimeButton
+        viewModel?.isSelectedMuchTimeButton
             .receive(on: DispatchQueue.main)
-            .sink { supplementary.muchTimeButton.isSelected = $0 }
-            .store(in: &self.cancellableBag)
+            .assign(to: \.isSelected, on: supplementary.muchTimeButton)
+            .store(in: &cancellableBag)
     }
     
     //MARK: - Setup

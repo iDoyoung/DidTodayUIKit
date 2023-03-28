@@ -75,12 +75,12 @@ final class DetailDayViewController: DidListCollectionViewController {
         super.bindSortingSupplementaryWithViewModel(supplementary: supplementary)
         self.viewModel?.isSelectedRecentlyButton
             .receive(on: DispatchQueue.main)
-            .sink { supplementary.recentlyButton.isSelected  = $0 }
+            .assign(to: \.isSelected, on: supplementary.recentlyButton)
             .store(in: &self.cancellableBag)
         
         self.viewModel?.isSelectedMuchTimeButton
             .receive(on: DispatchQueue.main)
-            .sink { supplementary.muchTimeButton.isSelected = $0 }
+            .assign(to: \.isSelected, on: supplementary.muchTimeButton)
             .store(in: &self.cancellableBag)
     }
     

@@ -16,7 +16,7 @@
 
 //MARK: - In Doing
 "Keep going!" = "계속 나아가요!";
-"Couldn't add within 5 minutes" = "5분 이내로는 추가할 수 없어요";
+"Couldn't finish a work within 5 minutes" = "5분 이내로는 추가할 수 없어요";
 "Started Time: %@" = "시작시간: %@";
 "Day is changed!" = "하루가 끝났어요!";
 "Are you working now? If you are not, please cancel or finish a work." = "아직도 무언가 진행중인가요? 만약 그렇지 않다면, 작업을 취소 또는 끝내주세요.";

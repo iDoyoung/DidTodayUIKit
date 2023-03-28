@@ -91,15 +91,29 @@ final class DidDetailsViewModelTests: XCTestCase {
         wait(for: [promise], timeout: 1)
     }
     
-    func test_initailize_shouldBeGetOutputOfTimeRange() {
+    func test_initailize_shouldBeGetOutputOfStartedTime() {
         let promise = expectation(description: "Get output of Time Range")
         ///given
         let mockDid = Seeds.Dids.christmasParty
         ///when
         sut = DidDetailsViewModel(mockDid)
         ///then
-        let _ = sut.timeRange.sink { result in
-            XCTAssertEqual(result, "12:00 AM - 12:00 AM")
+        let _ = sut.startedTime.sink { result in
+            XCTAssertEqual(result, "12:00 AM")
+            promise.fulfill()
+        }
+        wait(for: [promise], timeout: 1)
+    }
+    
+    func test_initailize_shouldBeGetOutputOfFinishedTime() {
+        let promise = expectation(description: "Get output of Time Range")
+        ///given
+        let mockDid = Seeds.Dids.christmasParty
+        ///when
+        sut = DidDetailsViewModel(mockDid)
+        ///then
+        let _ = sut.finishedTime.sink { result in
+            XCTAssertEqual(result, "12:00 AM")
             promise.fulfill()
         }
         wait(for: [promise], timeout: 1)

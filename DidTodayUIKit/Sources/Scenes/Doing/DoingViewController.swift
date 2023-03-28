@@ -43,7 +43,6 @@ final class DoingViewController: ParentUIViewController, StoryboardInstantiable 
             occurFeedback()
             timerLabel.animateToShake()
         } else {
-            viewModel.endDoing()
             viewModel.showCreateDid()
         }
     }
@@ -61,19 +60,21 @@ final class DoingViewController: ParentUIViewController, StoryboardInstantiable 
         createDismissKeyboardTapGesture()
         setupView()
         bindViewModel()
-        observeApplicationWillEnterForeground()
+        viewModel?.observeWillEnterForeground()
+        viewModel?.observeDidEnterBackground()
         observeDayIsChanged()
         requestUserNotificationsAuthorization()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        viewModel?.startDoing()
+        viewModel?.countTime()
         informationBoardLabel.startAnimation()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        viewModel?.viewDisappear()
         informationBoardLabel.stopAnimation()
     }
     
@@ -122,13 +123,11 @@ final class DoingViewController: ParentUIViewController, StoryboardInstantiable 
         ///Bind With Timer Label
         viewModel?.timesOfTimer
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] output in self?.timerLabel.text = output }
+            .assign(to: \.text, on: timerLabel)
             .store(in: &cancellableBag)
         ///Bind StartedTime
-        viewModel?.startedTime
-            .sink { [weak self] output in
-                self?.startedTimeLabel.text = output
-            }
+        viewModel?.startedTimeText
+            .assign(to: \.text, on: startedTimeLabel)
             .store(in: &cancellableBag)
     }
     
@@ -153,13 +152,6 @@ final class DoingViewController: ParentUIViewController, StoryboardInstantiable 
         }
     }
     
-    private func observeApplicationWillEnterForeground() {
-            NotificationCenter.default
-                .publisher(for: UIApplication.willEnterForegroundNotification)
-                .sink() { [weak self] _ in self?.viewModel?.startDoing() }
-                .store(in: &cancellableBag)
-    }
-    
     private func observeDayIsChanged() {
         ///Notify day is changed
         NotificationCenter.default
@@ -181,7 +173,7 @@ final class DoingViewController: ParentUIViewController, StoryboardInstantiable 
 extension DoingViewController: TimerAlert {
     
     func cancelTimer() {
-        viewModel?.cancel()
+        viewModel?.cancelRecording()
         dismiss(animated: true)
     }
 }

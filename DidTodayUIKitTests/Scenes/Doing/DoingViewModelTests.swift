@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import Combine
 @testable import DidTodayUIKit
 
 final class DoingViewModelTests: XCTestCase {
@@ -46,14 +47,65 @@ final class DoingViewModelTests: XCTestCase {
     }
     
     //MARK: Tests
-    func test_showCreateDid_whenGivenStartedDate_shouldCallCoordinator() {
-        sut.startedDate = Date()
-        sut.showCreateDid()
-        XCTAssertTrue(coordinatorSpy.showCreateDidCalled)
+    
+    func test_updateCountWithStartedDate_givenCurrentDate() {
+        // given
+        let current = Date()
+        sut.startedDate = current
+        // when
+        sut.updateCountWithStartedDate()
+        
+        // then
+        XCTAssertEqual(sut.timesOfTimer.value, "00:00")
     }
-   
-    func test_showCreateDid_whenGivenNothing_shouldNotCallCoordinator() {
+    
+    func test_updateCountWithStartedDate_givenSomeDate() {
+        // given
+        sut.startedDate = Calendar.current.date(byAdding: .hour, value: -1, to: Date())!
+        
+        // when
+        sut.updateCountWithStartedDate()
+        
+        // then
+        XCTAssertEqual(sut.timesOfTimer.value, "01:00")
+    }
+    
+    ///Timer Publisher Should Attach a subscriber
+    func test_countTime() {
+        // given
+        sut.cancellablesBag.removeAll()
+        
+        // when
+        sut.countTime()
+        
+        // then
+        XCTAssertEqual(sut.cancellablesBag.count, 1, "Unexpected number of cancellables")
+    }
+    
+    func test_observeDidEnterBackground() {
+        //given
+        sut.cancellablesBag.removeAll()
+        
+        // when
+        sut.observeDidEnterBackground()
+        
+        // then
+        XCTAssertEqual(sut.cancellablesBag.count, 1, "Unexpected number of cancellables")
+    }
+    
+    func test_observeWillEnterForeground() {
+        //given
+        sut.cancellablesBag.removeAll()
+        
+        // when
+        sut.observeWillEnterForeground()
+        
+        // then
+        XCTAssertEqual(sut.cancellablesBag.count, 1, "Unexpected number of cancellables")
+    }
+    
+    func test_showCreateDid() {
         sut.showCreateDid()
-        XCTAssertFalse(coordinatorSpy.showCreateDidCalled)
+        XCTAssertEqual(coordinatorSpy.showCreateDidCalled, true)
     }
 }

@@ -62,8 +62,8 @@ final class DoingViewController: ParentUIViewController, StoryboardInstantiable 
         bindViewModel()
         viewModel?.observeWillEnterForeground()
         viewModel?.observeDidEnterBackground()
-        observeDayIsChanged()
-        requestUserNotificationsAuthorization()
+        viewModel?.observeDayIsChanged()
+        viewModel?.requestUserNotificationsAuthorization()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -137,34 +137,6 @@ final class DoingViewController: ParentUIViewController, StoryboardInstantiable 
         view.addGestureRecognizer(tapGesture)
     }
     
-    private func requestUserNotificationsAuthorization() {
-        AuthorizationManager.requestUserNotificationsAuthorization { result in
-            switch result {
-            case .success(let authorizationStatus):
-                #if DEBUG
-                print("Succeeded requesting user notifications authorization \(String(describing: authorizationStatus))")
-                #endif
-            case .failure(let error):
-                #if DEBUG
-                print("Failed requesting user notifications authorization \(String(describing: error))")
-                #endif
-            }
-        }
-    }
-    
-    private func observeDayIsChanged() {
-        ///Notify day is changed
-        NotificationCenter.default
-            .publisher(for: Notification.Name.NSCalendarDayChanged)
-            .sink { [weak self] _ in
-                #if DEBUG
-                print("Day is Changed")
-                #endif
-                self?.requestUserNotification(with: "day-is-changed")
-            }
-            .store(in: &cancellableBag)
-    }
- 
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
@@ -177,5 +149,3 @@ extension DoingViewController: TimerAlert {
         dismiss(animated: true)
     }
 }
-
-extension DoingViewController: DayIsChangedNotification {   }

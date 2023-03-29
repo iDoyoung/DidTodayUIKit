@@ -666,9 +666,9 @@
 			isa = PBXGroup;
 			children = (
 				7F850C602961AEC80083522A /* ParentUIViewController.swift */,
+				7FB6A91F28E079ED009C61C5 /* Custom */,
 				7FC22B5A28C71AF500F83122 /* Main */,
 				7F666DB329BAD00100D32E29 /* DidDetails */,
-				7FB6A91F28E079ED009C61C5 /* Custom */,
 				7FC11596293654400056237A /* Doing */,
 				7F397A7028D82FF4000F89E2 /* CreateDid */,
 				7F133C45290364300099E55C /* Calendar */,

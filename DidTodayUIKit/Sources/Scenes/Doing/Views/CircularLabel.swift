@@ -9,48 +9,73 @@ import UIKit
 
 final class CircularLabel: UIView {
 
+    enum TextAlign {
+        case center
+        case start
+    }
+    
     @IBInspectable var text: String? {
         didSet {
             setNeedsDisplay()
         }
     }
+    var textAlign: TextAlign = .center
     @IBInspectable var textSize: CGFloat = 17
     @IBInspectable var isClockwise: Bool = true
-    @IBInspectable var startAngle: CGFloat = 0
+    var startAngle: CGFloat {
+        switch textAlign {
+        case .start:
+            return 0
+        case .center:
+            return 0 - (centralAngle)
+        }
+    }
+    
+    @IBInspectable var weight: UIFont.Weight = .regular
+    
+    lazy var centralAngle: CGFloat = {
+        let font = UIFont.systemFont(ofSize: textSize, weight: weight)
+        let attributes = [NSAttributedString.Key.font: font]
+        let chord = text!.size(withAttributes: attributes).width
+        return chord / (bounds.size.width - 20) * .pi * 360 / 20
+    }()
     
     override func draw(_ rect: CGRect) {
         guard let context = UIGraphicsGetCurrentContext() else { return }
         context.translateBy(x: self.bounds.midX, y: self.bounds.midX)
         context.scaleBy (x: 1, y: -1)
 
-        centreArcPerpendicular(text: text ?? "", context: context, radius: ((self.bounds.size.width - textSize) / 2) - 20, angle: startAngle, color: tintColor, font: UIFont.systemFont(ofSize: textSize, weight: .regular), clockwise: isClockwise)
+        centreArcPerpendicular(context: context)
     }
     
-    func centreArcPerpendicular(text str: String, context: CGContext, radius: CGFloat, angle: CGFloat, color: UIColor, font: UIFont, clockwise: Bool){
-        let characters = str.map { $0 }
-        let length = characters.count
+    func centreArcPerpendicular(context: CGContext) {
+        guard let text else { return }
+        let radius = (bounds.size.width) / 2 - 20
+        let characters = text.map { $0 }
+        let font = UIFont.systemFont(ofSize: textSize, weight: weight)
         let attributes = [NSAttributedString.Key.font: font]
-        let direction: CGFloat = clockwise ? -1 : 1
-        let slantCorrection: CGFloat = clockwise ? -.pi / 2 : .pi / 2
-        var theta: CGFloat = -(degreesToRadians(angle - 90))
-
-        for index in 0 ..< length {
-            let char = String(characters[index])
-            theta += direction * (chordToArc(char.size(withAttributes: attributes).width, radius: radius)) / 2
-            centre(text: char, context: context, radius: radius, angle: theta, color: color, font: font, slantAngle: theta + slantCorrection)
-            theta += direction * (chordToArc(char.size(withAttributes: attributes).width, radius: radius)) / 2
+        let direction: CGFloat = isClockwise ? -1 : 1
+        let slantCorrection: CGFloat = isClockwise ? -.pi / 2 : .pi / 2
+        var theta: CGFloat = -(degreesToRadians(startAngle - 90))
+        
+        characters.forEach {
+            let char = String($0)
+            let arc = arc(char.size(withAttributes: attributes).width, radius)
+            theta += direction * arc / 2
+            centre(text: char, context: context, radius: radius, angle: theta, color: tintColor, font: font, slantAngle: theta + slantCorrection)
+            theta += direction * arc / 2
         }
     }
-    
-    private func chordToArc(_ chord: CGFloat, radius: CGFloat) -> CGFloat {
+        
+    private func arc(_ chord: CGFloat, _ radius: CGFloat) -> CGFloat {
         return 2 * asin(chord / (2 * radius))
     }
-
-    private func centre(text string: String, context: CGContext, radius r: CGFloat, angle theta: CGFloat, color: UIColor, font: UIFont, slantAngle: CGFloat) {
+    
+    private func centre(text string: String, context: CGContext, radius: CGFloat, angle theta: CGFloat, color: UIColor, font: UIFont, slantAngle: CGFloat) {
         let attributes = [NSAttributedString.Key.foregroundColor: color, NSAttributedString.Key.font: font]
         context.saveGState()
         context.scaleBy(x: 1, y: -1)
-        context.translateBy(x: r * cos(theta), y: -(r * sin(theta)))
+        context.translateBy(x: radius * cos(theta), y: -(radius * sin(theta)))
         context.rotate(by: -slantAngle)
         let offset = string.size(withAttributes: attributes)
         context.translateBy (x: -offset.width / 2, y: -offset.height / 2)
@@ -62,3 +87,17 @@ final class CircularLabel: UIView {
         return (number * .pi / 180)
     }
 }
+
+#if canImport(SwiftUI) && DEBUG
+import SwiftUI
+
+struct CircularLabelPreview: PreviewProvider {
+    static var previews: some View {
+        UIViewPreview {
+            let view = CircularLabel()
+            view.text = "PreviewOfCircularLabel"
+            return view
+        }
+    }
+}
+#endif

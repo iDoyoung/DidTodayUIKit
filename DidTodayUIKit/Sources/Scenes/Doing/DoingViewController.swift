@@ -64,6 +64,7 @@ final class DoingViewController: ParentUIViewController, StoryboardInstantiable 
         viewModel?.observeDidEnterBackground()
         viewModel?.observeDayIsChanged()
         viewModel?.requestUserNotificationsAuthorization()
+        UNUserNotificationCenter.current().delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -147,5 +148,12 @@ extension DoingViewController: TimerAlert {
     func cancelTimer() {
         viewModel?.cancelRecording()
         dismiss(animated: true)
+    }
+}
+
+extension DoingViewController: UNUserNotificationCenterDelegate {
+  
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification) async -> UNNotificationPresentationOptions {
+        return [.sound, .banner]
     }
 }

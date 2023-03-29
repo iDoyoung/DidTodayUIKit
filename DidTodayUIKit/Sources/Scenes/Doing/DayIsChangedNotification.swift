@@ -12,8 +12,8 @@ protocol DayIsChangedNotification: UserNotificationRequestable { }
 
 extension DayIsChangedNotification {
     
-    func setTrigger() -> UNNotificationTrigger? {
-        return nil
+    func setTrigger() -> UNNotificationTrigger {
+        UNTimeIntervalNotificationTrigger(timeInterval: 0.1, repeats: false)
     }
     
     func setContent() -> UNMutableNotificationContent {

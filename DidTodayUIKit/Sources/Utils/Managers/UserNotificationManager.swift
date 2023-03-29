@@ -9,7 +9,7 @@ import Foundation
 import UserNotifications
 
 protocol UserNotificationRequestable {
-    func setTrigger() -> UNNotificationTrigger?
+    func setTrigger() -> UNNotificationTrigger
     func setContent() -> UNMutableNotificationContent
 }
 

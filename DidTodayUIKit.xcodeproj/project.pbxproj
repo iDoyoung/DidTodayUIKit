@@ -46,6 +46,7 @@
 		7F43BBE429767D340084FB78 /* AboutRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F43BBE329767D340084FB78 /* AboutRouter.swift */; };
 		7F4AA14E292471EE004CE62A /* SortingSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4AA14D292471EE004CE62A /* SortingSupplementaryView.swift */; };
 		7F55E3FF294C08A0007B2706 /* CreateDidAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F55E3FE294C08A0007B2706 /* CreateDidAlert.swift */; };
+		7F5719BF29D52FA200729716 /* DetailDayViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5719BE29D52FA200729716 /* DetailDayViewControllerTests.swift */; };
 		7F583F2D2910EE90006735AA /* HorizonCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 7F583F2C2910EE90006735AA /* HorizonCalendar */; };
 		7F583F322914B73B006735AA /* DidTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F583F312914B73B006735AA /* DidTitleCell.swift */; };
 		7F583F34291A61D2006735AA /* DidsOfDayItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F583F33291A61D2006735AA /* DidsOfDayItemViewModel.swift */; };
@@ -178,6 +179,7 @@
 		7F43BBE329767D340084FB78 /* AboutRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutRouter.swift; sourceTree = "<group>"; };
 		7F4AA14D292471EE004CE62A /* SortingSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingSupplementaryView.swift; sourceTree = "<group>"; };
 		7F55E3FE294C08A0007B2706 /* CreateDidAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDidAlert.swift; sourceTree = "<group>"; };
+		7F5719BE29D52FA200729716 /* DetailDayViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDayViewControllerTests.swift; sourceTree = "<group>"; };
 		7F583F312914B73B006735AA /* DidTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidTitleCell.swift; sourceTree = "<group>"; };
 		7F583F33291A61D2006735AA /* DidsOfDayItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidsOfDayItemViewModel.swift; sourceTree = "<group>"; };
 		7F5A69922968FC7A00062E2B /* DetailDayViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDayViewModelTests.swift; sourceTree = "<group>"; };
@@ -453,6 +455,7 @@
 		7F5A69912968FC5700062E2B /* DetailDay */ = {
 			isa = PBXGroup;
 			children = (
+				7F5719BE29D52FA200729716 /* DetailDayViewControllerTests.swift */,
 				7F5A69922968FC7A00062E2B /* DetailDayViewModelTests.swift */,
 			);
 			path = DetailDay;
@@ -1054,6 +1057,7 @@
 				7FB6A8CB28DAF529009C61C5 /* CreateDidViewModelTests.swift in Sources */,
 				7F5ABAAD296FB81F002E509E /* BetaVersionMigrationTests.swift in Sources */,
 				7F5CD8FD29D42F85003F4073 /* DoingViewControllerTests.swift in Sources */,
+				7F5719BF29D52FA200729716 /* DetailDayViewControllerTests.swift in Sources */,
 				7F6C338229BF2CE10019D80B /* DeleteUseCaseTests.swift in Sources */,
 				7FA3119529B43C2700A4C5DE /* CreateDidUseCaseTests.swift in Sources */,
 				7FA60AE928D6FB7A0098F3D2 /* MainViewControllerTests.swift in Sources */,

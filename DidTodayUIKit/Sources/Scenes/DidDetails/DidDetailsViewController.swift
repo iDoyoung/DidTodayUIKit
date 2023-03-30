@@ -12,7 +12,7 @@ final class DidDetailsViewController: UIViewController {
     
     var viewModel: DidDetailsViewModelProtocol?
     private var cancellableBag = Set<AnyCancellable>()
-    private let didDetailView = DidDetailsView()
+    let didDetailView = DidDetailsView()
     
     //MARK: - Life Cycle
     static func create(with viewModel: DidDetailsViewModelProtocol) -> DidDetailsViewController {

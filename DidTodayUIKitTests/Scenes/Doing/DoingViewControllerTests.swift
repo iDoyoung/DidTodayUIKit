@@ -136,14 +136,14 @@ final class DoingViewControllerTests: XCTestCase {
     
     //MARK: Test Binding
     
-    func test_bindingWithViewModel() {
+    func test_timerLabel_bindingWithViewModel() {
         // when
         sut.viewDidLoad()
         //then
         XCTAssertEqual(sut.timerLabel.text, "00:00")
     }
     
-    func test_bindingViewViewModel_() {
+    func test_startedTimeLabel_bindingViewViewModel() {
         // when
         sut.viewDidLoad()
         // then

@@ -53,6 +53,7 @@
 		7F5A91C828E68CCF006B8406 /* Date+ToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A91C728E68CCF006B8406 /* Date+ToString.swift */; };
 		7F5ABAAB296F97FA002E509E /* BetaVersionMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5ABAAA296F97FA002E509E /* BetaVersionMigration.swift */; };
 		7F5ABAAD296FB81F002E509E /* BetaVersionMigrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5ABAAC296FB81F002E509E /* BetaVersionMigrationTests.swift */; };
+		7F5CD8FD29D42F85003F4073 /* DoingViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5CD8FC29D42F85003F4073 /* DoingViewControllerTests.swift */; };
 		7F61A03C294439A80084A3F6 /* UIView+animateToShake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F61A03B294439A80084A3F6 /* UIView+animateToShake.swift */; };
 		7F666DB229BACC6100D32E29 /* UIViewPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F666DB129BACC6100D32E29 /* UIViewPreview.swift */; };
 		7F666DB529BAD01400D32E29 /* DidDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F666DB429BAD01400D32E29 /* DidDetailsView.swift */; };
@@ -183,6 +184,7 @@
 		7F5A91C728E68CCF006B8406 /* Date+ToString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+ToString.swift"; sourceTree = "<group>"; };
 		7F5ABAAA296F97FA002E509E /* BetaVersionMigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetaVersionMigration.swift; sourceTree = "<group>"; };
 		7F5ABAAC296FB81F002E509E /* BetaVersionMigrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetaVersionMigrationTests.swift; sourceTree = "<group>"; };
+		7F5CD8FC29D42F85003F4073 /* DoingViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoingViewControllerTests.swift; sourceTree = "<group>"; };
 		7F61A03B294439A80084A3F6 /* UIView+animateToShake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+animateToShake.swift"; sourceTree = "<group>"; };
 		7F666DB129BACC6100D32E29 /* UIViewPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewPreview.swift; sourceTree = "<group>"; };
 		7F666DB429BAD01400D32E29 /* DidDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidDetailsView.swift; sourceTree = "<group>"; };
@@ -603,8 +605,8 @@
 		7FB6A8C928DAF514009C61C5 /* CreateDid */ = {
 			isa = PBXGroup;
 			children = (
-				7FB6A8CA28DAF529009C61C5 /* CreateDidViewModelTests.swift */,
 				7FB6A8CE28DB00E3009C61C5 /* CreateDidViewControllerTests.swift */,
+				7FB6A8CA28DAF529009C61C5 /* CreateDidViewModelTests.swift */,
 			);
 			path = CreateDid;
 			sourceTree = "<group>";
@@ -644,6 +646,7 @@
 		7FC115A3293875370056237A /* Doing */ = {
 			isa = PBXGroup;
 			children = (
+				7F5CD8FC29D42F85003F4073 /* DoingViewControllerTests.swift */,
 				7FC115A4293875510056237A /* DoingViewModelTests.swift */,
 			);
 			path = Doing;
@@ -1050,6 +1053,7 @@
 				7F6C337E29BC97E10019D80B /* DidDetailsViewModelTests.swift in Sources */,
 				7FB6A8CB28DAF529009C61C5 /* CreateDidViewModelTests.swift in Sources */,
 				7F5ABAAD296FB81F002E509E /* BetaVersionMigrationTests.swift in Sources */,
+				7F5CD8FD29D42F85003F4073 /* DoingViewControllerTests.swift in Sources */,
 				7F6C338229BF2CE10019D80B /* DeleteUseCaseTests.swift in Sources */,
 				7FA3119529B43C2700A4C5DE /* CreateDidUseCaseTests.swift in Sources */,
 				7FA60AE928D6FB7A0098F3D2 /* MainViewControllerTests.swift in Sources */,

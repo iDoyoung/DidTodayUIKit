@@ -946,6 +946,8 @@
 			dependencies = (
 			);
 			name = DidWidgetExtension;
+			packageProductDependencies = (
+			);
 			productName = DidWidgetExtension;
 			productReference = 7F33AE0C29D5D007001956A7 /* DidWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";

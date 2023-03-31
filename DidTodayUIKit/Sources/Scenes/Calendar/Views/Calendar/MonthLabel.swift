@@ -16,7 +16,7 @@ struct MonthLabel: CalendarItemViewRepresentable {
         let backgroundColor: UIColor
     }
     /// Properties that will vary depending on the particular date being displayed.
-    struct ViewModel: Equatable {
+    struct Content: Equatable {
         let month: Month
     }
     static func makeView(withInvariantViewProperties invariantViewProperties: InvariantViewProperties) -> UILabel {
@@ -26,7 +26,7 @@ struct MonthLabel: CalendarItemViewRepresentable {
         label.textColor = invariantViewProperties.textColor
         return label
     }
-    static func setViewModel(_ viewModel: ViewModel, on view: UILabel) {
+    static func setContent(_ content: Content, on view: UILabel) {
         let calendar = Calendar.current
         let monthHeaderDateFormatter = DateFormatter()
         monthHeaderDateFormatter.calendar = calendar
@@ -34,7 +34,7 @@ struct MonthLabel: CalendarItemViewRepresentable {
             fromTemplate: "MMMM yyyy",
             options: 0,
             locale: calendar.locale ?? Locale.current)
-        guard let monthDate = calendar.date(from: viewModel.month.components) else {
+        guard let monthDate = calendar.date(from: content.month.components) else {
             preconditionFailure()
         }
         view.text = monthHeaderDateFormatter.string(from: monthDate)

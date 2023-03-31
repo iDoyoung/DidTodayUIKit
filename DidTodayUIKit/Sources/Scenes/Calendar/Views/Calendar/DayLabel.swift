@@ -16,7 +16,7 @@ struct DayLabel: CalendarItemViewRepresentable {
         var backgroundColor: UIColor
     }
     /// Properties that will vary depending on the particular date being displayed.
-    struct ViewModel: Equatable {
+    struct Content: Equatable {
         let day: Day
     }
     
@@ -31,7 +31,7 @@ struct DayLabel: CalendarItemViewRepresentable {
         return label
     }
     
-    static func setViewModel(_ viewModel: ViewModel, on view: UILabel) {
-        view.text = "\(viewModel.day.day)"
+    static func setContent(_ content: Content, on view: UILabel) {
+        view.text = "\(content.day.day)"
     }
 }

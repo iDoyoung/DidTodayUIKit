@@ -195,7 +195,7 @@ extension CalendarViewController {
                     font: .systemFont(ofSize: 17, weight: .medium),
                     textColor: .label,
                     backgroundColor: .clear),
-                viewModel: .init(month: month))
+                content: .init(month: month))
         }
         .dayItemProvider { [weak self] day in
             var invariantViewProperties = DayLabel.InvariantViewProperties(font: .systemFont(ofSize: 14, weight: .semibold),
@@ -227,9 +227,9 @@ extension CalendarViewController {
             }
             return CalendarItemModel<DayLabel> (
                 invariantViewProperties: invariantViewProperties,
-                viewModel: .init(day: day))
+                content: .init(day: day))
         }
-        .monthDayInsets(UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0))
+        .monthDayInsets(.init(top: 10, leading: 0, bottom: 0, trailing: 0))
         .interMonthSpacing(60)
         .horizontalDayMargin(8)
         .verticalDayMargin(8)

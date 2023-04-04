@@ -12,9 +12,7 @@ import HorizonCalendar
 
 final class CalendarContainerView: UIView {
     
-    var startDate: Date? = nil
-    var selectedDate: Date?
-    var datesOfDid = [Date]()
+    //MARK: UI Properties
     
     let effectView: UIVisualEffectView = {
         let effect = UIBlurEffect(style: .systemMaterial)
@@ -24,7 +22,7 @@ final class CalendarContainerView: UIView {
     
     private let rootFlexContainer = UIView()
     var calendarView: CalendarView!
-    let collectionView: UICollectionView! = nil
+    var collectionView: UICollectionView!
     let showDetailButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle(CustomText.showDetail, for: .normal)
@@ -33,9 +31,16 @@ final class CalendarContainerView: UIView {
         return button
     }()
     
+    //MARK: Properties for Calendar
+    var startDate: Date? = nil
+    var selectedDate: Date?
+    var datesOfDid = [Date]()
+    
     init() {
         super.init(frame: .zero)
         calendarView = CalendarView(initialContent: setupCalendarViewContents())
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: createCollectionViewLayout())
+        
         addSubview(effectView)
         effectView.contentView.addSubview(rootFlexContainer)
         rootFlexContainer.flex
@@ -117,6 +122,35 @@ extension CalendarContainerView {
         .interMonthSpacing(60)
         .horizontalDayMargin(8)
         .verticalDayMargin(8)
+    }
+}
+
+//MARK: - Collection View
+extension CalendarContainerView {
+    private func createCollectionViewLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(32),
+                                              heightDimension: .fractionalHeight(1))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(32),
+                                               heightDimension: .absolute(34))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
+                                                       subitems: [item])
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing =  10
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0,
+                                                        leading: 10,
+                                                        bottom: 0,
+                                                        trailing: 10)
+        
+        // Setcion Header
+        let sectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(60))
+        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: sectionHeaderSize,
+                                                                        elementKind: CalendarViewController.sectionHeaderElementKind,
+                                                                        alignment: .top)
+        section.boundarySupplementaryItems = [sectionHeader]
+        section.orthogonalScrollingBehavior = .continuous
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        return layout
     }
 }
 

@@ -34,7 +34,7 @@ final class CalendarContainerView: UIView {
     
     //MARK: Properties for Calendar
     var startDate: Date? = nil
-    var selectedDate: Date?
+    var selectedDate: Date? = nil
     var datesOfDid = [Date]()
     
     init() {
@@ -46,10 +46,17 @@ final class CalendarContainerView: UIView {
         effectView.contentView.addSubview(rootFlexContainer)
         rootFlexContainer.flex
             .direction(.column)
+            .alignItems(.end)
             .define { flex in
                 flex.addItem(calendarView!)
+                    .width(100%)
+                    .grow(1)
                 flex.addItem(collectionView)
+                    .width(100%)
+                    .height(100)
                 flex.addItem(showDetailButton)
+                    .right(0)
+                    .height(50)
             }
     }
     
@@ -59,6 +66,7 @@ final class CalendarContainerView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        effectView.pin.all()
         rootFlexContainer.pin.all(self.pin.safeArea)
         rootFlexContainer.flex.layout()
     }
@@ -68,10 +76,10 @@ final class CalendarContainerView: UIView {
 extension CalendarContainerView {
     private func setupCalendarViewContents() -> CalendarViewContent {
         let calendar = Calendar.current
-        let endDate = Date()
+        let currentDate = Date()
         return CalendarViewContent(
             calendar: calendar,
-            visibleDateRange: (startDate ?? Date())...endDate,
+            visibleDateRange: (startDate ?? currentDate)...currentDate,
             monthsLayout: .vertical (
                 options: VerticalMonthsLayoutOptions(
                     pinDaysOfWeekToTop: true,
@@ -110,7 +118,6 @@ extension CalendarContainerView {
                 self.datesOfDid.forEach {
                     if calendar.date(from: day.components) == $0 {
                         invariantViewProperties.textColor = .customGreen
-                        
                     }
                 }
             }

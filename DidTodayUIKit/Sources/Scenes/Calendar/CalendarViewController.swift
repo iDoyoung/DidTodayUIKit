@@ -76,6 +76,8 @@ final class CalendarViewController: ParentUIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         /// - Tag: Configure Calendar After Fetch Dids
+        //FIXME: - 임시로 버그해결, Fetch가 didLoad와 willAppear 두 번 발생한다.
+        viewModel?.fetchDids()
         bindViewModel()
         configure()
     }

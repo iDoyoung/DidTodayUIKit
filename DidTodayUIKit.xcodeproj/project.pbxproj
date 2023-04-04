@@ -22,6 +22,7 @@
 		7F0BECFC2951644B00C0CF1C /* DoingFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0BECFB2951644B00C0CF1C /* DoingFlowCoordinator.swift */; };
 		7F0BECFF295171E500C0CF1C /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0BECFE295171E500C0CF1C /* Coordinator.swift */; };
 		7F0C251C29419BAE00304A0D /* CircularLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0C251B29419BAE00304A0D /* CircularLabel.swift */; };
+		7F0FCDFD29DBBF1D00CDB3B1 /* CalendarContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0FCDFC29DBBF1D00CDB3B1 /* CalendarContainerView.swift */; };
 		7F10CF7A29679E1B00EAADF2 /* DetailDayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F10CF7929679E1B00EAADF2 /* DetailDayViewModel.swift */; };
 		7F10CF7C2967AF7F00EAADF2 /* CalendarFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F10CF7B2967AF7F00EAADF2 /* CalendarFlowCoordinator.swift */; };
 		7F10CF7E2967C3D400EAADF2 /* CalendarRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F10CF7D2967C3D400EAADF2 /* CalendarRouter.swift */; };
@@ -167,6 +168,7 @@
 		7F0BECFB2951644B00C0CF1C /* DoingFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoingFlowCoordinator.swift; sourceTree = "<group>"; };
 		7F0BECFE295171E500C0CF1C /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		7F0C251B29419BAE00304A0D /* CircularLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularLabel.swift; sourceTree = "<group>"; };
+		7F0FCDFC29DBBF1D00CDB3B1 /* CalendarContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarContainerView.swift; sourceTree = "<group>"; };
 		7F10CF7929679E1B00EAADF2 /* DetailDayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDayViewModel.swift; sourceTree = "<group>"; };
 		7F10CF7B2967AF7F00EAADF2 /* CalendarFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarFlowCoordinator.swift; sourceTree = "<group>"; };
 		7F10CF7D2967C3D400EAADF2 /* CalendarRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarRouter.swift; sourceTree = "<group>"; };
@@ -406,6 +408,7 @@
 		7F1CAEC629D2A909004E20E8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7F0FCDFC29DBBF1D00CDB3B1 /* CalendarContainerView.swift */,
 				7FB6A92128E07BC4009C61C5 /* Calendar */,
 				7F583F2E2912ADF6006735AA /* Cells and Supplementary Views */,
 			);
@@ -1037,6 +1040,7 @@
 				7F135C402925FF33005156E0 /* TotalOfDidsViewModel.swift in Sources */,
 				7F850CBB29655C2E0083522A /* DetailDayViewController.swift in Sources */,
 				7FC22B6328C88AA500F83122 /* DataModel.xcdatamodeld in Sources */,
+				7F0FCDFD29DBBF1D00CDB3B1 /* CalendarContainerView.swift in Sources */,
 				7F2C6CBE290A6EB3002963DE /* MainRouter.swift in Sources */,
 				7F9C0B9E293DAA8C0094C2A5 /* TimerAlert.swift in Sources */,
 				7F71192B290B95FB001DFE99 /* UIColor+GradientEffect.swift in Sources */,

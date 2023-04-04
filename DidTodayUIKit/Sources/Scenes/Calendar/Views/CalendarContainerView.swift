@@ -12,6 +12,10 @@ import HorizonCalendar
 
 final class CalendarContainerView: UIView {
     
+    var startDate: Date? = nil
+    var selectedDate: Date?
+    var datesOfDid = [Date]()
+    
     let effectView: UIVisualEffectView = {
         let effect = UIBlurEffect(style: .systemMaterial)
         let effectView = UIVisualEffectView(effect: effect)
@@ -19,7 +23,7 @@ final class CalendarContainerView: UIView {
     }()
     
     private let rootFlexContainer = UIView()
-    let calendarView: CalendarView! = nil
+    var calendarView: CalendarView!
     let collectionView: UICollectionView! = nil
     let showDetailButton: UIButton = {
         let button = UIButton(type: .system)
@@ -31,6 +35,7 @@ final class CalendarContainerView: UIView {
     
     init() {
         super.init(frame: .zero)
+        calendarView = CalendarView(initialContent: setupCalendarViewContents())
         addSubview(effectView)
         effectView.contentView.addSubview(rootFlexContainer)
         rootFlexContainer.flex
@@ -50,6 +55,68 @@ final class CalendarContainerView: UIView {
         super.layoutSubviews()
         rootFlexContainer.pin.all(self.pin.safeArea)
         rootFlexContainer.flex.layout()
+    }
+}
+
+//MARK: - Calender
+extension CalendarContainerView {
+    private func setupCalendarViewContents() -> CalendarViewContent {
+        let calendar = Calendar.current
+        let endDate = Date()
+        return CalendarViewContent(
+            calendar: calendar,
+            visibleDateRange: (startDate ?? Date())...endDate,
+            monthsLayout: .vertical (
+                options: VerticalMonthsLayoutOptions(
+                    pinDaysOfWeekToTop: true,
+                    alwaysShowCompleteBoundaryMonths: true,
+                    scrollsToFirstMonthOnStatusBarTap: true)))
+        
+        // Month Hearder
+        .monthHeaderItemProvider { month in
+            CalendarItemModel<MonthLabel> (
+                invariantViewProperties: .init(
+                    font: .systemFont(ofSize: 17, weight: .medium),
+                    textColor: .label,
+                    backgroundColor: .clear),
+                content: .init(month: month))
+        }
+        
+        // Day Item
+        .dayItemProvider { [weak self] day in
+            var invariantViewProperties = DayLabel.InvariantViewProperties(font: .systemFont(ofSize: 14, weight: .semibold),
+                                                                           textColor: .darkGray,
+                                                                           backgroundColor: .clear)
+            // Setup Today UI
+            if day.components == calendar.dateComponents([.era, .year, .month, .day], from: Date()) {
+                invariantViewProperties.textColor = .systemBackground
+                invariantViewProperties.backgroundColor = .systemRed
+            }
+            
+            if let self {
+                // Setup Selected Day UI
+                if calendar.date(from: day.components) == self.selectedDate {
+                    invariantViewProperties.textColor = .systemBackground
+                    invariantViewProperties.backgroundColor = .label
+                }
+                
+                // Setup Fetched Day UI
+                self.datesOfDid.forEach {
+                    if calendar.date(from: day.components) == $0 {
+                        invariantViewProperties.textColor = .customGreen
+                        
+                    }
+                }
+            }
+            
+            return CalendarItemModel<DayLabel> (
+                invariantViewProperties: invariantViewProperties,
+                content: .init(day: day))
+        }
+        .monthDayInsets(.init(top: 10, leading: 0, bottom: 0, trailing: 0))
+        .interMonthSpacing(60)
+        .horizontalDayMargin(8)
+        .verticalDayMargin(8)
     }
 }
 

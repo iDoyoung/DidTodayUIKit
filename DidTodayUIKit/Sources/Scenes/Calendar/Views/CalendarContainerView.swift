@@ -12,8 +12,9 @@ import HorizonCalendar
 
 final class CalendarContainerView: UIView {
     
-    //MARK: UI Properties
+    static let sectionHeaderElementKind = "layout-header-element-kind"
     
+    //MARK: UI Properties
     let effectView: UIVisualEffectView = {
         let effect = UIBlurEffect(style: .systemMaterial)
         let effectView = UIVisualEffectView(effect: effect)
@@ -145,7 +146,7 @@ extension CalendarContainerView {
         // Setcion Header
         let sectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(60))
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: sectionHeaderSize,
-                                                                        elementKind: CalendarViewController.sectionHeaderElementKind,
+                                                                        elementKind: CalendarContainerView.sectionHeaderElementKind,
                                                                         alignment: .top)
         section.boundarySupplementaryItems = [sectionHeader]
         section.orthogonalScrollingBehavior = .continuous

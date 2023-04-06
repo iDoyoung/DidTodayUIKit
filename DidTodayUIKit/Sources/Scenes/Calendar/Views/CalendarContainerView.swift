@@ -43,7 +43,9 @@ final class CalendarContainerView: UIView {
             .backgroundColor(.systemBackground)
             .direction(.column)
             .alignItems(.end)
+            .cornerRadius(20)
             .define { flex in
+                flex.view?.layer.masksToBounds = true
                 flex.addItem(calendarView!)
                     .width(100%)
                     .grow(1)

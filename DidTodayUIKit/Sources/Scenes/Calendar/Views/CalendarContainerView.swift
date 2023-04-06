@@ -32,11 +32,6 @@ final class CalendarContainerView: UIView {
         return button
     }()
     
-    //MARK: Properties for Calendar
-    var startDate: Date? = nil
-    var selectedDate: Date? = nil
-    var datesOfDid = [Date]()
-    
     init() {
         super.init(frame: .zero)
         calendarView = CalendarView(initialContent: setupCalendarViewContents())
@@ -51,6 +46,10 @@ final class CalendarContainerView: UIView {
                 flex.addItem(calendarView!)
                     .width(100%)
                     .grow(1)
+                    .define { flex in
+                        guard let calendar = flex.view as? CalendarView else { return }
+                        calendar.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
+                    }
                 flex.addItem(collectionView)
                     .width(100%)
                     .height(100)
@@ -74,12 +73,12 @@ final class CalendarContainerView: UIView {
 
 //MARK: - Calender
 extension CalendarContainerView {
-    private func setupCalendarViewContents() -> CalendarViewContent {
+    func setupCalendarViewContents(selected: Date? = nil, fetched: [Date] = []) -> CalendarViewContent {
         let calendar = Calendar.current
-        let currentDate = Date()
+        let startDate = fetched.first ?? Date()
         return CalendarViewContent(
             calendar: calendar,
-            visibleDateRange: (startDate ?? currentDate)...currentDate,
+            visibleDateRange: startDate...Date(),
             monthsLayout: .vertical (
                 options: VerticalMonthsLayoutOptions(
                     pinDaysOfWeekToTop: true,
@@ -97,7 +96,7 @@ extension CalendarContainerView {
         }
         
         // Day Item
-        .dayItemProvider { [weak self] day in
+        .dayItemProvider { day in
             var invariantViewProperties = DayLabel.InvariantViewProperties(font: .systemFont(ofSize: 14, weight: .semibold),
                                                                            textColor: .darkGray,
                                                                            backgroundColor: .clear)
@@ -107,18 +106,16 @@ extension CalendarContainerView {
                 invariantViewProperties.backgroundColor = .systemRed
             }
             
-            if let self {
-                // Setup Selected Day UI
-                if calendar.date(from: day.components) == self.selectedDate {
-                    invariantViewProperties.textColor = .systemBackground
-                    invariantViewProperties.backgroundColor = .label
-                }
-                
-                // Setup Fetched Day UI
-                self.datesOfDid.forEach {
-                    if calendar.date(from: day.components) == $0 {
-                        invariantViewProperties.textColor = .customGreen
-                    }
+            // Setup Selected Day UI
+            if calendar.date(from: day.components) == selected {
+                invariantViewProperties.textColor = .systemBackground
+                invariantViewProperties.backgroundColor = .label
+            }
+            
+            // Setup Fetched Day UI
+            fetched.forEach {
+                if calendar.date(from: day.components) == $0 {
+                    invariantViewProperties.textColor = .customGreen
                 }
             }
             

@@ -58,6 +58,10 @@ final class CalendarContainerView: UIView {
             .cornerRadius(20)
             .border(0.5, .separator)
             .define { flex in
+                flex.view?.shadowColor = .systemGray
+                flex.view?.shadowOpacity = 0.2
+                flex.view?.shadowRadius = 5
+                flex.view?.shadowOffset = CGSize(width: 0, height: 5)
                 flex.addItem(titleLabel)
                     .paddingVertical(20)
                     .start(20)

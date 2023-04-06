@@ -44,6 +44,7 @@ final class CalendarContainerView: UIView {
             .direction(.column)
             .alignItems(.end)
             .cornerRadius(20)
+            .border(0.5, .separator)
             .define { flex in
                 flex.view?.layer.masksToBounds = true
                 flex.addItem(calendarView!)
@@ -53,9 +54,19 @@ final class CalendarContainerView: UIView {
                         guard let calendar = flex.view as? CalendarView else { return }
                         calendar.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
                     }
+                // Separator Line
+                flex.addItem()
+                    .backgroundColor(.separator)
+                    .height(0.5)
+                    .width(100%)
                 flex.addItem(collectionView)
                     .width(100%)
                     .height(100)
+                // Separator Line
+                flex.addItem()
+                    .backgroundColor(.separator)
+                    .height(0.5)
+                    .width(100%)
                 flex.addItem(showDetailButton)
                     .right(20)
                     .height(50)

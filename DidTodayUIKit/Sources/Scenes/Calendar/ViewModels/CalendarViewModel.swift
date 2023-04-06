@@ -21,6 +21,7 @@ protocol CalendarViewModelOutput {
     var displayedItemsOfDidSelectedDay: CurrentValueSubject<[DidsOfDayItemViewModel], Never> { get }
     var descriptionOfSelectedDay: CurrentValueSubject<String?, Never> { get }
     var startedDate: Date? { get }
+    var selectedDate: CurrentValueSubject<Date?, Never> { get }
     
     func showDetail()
 }
@@ -41,6 +42,7 @@ final class CalendarViewModel: CalendarViewModelProtocol {
     var dateOfDids = CurrentValueSubject<[Date], Never>([])
     ///Set started date of Calendar
     var startedDate: Date?
+    var selectedDate = CurrentValueSubject<Date?, Never>(nil)
     var displayedItemsOfDidSelectedDay = CurrentValueSubject<[DidsOfDayItemViewModel], Never>([])
     var descriptionOfSelectedDay = CurrentValueSubject<String?, Never>(CustomText.selectDay)
         
@@ -75,6 +77,7 @@ final class CalendarViewModel: CalendarViewModelProtocol {
                     .compactMap { DidsOfDayItemViewModel($0) }
                 /// - Tag: Setting Description Label
                 let description = item.isEmpty ? CustomText.selectDay: CustomText.selectedItems(count: item.count)
+                self.selectedDate.send(Calendar.current.date(from: day))
                 self.displayedItemsOfDidSelectedDay.send(item)
                 self.descriptionOfSelectedDay.send(description)
             }

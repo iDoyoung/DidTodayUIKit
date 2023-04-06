@@ -80,7 +80,12 @@ final class CalendarContainerView: UIView {
                     .width(100%)
                 flex.addItem(collectionView)
                     .width(100%)
-                    .height(100)
+                    .height(54)
+                    .define { flex in
+                        if let collectionView = flex.view as? UICollectionView {
+                            collectionView.isScrollEnabled = false
+                        }
+                    }
                 // Separator Line
                 flex.addItem()
                     .backgroundColor(.separator)
@@ -180,9 +185,9 @@ extension CalendarContainerView {
                                                        subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing =  10
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0,
+        section.contentInsets = NSDirectionalEdgeInsets(top: 10,
                                                         leading: 10,
-                                                        bottom: 0,
+                                                        bottom: 10,
                                                         trailing: 10)
         
 //        // Setcion Header
@@ -191,7 +196,7 @@ extension CalendarContainerView {
 //                                                                        elementKind: CalendarContainerView.sectionHeaderElementKind,
 //                                                                        alignment: .top)
 //        section.boundarySupplementaryItems = [sectionHeader]
-//        section.orthogonalScrollingBehavior = .continuous
+        section.orthogonalScrollingBehavior = .continuous
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
     }

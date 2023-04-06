@@ -17,45 +17,13 @@ final class CalendarViewController: ParentUIViewController {
     }
     //MARK: - Properties
     
-    //MARK: Static
-    static let sectionHeaderElementKind = "layout-header-element-kind"
-    
     //MARK: Components
     var viewModel: CalendarViewModelProtocol?
     private var cancellableBag = Set<AnyCancellable>()
     private var dataSource: UICollectionViewDiffableDataSource<Section, DidsOfDayItemViewModel>?
     
     //MARK: UI Properties
-    private lazy var calendarView: CalendarView = CalendarView(initialContent: setupCalendarViewContents())
-    private var collectionView: UICollectionView!
-    
-    private lazy var verticalStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [calendarView, collectionView, bottomView])
-        stackView.axis = .vertical
-        stackView.backgroundColor = .separator
-        stackView.layer.borderColor = UIColor.separator.cgColor
-        stackView.layer.borderWidth = 0.5
-        stackView.cornerRadius = 20
-        stackView.layer.masksToBounds = true
-        stackView.spacing = 0.5
-        return stackView
-    }()
-    
-    private lazy var bottomView: UIView = {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 40))
-        view.backgroundColor = .systemBackground
-        view.addSubview(showDetailButton)
-        return view
-    }()
-    
-    private lazy var showDetailButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle(CustomText.showDetail, for: .normal)
-        button.tintColor = .label
-        button.isSelected = true
-        button.addTarget(self, action: #selector(showDetail), for: .touchUpInside)
-        return button
-    }()
+    var contentView = CalendarContainerView()
     
     //MARK: - Methods
     //MARK: Life Cycle
@@ -65,25 +33,23 @@ final class CalendarViewController: ParentUIViewController {
         return viewController
     }
     
-    //FIXME: - calendarView.scroll issue
-    ///loadView() 로 prent view 생성할 경우, viewDidLoad() 에서 calendarView.scroll 할 경우,
-    ///"Will attempt to recover by breaking constrain" Issue
-//    override func loadView() {
-//        view = UIView()
-//        view.backgroundColor = .systemBackground
-//    }
+    override func loadView() {
+        view = contentView
+        configureDataSource(with: contentView.collectionView)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        /// - Tag: Configure Calendar After Fetch Dids
-        //FIXME: - 임시로 버그해결, Fetch가 didLoad와 willAppear 두 번 발생한다.
-        viewModel?.fetchDids()
         bindViewModel()
         configure()
+        //TODO: - FetchDids를 View Did Load에서 호출하지 않을 방법 고려
+        // View Did Load에서 fetchDids를 호출하지 않을 경우 Calendar가 그려질 때 아직 Fetch 전이므로 날짜 범위의 시작부분이 현재 날짜로 지정된다.
+        viewModel?.fetchDids()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // Core Data가 변경이 있을 경우 다시 Fetch해서 뷰를 그려야하기 때문에 View Will Appear시 Fetchg해야만 한다.
         viewModel?.fetchDids()
     }
     
@@ -91,10 +57,8 @@ final class CalendarViewController: ParentUIViewController {
     private func configure() {
         setupView()
         setupNavigationBar()
-        configureCollectionView()
-        configureStackView()
-        setupLayoutConstraints()
-        configureCalendarView()
+        configureCalendarViewDaySelectionHandler()
+        scrollToToday()
     }
     
     private func setupView() {
@@ -112,39 +76,29 @@ final class CalendarViewController: ParentUIViewController {
         let rightBarButton = UIBarButtonItem(image: xmarkImage, style: .plain, target: self, action: #selector(close))
         navigationItem.rightBarButtonItem = rightBarButton
     }
-    
-    private func configureStackView() {
-        view.addSubview(verticalStackView)
-    }
-        
-    private func setupLayoutConstraints() {
-        verticalStackView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        bottomView.translatesAutoresizingMaskIntoConstraints = false
-        showDetailButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            verticalStackView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
-            verticalStackView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-            verticalStackView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
-            verticalStackView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-            collectionView.heightAnchor.constraint(equalToConstant: 100),
-            bottomView.heightAnchor.constraint(equalToConstant: 100),
-            showDetailButton.leadingAnchor.constraint(greaterThanOrEqualTo: bottomView.leadingAnchor),
-            showDetailButton.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor, constant: -20),
-            showDetailButton.topAnchor.constraint(greaterThanOrEqualTo: bottomView.topAnchor),
-            showDetailButton.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor, constant: -20)
-        ])
-    }
-    
+   
     //MARK: Binding
     ///Binding with View Model
     func bindViewModel() {
-        viewModel?.displayedItemsOfDidSelectedDay
+        let contentView = contentView
+        guard let viewModel else { return }
+        
+        // Updating UI Of Calendar
+        viewModel.dateOfDids
+            .combineLatest(viewModel.selectedDate)
+            .receive(on: DispatchQueue.main)
+            .sink {
+                let calendarContent = contentView.setupCalendarViewContents(selected: $1, fetched: $0)
+                contentView.calendarView.setContent(calendarContent)
+            }
+            .store(in: &cancellableBag)
+        
+        // Updating UI Of Collection View
+        viewModel.displayedItemsOfDidSelectedDay
             .receive(on: DispatchQueue.main)
             .sink { [weak self] items in
-                guard let self = self else { return }
-                self.showDetailButton.isEnabled = !items.isEmpty
-                self.initialSnapshot(items)
+                self?.contentView.showDetailButton.isEnabled = !items.isEmpty
+                self?.setSnapshot(items)
             }
             .store(in: &cancellableBag)
     }
@@ -165,119 +119,22 @@ extension CalendarViewController {
 //MARK: - Configure Calendar View
 extension CalendarViewController {
     
-    private func configureCalendarView() {
-        calendarView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
-        calendarView.backgroundColor = .systemBackground
-        calendarView.daySelectionHandler = { [weak self] day in
-            guard let self = self else { return }
+    private func configureCalendarViewDaySelectionHandler() {
+        contentView.calendarView.daySelectionHandler = { [weak self] day in
+            guard let self else { return }
             self.viewModel?.selectedDay = day.components
-            let newContent = self.setupCalendarViewContents()
-            self.calendarView.setContent(newContent)
         }
-        scrollToToday()
-    }
-    
-    //TODO: Refactor
-    private func setupCalendarViewContents() -> CalendarViewContent {
-        let calendar = Calendar.current
-        //FIXME: - To date of first uploaded date
-        let startDate = viewModel?.startedDate ?? Date()
-        let endDate = Date()
-        return CalendarViewContent(
-            calendar: calendar,
-            visibleDateRange: startDate...endDate,
-            monthsLayout: .vertical (
-                options: VerticalMonthsLayoutOptions(
-                    pinDaysOfWeekToTop: true,
-                    alwaysShowCompleteBoundaryMonths: true,
-                    scrollsToFirstMonthOnStatusBarTap: true)))
-        .monthHeaderItemProvider { month in
-            CalendarItemModel<MonthLabel> (
-                invariantViewProperties: .init(
-                    font: .systemFont(ofSize: 17, weight: .medium),
-                    textColor: .label,
-                    backgroundColor: .clear),
-                content: .init(month: month))
-        }
-        .dayItemProvider { [weak self] day in
-            var invariantViewProperties = DayLabel.InvariantViewProperties(font: .systemFont(ofSize: 14, weight: .semibold),
-                                                                           textColor: .darkGray,
-                                                                           backgroundColor: .clear)
-            ///Setup Seleted day
-            if let self = self,
-               let viewModel = self.viewModel {
-                if day.components == viewModel.selectedDay {
-                    invariantViewProperties.textColor = .systemBackground
-                    invariantViewProperties.backgroundColor = .label
-                }
-                ///Setup today
-                if day.components == calendar.dateComponents([.era, .year, .month, .day], from: Date()) {
-                    invariantViewProperties.textColor = .systemBackground
-                    invariantViewProperties.backgroundColor = .systemRed
-                }
-                //TODO: Binding
-                viewModel.dateOfDids
-                    .sink { dateOfDids in
-                        for date in dateOfDids {
-                            if day.components == calendar.dateComponents([.era, .year, .month, .day], from: date) {
-                                invariantViewProperties.textColor = .customGreen
-                                break
-                            }
-                        }
-                    }
-                    .store(in: &self.cancellableBag)
-            }
-            return CalendarItemModel<DayLabel> (
-                invariantViewProperties: invariantViewProperties,
-                content: .init(day: day))
-        }
-        .monthDayInsets(.init(top: 10, leading: 0, bottom: 0, trailing: 0))
-        .interMonthSpacing(60)
-        .horizontalDayMargin(8)
-        .verticalDayMargin(8)
     }
     
     private func scrollToToday() {
-        calendarView.scroll(toMonthContaining: Date(), scrollPosition: .lastFullyVisiblePosition, animated: false)
+        contentView.calendarView.scroll(toMonthContaining: Date(), scrollPosition: .lastFullyVisiblePosition, animated: false)
     }
 }
 
 //MARK: - Collection View
 extension CalendarViewController {
      
-    private func configureCollectionView() {
-        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createCollectionViewLayout())
-        collectionView.backgroundColor = .systemBackground
-        collectionView.isScrollEnabled = false
-        configureDataSource()
-    }
-    
-    private func createCollectionViewLayout() -> UICollectionViewLayout {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(32),
-                                              heightDimension: .fractionalHeight(1))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(32),
-                                               heightDimension: .absolute(34))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
-                                                       subitems: [item])
-        let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing =  10
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0,
-                                                        leading: 10,
-                                                        bottom: 0,
-                                                        trailing: 10)
-        ///setup header
-        let sectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(60))
-        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: sectionHeaderSize,
-                                                                        elementKind: CalendarViewController.sectionHeaderElementKind,
-                                                                        alignment: .top)
-        section.boundarySupplementaryItems = [sectionHeader]
-        section.orthogonalScrollingBehavior = .continuous
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        return layout
-    }
-    
-    private func configureDataSource() {
+    private func configureDataSource(with collectionView: UICollectionView) {
         let didTitleCellRegistration = createDidTitleCellRegistration()
         let didsOfSelectedSupplementaryRegistration = createDidsOfSelectedSupplementaryRegistration()
         dataSource = UICollectionViewDiffableDataSource<Section, DidsOfDayItemViewModel>(
@@ -288,14 +145,15 @@ extension CalendarViewController {
                     for: indexPath,
                     item: itemIdentifier)
             })
-        dataSource?.supplementaryViewProvider = { [weak self] supplementaryView, elementKind, indexPath in
-            self?.collectionView.dequeueConfiguredReusableSupplementary(using: didsOfSelectedSupplementaryRegistration, for: indexPath)
+        
+        dataSource?.supplementaryViewProvider = { supplementaryView, elementKind, indexPath in
+            collectionView.dequeueConfiguredReusableSupplementary(using: didsOfSelectedSupplementaryRegistration, for: indexPath)
         }
     }
     
     //MARK: Create Registration
     private func createDidsOfSelectedSupplementaryRegistration() -> UICollectionView.SupplementaryRegistration<DetailDidSupplementaryView> {
-        UICollectionView.SupplementaryRegistration(elementKind: CalendarViewController.sectionHeaderElementKind) { [weak self] supplementaryView, elementKind, indexPath in
+        UICollectionView.SupplementaryRegistration(elementKind: CalendarContainerView.sectionHeaderElementKind) { [weak self] supplementaryView, elementKind, indexPath in
             guard let self = self,
                   let viewModel = self.viewModel else { return }
             ///Binding with ViewModel
@@ -315,7 +173,7 @@ extension CalendarViewController {
         }
     }
    
-    private func initialSnapshot(_ items: [DidsOfDayItemViewModel]) {
+    private func setSnapshot(_ items: [DidsOfDayItemViewModel]) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, DidsOfDayItemViewModel>()
         snapshot.appendSections(Section.allCases)
         snapshot.appendItems(items)

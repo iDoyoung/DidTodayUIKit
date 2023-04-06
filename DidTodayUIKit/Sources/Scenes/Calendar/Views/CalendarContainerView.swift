@@ -40,6 +40,7 @@ final class CalendarContainerView: UIView {
         addSubview(effectView)
         effectView.contentView.addSubview(rootFlexContainer)
         rootFlexContainer.flex
+            .backgroundColor(.systemBackground)
             .direction(.column)
             .alignItems(.end)
             .define { flex in
@@ -54,7 +55,7 @@ final class CalendarContainerView: UIView {
                     .width(100%)
                     .height(100)
                 flex.addItem(showDetailButton)
-                    .right(0)
+                    .right(20)
                     .height(50)
             }
     }
@@ -67,6 +68,11 @@ final class CalendarContainerView: UIView {
         super.layoutSubviews()
         effectView.pin.all()
         rootFlexContainer.pin.all(self.pin.safeArea)
+        rootFlexContainer.pin
+            .top(self.pin.safeArea)
+            .bottom(self.pin.safeArea)
+            .left(20)
+            .right(20)
         rootFlexContainer.flex.layout()
     }
 }

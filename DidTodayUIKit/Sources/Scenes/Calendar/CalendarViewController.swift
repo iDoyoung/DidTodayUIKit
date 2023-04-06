@@ -136,7 +136,7 @@ extension CalendarViewController {
      
     private func configureDataSource(with collectionView: UICollectionView) {
         let didTitleCellRegistration = createDidTitleCellRegistration()
-        let didsOfSelectedSupplementaryRegistration = createDidsOfSelectedSupplementaryRegistration()
+//        let didsOfSelectedSupplementaryRegistration = createDidsOfSelectedSupplementaryRegistration()
         dataSource = UICollectionViewDiffableDataSource<Section, DidsOfDayItemViewModel>(
             collectionView: collectionView,
             cellProvider: { collectionView, indexPath, itemIdentifier in
@@ -146,22 +146,22 @@ extension CalendarViewController {
                     item: itemIdentifier)
             })
         
-        dataSource?.supplementaryViewProvider = { supplementaryView, elementKind, indexPath in
-            collectionView.dequeueConfiguredReusableSupplementary(using: didsOfSelectedSupplementaryRegistration, for: indexPath)
-        }
+//        dataSource?.supplementaryViewProvider = { supplementaryView, elementKind, indexPath in
+//            collectionView.dequeueConfiguredReusableSupplementary(using: didsOfSelectedSupplementaryRegistration, for: indexPath)
+//        }
     }
     
     //MARK: Create Registration
-    private func createDidsOfSelectedSupplementaryRegistration() -> UICollectionView.SupplementaryRegistration<DetailDidSupplementaryView> {
-        UICollectionView.SupplementaryRegistration(elementKind: CalendarContainerView.sectionHeaderElementKind) { [weak self] supplementaryView, elementKind, indexPath in
-            guard let self = self,
-                  let viewModel = self.viewModel else { return }
-            ///Binding with ViewModel
-            viewModel.descriptionOfSelectedDay
-                .assign(to: \.text, on: supplementaryView.descriptionCountLabel)
-                .store(in: &self.cancellableBag)
-        }
-    }
+//    private func createDidsOfSelectedSupplementaryRegistration() -> UICollectionView.SupplementaryRegistration<DetailDidSupplementaryView> {
+//        UICollectionView.SupplementaryRegistration(elementKind: CalendarContainerView.sectionHeaderElementKind) { [weak self] supplementaryView, elementKind, indexPath in
+//            guard let self = self,
+//                  let viewModel = self.viewModel else { return }
+//            ///Binding with ViewModel
+//            viewModel.descriptionOfSelectedDay
+//                .assign(to: \.text, on: supplementaryView.descriptionCountLabel)
+//                .store(in: &self.cancellableBag)
+//        }
+//    }
     
     private func createDidTitleCellRegistration() -> UICollectionView.CellRegistration<DidTitleCell, DidsOfDayItemViewModel> {
         return UICollectionView.CellRegistration { cell, indexPath, itemIdentifier in

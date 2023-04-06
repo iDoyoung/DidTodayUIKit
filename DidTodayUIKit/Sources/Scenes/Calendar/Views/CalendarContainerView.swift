@@ -22,6 +22,18 @@ final class CalendarContainerView: UIView {
     }()
     
     private let rootFlexContainer = UIView()
+    
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "History"
+        let descriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .title1)
+        let font = UIFont.systemFont(ofSize: descriptor.pointSize, weight: .bold)
+        label.font = UIFontMetrics(forTextStyle: .title1).scaledFont(for: font)
+        // 생각과 다르게 반응한다.
+        label.adjustsFontForContentSizeCategory = true
+        return label
+    }()
+    
     var calendarView: CalendarView!
     var collectionView: UICollectionView!
     let showDetailButton: UIButton = {
@@ -46,7 +58,10 @@ final class CalendarContainerView: UIView {
             .cornerRadius(20)
             .border(0.5, .separator)
             .define { flex in
-                flex.view?.layer.masksToBounds = true
+                flex.addItem(titleLabel)
+                    .paddingVertical(20)
+                    .start(20)
+                    .width(100%)
                 flex.addItem(calendarView!)
                     .width(100%)
                     .grow(1)
@@ -166,13 +181,13 @@ extension CalendarContainerView {
                                                         bottom: 0,
                                                         trailing: 10)
         
-        // Setcion Header
-        let sectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(60))
-        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: sectionHeaderSize,
-                                                                        elementKind: CalendarContainerView.sectionHeaderElementKind,
-                                                                        alignment: .top)
-        section.boundarySupplementaryItems = [sectionHeader]
-        section.orthogonalScrollingBehavior = .continuous
+//        // Setcion Header
+//        let sectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(60))
+//        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: sectionHeaderSize,
+//                                                                        elementKind: CalendarContainerView.sectionHeaderElementKind,
+//                                                                        alignment: .top)
+//        section.boundarySupplementaryItems = [sectionHeader]
+//        section.orthogonalScrollingBehavior = .continuous
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
     }

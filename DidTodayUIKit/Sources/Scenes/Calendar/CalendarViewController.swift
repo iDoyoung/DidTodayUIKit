@@ -34,6 +34,7 @@ final class CalendarViewController: ParentUIViewController {
     }
     
     override func loadView() {
+        contentView.showDetailButton.addTarget(self, action: #selector(showDetail), for: .touchUpInside)
         view = contentView
         configureDataSource(with: contentView.collectionView)
     }

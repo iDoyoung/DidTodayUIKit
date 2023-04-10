@@ -34,6 +34,7 @@
 
 //MARK: - Calendar
 "Select Day" = "Select Day";
+"Which day did you do?" = "Which day did you do?";
 "Did %d Things" = "Did %d Things";
 "Show detail" = "Show detail";
 

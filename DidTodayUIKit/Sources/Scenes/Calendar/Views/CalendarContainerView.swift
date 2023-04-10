@@ -25,7 +25,7 @@ final class CalendarContainerView: UIView {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "History"
+        label.text = CustomText.whichDayDidYou
         let descriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .title1)
         let font = UIFont.systemFont(ofSize: descriptor.pointSize, weight: .bold)
         label.font = UIFontMetrics(forTextStyle: .title1).scaledFont(for: font)

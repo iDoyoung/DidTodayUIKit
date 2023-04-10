@@ -50,6 +50,7 @@ enum CustomText {
     ///In Calendar
     //MARK: - For Calendar
     static let selectDay = "Select Day".localized
+    static let whichDayDidYou = "Which day did you do?".localized
     static func selectedItems(count: Int) -> String {
         return String(format: "Did %d Things".localized, count)
     }

@@ -34,6 +34,7 @@
 
 //MARK: - Calendar
 "Select Day" = "날짜를 고르세요";
+"Which day did you do?" = "날짜를 선택하세요";
 "Did %d Things" = "%d개 완료";
 "Show detail" = "자세히 보기";
 

@@ -47,6 +47,8 @@ final class CalendarContainerView: UIView {
     init() {
         super.init(frame: .zero)
         calendarView = CalendarView(initialContent: setupCalendarViewContents())
+        //FIXME: - Calendar View에 Frame 적용하지 않을 경우 Breaking constraint waring 발생, width&height가 0일 경우에도 발생
+        calendarView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: createCollectionViewLayout())
         
         addSubview(effectView)
@@ -66,7 +68,7 @@ final class CalendarContainerView: UIView {
                     .paddingVertical(20)
                     .start(20)
                     .width(100%)
-                flex.addItem(calendarView!)
+                flex.addItem(calendarView)
                     .width(100%)
                     .grow(1)
                     .define { flex in
@@ -104,7 +106,6 @@ final class CalendarContainerView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         effectView.pin.all()
-        rootFlexContainer.pin.all(self.pin.safeArea)
         rootFlexContainer.pin
             .top(self.pin.safeArea)
             .bottom(self.pin.safeArea)

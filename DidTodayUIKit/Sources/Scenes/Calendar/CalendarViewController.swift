@@ -56,18 +56,9 @@ final class CalendarViewController: ParentUIViewController {
     
     //MARK: Configure & Setup
     private func configure() {
-        setupView()
         setupNavigationBar()
         configureCalendarViewDaySelectionHandler()
         scrollToToday()
-    }
-    
-    private func setupView() {
-        view.borderColor = .clear
-        let blurEffect = UIBlurEffect(style: .systemMaterial)
-        let blurredEffectView = UIVisualEffectView(effect: blurEffect)
-        blurredEffectView.frame = view.bounds
-        view.addSubview(blurredEffectView)
     }
     
     private func setupNavigationBar() {

@@ -119,7 +119,9 @@ final class CalendarContainerView: UIView {
 extension CalendarContainerView {
     func setupCalendarViewContents(selected: Date? = nil, fetched: [Date] = []) -> CalendarViewContent {
         let calendar = Calendar.current
-        let startDate = fetched.first ?? Date()
+        //Start Date를 기본적으로 설정하지 않으면 UI가 부자연스러움
+        let startDate = calendar.date(from: DateComponents(year: 2019, month: 01, day: 01))!
+        
         return CalendarViewContent(
             calendar: calendar,
             visibleDateRange: startDate...Date(),

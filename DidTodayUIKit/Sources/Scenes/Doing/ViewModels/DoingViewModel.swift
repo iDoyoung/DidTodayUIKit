@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import UserNotifications
 
 protocol DoingViewModelProtocol: DoingViewModelInput, DoingViewModelOutput {   }
 
@@ -20,6 +21,8 @@ protocol DoingViewModelInput {
     func cancelRecording()
     func observeDidEnterBackground()
     func observeWillEnterForeground()
+    func reqeustDayIsChangedNotification()
+    func cancelUserNotifications()
 }
 
 protocol DoingViewModelOutput {
@@ -149,4 +152,13 @@ final class DoingViewModel: DoingViewModelProtocol {
     }
 }
 
-extension DoingViewModel: DayIsChangedNotification {    }
+extension DoingViewModel: DayIsChangedNotification {
+    
+    func reqeustDayIsChangedNotification() {
+        requestUserNotification(with: "day-is-changed")
+    }
+    
+    func cancelUserNotifications() {
+        UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: ["day-is-changed"])
+    }
+}

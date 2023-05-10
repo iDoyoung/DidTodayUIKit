@@ -43,6 +43,7 @@ final class DoingViewController: ParentUIViewController, StoryboardInstantiable 
             occurFeedback()
             timerLabel.animateToShake()
         } else {
+            viewModel.cancelUserNotifications()
             viewModel.showCreateDid()
         }
     }
@@ -146,6 +147,7 @@ extension DoingViewController: TimerAlert {
     
     func cancelTimer() {
         viewModel?.cancelRecording()
+        viewModel?.cancelUserNotifications()
         dismiss(animated: true)
     }
 }

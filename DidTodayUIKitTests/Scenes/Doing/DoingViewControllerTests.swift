@@ -67,13 +67,7 @@ final class DoingViewControllerTests: XCTestCase {
         func cancelRecording() {
             cancelRecordingCalled = true
         }
-        
-        var observeDayIsChangedCalled = false
-        
-        func observeDayIsChanged() {
-            observeDayIsChangedCalled = true
-        }
-        
+       
         var observeDidEnterBackgroundCalled = false
         
         func observeDidEnterBackground() {
@@ -84,6 +78,18 @@ final class DoingViewControllerTests: XCTestCase {
         
         func observeWillEnterForeground() {
             observeWillEnterForegroundCalled = true
+        }
+        
+        var reqeustDayIsChangedNotificationCalled = false
+        
+        func reqeustDayIsChangedNotification() {
+            reqeustDayIsChangedNotificationCalled = true
+        }
+        
+        var cancelUserNotificationsCalled = false
+        
+        func cancelUserNotifications() {
+            cancelUserNotificationsCalled = true
         }
         
         var startedTimeText: AnyPublisher<String?, Never> = Just(Seeds.MockDate.midnight!)
@@ -108,14 +114,6 @@ final class DoingViewControllerTests: XCTestCase {
         
         // then
         XCTAssertTrue(doingViewModelSpy.observeDidEnterBackgroundCalled)
-    }
-    
-    func test_viewDidLoad_shouldCallObserveDayIsChanged() {
-        // when
-        sut.viewDidLoad()
-        
-        // then
-        XCTAssertTrue(doingViewModelSpy.observeDayIsChangedCalled)
     }
     
     func test_viewDidLoad_shouldCallRequestUserNotificationsAuthorization() {

@@ -21,7 +21,6 @@ protocol DoingViewModelInput {
     func cancelRecording()
     func observeDidEnterBackground()
     func observeWillEnterForeground()
-    func reqeustDayIsChangedNotification()
     func cancelUserNotifications()
 }
 
@@ -87,12 +86,13 @@ final class DoingViewModel: DoingViewModelProtocol {
     
     //MARK: Input
      func requestUserNotificationsAuthorization() {
-        AuthorizationManager.requestUserNotificationsAuthorization { result in
+        AuthorizationManager.requestUserNotificationsAuthorization { [weak self] result in
             switch result {
             case .success(let authorizationStatus):
                 #if DEBUG
                 print("Succeeded requesting user notifications authorization \(String(describing: authorizationStatus))")
                 #endif
+                self?.requestUserNotification(with: "day-is-changed")
             case .failure(let error):
                 #if DEBUG
                 print("Failed requesting user notifications authorization \(String(describing: error))")
@@ -153,11 +153,7 @@ final class DoingViewModel: DoingViewModelProtocol {
 }
 
 extension DoingViewModel: DayIsChangedNotification {
-    
-    func reqeustDayIsChangedNotification() {
-        requestUserNotification(with: "day-is-changed")
-    }
-    
+   
     func cancelUserNotifications() {
         UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: ["day-is-changed"])
     }

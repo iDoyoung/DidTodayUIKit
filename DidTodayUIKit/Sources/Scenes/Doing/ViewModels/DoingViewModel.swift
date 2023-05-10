@@ -18,7 +18,6 @@ protocol DoingViewModelInput {
     func showCreateDid()
     ///현재 기록 중인 데이터를 취소
     func cancelRecording()
-    func observeDayIsChanged()
     func observeDidEnterBackground()
     func observeWillEnterForeground()
 }
@@ -117,19 +116,6 @@ final class DoingViewModel: DoingViewModelProtocol {
     
     func viewDisappear() {
         timerPublisher.upstream.connect().cancel()
-    }
-    
-    func observeDayIsChanged() {
-        ///Notify day is changed
-        NotificationCenter.default
-            .publisher(for: Notification.Name.NSCalendarDayChanged)
-            .sink { [weak self] _ in
-                #if DEBUG
-                print("Day is Changed")
-                #endif
-                self?.requestUserNotification(with: "day-is-changed")
-            }
-            .store(in: &cancellablesBag)
     }
     
     func observeDidEnterBackground() {

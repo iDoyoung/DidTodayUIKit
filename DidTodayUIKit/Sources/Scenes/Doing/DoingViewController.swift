@@ -62,7 +62,6 @@ final class DoingViewController: ParentUIViewController, StoryboardInstantiable 
         bindViewModel()
         viewModel?.observeWillEnterForeground()
         viewModel?.observeDidEnterBackground()
-        viewModel?.observeDayIsChanged()
         viewModel?.requestUserNotificationsAuthorization()
         UNUserNotificationCenter.current().delegate = self
     }

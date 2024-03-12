@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -58,6 +58,8 @@
 		7F5ABAAD296FB81F002E509E /* BetaVersionMigrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5ABAAC296FB81F002E509E /* BetaVersionMigrationTests.swift */; };
 		7F5CD8FD29D42F85003F4073 /* DoingViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5CD8FC29D42F85003F4073 /* DoingViewControllerTests.swift */; };
 		7F61A03C294439A80084A3F6 /* UIView+animateToShake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F61A03B294439A80084A3F6 /* UIView+animateToShake.swift */; };
+		7F61B09A2BA02801007B02F8 /* ReadReminderUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F61B0992BA02801007B02F8 /* ReadReminderUseCase.swift */; };
+		7F61B09C2BA02B1F007B02F8 /* ReadReminderUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F61B09B2BA02B1F007B02F8 /* ReadReminderUseCaseTests.swift */; };
 		7F666DB229BACC6100D32E29 /* UIViewPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F666DB129BACC6100D32E29 /* UIViewPreview.swift */; };
 		7F666DB529BAD01400D32E29 /* DidDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F666DB429BAD01400D32E29 /* DidDetailsView.swift */; };
 		7F6C337929BC83330019D80B /* DidDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6C337829BC83330019D80B /* DidDetailsViewController.swift */; };
@@ -122,6 +124,10 @@
 		7FF48C2D2922085A00387FE7 /* UIView+Corner Radius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF48C2C2922085A00387FE7 /* UIView+Corner Radius.swift */; };
 		7FF770B12955625400A665B5 /* AboutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF770B02955625400A665B5 /* AboutCell.swift */; };
 		7FF770B429557ED500A665B5 /* AboutDid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF770B329557ED500A665B5 /* AboutDid.swift */; };
+		7FFF125E2B9EBBE2004033A4 /* EKEventStore+AsyncFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FFF125D2B9EBBE2004033A4 /* EKEventStore+AsyncFetch.swift */; };
+		7FFF12612B9EC0B0004033A4 /* ReminderStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FFF12602B9EC0B0004033A4 /* ReminderStore.swift */; };
+		7FFF12632B9ECD1C004033A4 /* Reminder+EKReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FFF12622B9ECD1C004033A4 /* Reminder+EKReminder.swift */; };
+		7FFF12652B9ED0B0004033A4 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FFF12642B9ED0B0004033A4 /* Reminder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -207,6 +213,8 @@
 		7F5ABAAC296FB81F002E509E /* BetaVersionMigrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetaVersionMigrationTests.swift; sourceTree = "<group>"; };
 		7F5CD8FC29D42F85003F4073 /* DoingViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoingViewControllerTests.swift; sourceTree = "<group>"; };
 		7F61A03B294439A80084A3F6 /* UIView+animateToShake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+animateToShake.swift"; sourceTree = "<group>"; };
+		7F61B0992BA02801007B02F8 /* ReadReminderUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadReminderUseCase.swift; sourceTree = "<group>"; };
+		7F61B09B2BA02B1F007B02F8 /* ReadReminderUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadReminderUseCaseTests.swift; sourceTree = "<group>"; };
 		7F666DB129BACC6100D32E29 /* UIViewPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewPreview.swift; sourceTree = "<group>"; };
 		7F666DB429BAD01400D32E29 /* DidDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidDetailsView.swift; sourceTree = "<group>"; };
 		7F6C337829BC83330019D80B /* DidDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidDetailsViewController.swift; sourceTree = "<group>"; };
@@ -268,6 +276,10 @@
 		7FF48C2C2922085A00387FE7 /* UIView+Corner Radius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Corner Radius.swift"; sourceTree = "<group>"; };
 		7FF770B02955625400A665B5 /* AboutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutCell.swift; sourceTree = "<group>"; };
 		7FF770B329557ED500A665B5 /* AboutDid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutDid.swift; sourceTree = "<group>"; };
+		7FFF125D2B9EBBE2004033A4 /* EKEventStore+AsyncFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EKEventStore+AsyncFetch.swift"; sourceTree = "<group>"; };
+		7FFF12602B9EC0B0004033A4 /* ReminderStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderStore.swift; sourceTree = "<group>"; };
+		7FFF12622B9ECD1C004033A4 /* Reminder+EKReminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reminder+EKReminder.swift"; sourceTree = "<group>"; };
+		7FFF12642B9ED0B0004033A4 /* Reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
 		ADA015A5697AC9D46CCADCEC /* Pods_DidTodayUIKit_DidTodayUIKitUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DidTodayUIKit_DidTodayUIKitUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D52ECED48532DF52D0291955 /* Pods_DidTodayUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DidTodayUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -571,6 +583,7 @@
 				7FA3118E29B3324800A4C5DE /* FetchDidUseCase.swift */,
 				7FA3119229B43A1500A4C5DE /* CreateDidUseCase.swift */,
 				7F6C337F29BF2B650019D80B /* DeleteDidUseCase.swift */,
+				7F61B0992BA02801007B02F8 /* ReadReminderUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -581,6 +594,7 @@
 				7FA3119029B4211100A4C5DE /* FetchDidUseCaseTests.swift */,
 				7FA3119429B43C2700A4C5DE /* CreateDidUseCaseTests.swift */,
 				7F6C338129BF2CE10019D80B /* DeleteUseCaseTests.swift */,
+				7F61B09B2BA02B1F007B02F8 /* ReadReminderUseCaseTests.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -679,6 +693,7 @@
 		7FC22B5828C71AE400F83122 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				7FFF125C2B9EBA39004033A4 /* ReminderStore */,
 				7FA3118D29B3322F00A4C5DE /* UseCases */,
 				7FC22B6028C88A3A00F83122 /* Services */,
 				7FC22B5C28C7224000F83122 /* Entry */,
@@ -847,6 +862,25 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		7FFF125C2B9EBA39004033A4 /* ReminderStore */ = {
+			isa = PBXGroup;
+			children = (
+				7FFF125F2B9EBFFE004033A4 /* Extensions */,
+				7FFF12602B9EC0B0004033A4 /* ReminderStore.swift */,
+				7FFF12642B9ED0B0004033A4 /* Reminder.swift */,
+			);
+			path = ReminderStore;
+			sourceTree = "<group>";
+		};
+		7FFF125F2B9EBFFE004033A4 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7FFF125D2B9EBBE2004033A4 /* EKEventStore+AsyncFetch.swift */,
+				7FFF12622B9ECD1C004033A4 /* Reminder+EKReminder.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		DAB2CA619C78ADD98AADD0EB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -982,6 +1016,7 @@
 				7F133C652907CC5A0099E55C /* SceneDIContainer.swift in Sources */,
 				7FB3345F2953E5FC00E9FB88 /* AboutViewModel.swift in Sources */,
 				7F583F322914B73B006735AA /* DidTitleCell.swift in Sources */,
+				7F61B09A2BA02801007B02F8 /* ReadReminderUseCase.swift in Sources */,
 				7FE4C06F294852020048F24E /* UIColor+GetRGB.swift in Sources */,
 				7F0B97BB292C7ACA0071DF98 /* UIView+Border.swift in Sources */,
 				7F6C337929BC83330019D80B /* DidDetailsViewController.swift in Sources */,
@@ -997,6 +1032,7 @@
 				7F850CB62965130E0083522A /* UserNotificationManager.swift in Sources */,
 				7F55E3FF294C08A0007B2706 /* CreateDidAlert.swift in Sources */,
 				7FA3119329B43A1500A4C5DE /* CreateDidUseCase.swift in Sources */,
+				7FFF12652B9ED0B0004033A4 /* Reminder.swift in Sources */,
 				7F850CC22966B6540083522A /* DidListCollectionViewController.swift in Sources */,
 				7F6C338029BF2B650019D80B /* DeleteDidUseCase.swift in Sources */,
 				7FB6A8D628DD89E5009C61C5 /* Date+DifferenceToString.swift in Sources */,
@@ -1042,6 +1078,7 @@
 				7FC22B6328C88AA500F83122 /* DataModel.xcdatamodeld in Sources */,
 				7F0FCDFD29DBBF1D00CDB3B1 /* CalendarContainerView.swift in Sources */,
 				7F2C6CBE290A6EB3002963DE /* MainRouter.swift in Sources */,
+				7FFF12632B9ECD1C004033A4 /* Reminder+EKReminder.swift in Sources */,
 				7F9C0B9E293DAA8C0094C2A5 /* TimerAlert.swift in Sources */,
 				7F71192B290B95FB001DFE99 /* UIColor+GradientEffect.swift in Sources */,
 				7F4AA14E292471EE004CE62A /* SortingSupplementaryView.swift in Sources */,
@@ -1057,6 +1094,8 @@
 				7F6C337B29BC926A0019D80B /* DidDetailsViewModel.swift in Sources */,
 				7F10CF7C2967AF7F00EAADF2 /* CalendarFlowCoordinator.swift in Sources */,
 				7F666DB529BAD01400D32E29 /* DidDetailsView.swift in Sources */,
+				7FFF125E2B9EBBE2004033A4 /* EKEventStore+AsyncFetch.swift in Sources */,
+				7FFF12612B9EC0B0004033A4 /* ReminderStore.swift in Sources */,
 				504CE0B4253FDFDF000CC6CF /* PreviousVersionModel.swift in Sources */,
 				7F133CA3290902EC0099E55C /* StoryboardInstantiable.swift in Sources */,
 				7F5A91C828E68CCF006B8406 /* Date+ToString.swift in Sources */,
@@ -1075,6 +1114,7 @@
 				7FB6A8CF28DB00E3009C61C5 /* CreateDidViewControllerTests.swift in Sources */,
 				7F5A69932968FC7A00062E2B /* DetailDayViewModelTests.swift in Sources */,
 				7FDC193A2977A26500117963 /* AboutViewModelTests.swift in Sources */,
+				7F61B09C2BA02B1F007B02F8 /* ReadReminderUseCaseTests.swift in Sources */,
 				7F6EF3AF29A744AE002B5970 /* CalendarViewModelTests.swift in Sources */,
 				7F5719C129D5577000729716 /* DidDetailsViewControllerTests.swift in Sources */,
 				7FC22B7F28CB232600F83122 /* Seeds.swift in Sources */,

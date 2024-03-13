@@ -20,6 +20,8 @@ final class ReadReminderUseCaseTests: XCTestCase {
     }
     
     override func tearDownWithError() throws {
+        sut = nil
+        reminderStoreSpy = nil
         try super.tearDownWithError()
     }
     

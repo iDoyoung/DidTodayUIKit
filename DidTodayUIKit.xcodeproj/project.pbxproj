@@ -60,6 +60,8 @@
 		7F61A03C294439A80084A3F6 /* UIView+animateToShake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F61A03B294439A80084A3F6 /* UIView+animateToShake.swift */; };
 		7F61B09A2BA02801007B02F8 /* ReadReminderUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F61B0992BA02801007B02F8 /* ReadReminderUseCase.swift */; };
 		7F61B09C2BA02B1F007B02F8 /* ReadReminderUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F61B09B2BA02B1F007B02F8 /* ReadReminderUseCaseTests.swift */; };
+		7F61B0A02BA038E4007B02F8 /* RequestAccessOfReminderUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F61B09F2BA038E4007B02F8 /* RequestAccessOfReminderUseCase.swift */; };
+		7F61B0A32BA03C3D007B02F8 /* RequestAccessOfReminderUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F61B0A22BA03C3D007B02F8 /* RequestAccessOfReminderUseCaseTests.swift */; };
 		7F666DB229BACC6100D32E29 /* UIViewPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F666DB129BACC6100D32E29 /* UIViewPreview.swift */; };
 		7F666DB529BAD01400D32E29 /* DidDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F666DB429BAD01400D32E29 /* DidDetailsView.swift */; };
 		7F6C337929BC83330019D80B /* DidDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6C337829BC83330019D80B /* DidDetailsViewController.swift */; };
@@ -215,6 +217,8 @@
 		7F61A03B294439A80084A3F6 /* UIView+animateToShake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+animateToShake.swift"; sourceTree = "<group>"; };
 		7F61B0992BA02801007B02F8 /* ReadReminderUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadReminderUseCase.swift; sourceTree = "<group>"; };
 		7F61B09B2BA02B1F007B02F8 /* ReadReminderUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadReminderUseCaseTests.swift; sourceTree = "<group>"; };
+		7F61B09F2BA038E4007B02F8 /* RequestAccessOfReminderUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAccessOfReminderUseCase.swift; sourceTree = "<group>"; };
+		7F61B0A22BA03C3D007B02F8 /* RequestAccessOfReminderUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAccessOfReminderUseCaseTests.swift; sourceTree = "<group>"; };
 		7F666DB129BACC6100D32E29 /* UIViewPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewPreview.swift; sourceTree = "<group>"; };
 		7F666DB429BAD01400D32E29 /* DidDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidDetailsView.swift; sourceTree = "<group>"; };
 		7F6C337829BC83330019D80B /* DidDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidDetailsViewController.swift; sourceTree = "<group>"; };
@@ -529,6 +533,24 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		7F61B09E2BA038B9007B02F8 /* Reminder */ = {
+			isa = PBXGroup;
+			children = (
+				7F61B0992BA02801007B02F8 /* ReadReminderUseCase.swift */,
+				7F61B09F2BA038E4007B02F8 /* RequestAccessOfReminderUseCase.swift */,
+			);
+			path = Reminder;
+			sourceTree = "<group>";
+		};
+		7F61B0A12BA03C20007B02F8 /* Reminder */ = {
+			isa = PBXGroup;
+			children = (
+				7F61B09B2BA02B1F007B02F8 /* ReadReminderUseCaseTests.swift */,
+				7F61B0A22BA03C3D007B02F8 /* RequestAccessOfReminderUseCaseTests.swift */,
+			);
+			path = Reminder;
+			sourceTree = "<group>";
+		};
 		7F666DB329BAD00100D32E29 /* DidDetails */ = {
 			isa = PBXGroup;
 			children = (
@@ -580,10 +602,10 @@
 		7FA3118D29B3322F00A4C5DE /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				7F61B09E2BA038B9007B02F8 /* Reminder */,
 				7FA3118E29B3324800A4C5DE /* FetchDidUseCase.swift */,
 				7FA3119229B43A1500A4C5DE /* CreateDidUseCase.swift */,
 				7F6C337F29BF2B650019D80B /* DeleteDidUseCase.swift */,
-				7F61B0992BA02801007B02F8 /* ReadReminderUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -591,10 +613,10 @@
 		7FA3119629B4450700A4C5DE /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				7F61B0A12BA03C20007B02F8 /* Reminder */,
 				7FA3119029B4211100A4C5DE /* FetchDidUseCaseTests.swift */,
 				7FA3119429B43C2700A4C5DE /* CreateDidUseCaseTests.swift */,
 				7F6C338129BF2CE10019D80B /* DeleteUseCaseTests.swift */,
-				7F61B09B2BA02B1F007B02F8 /* ReadReminderUseCaseTests.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -1070,6 +1092,7 @@
 				7F076FC2290FC25500DF4EDC /* Date+OmittedTime.swift in Sources */,
 				7FF770B12955625400A665B5 /* AboutCell.swift in Sources */,
 				7F10CF7E2967C3D400EAADF2 /* CalendarRouter.swift in Sources */,
+				7F61B0A02BA038E4007B02F8 /* RequestAccessOfReminderUseCase.swift in Sources */,
 				7F61A03C294439A80084A3F6 /* UIView+animateToShake.swift in Sources */,
 				7F850C612961AEC80083522A /* ParentUIViewController.swift in Sources */,
 				7F71192D290BBC8B001DFE99 /* CalendarViewModel.swift in Sources */,
@@ -1110,6 +1133,7 @@
 			files = (
 				7F80EBC928D334A000781DB4 /* MainViewModelTests.swift in Sources */,
 				7FA3119129B4211100A4C5DE /* FetchDidUseCaseTests.swift in Sources */,
+				7F61B0A32BA03C3D007B02F8 /* RequestAccessOfReminderUseCaseTests.swift in Sources */,
 				7FC22B7D28CB145D00F83122 /* DidCoreDataStorageTests.swift in Sources */,
 				7FB6A8CF28DB00E3009C61C5 /* CreateDidViewControllerTests.swift in Sources */,
 				7F5A69932968FC7A00062E2B /* DetailDayViewModelTests.swift in Sources */,

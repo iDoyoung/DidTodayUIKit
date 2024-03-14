@@ -40,6 +40,10 @@ final class MainViewController: DidListCollectionViewController {
         super.viewDidLoad()
         configure()
         validateRecordingBeforeClose()
+        
+        Task {
+            try await viewModel?.requestAccess()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

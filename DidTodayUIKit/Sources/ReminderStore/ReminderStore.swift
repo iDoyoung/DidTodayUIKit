@@ -36,10 +36,7 @@ final class ReminderStore: ReminderStoreProtocol {
     }
     
     func readAll() async throws -> [Reminder] {
-        guard isAvailable else {
-            throw TodayError.accessDenied
-        }
-        
+        guard isAvailable else { throw TodayError.accessDenied }
         
         let predicate = ekStore.predicateForReminders(in: nil)
         let ekReminders = try await ekStore.reminders(matching: predicate)

@@ -12,6 +12,7 @@ protocol MainViewModelProtocol: MainViewModelInput, MainViewModelOutput {   }
 
 protocol MainViewModelInput {
     func fetchDids()
+    func requestAccess() async throws
     func selectRecently()
     func selectMuchTime()
     func removeRecorded()
@@ -37,6 +38,8 @@ final class MainViewModel: MainViewModelProtocol {
     
     //MARK: Components
     private var fetchDidUseCase: FetchDidUseCase?
+    private var requestAccessOfReminderUseCase: RequestAccessOfReminderUseCaseProtocol?
+    
     private var router: MainRouter?
     private var cancellableBag = Set<AnyCancellable>()
     
@@ -49,8 +52,11 @@ final class MainViewModel: MainViewModelProtocol {
     var didItemsList = CurrentValueSubject<[DidItemViewModel], Never>([])
     
     //MARK: - Method
-    init(fetchDidUseCase: FetchDidUseCase, router: MainRouter) {
+    init(fetchDidUseCase: FetchDidUseCase, 
+         requestAccessOfReminderUseCase: RequestAccessOfReminderUseCaseProtocol,
+         router: MainRouter) {
         self.fetchDidUseCase = fetchDidUseCase
+        self.requestAccessOfReminderUseCase = requestAccessOfReminderUseCase
         self.router = router
         
         fetchedDids
@@ -77,6 +83,10 @@ final class MainViewModel: MainViewModelProtocol {
     
     func removeRecorded() {
         UserDefaults.standard.removeObject(forKey: "start-time-of-doing")
+    }
+    
+    func requestAccess() async throws {
+        try await requestAccessOfReminderUseCase?.excute()
     }
     
     //MARK: View event methods

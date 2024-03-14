@@ -22,6 +22,7 @@ final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
     
     //MARK: Core Data Storage
     let didCoreDataStorage = DidCoreDataStorage()
+    let reminderStore = ReminderStore()
     
     //MARK: Use Case
     private func makeFetchDidUseCase() -> FetchDidUseCase {
@@ -36,6 +37,10 @@ final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
         return DefaultDeleteDidUseCase(storage: didCoreDataStorage)
     }
     
+    private var requestAccessOfReminderUseCase: RequestAccessOfReminderUseCaseProtocol {
+        RequestAccessOfReminderUseCase(stroage: reminderStore)
+    }
+    
     //MARK: Main VC
     func makeMainViewController(router: MainRouter) -> UIViewController {
         let viewController = MainViewController.create(with: makeMainViewModel(router: router))
@@ -43,7 +48,9 @@ final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
     }
     
     private func makeMainViewModel(router: MainRouter) -> MainViewModelProtocol {
-        let viewModel = MainViewModel(fetchDidUseCase: makeFetchDidUseCase(), router: router)
+        let viewModel = MainViewModel(fetchDidUseCase: makeFetchDidUseCase(),
+                                      requestAccessOfReminderUseCase: requestAccessOfReminderUseCase,
+                                      router: router)
         return viewModel
     }
     

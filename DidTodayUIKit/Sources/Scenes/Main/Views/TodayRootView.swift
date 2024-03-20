@@ -8,16 +8,24 @@ struct TodayRootView: View {
         ScrollView(.vertical) {
             LazyVStack {
                 // Display Reminder
-                ScrollView(.horizontal) {
-                    LazyHStack {
-                        ForEach(model.reminders) {
-                            ReminderCell(reminder: $0)
-                        }
+                remindersView
+            }
+        }
+    }
+    
+    @ViewBuilder
+    var remindersView: some View {
+        if model.isAccessReminders {
+            ScrollView(.horizontal) {
+                LazyHStack {
+                    ForEach(model.reminders) {
+                        ReminderCell(reminder: $0)
                     }
                 }
-                .padding(10)
-                .background(.green)
             }
+            .padding(10)
+        } else {
+            NotAccessRemindersAuthorizationStatusView()
         }
     }
 }

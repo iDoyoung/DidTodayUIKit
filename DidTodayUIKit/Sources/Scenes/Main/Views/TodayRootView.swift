@@ -6,9 +6,16 @@ struct TodayRootView: View {
     
     var body: some View {
         ScrollView(.vertical) {
-            LazyVStack {
+            LazyVStack(alignment: .leading, spacing: 0) {
                 // Display Reminder
                 remindersView
+                
+                //TODO: Draw Completed Today Reminders But Did Not Save In This App
+                
+                // Today Dids
+                ForEach(model.dids) {
+                    TodayDidsCell(did: $0)
+                }
             }
         }
     }
@@ -32,6 +39,36 @@ struct TodayRootView: View {
 
 #Preview {
     var model = TodayViewModel()
+    model.isAccessReminders = true
+    
+    model.lastestDid = Did(
+        started: Date(),
+        finished: Date(),
+        content: "Test",
+        color: .init(red: 1, green: 0, blue: 0, alpha: 1)
+    )
+    
+    model.dids = [
+        Did(
+            started: Date(),
+            finished: Date(),
+            content: "Frist Did",
+            color: .init(red: 0, green: 1, blue: 0, alpha: 1)
+        ),
+        Did(
+            started: Date(),
+            finished: Date(),
+            content: "Second Did",
+            color: .init(red: 0, green: 0, blue: 1, alpha: 1)
+        ),
+        Did(
+            started: Date(),
+            finished: Date(),
+            content: "Third Did",
+            color: .init(red: 1, green: 0, blue: 1, alpha: 1)
+        )
+    ]
+    
     model.reminders = [
         Reminder(
             title: "Sample 1",

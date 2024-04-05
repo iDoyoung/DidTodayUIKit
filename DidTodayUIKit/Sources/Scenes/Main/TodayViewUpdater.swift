@@ -7,16 +7,20 @@ struct TodayViewModel {
     var lastestDid: Did?
 }
 
-final class TodayViewState: ObservableObject {
+final class TodayViewUpdater: ObservableObject {
    
-    var interactor: TodayInteractor!
+    private var interactor: TodayInteractor!
     
     @Published var viewModel: TodayViewModel = TodayViewModel()
    
     func loadView() {
         Task {
-            try await interactor.execute(useCase: .readDids, viewModel: &viewModel)
-            try await interactor.execute(useCase: .readReminders, viewModel: &viewModel)
+            try await interactor.execute(useCase: .getRemindersAuthorizationStatus,
+                                         viewModel: &viewModel)
         }
+    }
+    
+    func request() {
+        
     }
 }

@@ -2,53 +2,83 @@ import SwiftUI
 
 struct TodayRootView: View {
    
-    @ObservedObject var model: TodayViewModel
+    @ObservedObject var updater: TodayViewUpdater
     
     var body: some View {
-        ScrollView(.vertical) {
-            LazyVStack(alignment: .leading, spacing: 0) {
-                // Display Reminder
-                remindersView
-                
-                //TODO: Draw Completed Today Reminders But Did Not Save In This App
-                
-                // Today Dids
-                ForEach(model.dids) {
-                    TodayDidsCell(did: $0)
+        GeometryReader { geomtry in
+            ScrollView {
+                VStack(alignment: .leading) {
+                    remindersView
+                        .padding(.vertical, 10)
+                        .task {
+                            do {
+                                try await updater.getIsAccessOfReminders()
+                                try await updater.readReminders()
+                            } catch {
+                                
+                            }
+                        }
+                    
+                    todayDidsView
+                        .task {
+                            do {
+                                try await updater.readDids()
+                            } catch {
+                                
+                            }
+                        }
                 }
             }
+            .background(.blue)
+            .frame(minHeight: geomtry.size.height)
         }
     }
     
     @ViewBuilder
     var remindersView: some View {
-        if model.isAccessReminders {
+        if updater.viewModel.isAccessReminders {
             ScrollView(.horizontal) {
                 LazyHStack {
-                    ForEach(model.reminders) {
+                    ForEach(updater.viewModel.reminders) {
                         ReminderCell(reminder: $0)
                     }
                 }
             }
-            .padding(10)
         } else {
             NotAccessRemindersAuthorizationStatusView()
+        }
+    }
+    
+    var todayDidsView: some View {
+        LazyVStack {
+            ForEach(updater.viewModel.dids) {
+                TodayDidsCell(did: $0)
+            }
+        }
+        .frame(maxHeight: .infinity, alignment: .center)
+        .overlay(alignment: .center) {
+            if updater.viewModel.dids.isEmpty {
+                Text(CustomText.didNothing)
+                    .foregroundStyle(.secondary)
+                    .font(.title2)
+                    .fontWeight(.semibold)
+            }
         }
     }
 }
 
 #Preview {
-    var model = TodayViewModel()
-    model.isAccessReminders = true
+    var model = TodayViewUpdater()
+    model.viewModel.isAccessReminders = false
     
-    model.lastestDid = Did(
+    model.viewModel.lastestDid = Did(
         started: Date(),
         finished: Date(),
         content: "Test",
         color: .init(red: 1, green: 0, blue: 0, alpha: 1)
     )
     
-    model.dids = [
+    model.viewModel.dids = [
         Did(
             started: Date(),
             finished: Date(),
@@ -69,7 +99,7 @@ struct TodayRootView: View {
         )
     ]
     
-    model.reminders = [
+    model.viewModel.reminders = [
         Reminder(
             title: "Sample 1",
             dueDate: Date(),
@@ -89,5 +119,5 @@ struct TodayRootView: View {
                 alpha: 1)
         ),
     ]
-    return TodayRootView(model: model)
+    return TodayRootView(updater: model)
 }

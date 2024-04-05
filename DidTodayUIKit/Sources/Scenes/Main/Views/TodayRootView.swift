@@ -31,6 +31,14 @@ struct TodayRootView: View {
             }
             .background(.blue)
             .frame(minHeight: geomtry.size.height)
+            .overlay(alignment: .center) {
+                if updater.viewModel.dids.isEmpty {
+                    Text(CustomText.didNothing)
+                        .foregroundStyle(.secondary)
+                        .font(.title2)
+                        .fontWeight(.semibold)
+                }
+            }
         }
     }
     
@@ -56,14 +64,6 @@ struct TodayRootView: View {
             }
         }
         .frame(maxHeight: .infinity, alignment: .center)
-        .overlay(alignment: .center) {
-            if updater.viewModel.dids.isEmpty {
-                Text(CustomText.didNothing)
-                    .foregroundStyle(.secondary)
-                    .font(.title2)
-                    .fontWeight(.semibold)
-            }
-        }
     }
 }
 

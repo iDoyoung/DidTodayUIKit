@@ -7,7 +7,7 @@ struct TodayRootView: View {
     var body: some View {
         GeometryReader { geomtry in
             ScrollView {
-                VStack(alignment: .leading) {
+                LazyVStack(alignment: .leading) {
                     remindersView
                         .padding(.vertical, 10)
                         .task {
@@ -29,7 +29,6 @@ struct TodayRootView: View {
                         }
                 }
             }
-            .background(.blue)
             .frame(minHeight: geomtry.size.height)
             .overlay(alignment: .center) {
                 if updater.viewModel.dids.isEmpty {
@@ -38,6 +37,21 @@ struct TodayRootView: View {
                         .font(.title2)
                         .fontWeight(.semibold)
                 }
+            }
+            .overlay(alignment: .bottomTrailing) {
+                Button(action: updater.showCreateDid) {
+                    HStack {
+                        Text(CustomText.did)
+                        Image(systemName: "plus")
+                    }
+                }
+                .buttonStyle(.borderedProminent)
+                .controlSize(.large)
+                .shadow(
+                    radius: 3,
+                    y: 1
+                )
+                .padding()
             }
         }
     }

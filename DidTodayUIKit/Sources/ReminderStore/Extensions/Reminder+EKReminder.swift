@@ -11,5 +11,6 @@ extension Reminder {
         self.dueDate = dueDate
         notes = ekReminder.notes
         isComplete = ekReminder.isCompleted
+        themeColor = ekReminder.calendar.cgColor
     }
 }

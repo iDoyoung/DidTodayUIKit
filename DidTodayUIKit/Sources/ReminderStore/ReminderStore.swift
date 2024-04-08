@@ -13,7 +13,7 @@ final class ReminderStore: ReminderStoreProtocol {
     private let ekStore = EKEventStore()
     
     var isAvailable: Bool {
-        EKEventStore.authorizationStatus(for: .reminder) == .authorized
+        EKEventStore.authorizationStatus(for: .reminder) == .fullAccess
     }
     
     func requestAccess() async throws {
@@ -22,7 +22,7 @@ final class ReminderStore: ReminderStoreProtocol {
         case .restricted:
             throw TodayError.accessRestricted
         case .notDetermined:
-            let accessGranted = try await ekStore.requestAccess(to: .reminder)
+            let accessGranted = try await ekStore.requestFullAccessToReminders()
             guard accessGranted else {
                 throw TodayError.accessDenied
             }

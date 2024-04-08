@@ -47,7 +47,7 @@ final class RequestAccessOfReminderUseCaseTests: XCTestCase {
     
     // MARK: - Tests
     func test_requestAccess_shouldCallRequestAccess() async throws {
-        try await sut.excute()
+        try await sut.execute()
         XCTAssertTrue(reminderStoreSpy!.requestAccessCalled)
     }
 }

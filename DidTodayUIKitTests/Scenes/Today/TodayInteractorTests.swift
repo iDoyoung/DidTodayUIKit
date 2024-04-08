@@ -12,6 +12,7 @@ final class TodayInteractorTests: XCTestCase {
         fetchDidsUseCaseSpy = FetchDidsUseCaseSpy()
         
         sut = TodayInteractor(
+            getRemindersAuthorizationStatusUseCase: getRemindersAuthorizationStatusUseCaseSpy,
             requestAccessOfRemindersUseCase: requestAccessRemindersUseCaseSpy,
             readRemindersUseCase: readReminderUseCaseSpy,
             fetchDidsUseCase: fetchDidsUseCaseSpy
@@ -47,15 +48,24 @@ final class TodayInteractorTests: XCTestCase {
     
     //MARK: Test Doubles
     
+    var getRemindersAuthorizationStatusUseCaseSpy: GetRemindersAuthorizationStatusUseCaseSpy!
     var requestAccessRemindersUseCaseSpy: RequestAccessRemindersUseCaseSpy!
     var readReminderUseCaseSpy: ReadReminderUseCaseSpy!
     var fetchDidsUseCaseSpy: FetchDidsUseCaseSpy!
+    
+    class GetRemindersAuthorizationStatusUseCaseSpy: GetRemindersAuthorizationStatusUseCaseProtocol {
+        var called = false
+        
+        func execute() async throws -> Bool {
+            return called
+        }
+    }
     
     class RequestAccessRemindersUseCaseSpy: RequestAccessOfReminderUseCaseProtocol {
         
         var called = false
         
-        func excute() async throws {
+        func execute() async throws {
             called = true
         }
     }

@@ -18,6 +18,9 @@ struct NotAccessRemindersAuthorizationStatusView: View {
     
     var settingButton: some View {
         Button {
+            if let url = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(url)
+            }
         } label: {
             Text("설정")
                 .fontWeight(.semibold)

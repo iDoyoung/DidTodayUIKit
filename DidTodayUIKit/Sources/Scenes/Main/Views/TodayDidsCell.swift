@@ -6,21 +6,22 @@ struct TodayDidsCell: View {
     
     var body: some View {
         HStack {
-            Rectangle()
-                .fill(did.color())
-                .frame(width: 4)
+            RoundedRectangle(cornerRadius: 3)
+                .fill(did.color)
+                .frame(width: 6)
+                .padding(.leading)
+            
             VStack(alignment: .leading) {
                 Text(did.content)
                     .fontWeight(.medium)
                 Text(Date.differenceToString(from: did.started, to: did.finished))
                     .font(.caption)
-                    .foregroundStyle(did.color())
+                    .foregroundStyle(did.color)
                     .padding(.bottom, 12)
                 Divider()
             }
             .padding(.top, 8)
-            .padding(.leading, 6)
+            .frame(alignment: .leading)
         }
     }
 }
-

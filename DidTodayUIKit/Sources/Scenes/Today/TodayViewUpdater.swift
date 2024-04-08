@@ -49,6 +49,11 @@ final class TodayViewUpdater: ObservableObject {
     }
     
     func showCreateDid() {
-        
+        Task { @MainActor in
+            try await interactor?.execute(
+                useCase: .createDid,
+                viewModel: &viewModel
+            )
+        }
     }
 }

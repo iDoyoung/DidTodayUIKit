@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MainRouter {
+struct TodayRouter {
     let showCalendar: () -> Void
     let showCreateDid: (Date?, Date?) -> Void
     let showDoing: () -> Void

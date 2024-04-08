@@ -8,7 +8,7 @@
 import UIKit
 
 protocol FlowCoordinatorDependenciesProtocol {
-    func makeTodayViewController(router: MainRouter) -> UIViewController
+    func makeTodayViewController(router: TodayRouter) -> UIViewController
     func makeDidDetailsViewController(_ did: Did) -> UIViewController
     func makeCalendarViewController(router: CalendarRouter) -> UIViewController
     func makeDetailDayViewController(selected: Date, router: DetailDayRouter) -> UIViewController
@@ -56,14 +56,15 @@ final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
     }
     
     //MARK: Main VC
-    func makeTodayViewController(router: MainRouter) -> UIViewController {
-        let updater = TodayViewUpdater(interactor: makeTodayInteractor())
+    func makeTodayViewController(router: TodayRouter) -> UIViewController {
+        let updater = TodayViewUpdater(interactor: makeTodayInteractor(router: router))
         let viewController = TodayViewController.create(with: updater)
         return viewController
     }
    
-    private func makeTodayInteractor() -> TodayInteractor {
-        return TodayInteractor(getRemindersAuthorizationStatusUseCase: getRemindersAuthorizationStatusUseCase,
+    private func makeTodayInteractor(router: TodayRouter) -> TodayInteractor {
+        return TodayInteractor(router: router,
+                               getRemindersAuthorizationStatusUseCase: getRemindersAuthorizationStatusUseCase,
                                requestAccessOfRemindersUseCase: requestAccessOfReminderUseCase,
                                readRemindersUseCase: readReminderUseCase,
                                fetchDidsUseCase: fetchDidUseCase)

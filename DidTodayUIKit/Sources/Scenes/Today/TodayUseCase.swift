@@ -5,4 +5,5 @@ enum TodayUseCase {
     case requestAccessOfReminders
     case readReminders
     case readDids
+    case createDid
 }

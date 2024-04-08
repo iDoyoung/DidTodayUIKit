@@ -10,7 +10,7 @@ import UIKit
 class ParentUIViewController: UIViewController {
     deinit {
         #if DEBUG
-        print("Succeeded Down RC Of View Controller")
+        print("🗑 Deallocating instance of '\(type(of: self))'")
         #endif
     }
 }

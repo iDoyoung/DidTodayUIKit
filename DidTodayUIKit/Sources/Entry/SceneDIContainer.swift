@@ -8,7 +8,7 @@
 import UIKit
 
 protocol FlowCoordinatorDependenciesProtocol {
-    func makeMainViewController(router: MainRouter) -> UIViewController
+    func makeTodayViewController(router: MainRouter) -> UIViewController
     func makeDidDetailsViewController(_ did: Did) -> UIViewController
     func makeCalendarViewController(router: CalendarRouter) -> UIViewController
     func makeDetailDayViewController(selected: Date, router: DetailDayRouter) -> UIViewController
@@ -25,6 +25,11 @@ final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
     let reminderStore = ReminderStore()
     
     //MARK: Use Case
+    //Did Use Case (Core Data)
+    private var fetchDidUseCase: FetchDidUseCase {
+        return DefaultFetchDidUseCase(storage: didCoreDataStorage)
+    }
+    
     private func makeFetchDidUseCase() -> FetchDidUseCase {
         return DefaultFetchDidUseCase(storage: didCoreDataStorage)
     }
@@ -37,21 +42,31 @@ final class SceneDIContainer: FlowCoordinatorDependenciesProtocol {
         return DefaultDeleteDidUseCase(storage: didCoreDataStorage)
     }
     
+    //Reminder Use Case
+    private var getRemindersAuthorizationStatusUseCase: GetRemindersAuthorizationStatusUseCaseProtocol {
+        GetRemindersAuthorizationStatusUseCase(storage: reminderStore)
+    }
+    
+    private var readReminderUseCase: ReadReminderUseCaseProtocol {
+        ReadReminderUseCase(stroage: reminderStore)
+    }
+    
     private var requestAccessOfReminderUseCase: RequestAccessOfReminderUseCaseProtocol {
         RequestAccessOfReminderUseCase(stroage: reminderStore)
     }
     
     //MARK: Main VC
-    func makeMainViewController(router: MainRouter) -> UIViewController {
-        let viewController = MainViewController.create(with: makeMainViewModel(router: router))
+    func makeTodayViewController(router: MainRouter) -> UIViewController {
+        let updater = TodayViewUpdater(interactor: makeTodayInteractor())
+        let viewController = TodayViewController.create(with: updater)
         return viewController
     }
-    
-    private func makeMainViewModel(router: MainRouter) -> MainViewModelProtocol {
-        let viewModel = MainViewModel(fetchDidUseCase: makeFetchDidUseCase(),
-                                      requestAccessOfReminderUseCase: requestAccessOfReminderUseCase,
-                                      router: router)
-        return viewModel
+   
+    private func makeTodayInteractor() -> TodayInteractor {
+        return TodayInteractor(getRemindersAuthorizationStatusUseCase: getRemindersAuthorizationStatusUseCase,
+                               requestAccessOfRemindersUseCase: requestAccessOfReminderUseCase,
+                               readRemindersUseCase: readReminderUseCase,
+                               fetchDidsUseCase: fetchDidUseCase)
     }
     
     //MARK: Did Details

@@ -16,11 +16,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         assert(UserDefaults.standard.object(forKey: "Doing") == nil, "Do not have User Defaults data of key: \"Doing\"")
         window = UIWindow(windowScene: windowScene)
-        let initialViewController = UINavigationController()
-        window?.rootViewController = initialViewController
+        
+        let todayNavigationController = UINavigationController()
+        window?.rootViewController = TabBarController()
         window?.makeKeyAndVisible()
-        coordinator = MainFlowCoordinator(navigationController: initialViewController, dependencies: SceneDIContainer())
-        coordinator?.start()
     }
 }
 

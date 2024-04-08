@@ -2,26 +2,26 @@ import UIKit
 
 final class TabBarController: UITabBarController {
     
+    var dependency = SceneDIContainer()
+    
     init() {
         super.init(nibName: nil, bundle: nil)
-        let todayController = UINavigationController(rootViewController: TodayViewController())
-        let emptyController = UIViewController()
+        let todayNaviagationController = UINavigationController()
         
-        todayController.tabBarItem = UITabBarItem(
+        todayNaviagationController.tabBarItem = UITabBarItem(
             title: "First",
             image: UIImage(systemName: "house"),
             selectedImage: nil
         )
     
-        emptyController.tabBarItem = UITabBarItem(
-            title: "Calendar",
-            image: nil,
-            selectedImage: nil
-        )
-        
-        self.viewControllers = [todayController, emptyController]
+        self.viewControllers = [todayNaviagationController]
         self.tabBar.tintColor = .label
         self.tabBar.unselectedItemTintColor = .systemGray
+        
+        var todayCoordinator = MainFlowCoordinator(navigationController: todayNaviagationController,
+                                              dependencies: dependency)
+        
+        todayCoordinator.start()
     }
     
     required init?(coder: NSCoder) {

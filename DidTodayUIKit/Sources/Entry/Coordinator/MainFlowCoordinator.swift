@@ -19,16 +19,16 @@ final class MainFlowCoordinator: Coordinator {
     }
     
     func start() {
-        showMain()
+        showToday()
     }
     
-    private func showMain() {
+    private func showToday() {
         let router = MainRouter(showCalendar: showCalendarCoordinator,
                                 showCreateDid: showCreateDid,
                                 showDoing: showDoingCoordinator,
                                 showInformation: showAboutCoordinator,
                                 showDidDetails: showDidDetails)
-        let viewController = dependencies.makeMainViewController(router: router)
+        let viewController = dependencies.makeTodayViewController(router: router)
         navigationController?.pushViewController(viewController, animated: false)
     }
     

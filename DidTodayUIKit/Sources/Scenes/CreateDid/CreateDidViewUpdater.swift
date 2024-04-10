@@ -1,7 +1,11 @@
-import Foundation
+import SwiftUI
 
 struct CreateDidViewModel {
-    
+    var isTimer = false
+    var title: String = ""
+    var startedTime: Date = Date()
+    var finishedTime: Date = Date()
+    var selectedColor: Color = .green
 }
 
 final class CreateDidViewUpdater: ObservableObject {

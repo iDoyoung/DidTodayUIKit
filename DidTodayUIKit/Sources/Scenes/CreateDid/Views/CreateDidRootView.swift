@@ -2,10 +2,7 @@ import SwiftUI
 
 struct CreateDidRootView: View {
     
-    @State var selectedColor: Color = .green
-    @State var title: String = ""
-    @State var startTime: Date = Date()
-    @State var endTime: Date = Date()
+    @ObservedObject var updater: CreateDidViewUpdater
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -21,7 +18,7 @@ struct CreateDidRootView: View {
                     .font(.system(size: 40))
             })
             .buttonStyle(.borderedProminent)
-            .tint(selectedColor)
+            .tint(updater.viewModel.selectedColor)
             .padding(.vertical, 2)
             
             //Current Date
@@ -37,7 +34,7 @@ struct CreateDidRootView: View {
                     .font(.system(size: 12,
                                   weight: .semibold))
                     .padding()
-                DatePicker("", selection: $startTime,
+                DatePicker("", selection: $updater.viewModel.startedTime,
                            displayedComponents: [.hourAndMinute])
                 Spacer()
             }
@@ -51,7 +48,7 @@ struct CreateDidRootView: View {
                     .font(.system(size: 12,
                                   weight: .semibold))
                     .padding()
-                DatePicker("", selection: $endTime,
+                DatePicker("", selection: $updater.viewModel.finishedTime,
                            displayedComponents: [.hourAndMinute])
                 Spacer()
             }
@@ -59,7 +56,7 @@ struct CreateDidRootView: View {
             .clipShape(RoundedRectangle(cornerRadius: 10.0))
             .padding(.vertical, 2)
             
-            TextField("Title", text: $title)
+            TextField("Title", text: $updater.viewModel.title)
                 .frame(height: 50)
                 .padding(.vertical, 2)
                 .padding(.horizontal)
@@ -72,7 +69,7 @@ struct CreateDidRootView: View {
             
             HStack {
                 Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
-                    Image(systemName: "chevron.backward")
+                    Image(systemName: "xmark")
                         .frame(width: 40, height: 40)
                         .background(Color(uiColor: .systemBackground))
                         .clipShape(Circle())
@@ -103,5 +100,6 @@ struct CreateDidRootView: View {
 }
 
 #Preview {
-    CreateDidRootView()
+    var updater = CreateDidViewUpdater()
+    return CreateDidRootView(updater: updater)
 }

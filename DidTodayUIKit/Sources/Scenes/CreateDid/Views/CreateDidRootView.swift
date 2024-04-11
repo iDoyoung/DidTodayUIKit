@@ -3,6 +3,7 @@ import SwiftUI
 struct CreateDidRootView: View {
     
     @ObservedObject var updater: CreateDidViewUpdater
+    @State private var showAlert = false
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -68,7 +69,9 @@ struct CreateDidRootView: View {
             Spacer()
             
             HStack {
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                Button(action: {
+                    showAlert = true
+                }) {
                     Image(systemName: "xmark")
                         .frame(width: 40, height: 40)
                         .background(Color(uiColor: .systemBackground))
@@ -79,6 +82,17 @@ struct CreateDidRootView: View {
                     radius: 3,
                     y: 1
                 )
+                .alert(isPresented: $showAlert) {
+                    Alert(
+                        title: Text(CustomText.discardToCreateDidTitle),
+                        message: Text(CustomText.discardToCreateDidMessage),
+                        primaryButton: .destructive(
+                            Text(CustomText.okay),
+                            action: updater.cancel
+                        ),
+                        secondaryButton: .cancel()
+                    )
+                }
                 
                 Spacer()
                 

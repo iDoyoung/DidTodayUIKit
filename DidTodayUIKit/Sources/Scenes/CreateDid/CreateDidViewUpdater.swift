@@ -18,4 +18,16 @@ final class CreateDidViewUpdater: ObservableObject {
     init(interactor: CreateDidInteractor? = nil) {
         self.interactor = interactor
     }
+    
+    func cancel()  {
+        Task { @MainActor in
+            try await interactor?.execute(
+                action: .cancel,
+                with: &viewModel
+            )
+        }
+    }
+    
+    func create() async throws {
+    }
 }

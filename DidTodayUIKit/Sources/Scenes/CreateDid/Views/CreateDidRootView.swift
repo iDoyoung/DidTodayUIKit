@@ -4,20 +4,23 @@ struct CreateDidRootView: View {
     
     @ObservedObject var updater: CreateDidViewUpdater
     @State private var showAlert = false
+    var presentColorPicker: () -> Void
     
     var body: some View {
         VStack(alignment: .leading) {
             Spacer()
             
             //Color Picker
-            Button(action: {}, label: {
-                Text("Set Color")
-                    .font(.system(size: 40,
-                                  weight: .black))
-                Image(systemName: "paintpalette")
-                    .frame( alignment: .trailing)
-                    .font(.system(size: 40))
-            })
+            Button(
+                action: presentColorPicker,
+                label: {
+                    Text("Set Color")
+                        .font(.system(size: 40,
+                                      weight: .black))
+                    Image(systemName: "paintpalette")
+                        .frame( alignment: .trailing)
+                        .font(.system(size: 40))
+                })
             .buttonStyle(.borderedProminent)
             .tint(updater.viewModel.selectedColor)
             .padding(.vertical, 2)
@@ -115,5 +118,6 @@ struct CreateDidRootView: View {
 
 #Preview {
     var updater = CreateDidViewUpdater()
-    return CreateDidRootView(updater: updater)
+    return CreateDidRootView(updater: updater, 
+                             presentColorPicker: {})
 }

@@ -15,13 +15,17 @@ final class CreateDidViewController: ParentUIViewController {
     var updater: CreateDidViewUpdater?
     var hostingController: UIHostingController<CreateDidRootView>!
     
+    // MARK: -
+    private var feedbackGenerator: UIFeedbackGenerator?
+    
     //MARK: - Life cycle
     static func create(with updater: CreateDidViewUpdater) -> CreateDidViewController {
         let viewController = CreateDidViewController()
         viewController.updater = updater
         viewController.hostingController = UIHostingController(rootView: CreateDidRootView(
             updater: updater,
-            presentColorPicker: viewController.showColorPicker)
+            presentColorPicker: viewController.showColorPicker,
+            occurErrorFeedBack: viewController.occurFeedback)
         )
         
         return viewController
@@ -34,10 +38,20 @@ final class CreateDidViewController: ParentUIViewController {
         view.addSubview(hostingController.view)
         hostingController.didMove(toParent: self)
         
+        configureFeedbackGenerator()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
+    }
+    
+    private func configureFeedbackGenerator() {
+         feedbackGenerator = UINotificationFeedbackGenerator()
+         feedbackGenerator?.prepare()
+     }
+    
+    private func occurFeedback() {
+        (feedbackGenerator as? UINotificationFeedbackGenerator)?.notificationOccurred(.error)
     }
     
     private func showColorPicker() {

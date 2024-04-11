@@ -4,7 +4,10 @@ struct CreateDidRootView: View {
     
     @ObservedObject var updater: CreateDidViewUpdater
     @State private var showAlert = false
+    @State private var isShakedTextField = false
+    
     var presentColorPicker: () -> Void
+    var occurErrorFeedBack: () -> Void
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -67,7 +70,7 @@ struct CreateDidRootView: View {
                 .background(Color.gray.opacity(0.1))
                 .clipShape(RoundedRectangle(cornerRadius: 10.0))
                 .tint(Color(uiColor: .label))
-                
+                .offset(x: isShakedTextField ? 5: 0)
             
             Spacer()
             
@@ -99,7 +102,7 @@ struct CreateDidRootView: View {
                 
                 Spacer()
                 
-                Button(action: {}) {
+                Button(action: updater.viewModel.title.isEmpty ? failCreate: { }) {
                     Text(CustomText.create)
                         .fontWeight(.bold)
                 }
@@ -114,10 +117,26 @@ struct CreateDidRootView: View {
         }
         .padding(.horizontal, 20)
     }
+    
+    private func failCreate() {
+        occurErrorFeedBack()
+        isShakedTextField = true
+        
+        withAnimation(Animation.spring(
+            response: 0.1,
+            dampingFraction: 0.1,
+            blendDuration: 0.4
+        )) {
+            isShakedTextField = false
+        }
+    }
 }
 
 #Preview {
     var updater = CreateDidViewUpdater()
-    return CreateDidRootView(updater: updater, 
-                             presentColorPicker: {})
+    return CreateDidRootView(
+        updater: updater,
+        presentColorPicker: {},
+        occurErrorFeedBack: {}
+    )
 }

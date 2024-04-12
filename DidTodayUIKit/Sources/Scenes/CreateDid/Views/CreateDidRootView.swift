@@ -23,9 +23,10 @@ struct CreateDidRootView: View {
                     Image(systemName: "paintpalette")
                         .frame( alignment: .trailing)
                         .font(.system(size: 40))
-                })
+                }
+            )
             .buttonStyle(.borderedProminent)
-            .tint(updater.viewModel.selectedColor)
+            .tint(Color(uiColor: updater.viewModel.selectedColor))
             .padding(.vertical, 2)
             
             //Current Date
@@ -102,7 +103,7 @@ struct CreateDidRootView: View {
                 
                 Spacer()
                 
-                Button(action: updater.viewModel.title.isEmpty ? failCreate: { }) {
+                Button(action: updater.viewModel.title.isEmpty ? failCreate: successCreate) {
                     Text(CustomText.create)
                         .fontWeight(.bold)
                 }
@@ -116,6 +117,13 @@ struct CreateDidRootView: View {
             }
         }
         .padding(.horizontal, 20)
+    }
+    
+    private func successCreate() {
+        Task {
+            try await updater.create()
+        }
+        updater.cancel()
     }
     
     private func failCreate() {

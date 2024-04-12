@@ -64,6 +64,6 @@ final class CreateDidViewController: ParentUIViewController {
 
 extension CreateDidViewController: UIColorPickerViewControllerDelegate {
     func colorPickerViewController(_ viewController: UIColorPickerViewController, didSelect color: UIColor, continuously: Bool) {
-        updater?.viewModel.selectedColor = Color(uiColor: color)
+        updater?.viewModel.selectedColor = color
     }
 }

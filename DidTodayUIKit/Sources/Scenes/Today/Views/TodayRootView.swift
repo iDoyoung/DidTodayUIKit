@@ -10,23 +10,8 @@ struct TodayRootView: View {
                 LazyVStack(alignment: .leading) {
                     remindersView
                         .padding(.vertical, 10)
-                        .task {
-                            do {
-                                try await updater.getIsAccessOfReminders()
-                                try await updater.readReminders()
-                            } catch {
-                                
-                            }
-                        }
                     
                     todayDidsView
-                        .task {
-                            do {
-                                try await updater.readDids()
-                            } catch {
-                                
-                            }
-                        }
                 }
             }
             .frame(minHeight: geomtry.size.height)
@@ -52,6 +37,15 @@ struct TodayRootView: View {
                     y: 1
                 )
                 .padding()
+            }
+        }
+        .task {
+            do {
+                try await updater.getIsAccessOfReminders()
+                try await updater.readReminders()
+                try await updater.readDids()
+            } catch {
+                
             }
         }
     }

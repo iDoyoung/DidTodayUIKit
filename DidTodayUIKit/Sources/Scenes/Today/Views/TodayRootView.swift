@@ -2,7 +2,9 @@ import SwiftUI
 
 struct TodayRootView: View {
    
-    @ObservedObject var updater: TodayViewUpdater
+    @State var reminders: FetchedReminders
+    @State var dids: FetchedDids
+    var action: TodayAction
     
     var body: some View {
         GeometryReader { geomtry in
@@ -16,7 +18,7 @@ struct TodayRootView: View {
             }
             .frame(minHeight: geomtry.size.height)
             .overlay(alignment: .center) {
-                if updater.viewModel.dids.isEmpty {
+                if dids.items.isEmpty {
                     Text(CustomText.didNothing)
                         .foregroundStyle(.secondary)
                         .font(.title2)
@@ -24,7 +26,7 @@ struct TodayRootView: View {
                 }
             }
             .overlay(alignment: .bottomTrailing) {
-                Button(action: updater.showCreateDid) {
+                Button(action: action.tapCreate) {
                     HStack {
                         Text(CustomText.did)
                         Image(systemName: "plus")
@@ -39,23 +41,14 @@ struct TodayRootView: View {
                 .padding()
             }
         }
-        .task {
-            do {
-                try await updater.getIsAccessOfReminders()
-                try await updater.readReminders()
-                try await updater.readDids()
-            } catch {
-                
-            }
-        }
     }
     
     @ViewBuilder
     var remindersView: some View {
-        if updater.viewModel.isAccessReminders {
+        if reminders.isAccessReminders {
             ScrollView(.horizontal) {
                 LazyHStack {
-                    ForEach(updater.viewModel.reminders) {
+                    ForEach(reminders.items) {
                         ReminderCell(reminder: $0)
                     }
                 }
@@ -67,65 +60,12 @@ struct TodayRootView: View {
     
     var todayDidsView: some View {
         LazyVStack {
-            ForEach(updater.viewModel.dids) {
+            ForEach(dids.items) {
                 TodayDidsCell(did: $0)
+                    .onTapGesture {
+                    }
             }
         }
         .frame(maxHeight: .infinity, alignment: .center)
     }
-}
-
-#Preview {
-    var model = TodayViewUpdater()
-    model.viewModel.isAccessReminders = false
-    
-    model.viewModel.lastestDid = Did(
-        started: Date(),
-        finished: Date(),
-        content: "Test",
-        color: .init(red: 1, green: 0, blue: 0, alpha: 1)
-    )
-    
-    model.viewModel.dids = [
-        Did(
-            started: Date(),
-            finished: Date(),
-            content: "Frist Did",
-            color: .init(red: 0, green: 1, blue: 0, alpha: 1)
-        ),
-        Did(
-            started: Date(),
-            finished: Date(),
-            content: "Second Did",
-            color: .init(red: 0, green: 0, blue: 1, alpha: 1)
-        ),
-        Did(
-            started: Date(),
-            finished: Date(),
-            content: "Third Did",
-            color: .init(red: 1, green: 0, blue: 1, alpha: 1)
-        )
-    ]
-    
-    model.viewModel.reminders = [
-        Reminder(
-            title: "Sample 1",
-            dueDate: Date(),
-            themeColor: CGColor(
-                red: 0.5,
-                green: 0.5,
-                blue: 0.5,
-                alpha: 1)
-        ),
-        Reminder(
-            title: "Sample 2",
-            dueDate: Date(),
-            themeColor: CGColor(
-                red: 0.5,
-                green: 1,
-                blue: 0.5,
-                alpha: 1)
-        ),
-    ]
-    return TodayRootView(updater: model)
 }

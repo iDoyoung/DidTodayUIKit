@@ -8,7 +8,8 @@
 import Foundation
 import SwiftUI
 
-struct Did: Identifiable, Equatable, Hashable {
+@Observable
+final class Did: Identifiable, Equatable {
     
     let id: UUID
     let withTimer: Bool

@@ -2,20 +2,19 @@ import SwiftUI
 
 struct CreateDidRootView: View {
     
-    @ObservedObject var updater: CreateDidViewUpdater
+    @State var creating: Did
+    @State var error: CreateDidError
     @State private var showAlert = false
-    @State private var isShakedTextField = false
     
-    var presentColorPicker: () -> Void
-    var occurErrorFeedBack: () -> Void
-    
+    var action: CreateDidAction
+   
     var body: some View {
         VStack(alignment: .leading) {
             Spacer()
             
             //Color Picker
             Button(
-                action: presentColorPicker,
+                action: action.tapColorPickerButton,
                 label: {
                     Text("Set Color")
                         .font(.system(size: 40,
@@ -26,7 +25,7 @@ struct CreateDidRootView: View {
                 }
             )
             .buttonStyle(.borderedProminent)
-            .tint(Color(uiColor: updater.viewModel.selectedColor))
+            .tint(Color(uiColor: creating.uiColor))
             .padding(.vertical, 2)
             
             //Current Date
@@ -42,7 +41,7 @@ struct CreateDidRootView: View {
                     .font(.system(size: 12,
                                   weight: .semibold))
                     .padding()
-                DatePicker("", selection: $updater.viewModel.startedTime,
+                DatePicker("", selection: $creating.started,
                            displayedComponents: [.hourAndMinute])
                 Spacer()
             }
@@ -56,7 +55,7 @@ struct CreateDidRootView: View {
                     .font(.system(size: 12,
                                   weight: .semibold))
                     .padding()
-                DatePicker("", selection: $updater.viewModel.finishedTime,
+                DatePicker("", selection: $creating.finished,
                            displayedComponents: [.hourAndMinute])
                 Spacer()
             }
@@ -64,14 +63,14 @@ struct CreateDidRootView: View {
             .clipShape(RoundedRectangle(cornerRadius: 10.0))
             .padding(.vertical, 2)
             
-            TextField("Title", text: $updater.viewModel.title)
+            TextField("Title", text: $creating.content)
                 .frame(height: 50)
                 .padding(.vertical, 2)
                 .padding(.horizontal)
                 .background(Color.gray.opacity(0.1))
                 .clipShape(RoundedRectangle(cornerRadius: 10.0))
                 .tint(Color(uiColor: .label))
-                .offset(x: isShakedTextField ? 5: 0)
+                .offset(x: error.type == .textFieldIsEmpty ? 5: 0)
             
             Spacer()
             
@@ -95,7 +94,7 @@ struct CreateDidRootView: View {
                         message: Text(CustomText.discardToCreateDidMessage),
                         primaryButton: .destructive(
                             Text(CustomText.okay),
-                            action: updater.cancel
+                            action: action.close
                         ),
                         secondaryButton: .cancel()
                     )
@@ -103,7 +102,7 @@ struct CreateDidRootView: View {
                 
                 Spacer()
                 
-                Button(action: updater.viewModel.title.isEmpty ? failCreate: successCreate) {
+                Button(action: action.tapCreateButton) {
                     Text(CustomText.create)
                         .fontWeight(.bold)
                 }
@@ -118,33 +117,4 @@ struct CreateDidRootView: View {
         }
         .padding(.horizontal, 20)
     }
-    
-    private func successCreate() {
-        Task {
-            try await updater.create()
-        }
-        updater.cancel()
-    }
-    
-    private func failCreate() {
-        occurErrorFeedBack()
-        isShakedTextField = true
-        
-        withAnimation(Animation.spring(
-            response: 0.1,
-            dampingFraction: 0.1,
-            blendDuration: 0.4
-        )) {
-            isShakedTextField = false
-        }
-    }
-}
-
-#Preview {
-    var updater = CreateDidViewUpdater()
-    return CreateDidRootView(
-        updater: updater,
-        presentColorPicker: {},
-        occurErrorFeedBack: {}
-    )
 }

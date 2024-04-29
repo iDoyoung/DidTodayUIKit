@@ -8,29 +8,46 @@
 import UIKit
 import SwiftUI
 import Combine
+import os
 
 final class CreateDidViewController: ParentUIViewController {
     
-    //MARK: - Components
-    var updater: CreateDidViewUpdater?
-    var hostingController: UIHostingController<CreateDidRootView>!
+    typealias Action = CreateDidAction
     
-    // MARK: -
+    //MARK: - Properties
+    
+    var did: Did = Did(
+        started: .init(),
+        finished: .init(),
+        content: "",
+        color: .green
+    )
+    
+    var error = CreateDidError()
+    var action = Action()
+    
+    var createDidUseCase: CreateDidUseCase?
+    private var cancellableBag = [AnyCancellable]()
+    
+    // UI
     private var feedbackGenerator: UIFeedbackGenerator?
     
-    //MARK: - Life cycle
-    static func create(with updater: CreateDidViewUpdater) -> CreateDidViewController {
-        let viewController = CreateDidViewController()
-        viewController.updater = updater
-        viewController.hostingController = UIHostingController(rootView: CreateDidRootView(
-            updater: updater,
-            presentColorPicker: viewController.showColorPicker,
-            occurErrorFeedBack: viewController.occurFeedback)
+    lazy var rootView: CreateDidRootView = {
+        CreateDidRootView(
+            creating: did, 
+            error: error,
+            action: action
         )
-        
-        return viewController
-    }
+    }()
     
+    lazy var hostingController: UIHostingController<CreateDidRootView>! = {
+        UIHostingController(rootView: rootView)
+    }()
+    
+    //MARK: - Methods
+    
+    
+    //View Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         addChild(hostingController)
@@ -38,20 +55,68 @@ final class CreateDidViewController: ParentUIViewController {
         view.addSubview(hostingController.view)
         hostingController.didMove(toParent: self)
         
-        configureFeedbackGenerator()
+        buildFeedbackGenerator()
+        buildCreateAction()
+        buildColorPickerAction()
+        buildClosing()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
     
-    private func configureFeedbackGenerator() {
-         feedbackGenerator = UINotificationFeedbackGenerator()
-         feedbackGenerator?.prepare()
-     }
+    private func buildCreateAction() {
+        action.$isTapCreateButton
+            .sink { [weak self] in
+                guard let self else { return }
+                
+                if $0 {
+                    logger.log("Text: \(did.content)")
+                    logger.debug("Use Case \(String(describing: createDidUseCase))")
+                    if did.content.isEmpty {
+                        error.type = .textFieldIsEmpty
+                        occurFeedback()
+                        withAnimation(Animation.spring(
+                            response: 0.1,
+                            dampingFraction: 0.1,
+                            blendDuration: 0.4
+                        )) {
+                            self.error.type = .none
+                        }
+                    } else {
+                        Task {
+                            try await self.createDidUseCase?.execute(self.did)
+                            self.logger.log("Success Create Did")
+                        }
+                        dismiss(animated: true)
+                        logger.log("Dismiss, Success Create Did")
+                    }
+                }
+            }
+            .store(in: &cancellableBag)
+    }
     
-    private func occurFeedback() {
-        (feedbackGenerator as? UINotificationFeedbackGenerator)?.notificationOccurred(.error)
+    private func buildColorPickerAction() {
+        action.$isTapColorPickerButton
+            .sink { [weak self] in
+                guard let self else { return }
+                if $0 {
+                    logger.log("Tap Color Picker")
+                    showColorPicker()
+                }
+            }
+            .store(in: &cancellableBag)
+    }
+    
+    private func buildClosing() {
+        action.$isClose
+            .sink { [weak self] in
+                guard let self else { return }
+                if $0 {
+                    self.dismiss(animated: true)
+                }
+            }
+            .store(in: &cancellableBag)
     }
     
     private func showColorPicker() {
@@ -60,10 +125,19 @@ final class CreateDidViewController: ParentUIViewController {
         colorPickerViewController.delegate = self
         present(colorPickerViewController, animated: true)
     }
+    
+    private func buildFeedbackGenerator() {
+        feedbackGenerator = UINotificationFeedbackGenerator()
+        feedbackGenerator?.prepare()
+    }
+    
+    private func occurFeedback() {
+        (feedbackGenerator as? UINotificationFeedbackGenerator)?.notificationOccurred(.error)
+    }
 }
 
 extension CreateDidViewController: UIColorPickerViewControllerDelegate {
     func colorPickerViewController(_ viewController: UIColorPickerViewController, didSelect color: UIColor, continuously: Bool) {
-        updater?.viewModel.selectedColor = color
+        did.uiColor = color
     }
 }

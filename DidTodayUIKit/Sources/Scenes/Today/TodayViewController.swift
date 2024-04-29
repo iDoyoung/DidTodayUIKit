@@ -12,7 +12,6 @@ import os
 
 final class TodayViewController: ParentUIViewController {
    
-    let logger = Logger()
     // MARK: - Properties
     
     var fetchedReminders = FetchedReminders()
@@ -22,13 +21,13 @@ final class TodayViewController: ParentUIViewController {
     private var cancellableBag = [AnyCancellable]()
     
     // UI
-    lazy var rootView: TodayRootView = {
+    private(set) lazy var rootView: TodayRootView = {
         TodayRootView(reminders: fetchedReminders,
                       dids: fetchedDids, 
                       action: action)
     }()
     
-    lazy var hostingController: UIHostingController<TodayRootView>! = {
+    private(set) lazy var hostingController: UIHostingController<TodayRootView>! = {
         UIHostingController(rootView: rootView)
     }()
     
@@ -40,8 +39,13 @@ final class TodayViewController: ParentUIViewController {
     private func buildCreateAction() {
         action.$isTapCreate
             .sink { [weak self] in
+                guard let self else { return }
                 if $0 {
-                    self?.logger.debug("Tap Create Button")
+                    self.logger.debug("Tap Create Button")
+                    let destination = CreateDidViewController()
+                    destination.createDidUseCase = DefaultCreateDidUseCase(storage: DidCoreDataStorage())
+                    destination.modalPresentationStyle = .fullScreen
+                    self.present(destination, animated: true)
                 }
             }
             .store(in: &cancellableBag)
@@ -102,9 +106,5 @@ extension TodayViewController {
     
     func requestReadDids() async throws -> [Did] {
         try await fetchDidsUseCase.execute()
-    }
-    
-    func presentCreate() {
-    
     }
 }

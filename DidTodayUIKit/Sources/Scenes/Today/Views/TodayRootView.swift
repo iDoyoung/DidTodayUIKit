@@ -60,9 +60,10 @@ struct TodayRootView: View {
     
     var todayDidsView: some View {
         LazyVStack {
-            ForEach(dids.items) {
-                TodayDidsCell(did: $0)
-                    .onTapGesture {
+            ForEach(dids.items) { did in
+                TodayDidsCell(did: did)
+                    .onTapGesture { _ in
+                        action.selectDid(did)
                     }
             }
         }

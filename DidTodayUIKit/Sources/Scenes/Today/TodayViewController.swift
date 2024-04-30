@@ -51,6 +51,17 @@ final class TodayViewController: ParentUIViewController {
             .store(in: &cancellableBag)
     }
     
+    private func buildDetailAction() {
+        action.$selectedDid
+            .sink { [weak self] did in
+                guard let did else { return }
+                let destination = DidDetailsViewController()
+                destination.did = did
+                self?.navigationController?.pushViewController(destination, animated: true)
+            }
+            .store(in: &cancellableBag)
+    }
+    
     // View Life Cycle
     
     override func viewDidLoad() {
@@ -62,6 +73,7 @@ final class TodayViewController: ParentUIViewController {
         hostingController.didMove(toParent: self)
         
         buildCreateAction()
+        buildDetailAction()
     }
     
     override func viewIsAppearing(_ animated: Bool) {

@@ -2,12 +2,14 @@ import SwiftUI
 
 struct DayListCellView: View {
     
-    @Binding var color: Color
-    @Binding var dids: [Did]
-    
+    @State var dids: [Did]
     @State var month: String
     @State var day: String
     @State var year: String
+    
+    var color: Color {
+        dids.first?.color ?? Color(uiColor: .systemBackground)
+    }
     
     var body: some View {
         HStack {
@@ -57,7 +59,7 @@ struct DayListCellView: View {
                 .padding(.top)
         }
         .padding()
-        .background(color)
+        .background(color.opacity(0.3))
         .clipShape(RoundedRectangle(cornerRadius: 25))
     }
 }
@@ -74,8 +76,7 @@ struct DayListCellView: View {
     ]
     
     return DayListCellView(
-        color: $color,
-        dids: $dids,
+        dids: dids,
         month: "May",
         day: "5",
         year: "2024"

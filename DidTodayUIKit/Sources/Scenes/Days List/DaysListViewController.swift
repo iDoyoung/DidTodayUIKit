@@ -1,29 +1,35 @@
-//
-//  DaysListViewController.swift
-//  DidTodayUIKit
-//
-//  Created by Doyoung on 5/14/24.
-//
-
 import UIKit
+import SwiftUI
+import os
 
-class DaysListViewController: UIViewController {
+final class DaysListViewController: ParentUIViewController {
 
+    // UI
+    private lazy var rootView: DaysListRootView = {
+        DaysListRootView(items: getDaysListItem())
+    }()
+    
+    private lazy var hostingController: UIHostingController<DaysListRootView>! = {
+        UIHostingController(rootView: rootView)
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        addChild(hostingController)
+        hostingController.view.frame = view.frame
+        view.addSubview(hostingController.view)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    var dids: [Did] = []
+    
+    private func getDaysListItem() -> [DaysListItem] {
+        return dids.reduce(into: [DaysListItem]()) { partialResult, did in
+            if let existing = partialResult.firstIndex(where: { Calendar.current.isDate($0.date, inSameDayAs: did.started) }) {
+                partialResult[existing].dids.append(did)
+            } else {
+                partialResult.append(DaysListItem(
+                    date: Calendar.current.startOfDay(for: did.started), dids: [did]))
+            }
+        }
     }
-    */
-
 }

@@ -1,8 +1,9 @@
-//
-//  DaysListItem.swift
-//  DidTodayUIKit
-//
-//  Created by Doyoung on 5/14/24.
-//
-
 import Foundation
+   
+struct DaysListItem {
+    var date: Date
+    var dids: [Did]
+    var count: Int {
+        dids.count
+    }
+}

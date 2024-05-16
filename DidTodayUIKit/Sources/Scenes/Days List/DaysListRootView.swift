@@ -10,17 +10,21 @@ import SwiftUI
 struct DaysListRootView: View {
     
     @State var items: [DaysListItem]
+    var action: DaysListAction
     
     var body: some View {
         ScrollView {
             LazyVStack {
-                ForEach(items, id: \.date) {
+                ForEach(items, id: \.date) { day in
                     DayListCellView(
-                        dids: $0.dids,
-                        month: $0.date.month,
-                        day: $0.date.day,
-                        year: $0.date.year
+                        dids: day.dids,
+                        month: day.date.month,
+                        day: day.date.day,
+                        year: day.date.year
                     )
+                    .onTapGesture {
+                        action.selectDate(day.date)
+                    }
                 }
             }
         }
@@ -63,5 +67,5 @@ struct DaysListRootView: View {
         )
     ]
     
-    return DaysListRootView(items: mockItems)
+    return DaysListRootView(items: mockItems, action: .init())
 }

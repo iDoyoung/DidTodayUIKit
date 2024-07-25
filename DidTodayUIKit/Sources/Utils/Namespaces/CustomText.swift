@@ -81,4 +81,5 @@ enum CustomText {
     //MARK: - For Global
     static let cancel = "Cancel".localized
     static let okay = "OK".localized
+    static let did = "DID"
 }

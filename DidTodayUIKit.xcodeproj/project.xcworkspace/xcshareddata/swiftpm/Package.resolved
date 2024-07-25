@@ -19,15 +19,6 @@
       }
     },
     {
-      "identity" : "needle",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/uber/needle",
-      "state" : {
-        "branch" : "master",
-        "revision" : "8828a6509818e992b8c0cad2af2dfab234ea6f34"
-      }
-    },
-    {
       "identity" : "pinlayout",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/layoutBox/PinLayout",

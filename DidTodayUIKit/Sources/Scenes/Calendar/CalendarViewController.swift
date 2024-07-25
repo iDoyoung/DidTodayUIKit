@@ -20,23 +20,14 @@ final class CalendarViewController: ParentUIViewController {
     //MARK: Components
     var viewModel: CalendarViewModelProtocol?
     private var cancellableBag = Set<AnyCancellable>()
-    private var dataSource: UICollectionViewDiffableDataSource<Section, DidsOfDayItemViewModel>?
     
     //MARK: UI Properties
     var contentView = CalendarContainerView()
     
     //MARK: - Methods
-    //MARK: Life Cycle
-    static func create(with viewModel: CalendarViewModelProtocol) -> CalendarViewController {
-        let viewController = CalendarViewController()
-        viewController.viewModel = viewModel
-        return viewController
-    }
-    
+  
     override func loadView() {
-        contentView.showDetailButton.addTarget(self, action: #selector(showDetail), for: .touchUpInside)
         view = contentView
-        configureDataSource(with: contentView.collectionView)
     }
     
     override func viewDidLoad() {
@@ -84,15 +75,6 @@ final class CalendarViewController: ParentUIViewController {
                 contentView.calendarView.setContent(calendarContent)
             }
             .store(in: &cancellableBag)
-        
-        // Updating UI Of Collection View
-        viewModel.displayedItemsOfDidSelectedDay
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] items in
-                self?.contentView.showDetailButton.isEnabled = !items.isEmpty
-                self?.setSnapshot(items)
-            }
-            .store(in: &cancellableBag)
     }
 }
 
@@ -120,55 +102,5 @@ extension CalendarViewController {
     
     private func scrollToToday() {
         contentView.calendarView.scroll(toMonthContaining: Date(), scrollPosition: .lastFullyVisiblePosition, animated: false)
-    }
-}
-
-//MARK: - Collection View
-extension CalendarViewController {
-     
-    private func configureDataSource(with collectionView: UICollectionView) {
-        let didTitleCellRegistration = createDidTitleCellRegistration()
-//        let didsOfSelectedSupplementaryRegistration = createDidsOfSelectedSupplementaryRegistration()
-        dataSource = UICollectionViewDiffableDataSource<Section, DidsOfDayItemViewModel>(
-            collectionView: collectionView,
-            cellProvider: { collectionView, indexPath, itemIdentifier in
-                collectionView.dequeueConfiguredReusableCell(
-                    using: didTitleCellRegistration,
-                    for: indexPath,
-                    item: itemIdentifier)
-            })
-        
-//        dataSource?.supplementaryViewProvider = { supplementaryView, elementKind, indexPath in
-//            collectionView.dequeueConfiguredReusableSupplementary(using: didsOfSelectedSupplementaryRegistration, for: indexPath)
-//        }
-    }
-    
-    //MARK: Create Registration
-//    private func createDidsOfSelectedSupplementaryRegistration() -> UICollectionView.SupplementaryRegistration<DetailDidSupplementaryView> {
-//        UICollectionView.SupplementaryRegistration(elementKind: CalendarContainerView.sectionHeaderElementKind) { [weak self] supplementaryView, elementKind, indexPath in
-//            guard let self = self,
-//                  let viewModel = self.viewModel else { return }
-//            ///Binding with ViewModel
-//            viewModel.descriptionOfSelectedDay
-//                .assign(to: \.text, on: supplementaryView.descriptionCountLabel)
-//                .store(in: &self.cancellableBag)
-//        }
-//    }
-    
-    private func createDidTitleCellRegistration() -> UICollectionView.CellRegistration<DidTitleCell, DidsOfDayItemViewModel> {
-        return UICollectionView.CellRegistration { cell, indexPath, itemIdentifier in
-            cell.borderWidth = 2
-            cell.borderColor = .separator
-            cell.titleLabel.text = itemIdentifier.title
-            cell.titleLabel.textColor = itemIdentifier.color.isDark() ? .white : .black
-            cell.backgroundColor = itemIdentifier.color
-        }
-    }
-   
-    private func setSnapshot(_ items: [DidsOfDayItemViewModel]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, DidsOfDayItemViewModel>()
-        snapshot.appendSections(Section.allCases)
-        snapshot.appendItems(items)
-        dataSource?.apply(snapshot, animatingDifferences: true)
     }
 }

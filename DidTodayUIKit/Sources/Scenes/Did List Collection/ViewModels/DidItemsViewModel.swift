@@ -21,9 +21,10 @@ struct DidItemViewModel: Hashable {
         times = Date.differenceToString(from: did.started, to: did.finished)
         timesToMinutes = Date.differenceToMinutes(from: did.started, to: did.finished)
         content = did.content
-        color = UIColor(red: CGFloat(did.pieColor.red),
-                        green: CGFloat(did.pieColor.green),
-                        blue: CGFloat(did.pieColor.blue),
-                        alpha: CGFloat(did.pieColor.alpha))
+        color = did.uiColor
+//        UIColor(red: CGFloat(did.pieColor.red),
+//                        green: CGFloat(did.pieColor.green),
+//                        blue: CGFloat(did.pieColor.blue),
+//                        alpha: CGFloat(did.pieColor.alpha))
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import CoreData
+import os
 
 enum CoreDataStoreError: Error {
     case readError(Error)
@@ -22,6 +23,8 @@ protocol DidCoreDataStorable {
 
 final class DidCoreDataStorage: DidCoreDataStorable {
     
+    private let logger = Logger()
+    
     private lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "DataModel")
         container.loadPersistentStores { _, error in
@@ -34,7 +37,7 @@ final class DidCoreDataStorage: DidCoreDataStorable {
     
     @discardableResult func create(_ did: Did) async throws -> Did {
         return try await withCheckedThrowingContinuation { continuation in
-            persistentContainer.performBackgroundTask { context in
+            persistentContainer.performBackgroundTask { [weak self] context in
                 let managedDid = ManagedDidItem(context: context)
                 managedDid.fromDidItem(did)
                 if context.hasChanges {
@@ -42,6 +45,7 @@ final class DidCoreDataStorage: DidCoreDataStorable {
                         try context.save()
                         continuation.resume(returning: did)
                     } catch let error {
+                        self?.logger.error("Save data error: \(error)")
                         continuation.resume(throwing: CoreDataStoreError.saveError(error))
                     }
                 }
@@ -51,7 +55,7 @@ final class DidCoreDataStorage: DidCoreDataStorable {
     
     func fetchDids(with filtering: Date?) async throws -> [Did] {
         return try await withCheckedThrowingContinuation { continuation in
-            persistentContainer.performBackgroundTask { context in
+            persistentContainer.performBackgroundTask { [weak self] context in
                 do {
                     let request = ManagedDidItem.fetchRequest()
                     if let filtering {
@@ -64,6 +68,7 @@ final class DidCoreDataStorage: DidCoreDataStorable {
                     let fetched = result.map { $0.toDidItem() }
                     continuation.resume(returning: fetched)
                 } catch let error {
+                    self?.logger.error("Fetch error: \(error)")
                     continuation.resume(throwing: CoreDataStoreError.readError(error))
                 }
             }
@@ -71,7 +76,7 @@ final class DidCoreDataStorage: DidCoreDataStorable {
     }
     
     func update(_ did: Did, completion: @escaping (Did, CoreDataStoreError?) -> Void) {
-        persistentContainer.performBackgroundTask { context in
+        persistentContainer.performBackgroundTask { [weak self] context in
             do {
                 let request = ManagedDidItem.fetchRequest()
                 request.predicate = NSPredicate(format: "identifier==%@", did.id as CVarArg)
@@ -82,19 +87,21 @@ final class DidCoreDataStorage: DidCoreDataStorable {
                         do {
                             try context.save()
                         } catch let error {
+                            self?.logger.error("Save data error: \(error)")
                             completion(did, CoreDataStoreError.saveError(error))
                         }
                     }
                 }
             } catch {
+                self?.logger.error("Fetch data error: \(error)")
                 completion(did, CoreDataStoreError.readError(error))
             }
         }
     }
     
     @discardableResult func delete(_ did: Did) async throws -> Did {
-        return try await withCheckedThrowingContinuation { continuation in
-            persistentContainer.performBackgroundTask { context in
+        return try await withCheckedThrowingContinuation { [weak self] continuation in
+            self?.persistentContainer.performBackgroundTask { context in
                 do {
                     let request = ManagedDidItem.fetchRequest()
                     request.predicate = NSPredicate(format: "identifier==%@", did.id as CVarArg)
@@ -105,10 +112,12 @@ final class DidCoreDataStorage: DidCoreDataStorable {
                             try context.save()
                             continuation.resume(returning: did)
                         } catch let error {
+                            self?.logger.error("Save Data error: \(error)")
                             continuation.resume(throwing: CoreDataStoreError.deleteError(error))
                         }
                     }
                 } catch let error {
+                    self?.logger.error("Fetch data error: \(error)")
                     continuation.resume(throwing: CoreDataStoreError.readError(error))
                 }
             }

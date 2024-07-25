@@ -27,9 +27,9 @@ public class ManagedDidItem: NSManagedObject {
         started = item.started
         finished = item.finished
         title = item.content
-        red = item.pieColor.red
-        green = item.pieColor.green
-        blue = item.pieColor.blue
-        alpha = item.pieColor.alpha
+        red = Float(item.uiColor.getRedOfRGB())
+        green = Float(item.uiColor.getGreenOfRGB())
+        blue = Float(item.uiColor.getBlueRGB())
+        alpha = Float(item.uiColor.getAlpha())
     }
 }

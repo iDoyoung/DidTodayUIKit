@@ -8,7 +8,7 @@
 import Foundation
 
 protocol ReadReminderUseCaseProtocol {
-    func excute() async throws -> [Reminder]
+    func execute() async throws -> [Reminder]
 }
 
 final class ReadReminderUseCase: ReadReminderUseCaseProtocol {
@@ -19,7 +19,7 @@ final class ReadReminderUseCase: ReadReminderUseCaseProtocol {
         self.stroage = stroage
     }
     
-    func excute() async throws -> [Reminder] {
+    func execute() async throws -> [Reminder] {
         try await stroage.readAll()
     }
 }

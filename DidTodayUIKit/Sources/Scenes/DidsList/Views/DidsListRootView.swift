@@ -1,8 +1,11 @@
 import SwiftUI
+import os
 
 struct DidsListRootView: View {
     
     @State var dids: FetchedDids
+    
+    let logger = Logger()
     
     let columns = [
         GridItem(.flexible(), spacing: 1),
@@ -16,6 +19,12 @@ struct DidsListRootView: View {
                 ForEach(dids.items, id: \.id) { item in
                     buildCell(item: item)
                         .aspectRatio(1, contentMode: .fill)
+                        .onAppear(perform: {
+                            logger.log("Appear Cell of \(item.content)")
+                        })
+                        .onTapGesture {
+                            
+                        }
                 }
             }
         }

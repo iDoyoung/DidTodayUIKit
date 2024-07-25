@@ -21,20 +21,20 @@ final class TodayViewController: ParentUIViewController {
     private var cancellableBag = [AnyCancellable]()
     
     // UI
-    private(set) lazy var rootView: TodayRootView = {
+    private lazy var rootView: TodayRootView = {
         TodayRootView(reminders: fetchedReminders,
                       dids: fetchedDids, 
                       action: action)
     }()
     
-    private(set) lazy var hostingController: UIHostingController<TodayRootView>! = {
+    private lazy var hostingController: UIHostingController<TodayRootView>! = {
         UIHostingController(rootView: rootView)
     }()
     
     var getRemindersAuthorizationStatusUseCase: GetRemindersAuthorizationStatusUseCaseProtocol!
     var requestAccessOfRemindersUseCase: RequestAccessOfReminderUseCaseProtocol!
     var readRemindersUseCase: ReadReminderUseCaseProtocol!
-    var fetchDidsUseCase: FetchDidUseCase!
+//    var fetchDidsUseCase: FetchDidUseCase!
    
     private func buildCreateAction() {
         action.$isTapCreate
@@ -81,7 +81,7 @@ final class TodayViewController: ParentUIViewController {
         Task {
             fetchedReminders.isAccessReminders = try await getRemindersAuthorizationStatusUseCase.execute()
             fetchedReminders.items = try await readRemindersUseCase.execute()
-            fetchedDids.items = try await fetchDidsUseCase.execute()
+//            fetchedDids.items = try await fetchDidsUseCase.execute()
         }
     }
     
@@ -114,9 +114,5 @@ extension TodayViewController {
     
     func requestReadReminder() async throws -> [Reminder] {
         return try await readRemindersUseCase.execute()
-    }
-    
-    func requestReadDids() async throws -> [Did] {
-        try await fetchDidsUseCase.execute()
     }
 }

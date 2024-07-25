@@ -6,19 +6,22 @@
 //
 
 import UIKit
+import os
 
 class ParentUIViewController: UIViewController {
+    final var logger = Logger()
+    
     deinit {
-        #if DEBUG
-        print("🗑 Deallocating instance of '\(type(of: self))'")
-        #endif
+        logger.debug("🗑 Deallocating instance of '\(type(of: self))'")
     }
 }
 
 class ParentUITableViewController: UITableViewController {
+    final var logger = Logger()
+    
     deinit {
         #if DEBUG
-        print("Succeeded Down RC Of Table View Controller")
+        logger.debug("🗑 Deallocating instance of '\(type(of: self))'")
         #endif
     }
 }

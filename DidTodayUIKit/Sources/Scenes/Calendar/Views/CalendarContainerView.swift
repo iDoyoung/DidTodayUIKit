@@ -12,14 +12,7 @@ import HorizonCalendar
 
 final class CalendarContainerView: UIView {
     
-    static let sectionHeaderElementKind = "layout-header-element-kind"
-    
     //MARK: UI Properties
-    let effectView: UIVisualEffectView = {
-        let effect = UIBlurEffect(style: .systemMaterial)
-        let effectView = UIVisualEffectView(effect: effect)
-        return effectView
-    }()
     
     private let rootFlexContainer = UIView()
     
@@ -34,40 +27,36 @@ final class CalendarContainerView: UIView {
         return label
     }()
     
-    var calendarView: CalendarView!
-    var collectionView: UICollectionView!
-    let showDetailButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle(CustomText.showDetail, for: .normal)
-        button.tintColor = .label
-        button.isSelected = true
-        return button
+    private let imageView: UIImageView = {
+        let imageView = UIImageView()
+        return imageView
     }()
     
+    var calendarView: CalendarView!
+   
     init() {
         super.init(frame: .zero)
         calendarView = CalendarView(initialContent: setupCalendarViewContents())
         //FIXME: - Calendar View에 Frame 적용하지 않을 경우 Breaking constraint waring 발생, width&height가 0일 경우에도 발생
         calendarView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: createCollectionViewLayout())
         
-        addSubview(effectView)
-        effectView.contentView.addSubview(rootFlexContainer)
+        addSubview(rootFlexContainer)
         rootFlexContainer.flex
             .backgroundColor(.systemBackground)
             .direction(.column)
             .alignItems(.end)
-            .cornerRadius(20)
-            .border(0.5, .separator)
             .define { flex in
-                flex.view?.shadowColor = .systemGray
-                flex.view?.shadowOpacity = 0.2
-                flex.view?.shadowRadius = 5
-                flex.view?.shadowOffset = CGSize(width: 0, height: 5)
+
                 flex.addItem(titleLabel)
                     .paddingVertical(20)
                     .start(20)
                     .width(100%)
+                
+                flex.addItem(imageView)
+                    .backgroundColor(.systemRed)
+                    .grow(1)
+                    .width(100%)
+                
                 flex.addItem(calendarView)
                     .width(100%)
                     .grow(1)
@@ -75,27 +64,6 @@ final class CalendarContainerView: UIView {
                         guard let calendar = flex.view as? CalendarView else { return }
                         calendar.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
                     }
-                // Separator Line
-                flex.addItem()
-                    .backgroundColor(.separator)
-                    .height(0.5)
-                    .width(100%)
-                flex.addItem(collectionView)
-                    .width(100%)
-                    .height(54)
-                    .define { flex in
-                        if let collectionView = flex.view as? UICollectionView {
-                            collectionView.isScrollEnabled = false
-                        }
-                    }
-                // Separator Line
-                flex.addItem()
-                    .backgroundColor(.separator)
-                    .height(0.5)
-                    .width(100%)
-                flex.addItem(showDetailButton)
-                    .right(20)
-                    .height(50)
             }
     }
     
@@ -105,12 +73,9 @@ final class CalendarContainerView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        effectView.pin.all()
         rootFlexContainer.pin
-            .top(self.pin.safeArea)
-            .bottom(self.pin.safeArea)
-            .left(20)
-            .right(20)
+            .all(pin.safeArea)
+        
         rootFlexContainer.flex.layout()
     }
 }
@@ -173,35 +138,6 @@ extension CalendarContainerView {
         .interMonthSpacing(60)
         .horizontalDayMargin(8)
         .verticalDayMargin(8)
-    }
-}
-
-//MARK: - Collection View
-extension CalendarContainerView {
-    private func createCollectionViewLayout() -> UICollectionViewLayout {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(32),
-                                              heightDimension: .fractionalHeight(1))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(32),
-                                               heightDimension: .absolute(34))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
-                                                       subitems: [item])
-        let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing =  10
-        section.contentInsets = NSDirectionalEdgeInsets(top: 10,
-                                                        leading: 10,
-                                                        bottom: 10,
-                                                        trailing: 10)
-        
-//        // Setcion Header
-//        let sectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(60))
-//        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: sectionHeaderSize,
-//                                                                        elementKind: CalendarContainerView.sectionHeaderElementKind,
-//                                                                        alignment: .top)
-//        section.boundarySupplementaryItems = [sectionHeader]
-        section.orthogonalScrollingBehavior = .continuous
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        return layout
     }
 }
 

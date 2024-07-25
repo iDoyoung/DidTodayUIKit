@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 final class BetaVersionMigration {
     
@@ -49,10 +50,7 @@ final class BetaVersionMigration {
                 let output = Did(started: startedDate,
                                  finished: finsihedDate,
                                  content: did.did,
-                                 color: Did.PieColor(red: Float(did.colour.getRedOfRGB()),
-                                                     green: Float(did.colour.getGreenOfRGB()),
-                                                     blue: Float(did.colour.getBlueRGB()),
-                                                     alpha: 1))
+                                 color: did.colour)
                 try await coreDataStorage.create(output)
             }
             defaults.removeObject(forKey: key)
@@ -74,10 +72,7 @@ final class BetaVersionMigration {
                 let output = Did(started: startedDate,
                                  finished: finsihedDate,
                                  content: did.did,
-                                 color: Did.PieColor(red: Float(did.colour.getRedOfRGB()),
-                                                     green: Float(did.colour.getGreenOfRGB()),
-                                                     blue: Float(did.colour.getBlueRGB()),
-                                                     alpha: 1))
+                                 color: did.colour)
                 try await coreDataStorage.create(output)
             }
             defaults.removeObject(forKey: key)

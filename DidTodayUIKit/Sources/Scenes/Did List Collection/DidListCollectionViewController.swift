@@ -44,15 +44,21 @@ class DidListCollectionViewController: ParentUIViewController {
                                                                subitems: [item])
                 section = NSCollectionLayoutSection(group: group)
                 section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0)
+                return section
+                
             case .list:
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                       heightDimension: .fractionalHeight(1.0))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                        heightDimension: .absolute(60))
-                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
-                                                               subitem: item,
-                                                               count: 2)
+                let group = NSCollectionLayoutGroup
+                    .horizontal(
+                        layoutSize: groupSize,
+                        repeatingSubitem: item,
+                        count: 2
+                    )
+                
                 group.interItemSpacing = .fixed(8)
                 group.contentInsets = NSDirectionalEdgeInsets(top: 4, leading: 12, bottom: 4, trailing: 12)
                 section = NSCollectionLayoutSection(group: group)
@@ -64,8 +70,8 @@ class DidListCollectionViewController: ParentUIViewController {
                                                                                 elementKind: DidListCollectionViewController.sectionHeaderElementKind,
                                                                                 alignment: .top)
                 section.boundarySupplementaryItems = [sectionHeader]
+                return section
             }
-            return section
         }
         return layout
     }

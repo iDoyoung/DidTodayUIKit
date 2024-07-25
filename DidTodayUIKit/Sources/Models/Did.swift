@@ -13,20 +13,21 @@ final class Did: Identifiable, Equatable {
     
     let id: UUID
     let withTimer: Bool
-    let started: Date
-    let finished: Date
+    var started: Date
+    var finished: Date
     var content: String
-    var pieColor: PieColor
+//    var pieColor: PieColor
     
     //FIXME: - UI 요소를 모델 레이어에서 설정하는게 맞을까?
-    var uiColor: UIColor {
-        UIColor(
-            red: CGFloat(pieColor.red),
-            green: CGFloat(pieColor.green),
-            blue: CGFloat(pieColor.blue),
-            alpha: CGFloat(pieColor.alpha)
-        )
-    }
+    var uiColor: UIColor 
+//    {
+//        UIColor(
+//            red: CGFloat(pieColor.red),
+//            green: CGFloat(pieColor.green),
+//            blue: CGFloat(pieColor.blue),
+//            alpha: CGFloat(pieColor.alpha)
+//        )
+//    }
     
     var color: Color {
         Color(uiColor: uiColor)
@@ -36,13 +37,13 @@ final class Did: Identifiable, Equatable {
         lhs.id == rhs.id
     }
     
-    init(withTimer: Bool = false, started: Date, finished: Date, content: String, color: PieColor) {
+    init(withTimer: Bool = false, started: Date, finished: Date, content: String, color: UIColor) {
         self.id = UUID()
         self.withTimer = withTimer
         self.started = started
         self.finished = finished
         self.content = content
-        self.pieColor = color
+        self.uiColor = color
     }
     
     init(id: UUID, withTimer: Bool = false, started: Date, finished: Date, content: String, red: Float, green: Float, blue: Float, alpha: Float) {
@@ -51,13 +52,12 @@ final class Did: Identifiable, Equatable {
         self.started = started
         self.finished = finished
         self.content = content
-        self.pieColor = PieColor(red: red, green: green, blue: blue, alpha: alpha)
-    }
-    
-    struct PieColor: Hashable {
-        let red: Float
-        let green: Float
-        let blue: Float
-        let alpha: Float
+        self.uiColor = UIColor(
+            red: CGFloat(red),
+            green: CGFloat(green),
+            blue: CGFloat(blue),
+            alpha: CGFloat(alpha)
+        )
+//        self.pieColor = PieColor(red: red, green: green, blue: blue, alpha: alpha)
     }
 }

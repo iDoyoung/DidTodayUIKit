@@ -1,7 +1,7 @@
 import Foundation
 
 protocol RequestAccessOfReminderUseCaseProtocol {
-    func excute() async throws 
+    func execute() async throws 
 }
 
 final class RequestAccessOfReminderUseCase: RequestAccessOfReminderUseCaseProtocol {
@@ -12,7 +12,7 @@ final class RequestAccessOfReminderUseCase: RequestAccessOfReminderUseCaseProtoc
         self.stroage = stroage
     }
     
-    func excute() async throws {
+    func execute() async throws {
         try await stroage.requestAccess()
     }
 }

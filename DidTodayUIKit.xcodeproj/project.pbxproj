@@ -34,10 +34,7 @@
 		7F133CA3290902EC0099E55C /* StoryboardInstantiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F133CA2290902EC0099E55C /* StoryboardInstantiable.swift */; };
 		7F135C402925FF33005156E0 /* TotalOfDidsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F135C3F2925FF33005156E0 /* TotalOfDidsViewModel.swift */; };
 		7F13A55B2BC902C5000A35C5 /* DidDetailsRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F13A55A2BC902C5000A35C5 /* DidDetailsRootView.swift */; };
-		7F13A55D2BCD04D3000A35C5 /* DidDetailsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F13A55C2BCD04D3000A35C5 /* DidDetailsInteractor.swift */; };
-		7F13A55F2BCD04E7000A35C5 /* DidDetailsViewUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F13A55E2BCD04E7000A35C5 /* DidDetailsViewUpdater.swift */; };
 		7F23A8E729C0630500BDAD90 /* DetailDayRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F23A8E629C0630500BDAD90 /* DetailDayRouter.swift */; };
-		7F2C6CBE290A6EB3002963DE /* TodayRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2C6CBD290A6EB3002963DE /* TodayRouter.swift */; };
 		7F324E402BB3E5F10070A87C /* GetRemindersAuthorizationStatusUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F324E3F2BB3E5F10070A87C /* GetRemindersAuthorizationStatusUseCase.swift */; };
 		7F324E422BB3FCC80070A87C /* GetRemindersAuthorizationStatusUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F324E412BB3FCC80070A87C /* GetRemindersAuthorizationStatusUseCaseTests.swift */; };
 		7F374B182BAD228A00381445 /* TodayDidsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F374B172BAD228A00381445 /* TodayDidsCell.swift */; };
@@ -69,7 +66,6 @@
 		7F666DB229BACC6100D32E29 /* UIViewPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F666DB129BACC6100D32E29 /* UIViewPreview.swift */; };
 		7F6B24082BA2E39B0066B46D /* CGColor+BrighterRed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6B24072BA2E39B0066B46D /* CGColor+BrighterRed.swift */; };
 		7F6C337929BC83330019D80B /* DidDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6C337829BC83330019D80B /* DidDetailsViewController.swift */; };
-		7F6C337B29BC926A0019D80B /* DidDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6C337A29BC926A0019D80B /* DidDetailsViewModel.swift */; };
 		7F6C337E29BC97E10019D80B /* DidDetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6C337D29BC97E10019D80B /* DidDetailsViewModelTests.swift */; };
 		7F6C338029BF2B650019D80B /* DeleteDidUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6C337F29BF2B650019D80B /* DeleteDidUseCase.swift */; };
 		7F6C338229BF2CE10019D80B /* DeleteUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6C338129BF2CE10019D80B /* DeleteUseCaseTests.swift */; };
@@ -84,6 +80,10 @@
 		7F850CB829651EE00083522A /* DayIsChangedNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F850CB729651EE00083522A /* DayIsChangedNotification.swift */; };
 		7F850CBB29655C2E0083522A /* DetailDayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F850CBA29655C2E0083522A /* DetailDayViewController.swift */; };
 		7F850CC22966B6540083522A /* DidListCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F850CC12966B6540083522A /* DidListCollectionViewController.swift */; };
+		7F851FA32BD8DD0600CE4C04 /* FetchedReminders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F851FA22BD8DD0600CE4C04 /* FetchedReminders.swift */; };
+		7F851FA72BDAA50F00CE4C04 /* FetchedDids.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F851FA62BDAA50F00CE4C04 /* FetchedDids.swift */; };
+		7F851FAC2BDD0D4D00CE4C04 /* TodayAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F851FAB2BDD0D4D00CE4C04 /* TodayAction.swift */; };
+		7F851FAE2BDF3A3100CE4C04 /* CreateDidError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F851FAD2BDF3A3100CE4C04 /* CreateDidError.swift */; };
 		7F9B3FB729B9F01900C8A3D0 /* FlexLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 7F9B3FB629B9F01900C8A3D0 /* FlexLayout */; };
 		7F9B3FBA29B9F06700C8A3D0 /* PinLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 7F9B3FB929B9F06700C8A3D0 /* PinLayout */; };
 		7F9B3FC029B9F47600C8A3D0 /* FlexLayoutYoga in Frameworks */ = {isa = PBXBuildFile; productRef = 7F9B3FBF29B9F47600C8A3D0 /* FlexLayoutYoga */; };
@@ -91,11 +91,21 @@
 		7F9C0B9E293DAA8C0094C2A5 /* TimerAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9C0B9D293DAA8C0094C2A5 /* TimerAlert.swift */; };
 		7F9C0BA0293DC1BA0094C2A5 /* Double+ToStringOfTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9C0B9F293DC1BA0094C2A5 /* Double+ToStringOfTimer.swift */; };
 		7F9DF0CB2BA40C8C004004BE /* TodayRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9DF0CA2BA40C8C004004BE /* TodayRootView.swift */; };
+		7FA27B802BE9C91C00BDB1A9 /* DidsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA27B7F2BE9C91C00BDB1A9 /* DidsListViewController.swift */; };
+		7FA27B832BE9CD6100BDB1A9 /* DidsListRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA27B822BE9CD6100BDB1A9 /* DidsListRootView.swift */; };
+		7FA27C062BECEB4400BDB1A9 /* DaysListRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA27C052BECEB4400BDB1A9 /* DaysListRootView.swift */; };
+		7FA27C082BEDAAC800BDB1A9 /* DayListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA27C072BEDAAC800BDB1A9 /* DayListCellView.swift */; };
+		7FA27C0A2BF05F6C00BDB1A9 /* DidsSimpleChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA27C092BF05F6C00BDB1A9 /* DidsSimpleChartView.swift */; };
 		7FA3118F29B3324800A4C5DE /* FetchDidUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA3118E29B3324800A4C5DE /* FetchDidUseCase.swift */; };
 		7FA3119129B4211100A4C5DE /* FetchDidUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA3119029B4211100A4C5DE /* FetchDidUseCaseTests.swift */; };
 		7FA3119329B43A1500A4C5DE /* CreateDidUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA3119229B43A1500A4C5DE /* CreateDidUseCase.swift */; };
 		7FA3119529B43C2700A4C5DE /* CreateDidUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA3119429B43C2700A4C5DE /* CreateDidUseCaseTests.swift */; };
 		7FAD0FFC2990C4B2009E452E /* UIColor+IsDark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAD0FFB2990C4B2009E452E /* UIColor+IsDark.swift */; };
+		7FB2D7DD2BF30F73001BA4FB /* DaysListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB2D7DC2BF30F73001BA4FB /* DaysListViewController.swift */; };
+		7FB2D7DF2BF322BE001BA4FB /* DaysListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB2D7DE2BF322BE001BA4FB /* DaysListItem.swift */; };
+		7FB2D7E92BF5D0B0001BA4FB /* DaysListAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB2D7E82BF5D0B0001BA4FB /* DaysListAction.swift */; };
+		7FB2D7EC2BF5D8BA001BA4FB /* DayDetailsRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB2D7EB2BF5D8BA001BA4FB /* DayDetailsRootView.swift */; };
+		7FB2D7EE2BF5DE74001BA4FB /* DidsDetailPieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB2D7ED2BF5DE74001BA4FB /* DidsDetailPieChartView.swift */; };
 		7FB3345D2953E58000E9FB88 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB3345C2953E58000E9FB88 /* AboutViewController.swift */; };
 		7FB3345F2953E5FC00E9FB88 /* AboutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB3345E2953E5FC00E9FB88 /* AboutViewModel.swift */; };
 		7FB6A8CB28DAF529009C61C5 /* CreateDidViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6A8CA28DAF529009C61C5 /* CreateDidViewModelTests.swift */; };
@@ -107,7 +117,6 @@
 		7FB6A8DA28DDC2C4009C61C5 /* Date+GetHoursAndMinutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6A8D928DDC2C4009C61C5 /* Date+GetHoursAndMinutes.swift */; };
 		7FB6A92328E07BE4009C61C5 /* DayLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6A92228E07BE4009C61C5 /* DayLabel.swift */; };
 		7FB6A92528E07BED009C61C5 /* MonthLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6A92428E07BED009C61C5 /* MonthLabel.swift */; };
-		7FBC01A32BB10A7B00276715 /* TodayUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBC01A22BB10A7B00276715 /* TodayUseCase.swift */; };
 		7FBC01A62BB131A900276715 /* TodayInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBC01A52BB131A900276715 /* TodayInteractorTests.swift */; };
 		7FC115A229386B930056237A /* DoingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC115A129386B930056237A /* DoingViewModel.swift */; };
 		7FC115A5293875510056237A /* DoingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC115A4293875510056237A /* DoingViewModelTests.swift */; };
@@ -120,9 +129,7 @@
 		7FC22BB828CDE19300F83122 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22BB728CDE19300F83122 /* TodayViewController.swift */; };
 		7FC22BBA28D0547500F83122 /* DidCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC22BB928D0547500F83122 /* DidCell.swift */; };
 		7FC580A328D1A201008086FD /* PieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC580A228D1A201008086FD /* PieView.swift */; };
-		7FD610552BA9755C00BDFAB2 /* TodayViewUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD610542BA9755C00BDFAB2 /* TodayViewUpdater.swift */; };
 		7FDC193A2977A26500117963 /* AboutViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDC19392977A26500117963 /* AboutViewModelTests.swift */; };
-		7FDD406B29AC782100C1B656 /* MainAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDD406A29AC782100C1B656 /* MainAlert.swift */; };
 		7FE4C06F294852020048F24E /* UIColor+GetRGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE4C06E294852020048F24E /* UIColor+GetRGB.swift */; };
 		7FE9304C2BC19C1100B2B731 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE9304B2BC19C1100B2B731 /* TabBarController.swift */; };
 		7FE9304E2BC2554200B2B731 /* CreateDidRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE9304D2BC2554200B2B731 /* CreateDidRootView.swift */; };
@@ -133,11 +140,7 @@
 		7FF770B12955625400A665B5 /* AboutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF770B02955625400A665B5 /* AboutCell.swift */; };
 		7FF770B429557ED500A665B5 /* AboutDid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF770B329557ED500A665B5 /* AboutDid.swift */; };
 		7FFA0BB42BA2A55800EC02C8 /* ReminderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FFA0BB32BA2A55800EC02C8 /* ReminderCell.swift */; };
-		7FFB23152BAE964B0008C7AE /* TodayInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FFB23142BAE964B0008C7AE /* TodayInteractor.swift */; };
-		7FFCB21D2BC4D3F700A84B0D /* CreateDidInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FFCB21C2BC4D3F700A84B0D /* CreateDidInteractor.swift */; };
-		7FFCB21F2BC4D78900A84B0D /* CreateDidViewUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FFCB21E2BC4D78900A84B0D /* CreateDidViewUpdater.swift */; };
 		7FFCB2212BC579E700A84B0D /* CreateDidAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FFCB2202BC579E700A84B0D /* CreateDidAction.swift */; };
-		7FFCB2232BC6CC9600A84B0D /* CreateDidRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FFCB2222BC6CC9600A84B0D /* CreateDidRouter.swift */; };
 		7FFF125E2B9EBBE2004033A4 /* EKEventStore+AsyncFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FFF125D2B9EBBE2004033A4 /* EKEventStore+AsyncFetch.swift */; };
 		7FFF12612B9EC0B0004033A4 /* ReminderStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FFF12602B9EC0B0004033A4 /* ReminderStore.swift */; };
 		7FFF12632B9ECD1C004033A4 /* Reminder+EKReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FFF12622B9ECD1C004033A4 /* Reminder+EKReminder.swift */; };
@@ -200,10 +203,7 @@
 		7F133CA2290902EC0099E55C /* StoryboardInstantiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardInstantiable.swift; sourceTree = "<group>"; };
 		7F135C3F2925FF33005156E0 /* TotalOfDidsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalOfDidsViewModel.swift; sourceTree = "<group>"; };
 		7F13A55A2BC902C5000A35C5 /* DidDetailsRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidDetailsRootView.swift; sourceTree = "<group>"; };
-		7F13A55C2BCD04D3000A35C5 /* DidDetailsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidDetailsInteractor.swift; sourceTree = "<group>"; };
-		7F13A55E2BCD04E7000A35C5 /* DidDetailsViewUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidDetailsViewUpdater.swift; sourceTree = "<group>"; };
 		7F23A8E629C0630500BDAD90 /* DetailDayRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDayRouter.swift; sourceTree = "<group>"; };
-		7F2C6CBD290A6EB3002963DE /* TodayRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayRouter.swift; sourceTree = "<group>"; };
 		7F324E3F2BB3E5F10070A87C /* GetRemindersAuthorizationStatusUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRemindersAuthorizationStatusUseCase.swift; sourceTree = "<group>"; };
 		7F324E412BB3FCC80070A87C /* GetRemindersAuthorizationStatusUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRemindersAuthorizationStatusUseCaseTests.swift; sourceTree = "<group>"; };
 		7F33AE0D29D5D007001956A7 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -237,7 +237,6 @@
 		7F666DB129BACC6100D32E29 /* UIViewPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewPreview.swift; sourceTree = "<group>"; };
 		7F6B24072BA2E39B0066B46D /* CGColor+BrighterRed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGColor+BrighterRed.swift"; sourceTree = "<group>"; };
 		7F6C337829BC83330019D80B /* DidDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidDetailsViewController.swift; sourceTree = "<group>"; };
-		7F6C337A29BC926A0019D80B /* DidDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidDetailsViewModel.swift; sourceTree = "<group>"; };
 		7F6C337D29BC97E10019D80B /* DidDetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidDetailsViewModelTests.swift; sourceTree = "<group>"; };
 		7F6C337F29BF2B650019D80B /* DeleteDidUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteDidUseCase.swift; sourceTree = "<group>"; };
 		7F6C338129BF2CE10019D80B /* DeleteUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUseCaseTests.swift; sourceTree = "<group>"; };
@@ -252,14 +251,28 @@
 		7F850CB729651EE00083522A /* DayIsChangedNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayIsChangedNotification.swift; sourceTree = "<group>"; };
 		7F850CBA29655C2E0083522A /* DetailDayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDayViewController.swift; sourceTree = "<group>"; };
 		7F850CC12966B6540083522A /* DidListCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidListCollectionViewController.swift; sourceTree = "<group>"; };
+		7F851FA22BD8DD0600CE4C04 /* FetchedReminders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchedReminders.swift; sourceTree = "<group>"; };
+		7F851FA62BDAA50F00CE4C04 /* FetchedDids.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchedDids.swift; sourceTree = "<group>"; };
+		7F851FAB2BDD0D4D00CE4C04 /* TodayAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayAction.swift; sourceTree = "<group>"; };
+		7F851FAD2BDF3A3100CE4C04 /* CreateDidError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDidError.swift; sourceTree = "<group>"; };
 		7F9C0B9D293DAA8C0094C2A5 /* TimerAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerAlert.swift; sourceTree = "<group>"; };
 		7F9C0B9F293DC1BA0094C2A5 /* Double+ToStringOfTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+ToStringOfTimer.swift"; sourceTree = "<group>"; };
 		7F9DF0CA2BA40C8C004004BE /* TodayRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayRootView.swift; sourceTree = "<group>"; };
+		7FA27B7F2BE9C91C00BDB1A9 /* DidsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidsListViewController.swift; sourceTree = "<group>"; };
+		7FA27B822BE9CD6100BDB1A9 /* DidsListRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidsListRootView.swift; sourceTree = "<group>"; };
+		7FA27C052BECEB4400BDB1A9 /* DaysListRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysListRootView.swift; sourceTree = "<group>"; };
+		7FA27C072BEDAAC800BDB1A9 /* DayListCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayListCellView.swift; sourceTree = "<group>"; };
+		7FA27C092BF05F6C00BDB1A9 /* DidsSimpleChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidsSimpleChartView.swift; sourceTree = "<group>"; };
 		7FA3118E29B3324800A4C5DE /* FetchDidUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDidUseCase.swift; sourceTree = "<group>"; };
 		7FA3119029B4211100A4C5DE /* FetchDidUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDidUseCaseTests.swift; sourceTree = "<group>"; };
 		7FA3119229B43A1500A4C5DE /* CreateDidUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDidUseCase.swift; sourceTree = "<group>"; };
 		7FA3119429B43C2700A4C5DE /* CreateDidUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDidUseCaseTests.swift; sourceTree = "<group>"; };
 		7FAD0FFB2990C4B2009E452E /* UIColor+IsDark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+IsDark.swift"; sourceTree = "<group>"; };
+		7FB2D7DC2BF30F73001BA4FB /* DaysListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysListViewController.swift; sourceTree = "<group>"; };
+		7FB2D7DE2BF322BE001BA4FB /* DaysListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysListItem.swift; sourceTree = "<group>"; };
+		7FB2D7E82BF5D0B0001BA4FB /* DaysListAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysListAction.swift; sourceTree = "<group>"; };
+		7FB2D7EB2BF5D8BA001BA4FB /* DayDetailsRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsRootView.swift; sourceTree = "<group>"; };
+		7FB2D7ED2BF5DE74001BA4FB /* DidsDetailPieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidsDetailPieChartView.swift; sourceTree = "<group>"; };
 		7FB3345C2953E58000E9FB88 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		7FB3345E2953E5FC00E9FB88 /* AboutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewModel.swift; sourceTree = "<group>"; };
 		7FB6A8CA28DAF529009C61C5 /* CreateDidViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDidViewModelTests.swift; sourceTree = "<group>"; };
@@ -271,7 +284,6 @@
 		7FB6A8D928DDC2C4009C61C5 /* Date+GetHoursAndMinutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+GetHoursAndMinutes.swift"; sourceTree = "<group>"; };
 		7FB6A92228E07BE4009C61C5 /* DayLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayLabel.swift; sourceTree = "<group>"; };
 		7FB6A92428E07BED009C61C5 /* MonthLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthLabel.swift; sourceTree = "<group>"; };
-		7FBC01A22BB10A7B00276715 /* TodayUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayUseCase.swift; sourceTree = "<group>"; };
 		7FBC01A52BB131A900276715 /* TodayInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayInteractorTests.swift; sourceTree = "<group>"; };
 		7FC115A129386B930056237A /* DoingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoingViewModel.swift; sourceTree = "<group>"; };
 		7FC115A4293875510056237A /* DoingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoingViewModelTests.swift; sourceTree = "<group>"; };
@@ -285,9 +297,7 @@
 		7FC22BB728CDE19300F83122 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		7FC22BB928D0547500F83122 /* DidCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidCell.swift; sourceTree = "<group>"; };
 		7FC580A228D1A201008086FD /* PieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieView.swift; sourceTree = "<group>"; };
-		7FD610542BA9755C00BDFAB2 /* TodayViewUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewUpdater.swift; sourceTree = "<group>"; };
 		7FDC19392977A26500117963 /* AboutViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewModelTests.swift; sourceTree = "<group>"; };
-		7FDD406A29AC782100C1B656 /* MainAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAlert.swift; sourceTree = "<group>"; };
 		7FE4C06E294852020048F24E /* UIColor+GetRGB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+GetRGB.swift"; sourceTree = "<group>"; };
 		7FE9304B2BC19C1100B2B731 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		7FE9304D2BC2554200B2B731 /* CreateDidRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDidRootView.swift; sourceTree = "<group>"; };
@@ -298,11 +308,7 @@
 		7FF770B02955625400A665B5 /* AboutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutCell.swift; sourceTree = "<group>"; };
 		7FF770B329557ED500A665B5 /* AboutDid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutDid.swift; sourceTree = "<group>"; };
 		7FFA0BB32BA2A55800EC02C8 /* ReminderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderCell.swift; sourceTree = "<group>"; };
-		7FFB23142BAE964B0008C7AE /* TodayInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayInteractor.swift; sourceTree = "<group>"; };
-		7FFCB21C2BC4D3F700A84B0D /* CreateDidInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDidInteractor.swift; sourceTree = "<group>"; };
-		7FFCB21E2BC4D78900A84B0D /* CreateDidViewUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDidViewUpdater.swift; sourceTree = "<group>"; };
 		7FFCB2202BC579E700A84B0D /* CreateDidAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDidAction.swift; sourceTree = "<group>"; };
-		7FFCB2222BC6CC9600A84B0D /* CreateDidRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDidRouter.swift; sourceTree = "<group>"; };
 		7FFF125D2B9EBBE2004033A4 /* EKEventStore+AsyncFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EKEventStore+AsyncFetch.swift"; sourceTree = "<group>"; };
 		7FFF12602B9EC0B0004033A4 /* ReminderStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderStore.swift; sourceTree = "<group>"; };
 		7FFF12622B9ECD1C004033A4 /* Reminder+EKReminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reminder+EKReminder.swift"; sourceTree = "<group>"; };
@@ -411,14 +417,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		7F1CAEC229D2A897004E20E8 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				7F6C337A29BC926A0019D80B /* DidDetailsViewModel.swift */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
 		7F1CAEC329D2A8B8004E20E8 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -460,10 +458,8 @@
 			children = (
 				7F1CAEC429D2A8D8004E20E8 /* Views */,
 				7F397A6728D71E74000F89E2 /* CreateDidViewController.swift */,
-				7FFCB21E2BC4D78900A84B0D /* CreateDidViewUpdater.swift */,
 				7FFCB2202BC579E700A84B0D /* CreateDidAction.swift */,
-				7FFCB21C2BC4D3F700A84B0D /* CreateDidInteractor.swift */,
-				7FFCB2222BC6CC9600A84B0D /* CreateDidRouter.swift */,
+				7F851FAD2BDF3A3100CE4C04 /* CreateDidError.swift */,
 			);
 			path = CreateDid;
 			sourceTree = "<group>";
@@ -565,12 +561,9 @@
 		7F666DB329BAD00100D32E29 /* DidDetails */ = {
 			isa = PBXGroup;
 			children = (
-				7F1CAEC229D2A897004E20E8 /* ViewModels */,
 				7F1CAEC129D2A87B004E20E8 /* Views */,
 				7F6C337829BC83330019D80B /* DidDetailsViewController.swift */,
 				7F6C338329BF48080019D80B /* DeleteDidAlert.swift */,
-				7F13A55E2BCD04E7000A35C5 /* DidDetailsViewUpdater.swift */,
-				7F13A55C2BCD04D3000A35C5 /* DidDetailsInteractor.swift */,
 			);
 			path = DidDetails;
 			sourceTree = "<group>";
@@ -590,6 +583,7 @@
 				7F850CBA29655C2E0083522A /* DetailDayViewController.swift */,
 				7F10CF7929679E1B00EAADF2 /* DetailDayViewModel.swift */,
 				7F23A8E629C0630500BDAD90 /* DetailDayRouter.swift */,
+				7FB2D7F12BF73254001BA4FB /* Views */,
 			);
 			path = "Detail Day";
 			sourceTree = "<group>";
@@ -602,6 +596,43 @@
 				7F850CC12966B6540083522A /* DidListCollectionViewController.swift */,
 			);
 			path = "Did List Collection";
+			sourceTree = "<group>";
+		};
+		7F851FA82BDAA52C00CE4C04 /* Observable */ = {
+			isa = PBXGroup;
+			children = (
+				7F851FA62BDAA50F00CE4C04 /* FetchedDids.swift */,
+				7F851FA22BD8DD0600CE4C04 /* FetchedReminders.swift */,
+			);
+			name = Observable;
+			sourceTree = "<group>";
+		};
+		7FA27B7E2BE9C8EB00BDB1A9 /* DidsList */ = {
+			isa = PBXGroup;
+			children = (
+				7FA27B812BE9CD4C00BDB1A9 /* Views */,
+				7FA27B7F2BE9C91C00BDB1A9 /* DidsListViewController.swift */,
+			);
+			path = DidsList;
+			sourceTree = "<group>";
+		};
+		7FA27B812BE9CD4C00BDB1A9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7FA27B822BE9CD6100BDB1A9 /* DidsListRootView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7FA27C042BECE9EE00BDB1A9 /* Days List */ = {
+			isa = PBXGroup;
+			children = (
+				7FB2D7DB2BF1CC09001BA4FB /* Views */,
+				7FB2D7DC2BF30F73001BA4FB /* DaysListViewController.swift */,
+				7FB2D7DE2BF322BE001BA4FB /* DaysListItem.swift */,
+				7FB2D7E82BF5D0B0001BA4FB /* DaysListAction.swift */,
+			);
+			path = "Days List";
 			sourceTree = "<group>";
 		};
 		7FA3118D29B3322F00A4C5DE /* UseCases */ = {
@@ -654,6 +685,25 @@
 				7FA3119729B4454500A4C5DE /* About */,
 			);
 			path = Scenes;
+			sourceTree = "<group>";
+		};
+		7FB2D7DB2BF1CC09001BA4FB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7FA27C052BECEB4400BDB1A9 /* DaysListRootView.swift */,
+				7FA27C072BEDAAC800BDB1A9 /* DayListCellView.swift */,
+				7FA27C092BF05F6C00BDB1A9 /* DidsSimpleChartView.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		7FB2D7F12BF73254001BA4FB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7FB2D7ED2BF5DE74001BA4FB /* DidsDetailPieChartView.swift */,
+				7FB2D7EB2BF5D8BA001BA4FB /* DayDetailsRootView.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		7FB3345B2953E36700E9FB88 /* About */ = {
@@ -746,6 +796,8 @@
 				7FB6A91F28E079ED009C61C5 /* Custom */,
 				7FC22B5A28C71AF500F83122 /* Today */,
 				7F666DB329BAD00100D32E29 /* DidDetails */,
+				7FA27B7E2BE9C8EB00BDB1A9 /* DidsList */,
+				7FA27C042BECE9EE00BDB1A9 /* Days List */,
 				7FC11596293654400056237A /* Doing */,
 				7F397A7028D82FF4000F89E2 /* CreateDid */,
 				7F133C45290364300099E55C /* Calendar */,
@@ -763,11 +815,7 @@
 			children = (
 				7FFA0BB22BA2A4FD00EC02C8 /* Views */,
 				7FC22BB728CDE19300F83122 /* TodayViewController.swift */,
-				7F2C6CBD290A6EB3002963DE /* TodayRouter.swift */,
-				7FDD406A29AC782100C1B656 /* MainAlert.swift */,
-				7FD610542BA9755C00BDFAB2 /* TodayViewUpdater.swift */,
-				7FFB23142BAE964B0008C7AE /* TodayInteractor.swift */,
-				7FBC01A22BB10A7B00276715 /* TodayUseCase.swift */,
+				7F851FAB2BDD0D4D00CE4C04 /* TodayAction.swift */,
 			);
 			path = Today;
 			sourceTree = "<group>";
@@ -804,6 +852,7 @@
 				7FB6A8D228DD5C04009C61C5 /* ManagedDidItem+CoreDataProperties.swift */,
 				504CE0B3253FDFDF000CC6CF /* PreviousVersionModel.swift */,
 				7FC22B6828C9C0E500F83122 /* Did.swift */,
+				7F851FA82BDAA52C00CE4C04 /* Observable */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1021,7 +1070,6 @@
 				7F583F2B2910EE90006735AA /* XCRemoteSwiftPackageReference "HorizonCalendar" */,
 				7F9B3FB529B9F01900C8A3D0 /* XCRemoteSwiftPackageReference "FlexLayout" */,
 				7F9B3FB829B9F06700C8A3D0 /* XCRemoteSwiftPackageReference "PinLayout" */,
-				7F13A59D2BCE496E000A35C5 /* XCRemoteSwiftPackageReference "needle" */,
 			);
 			productRefGroup = 504CE03F253FDFAA000CC6CF /* Products */;
 			projectDirPath = "";
@@ -1059,17 +1107,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FA27C0A2BF05F6C00BDB1A9 /* DidsSimpleChartView.swift in Sources */,
 				7F43BBE429767D340084FB78 /* AboutRouter.swift in Sources */,
-				7F13A55D2BCD04D3000A35C5 /* DidDetailsInteractor.swift in Sources */,
 				7F374B182BAD228A00381445 /* TodayDidsCell.swift in Sources */,
+				7FA27C082BEDAAC800BDB1A9 /* DayListCellView.swift in Sources */,
 				7F43BBE0297671F50084FB78 /* PrivacyPolicyViewModel.swift in Sources */,
 				50A4505A2564CFD500812F14 /* Localize.swift in Sources */,
 				7F133C652907CC5A0099E55C /* SceneDIContainer.swift in Sources */,
 				7FB3345F2953E5FC00E9FB88 /* AboutViewModel.swift in Sources */,
 				7F583F322914B73B006735AA /* DidTitleCell.swift in Sources */,
 				7F61B09A2BA02801007B02F8 /* ReadReminderUseCase.swift in Sources */,
+				7FB2D7EC2BF5D8BA001BA4FB /* DayDetailsRootView.swift in Sources */,
 				7FE4C06F294852020048F24E /* UIColor+GetRGB.swift in Sources */,
 				7F0B97BB292C7ACA0071DF98 /* UIView+Border.swift in Sources */,
+				7F851FAC2BDD0D4D00CE4C04 /* TodayAction.swift in Sources */,
 				7F6C337929BC83330019D80B /* DidDetailsViewController.swift in Sources */,
 				7F23A8E729C0630500BDAD90 /* DetailDayRouter.swift in Sources */,
 				7FB6A8DA28DDC2C4009C61C5 /* Date+GetHoursAndMinutes.swift in Sources */,
@@ -1081,11 +1132,14 @@
 				7FC580A328D1A201008086FD /* PieView.swift in Sources */,
 				7F0BECFC2951644B00C0CF1C /* DoingFlowCoordinator.swift in Sources */,
 				7F397A6828D71E74000F89E2 /* CreateDidViewController.swift in Sources */,
+				7FA27B832BE9CD6100BDB1A9 /* DidsListRootView.swift in Sources */,
+				7FB2D7DF2BF322BE001BA4FB /* DaysListItem.swift in Sources */,
 				7F850CB62965130E0083522A /* UserNotificationManager.swift in Sources */,
 				7FA3119329B43A1500A4C5DE /* CreateDidUseCase.swift in Sources */,
 				7FFF12652B9ED0B0004033A4 /* Reminder.swift in Sources */,
 				7F850CC22966B6540083522A /* DidListCollectionViewController.swift in Sources */,
 				7FFA0BB42BA2A55800EC02C8 /* ReminderCell.swift in Sources */,
+				7F851FA32BD8DD0600CE4C04 /* FetchedReminders.swift in Sources */,
 				7F6C338029BF2B650019D80B /* DeleteDidUseCase.swift in Sources */,
 				7FB6A8D628DD89E5009C61C5 /* Date+DifferenceToString.swift in Sources */,
 				7F80EBCB28D4102500781DB4 /* DidItemsViewModel.swift in Sources */,
@@ -1102,41 +1156,41 @@
 				7F324E402BB3E5F10070A87C /* GetRemindersAuthorizationStatusUseCase.swift in Sources */,
 				7FC22B6928C9C0E500F83122 /* Did.swift in Sources */,
 				7F133C47290365460099E55C /* CalendarViewController.swift in Sources */,
-				7FFCB21D2BC4D3F700A84B0D /* CreateDidInteractor.swift in Sources */,
 				7F850CB829651EE00083522A /* DayIsChangedNotification.swift in Sources */,
 				7F5ABAAB296F97FA002E509E /* BetaVersionMigration.swift in Sources */,
 				7FC22B6C28C9C9E900F83122 /* DidCoreDataStorage.swift in Sources */,
 				7FB6A8D428DD5C04009C61C5 /* ManagedDidItem+CoreDataProperties.swift in Sources */,
 				7F9DF0CB2BA40C8C004004BE /* TodayRootView.swift in Sources */,
 				7F583F34291A61D2006735AA /* DidsOfDayItemViewModel.swift in Sources */,
+				7FA27B802BE9C91C00BDB1A9 /* DidsListViewController.swift in Sources */,
 				7F850CB4296509820083522A /* AuthorizationManager.swift in Sources */,
 				7FC22BBA28D0547500F83122 /* DidCell.swift in Sources */,
 				7FAD0FFC2990C4B2009E452E /* UIColor+IsDark.swift in Sources */,
+				7FA27C062BECEB4400BDB1A9 /* DaysListRootView.swift in Sources */,
 				504CE042253FDFAA000CC6CF /* AppDelegate.swift in Sources */,
 				7F5470682BAAB53B002DA1B7 /* NotAccessRemindersAuthorizationStatusView.swift in Sources */,
 				7FA3118F29B3324800A4C5DE /* FetchDidUseCase.swift in Sources */,
 				7FB6A92528E07BED009C61C5 /* MonthLabel.swift in Sources */,
 				7FB6A92328E07BE4009C61C5 /* DayLabel.swift in Sources */,
 				7F43BBE22976799F0084FB78 /* AboutFlowCoordinator.swift in Sources */,
-				7FFCB21F2BC4D78900A84B0D /* CreateDidViewUpdater.swift in Sources */,
 				7F10CF7A29679E1B00EAADF2 /* DetailDayViewModel.swift in Sources */,
 				7FC115A72939EAF50056237A /* DoingViewController.swift in Sources */,
 				7FB6A8D328DD5C04009C61C5 /* ManagedDidItem+CoreDataClass.swift in Sources */,
 				7F397A7428D86EF1000F89E2 /* Date+ToDouble.swift in Sources */,
 				7F076FC2290FC25500DF4EDC /* Date+OmittedTime.swift in Sources */,
+				7FB2D7DD2BF30F73001BA4FB /* DaysListViewController.swift in Sources */,
 				7FF770B12955625400A665B5 /* AboutCell.swift in Sources */,
+				7F851FA72BDAA50F00CE4C04 /* FetchedDids.swift in Sources */,
 				7F10CF7E2967C3D400EAADF2 /* CalendarRouter.swift in Sources */,
 				7F61B0A02BA038E4007B02F8 /* RequestAccessOfReminderUseCase.swift in Sources */,
 				7F61A03C294439A80084A3F6 /* UIView+animateToShake.swift in Sources */,
 				7F850C612961AEC80083522A /* ParentUIViewController.swift in Sources */,
-				7FFB23152BAE964B0008C7AE /* TodayInteractor.swift in Sources */,
 				7F71192D290BBC8B001DFE99 /* CalendarViewModel.swift in Sources */,
 				7F135C402925FF33005156E0 /* TotalOfDidsViewModel.swift in Sources */,
 				7F850CBB29655C2E0083522A /* DetailDayViewController.swift in Sources */,
 				7FC22B6328C88AA500F83122 /* DataModel.xcdatamodeld in Sources */,
-				7F13A55F2BCD04E7000A35C5 /* DidDetailsViewUpdater.swift in Sources */,
 				7F0FCDFD29DBBF1D00CDB3B1 /* CalendarContainerView.swift in Sources */,
-				7F2C6CBE290A6EB3002963DE /* TodayRouter.swift in Sources */,
+				7FB2D7EE2BF5DE74001BA4FB /* DidsDetailPieChartView.swift in Sources */,
 				7FFF12632B9ECD1C004033A4 /* Reminder+EKReminder.swift in Sources */,
 				7F9C0B9E293DAA8C0094C2A5 /* TimerAlert.swift in Sources */,
 				7FE9304C2BC19C1100B2B731 /* TabBarController.swift in Sources */,
@@ -1150,20 +1204,17 @@
 				7FB6A8D828DD9B13009C61C5 /* TotalDidsCell.swift in Sources */,
 				7FF48C2B2921F4F600387FE7 /* UIView+Shadow Effect.swift in Sources */,
 				7FEB006029595D120073B90C /* DetailDidSupplementaryView.swift in Sources */,
-				7FFCB2232BC6CC9600A84B0D /* CreateDidRouter.swift in Sources */,
 				7F133C632907C66A0099E55C /* MainFlowCoordinator.swift in Sources */,
 				7FC115A229386B930056237A /* DoingViewModel.swift in Sources */,
-				7F6C337B29BC926A0019D80B /* DidDetailsViewModel.swift in Sources */,
 				7F10CF7C2967AF7F00EAADF2 /* CalendarFlowCoordinator.swift in Sources */,
-				7FD610552BA9755C00BDFAB2 /* TodayViewUpdater.swift in Sources */,
-				7FBC01A32BB10A7B00276715 /* TodayUseCase.swift in Sources */,
 				7FFF125E2B9EBBE2004033A4 /* EKEventStore+AsyncFetch.swift in Sources */,
 				7FFF12612B9EC0B0004033A4 /* ReminderStore.swift in Sources */,
 				504CE0B4253FDFDF000CC6CF /* PreviousVersionModel.swift in Sources */,
 				7F133CA3290902EC0099E55C /* StoryboardInstantiable.swift in Sources */,
+				7FB2D7E92BF5D0B0001BA4FB /* DaysListAction.swift in Sources */,
 				7F5A91C828E68CCF006B8406 /* Date+ToString.swift in Sources */,
-				7FDD406B29AC782100C1B656 /* MainAlert.swift in Sources */,
 				7FE9304E2BC2554200B2B731 /* CreateDidRootView.swift in Sources */,
+				7F851FAE2BDF3A3100CE4C04 /* CreateDidError.swift in Sources */,
 				7FB3345D2953E58000E9FB88 /* AboutViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1477,14 +1528,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		7F13A59D2BCE496E000A35C5 /* XCRemoteSwiftPackageReference "needle" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/uber/needle";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		7F583F2B2910EE90006735AA /* XCRemoteSwiftPackageReference "HorizonCalendar" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/HorizonCalendar";

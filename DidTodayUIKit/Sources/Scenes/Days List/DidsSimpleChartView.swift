@@ -15,7 +15,7 @@ struct DidsSimpleChartView: View {
     }
 }
 
-struct DidsSimpleChart: View {
+private struct DidsSimpleChart: View {
     @Binding var dids: [Did]
     
     var body: some View {

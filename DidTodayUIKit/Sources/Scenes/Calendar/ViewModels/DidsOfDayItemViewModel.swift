@@ -17,10 +17,6 @@ struct DidsOfDayItemViewModel: Hashable {
         started = Double(Date.getHours(did.started) + Date.getMinutes(did.started))
         ended = Double(Date.getHours(did.finished) + Date.getMinutes(did.finished))
         title = did.content
-        color = UIColor(
-            red: CGFloat(did.pieColor.red),
-            green: CGFloat(did.pieColor.green),
-            blue: CGFloat(did.pieColor.blue),
-            alpha: CGFloat(did.pieColor.alpha))
+        color = did.uiColor
     }
 }
